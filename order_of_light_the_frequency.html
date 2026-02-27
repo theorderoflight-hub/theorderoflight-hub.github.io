@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Frequency — Framework Document</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0A0A0A;
+  --deep: #111;
+  --surface: #181818;
+  --surface2: #202020;
+  --crimson: #8B1A2E;
+  --crimson-bright: #A82035;
+  --gold: #C8A96E;
+  --gold-dim: #8A6E3E;
+  --parchment: #E8E0D0;
+  --parchment-dim: #C4B89A;
+  --white: #F5F0E8;
+  --grey: #555;
+  /* Frequency accent — a cooler, more electric tone distinct from the main OOL palette */
+  --freq: #2A6A8A;
+  --freq-bright: #3A8AAA;
+  --freq-dim: #1A4A6A;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--void);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.45;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:900;
+  background:rgba(10,10,10,0.96); backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(42,106,138,0.2);
+  padding:0 48px; height:54px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav-id { display:flex; align-items:center; gap:10px; }
+.nav-id span { font-size:9.5px; letter-spacing:0.25em; text-transform:uppercase; color:rgba(42,106,138,0.6); }
+nav ul { list-style:none; display:flex; gap:28px; }
+nav a { text-decoration:none; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--grey); transition:color 0.3s; }
+nav a:hover { color:var(--freq-bright); }
+
+/* ── COVER ── */
+.cover {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:100px 48px 80px;
+  position:relative; overflow:hidden;
+}
+.cover::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at 50% 45%, rgba(42,106,138,0.12) 0%, transparent 60%);
+  pointer-events:none;
+}
+/* Oscillating wave lines behind cover */
+.cover-waves {
+  position:absolute; inset:0; pointer-events:none; overflow:hidden;
+}
+.wave {
+  position:absolute; left:-10%; right:-10%; height:1px;
+  background:linear-gradient(to right, transparent, rgba(42,106,138,0.15), rgba(139,26,46,0.1), rgba(42,106,138,0.15), transparent);
+  animation: waveDrift linear infinite;
+}
+.wave:nth-child(1) { top:28%; animation-duration:18s; animation-delay:0s; }
+.wave:nth-child(2) { top:42%; animation-duration:22s; animation-delay:-6s; opacity:0.7; }
+.wave:nth-child(3) { top:56%; animation-duration:16s; animation-delay:-11s; opacity:0.5; }
+.wave:nth-child(4) { top:70%; animation-duration:24s; animation-delay:-3s; opacity:0.35; }
+@keyframes waveDrift {
+  0% { transform:translateX(-5%) scaleY(1); }
+  50% { transform:translateX(5%) scaleY(2.5); }
+  100% { transform:translateX(-5%) scaleY(1); }
+}
+
+.cover-eyebrow {
+  font-size:9.5px; letter-spacing:0.45em; text-transform:uppercase;
+  color:var(--freq); margin-bottom:44px;
+  animation: fadeUp 1.5s ease both;
+}
+.cover-series {
+  font-size:9px; letter-spacing:0.35em; text-transform:uppercase;
+  color:rgba(42,106,138,0.5); margin-bottom:16px;
+  animation: fadeUp 1.5s ease 0.2s both;
+}
+.cover h1 {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:clamp(48px,8vw,96px); letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--white); line-height:0.95; margin-bottom:20px;
+  animation: fadeUp 1.5s ease 0.3s both;
+}
+.cover-rule {
+  width:1px; height:52px;
+  background:linear-gradient(to bottom, var(--freq), var(--crimson));
+  margin:0 auto 36px;
+  animation: fadeUp 1.5s ease 0.5s both;
+}
+.cover-sub {
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic;
+  font-size:clamp(16px,2vw,22px); color:rgba(245,240,232,0.55);
+  line-height:1.5; max-width:560px;
+  animation: fadeUp 1.5s ease 0.6s both;
+}
+
+/* ── PAGE ── */
+.page { max-width:960px; margin:0 auto; padding:0 48px; }
+
+/* ── SECTIONS ── */
+section { padding:80px 0; border-top:1px solid rgba(255,255,255,0.04); }
+
+.eyebrow {
+  font-size:9.5px; letter-spacing:0.38em; text-transform:uppercase;
+  margin-bottom:18px; display:flex; align-items:center; gap:14px;
+}
+.eyebrow.freq { color:var(--freq); }
+.eyebrow.freq::after { content:''; flex:1; height:1px; background:rgba(42,106,138,0.2); }
+.eyebrow.crim { color:var(--crimson); }
+.eyebrow.crim::after { content:''; flex:1; height:1px; background:rgba(139,26,46,0.2); }
+.eyebrow.gold { color:var(--gold-dim); }
+.eyebrow.gold::after { content:''; flex:1; height:1px; background:rgba(200,169,110,0.15); }
+
+h2 {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:clamp(28px,4vw,48px); color:var(--white);
+  letter-spacing:0.05em; line-height:1.1; margin-bottom:28px;
+}
+h3 {
+  font-size:9.5px; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--gold); margin:44px 0 14px;
+  display:flex; align-items:center; gap:12px;
+}
+h3::after { content:''; flex:1; height:1px; background:rgba(200,169,110,0.12); }
+h3.freq-h3 { color:var(--freq); }
+h3.freq-h3::after { background:rgba(42,106,138,0.15); }
+
+p { font-size:14px; line-height:1.88; color:rgba(245,240,232,0.68); max-width:700px; margin-bottom:16px; }
+p.wide { max-width:none; }
+strong { color:var(--white); font-weight:400; }
+em { color:var(--gold); font-style:italic; }
+em.freq-em { color:var(--freq-bright); font-style:italic; }
+
+/* ── PULL QUOTE ── */
+.pull-quote {
+  border-left:3px solid var(--freq); padding:18px 28px; margin:32px 0;
+  background:rgba(42,106,138,0.06);
+}
+.pull-quote p {
+  font-family:'Cormorant Garamond',serif; font-size:21px; font-style:italic;
+  color:var(--white); font-weight:300; max-width:none; margin:0; line-height:1.55;
+}
+
+/* ── LISTS ── */
+.ilist { margin:8px 0 20px; }
+.ilist li {
+  font-size:13.5px; line-height:1.8; color:rgba(245,240,232,0.68);
+  padding:6px 0 6px 22px; border-bottom:1px solid rgba(255,255,255,0.03);
+  position:relative; list-style:none;
+}
+.ilist li:last-child { border-bottom:none; }
+.ilist li::before { content:'◈'; position:absolute; left:0; color:var(--freq); font-size:9px; top:10px; }
+.ilist li strong { color:var(--white); font-weight:400; }
+
+/* ── THREE WORDS DISPLAY ── */
+.three-words {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin:40px 0;
+}
+.word-card {
+  padding:40px 32px; position:relative; overflow:hidden;
+}
+.word-card-1 { background:rgba(42,106,138,0.1); border:1px solid rgba(42,106,138,0.2); }
+.word-card-2 { background:rgba(139,26,46,0.08); border:1px solid rgba(139,26,46,0.15); }
+.word-card-3 { background:rgba(200,169,110,0.06); border:1px solid rgba(200,169,110,0.12); }
+.word-bg {
+  position:absolute; bottom:-10%; right:-5%;
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:7em; opacity:0.04; line-height:1; pointer-events:none; user-select:none;
+  color:var(--white);
+}
+.word-num {
+  font-size:8.5px; letter-spacing:0.35em; text-transform:uppercase;
+  margin-bottom:16px;
+}
+.word-card-1 .word-num { color:var(--freq); }
+.word-card-2 .word-num { color:var(--crimson-bright); }
+.word-card-3 .word-num { color:var(--gold-dim); }
+.word-title {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:clamp(22px,2.5vw,32px); letter-spacing:0.08em;
+  margin-bottom:14px; line-height:1.1;
+}
+.word-card-1 .word-title { color:var(--freq-bright); }
+.word-card-2 .word-title { color:var(--crimson-bright); }
+.word-card-3 .word-title { color:var(--gold); }
+.word-def { font-size:13px; line-height:1.75; color:rgba(245,240,232,0.6); max-width:none; margin:0; }
+
+/* ── RULES OF THE FREQUENCY ── */
+.rules-list { margin:20px 0; }
+.rule-item {
+  display:grid; grid-template-columns:48px 1fr; gap:0;
+  margin-bottom:2px;
+}
+.rule-num {
+  background:var(--freq-dim); display:flex; align-items:flex-start;
+  justify-content:center; padding-top:18px;
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:20px; color:rgba(42,106,138,0.6);
+}
+.rule-body {
+  background:var(--deep); border:1px solid rgba(255,255,255,0.04);
+  padding:18px 24px;
+}
+.rule-title {
+  font-size:9px; letter-spacing:0.25em; text-transform:uppercase;
+  color:var(--freq); margin-bottom:6px;
+}
+.rule-text { font-size:13px; color:rgba(245,240,232,0.65); line-height:1.75; max-width:none; margin:0; }
+
+/* ── TIMELINE ── */
+.timeline { margin:28px 0; position:relative; }
+.timeline::before {
+  content:''; position:absolute; left:20px; top:0; bottom:0;
+  width:1px; background:linear-gradient(to bottom, var(--freq), var(--crimson), transparent);
+}
+.tl-item {
+  display:grid; grid-template-columns:48px 1fr; gap:0; margin-bottom:2px;
+  position:relative;
+}
+.tl-dot {
+  display:flex; align-items:flex-start; justify-content:center; padding-top:20px;
+  position:relative; z-index:2;
+}
+.tl-dot-inner {
+  width:8px; height:8px; background:var(--freq); transform:rotate(45deg);
+}
+.tl-week { background:var(--deep); border:1px solid rgba(255,255,255,0.04); padding:18px 24px; }
+.tl-week-label { font-size:8.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--freq); margin-bottom:6px; }
+.tl-week-title { font-size:13.5px; color:var(--white); font-weight:400; margin-bottom:4px; }
+.tl-week-text { font-size:12.5px; color:rgba(245,240,232,0.55); line-height:1.72; max-width:none; margin:0; }
+
+.tl-item.ool .tl-dot-inner { background:var(--crimson); }
+.tl-item.ool .tl-week-label { color:var(--crimson-bright); }
+.tl-item.known .tl-dot-inner { background:var(--gold); }
+.tl-item.known .tl-week-label { color:var(--gold); }
+.tl-item.emerging .tl-dot-inner { background:rgba(245,240,232,0.4); }
+.tl-item.emerging .tl-week-label { color:rgba(245,240,232,0.45); }
+.tl-item.post .tl-dot-inner { background:rgba(42,106,138,0.5); }
+.tl-item.post .tl-week-label { color:rgba(42,106,138,0.7); }
+
+/* ── ROYALTY SPLITS ── */
+.splits-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin:24px 0; }
+.split-card {
+  padding:28px 24px; background:var(--deep);
+  border:1px solid rgba(255,255,255,0.05);
+}
+.split-who { font-size:8.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:16px; }
+.split-row { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+.split-row:last-child { border-bottom:none; }
+.split-label { font-size:11px; color:rgba(245,240,232,0.45); }
+.split-val { font-size:12px; color:var(--white); font-weight:400; font-family:'Cormorant Garamond',serif; }
+.split-val.yours { color:var(--gold); }
+.split-val.theirs { color:var(--freq-bright); }
+.split-val.shared { color:var(--parchment-dim); }
+
+.legal-note {
+  background:rgba(139,26,46,0.07); border:1px solid rgba(139,26,46,0.15);
+  padding:24px 28px; margin:24px 0;
+}
+.legal-note-label { font-size:8.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--crimson-bright); margin-bottom:10px; }
+.legal-note p { font-size:13px; max-width:none; margin-bottom:8px; }
+.legal-note p:last-child { margin-bottom:0; }
+
+/* ── EMBARGO ── */
+.embargo-block {
+  background:rgba(42,106,138,0.08); border:2px solid rgba(42,106,138,0.25);
+  padding:28px 32px; margin:28px 0;
+}
+.embargo-label { font-size:8.5px; letter-spacing:0.32em; text-transform:uppercase; color:var(--freq-bright); margin-bottom:14px; }
+.embargo-block p { font-size:13.5px; max-width:none; margin-bottom:10px; }
+
+/* ══════════════════════════════════
+   THE SOURCE TEMPLATE
+══════════════════════════════════ */
+.source-doc {
+  background:var(--parchment);
+  margin:40px 0; overflow:hidden;
+  border:1px solid rgba(200,169,110,0.3);
+}
+.source-header {
+  background:var(--void); padding:36px 44px;
+  border-bottom:3px solid var(--freq);
+  display:flex; align-items:flex-start; justify-content:space-between; gap:24px;
+}
+.source-header-label { font-size:9px; letter-spacing:0.38em; text-transform:uppercase; color:var(--freq); margin-bottom:8px; }
+.source-header-title {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:28px; color:var(--white); letter-spacing:0.06em; line-height:1.2;
+}
+.source-header-sub {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:14px; color:rgba(245,240,232,0.45); margin-top:6px;
+}
+.source-body { padding:44px; }
+
+.source-field {
+  margin-bottom:32px; padding-bottom:32px;
+  border-bottom:1px solid rgba(10,10,10,0.1);
+}
+.source-field:last-of-type { border-bottom:none; }
+.source-field-label {
+  font-size:8.5px; letter-spacing:0.32em; text-transform:uppercase;
+  color:var(--crimson-dim); margin-bottom:10px;
+  font-family:'DM Sans',sans-serif;
+}
+.source-field-content {
+  background:rgba(10,10,10,0.04); border:1px solid rgba(10,10,10,0.08);
+  padding:18px 20px; min-height:48px;
+}
+.source-field-content.title-field {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:32px; letter-spacing:0.08em; color:#0A0A0A;
+  min-height:auto;
+}
+.source-field-content.lyrics-field {
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic;
+  font-size:15px; color:rgba(10,10,10,0.75); line-height:2;
+  white-space:pre-line;
+}
+.source-field-content.chart-field {
+  font-family:monospace; font-size:14px; color:rgba(10,10,10,0.8);
+  line-height:2.2; white-space:pre;
+}
+.source-field-note {
+  font-size:11px; color:rgba(10,10,10,0.4); margin-top:8px;
+  line-height:1.6; font-style:italic;
+}
+
+.source-rules {
+  background:rgba(10,10,10,0.04); border-left:3px solid var(--freq);
+  padding:18px 20px; margin:24px 0;
+}
+.source-rules-label { font-size:8px; letter-spacing:0.3em; text-transform:uppercase; color:var(--freq-dim); margin-bottom:10px; font-family:'DM Sans',sans-serif; }
+.source-rules ol { padding-left:18px; }
+.source-rules li { font-size:12.5px; color:rgba(10,10,10,0.7); line-height:1.8; padding:2px 0; }
+
+.source-footer {
+  padding:24px 44px; border-top:1px solid rgba(10,10,10,0.08);
+  background:rgba(10,10,10,0.04);
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.source-footer p {
+  font-size:9.5px; letter-spacing:0.2em; text-transform:uppercase;
+  color:rgba(10,10,10,0.35); margin:0; max-width:none;
+}
+
+/* ── NASHVILLE EXPLAINER ── */
+.nn-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; margin:20px 0; }
+.nn-card {
+  background:var(--deep); padding:14px 10px; text-align:center;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.nn-num { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:var(--freq-bright); line-height:1; margin-bottom:4px; }
+.nn-note { font-size:9px; color:rgba(245,240,232,0.35); letter-spacing:0.1em; }
+
+.nn-example {
+  background:var(--deep); border:1px solid rgba(255,255,255,0.05);
+  padding:24px 28px; margin:20px 0; font-family:monospace;
+}
+.nn-ex-label { font-size:8.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--freq); margin-bottom:14px; font-family:'DM Sans',sans-serif; }
+.nn-ex-line { font-size:13px; color:rgba(245,240,232,0.65); line-height:2.2; }
+.nn-ex-line .chord { color:var(--gold); font-weight:bold; }
+.nn-ex-line .annotation { color:rgba(42,106,138,0.7); }
+
+/* ── CHECKLIST ── */
+.checklist { margin:20px 0; }
+.check-item {
+  display:flex; align-items:flex-start; gap:14px; padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.check-item:last-child { border-bottom:none; }
+.check-box {
+  width:18px; height:18px; border:1px solid rgba(42,106,138,0.4);
+  flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center;
+}
+.check-box.done { background:rgba(42,106,138,0.2); border-color:var(--freq); }
+.check-box.done::after { content:'◈'; font-size:8px; color:var(--freq); }
+.check-text { font-size:13.5px; color:rgba(245,240,232,0.68); line-height:1.7; }
+.check-text strong { color:var(--white); font-weight:400; }
+
+/* ── REVEAL ── */
+.r { opacity:0; transform:translateY(14px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.r.v { opacity:1; transform:none; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  padding:64px 48px; text-align:center;
+  border-top:1px solid rgba(255,255,255,0.04);
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+}
+.doc-footer p { font-size:9.5px; letter-spacing:0.22em; text-transform:uppercase; color:#333; margin:0; max-width:none; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+
+@media(max-width:800px){
+  nav ul { display:none; }
+  .page { padding:0 24px; }
+  .cover { padding:80px 24px 60px; }
+  .three-words { grid-template-columns:1fr; }
+  .splits-grid { grid-template-columns:1fr; }
+  .nn-grid { grid-template-columns:repeat(4,1fr); }
+  .source-body { padding:28px 24px; }
+  .source-header { padding:28px 24px; flex-direction:column; }
+  .source-footer { padding:20px 24px; flex-direction:column; gap:8px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-id">
+    <svg width="14" height="14" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#2A6A8A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#2A6A8A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#2A6A8A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#2A6A8A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#2A6A8A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#2A6A8A" stroke-width="7" stroke-linecap="square"/></svg>
+    <span>The Frequency — Framework Document</span>
+  </div>
+  <ul>
+    <li><a href="#concept">Concept</a></li>
+    <li><a href="#rules">The Rules</a></li>
+    <li><a href="#release">Release</a></li>
+    <li><a href="#nashville">Nashville Numbers</a></li>
+    <li><a href="#business">Business</a></li>
+    <li><a href="#source">The Source</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <div class="cover-eyebrow">The Order of Light · Annual Collaboration Series</div>
+  <div class="cover-series">A Transmission of</div>
+  <h1>The<br>Frequency</h1>
+  <div class="cover-rule"></div>
+  <div class="cover-sub">One source. Three receivers. The same signal interpreted by different atmospheres — and released to the world one transmission at a time.</div>
+</div>
+
+<div class="page">
+
+<!-- ═══ CONCEPT ═══ -->
+<section id="concept">
+  <div class="eyebrow freq r">01 — The Concept</div>
+  <h2 class="r">The same signal.<br>Three entirely<br>different receptions.</h2>
+
+  <p class="r">Every year, The Order of Light writes a single song and distributes it — incompletely, deliberately — to two collaborating artists. Each artist receives exactly the same material: a title, a set of lyrics, and a Nashville Numbers chord chart with a note of the original key. Nothing else. No demo. No reference track. No communication with each other or with the band.</p>
+  <p class="r">Each artist builds their own version from that raw material alone. They choose their key. They write their own melody. They make every production decision in a vacuum. The only thing they share with the other artists is the source.</p>
+  <p class="r">The Order of Light's version drops first. The collaborators follow, one per week. The world hears the same song three times — and three entirely different songs each time.</p>
+
+  <div class="pull-quote r">
+    <p>"We sent them the signal. What they received — that was always going to be theirs."</p>
+  </div>
+
+  <div class="three-words r">
+    <div class="word-card word-card-1">
+      <div class="word-bg">01</div>
+      <div class="word-num">The Series</div>
+      <div class="word-title">The Frequency</div>
+      <p class="word-def">The annual event. The brand. The thing that exists across years and accumulates meaning with each edition. "The Frequency 2025." "The Frequency 2026." Each year adds a new layer to an archive of interpretations.</p>
+    </div>
+    <div class="word-card word-card-2">
+      <div class="word-bg">02</div>
+      <div class="word-num">The Material</div>
+      <div class="word-title">The Source</div>
+      <p class="word-def">The document sent to each collaborator. Title, lyrics, Nashville Numbers chart, original key noted. The signal before it is received. It exists in no key, no tempo, no arrangement — until each artist makes it theirs.</p>
+    </div>
+    <div class="word-card word-card-3">
+      <div class="word-bg">03</div>
+      <div class="word-num">Each Version</div>
+      <div class="word-title">Transmission</div>
+      <p class="word-def">Each released interpretation — The Order of Light's, the established artist's, the emerging artist's — is a Transmission. The same word used for the Sermons. The mythology holds. The signal continues.</p>
+    </div>
+  </div>
+
+  <h3 class="r">Why This Works</h3>
+  <p class="r">The creative tension at the heart of The Frequency is the tension between sameness and difference. Three artists start at exactly the same coordinate and end up in completely different places. That is both a compelling artistic experiment and a genuinely press-worthy story — the kind of concept that a music journalist can explain in one sentence and spend three paragraphs exploring.</p>
+  <p class="r">The staggered release turns a single song into a three-week event. Each Transmission drives curiosity backwards — listeners who discover the established artist's version go looking for the original. Listeners who find the emerging artist's version discover both the band and the established collaborator. Every version is a door into the others.</p>
+  <p class="r">Across years, The Frequency becomes an archive. By year five, there are fifteen versions of five different songs in existence. That is an extraordinary body of work built entirely around a single annual ritual.</p>
+</section>
+
+<!-- ═══ THE RULES ═══ -->
+<section id="rules">
+  <div class="eyebrow crim r">02 — The Rules</div>
+  <h2 class="r">What every collaborator<br>receives. And what<br>they never do.</h2>
+
+  <p class="r">The integrity of The Frequency depends entirely on these rules being observed without exception. They are not suggestions. They are the mechanism that makes the concept work — and the first time they are broken, the concept is broken with them.</p>
+
+  <div class="rules-list r">
+    <div class="rule-item">
+      <div class="rule-num">1</div>
+      <div class="rule-body">
+        <div class="rule-title">The Source — and nothing else</div>
+        <p class="rule-text">Each collaborating artist receives The Source document: the song title, the complete lyrics, and the Nashville Numbers chord chart with the original key noted for reference only. This is the complete material package. No demo, no reference recording, no voice memo, no communication about feel, tempo, or vibe. The source is the source.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">2</div>
+      <div class="rule-body">
+        <div class="rule-title">No communication between collaborators</div>
+        <p class="rule-text">The collaborating artists must not communicate with each other about the song, their interpretation, their approach, or any creative element of their version. The Order of Light does not facilitate introductions until after all versions are released. If collaborators know each other personally, they are asked to treat this as a condition of participation.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">3</div>
+      <div class="rule-body">
+        <div class="rule-title">The melody belongs to each artist</div>
+        <p class="rule-text">Because no original melody is shared, each artist is free — and expected — to write their own melodic interpretation of the lyrics. The melody they create is their creative contribution. The Order of Light's original melody is revealed only when its Transmission drops. No artist hears another's melody before release.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">4</div>
+      <div class="rule-body">
+        <div class="rule-title">The key is a suggestion, not an instruction</div>
+        <p class="rule-text">The original key is noted on The Source for reference only. Each artist chooses their own key. The Nashville Numbers format exists precisely to make the chart playable in any key without the chart changing. An artist who records in a different key than the original is not departing from the concept — they are enacting it.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">5</div>
+      <div class="rule-body">
+        <div class="rule-title">The embargo holds until release</div>
+        <p class="rule-text">No artist — including The Order of Light — releases, previews, leaks, teases, or discusses the musical content of their version before its scheduled release date. Social posts, lyric drops, and pre-release communication are coordinated centrally. The reveal is the concept. The embargo protects the reveal.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">6</div>
+      <div class="rule-body">
+        <div class="rule-title">The lyrics are not altered</div>
+        <p class="rule-text">Each artist performs the lyrics as provided. Structural reordering of verses and choruses may be permitted at the discretion of The Order of Light, but substantive lyrical changes are not. The lyrics are the one constant across all three Transmissions — the thread connecting versions that are otherwise entirely distinct.</p>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">7</div>
+      <div class="rule-body">
+        <div class="rule-title">Each version stands alone</div>
+        <p class="rule-text">There is no definitive version. The Order of Light's Transmission is not the original against which others are measured — it is the first to be heard. All three Transmissions are presented as equal, complete interpretations of the same source material. This framing must be consistent across all press and promotional communication.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RELEASE STRATEGY ═══ -->
+<section id="release">
+  <div class="eyebrow freq r">03 — Release Strategy</div>
+  <h2 class="r">A three-week event.<br>One song.<br>Three arrivals.</h2>
+
+  <p class="r">The staggered release is not just a marketing decision — it is part of the artistic structure. Each Transmission needs space to be heard on its own terms before the next one recontextualises it. A simultaneous drop would collapse that space. The weekly cadence creates anticipation, comparison, and conversation across three weeks rather than one afternoon.</p>
+
+  <div class="timeline r">
+    <div class="tl-item ool">
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-week">
+        <div class="tl-week-label">Week One — The Order of Light</div>
+        <div class="tl-week-title">Transmission I — The Band's Version</div>
+        <p class="tl-week-text">The Order of Light's interpretation drops first. This is the version against which the others will be measured — not as the original (framing matters) but as the first. The announcement reveals the concept of The Frequency for the first time. Listeners are told that two further Transmissions are coming. No names yet. The concept itself is the hook.</p>
+      </div>
+    </div>
+    <div class="tl-item known">
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-week">
+        <div class="tl-week-label">Week Two — The Established Artist</div>
+        <div class="tl-week-title">Transmission II — The Known Name</div>
+        <p class="tl-week-text">The established collaborator's version drops seven days after the first. Their audience discovers The Order of Light. The Order of Light's existing audience discovers the collaborator's version. The contrast between the two interpretations — already audible — becomes the conversation. The third Transmission is now announced but unreleased.</p>
+      </div>
+    </div>
+    <div class="tl-item emerging">
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-week">
+        <div class="tl-week-label">Week Three — The Emerging Artist</div>
+        <div class="tl-week-title">Transmission III — The New Voice</div>
+        <p class="tl-week-text">The emerging artist's version completes the trilogy. This is often the most surprising Transmission — the one with the least precedent and the most freedom. Their platform is expanded by proximity to both previous releases. All three versions are now in the world simultaneously.</p>
+      </div>
+    </div>
+    <div class="tl-item post">
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-week">
+        <div class="tl-week-label">Week Four — The Reveal</div>
+        <div class="tl-week-title">All Three Artists Together</div>
+        <p class="tl-week-text">A single post or short-form video featuring all three artists reacting to each other's versions for the first time. The moment of genuine, unscripted discovery — hearing another artist's interpretation of your song — is real content. Film it. Release it. This is the most human moment in the entire series.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="r">Collaborator Selection Strategy</h3>
+  <p class="r">The pairing of one established artist with one emerging artist is not an arbitrary structure — it is a deliberate value exchange. The established name brings an existing audience and immediate credibility. The emerging artist brings freshness, gratitude, and often the most unexpected interpretation. Together they create a contrast that the established artist alone could not.</p>
+  <ul class="ilist r">
+    <li><strong>The established artist</strong> should ideally share sonic territory with The Order of Light without being identical to it — a name that makes sense alongside the band but surprises no one. Their team will want a collaboration agreement in place before recording begins</li>
+    <li><strong>The emerging artist</strong> should be genuinely talented and genuinely hungry — someone for whom this platform matters and who will bring their full creative investment to the interpretation. The Order of Light picks the emerging artist; the emerging artist does not audition</li>
+    <li><strong>Genre divergence is a feature</strong> — a collaborator from outside the immediate sonic territory of The Order of Light produces a more interesting contrast than one who sounds adjacent. The concept handles the connective tissue. The lyrics are the same. That is enough</li>
+    <li><strong>Personal connection is fine</strong> — working with artists you know and trust removes friction. The concept doesn't require strangers. It requires isolation during the creation process, not before or after</li>
+  </ul>
+
+  <h3 class="r">Social Media & Press Narrative</h3>
+  <ul class="ilist r">
+    <li>Announce The Frequency as a series concept alongside Transmission I — not just as a single release</li>
+    <li>The press hook is the concept, not the song: <em>"We sent them a piece of paper. We never spoke again until release day."</em></li>
+    <li>Short documentary content — each artist talking about receiving The Source, their process, their choices — is the ideal pre-release content for Transmissions II and III</li>
+    <li>The Week Four reaction content is potentially the highest-performing piece of the entire series. Prioritise filming it</li>
+    <li>All three versions should be pitched to playlists simultaneously after Week Three — "The Frequency: Complete" as a playlist or bundle is a natural editorial pitch</li>
+  </ul>
+</section>
+
+<!-- ═══ NASHVILLE NUMBERS ═══ -->
+<section id="nashville">
+  <div class="eyebrow gold r">04 — The Nashville Number System</div>
+  <h2 class="r">How The Source<br>stays keyless.</h2>
+
+  <p class="r">The Nashville Number System is a method of writing chord charts using numerals instead of letter names — each number represents a scale degree relative to whatever key the song is in. A chart written in Nashville Numbers can be played in any key without any changes to the chart itself. This is exactly why it is the right format for The Source.</p>
+  <p class="r">By providing a Nashville Numbers chart with the original key noted only as a reference point, The Order of Light gives collaborating artists a complete harmonic map of the song that belongs to no key until they choose one. The same chart that produced the original version in G major becomes a different song when an artist plays it in Bb, or D minor, or wherever their voice and instincts take them.</p>
+
+  <div class="nn-grid r">
+    <div class="nn-card"><div class="nn-num">1</div><div class="nn-note">Tonic</div></div>
+    <div class="nn-card"><div class="nn-num">2</div><div class="nn-note">Supertonic</div></div>
+    <div class="nn-card"><div class="nn-num">3</div><div class="nn-note">Mediant</div></div>
+    <div class="nn-card"><div class="nn-num">4</div><div class="nn-note">Subdominant</div></div>
+    <div class="nn-card"><div class="nn-num">5</div><div class="nn-note">Dominant</div></div>
+    <div class="nn-card"><div class="nn-num">6</div><div class="nn-note">Submediant</div></div>
+    <div class="nn-card"><div class="nn-num">7</div><div class="nn-note">Leading tone</div></div>
+  </div>
+
+  <h3 class="freq-h3 r">How to Notate The Source Chart</h3>
+  <p class="r">Common notation conventions used in The Source document:</p>
+  <ul class="ilist r">
+    <li><strong>Plain number (1, 4, 5)</strong> — major chord on that scale degree</li>
+    <li><strong>Minus sign (6-, 2-)</strong> — minor chord on that scale degree</li>
+    <li><strong>Triangle (1△)</strong> — major seventh chord</li>
+    <li><strong>Number with a 7 (5⁷)</strong> — dominant seventh chord</li>
+    <li><strong>Diamond (◇)</strong> — let ring / whole note duration</li>
+    <li><strong>Bars and slashes</strong> — standard bar lines and beat divisions</li>
+    <li><strong>Repeat marks</strong> — used for verse/chorus repetitions</li>
+  </ul>
+
+  <div class="nn-example r">
+    <div class="nn-ex-label">Example Source Chart Format</div>
+    <div class="nn-ex-line"><span class="annotation">Key of E (reference only — choose your own)</span></div>
+    <div class="nn-ex-line"></div>
+    <div class="nn-ex-line"><span class="annotation">[Verse]</span></div>
+    <div class="nn-ex-line"><span class="chord">| 1 . . . | 6- . . . | 4 . . . | 5 . . . |</span></div>
+    <div class="nn-ex-line"><span class="chord">| 1 . . . | 6- . . . | 4 . . . | 4 . . . |</span></div>
+    <div class="nn-ex-line"></div>
+    <div class="nn-ex-line"><span class="annotation">[Pre-Chorus]</span></div>
+    <div class="nn-ex-line"><span class="chord">| 4 . . . | 5 . . . | 6- . . . | 5 . . . |</span></div>
+    <div class="nn-ex-line"></div>
+    <div class="nn-ex-line"><span class="annotation">[Chorus]</span></div>
+    <div class="nn-ex-line"><span class="chord">| 1 . . . | 4 . . . | 5 . . . | 6- . . . |  x2</span></div>
+    <div class="nn-ex-line"></div>
+    <div class="nn-ex-line"><span class="annotation">[Bridge]</span></div>
+    <div class="nn-ex-line"><span class="chord">| 4△ . . . | 4△ . . . | 1 . . . | 5 . . . |</span></div>
+  </div>
+
+  <p class="r">The chart above gives a collaborating artist everything they need to understand the harmonic structure of the song while leaving melody, key, tempo, feel, arrangement, and production entirely open. Two artists handed this chart in a room with no further instruction will produce two different songs. That is the point.</p>
+</section>
+
+<!-- ═══ BUSINESS & LEGAL ═══ -->
+<section id="business">
+  <div class="eyebrow crim r">05 — Business, Royalties & Legal</div>
+  <h2 class="r">Being fair.<br>Not being naive.</h2>
+
+  <p class="r">The Frequency involves real intellectual property, real recordings, and real revenue potential. These things need to be handled correctly — both to protect The Order of Light's ownership of what it has created and to treat collaborators fairly. The following framework is a starting point, not a legal document. Run the final agreements past an entertainment lawyer before Year One.</p>
+
+  <h3 class="r">What The Order of Light Always Retains</h3>
+  <ul class="ilist r">
+    <li><strong>100% of lyrical copyright</strong> — across all three Transmissions, in perpetuity. The lyrics are not negotiable. They are provided to collaborators under a licence, not a transfer. Register them with your PRO (ASCAP or BMI) before sending The Source to anyone</li>
+    <li><strong>100% of composition and master for the OOL Transmission</strong> — your version is entirely yours. No split of any kind on the version you record</li>
+    <li><strong>The Source as a document</strong> — the chart, the title, and the lyrics as a combined work belong to The Order of Light</li>
+  </ul>
+
+  <h3 class="r">Royalty Split Models — Collaborator Versions</h3>
+  <p class="r">Because no original melody is provided and collaborators write their own melodic interpretation, they have a legitimate creative contribution to the composition of their version. The split model you use depends on the collaborator and the context.</p>
+
+  <div class="splits-grid r">
+    <div class="split-card">
+      <div class="split-who">Model A · Melodic Contribution Acknowledged</div>
+      <div class="split-row"><span class="split-label">Lyrics</span><span class="split-val yours">100% OOL</span></div>
+      <div class="split-row"><span class="split-label">Music composition</span><span class="split-val shared">70% OOL / 30% Artist</span></div>
+      <div class="split-row"><span class="split-label">Master recording</span><span class="split-val theirs">100% Artist</span></div>
+      <div class="split-row"><span class="split-label">Best for</span><span class="split-val" style="font-size:11px;color:rgba(245,240,232,0.4);">Established artists who will negotiate</span></div>
+    </div>
+    <div class="split-card">
+      <div class="split-who">Model B · Licence & Fee</div>
+      <div class="split-row"><span class="split-label">Lyrics</span><span class="split-val yours">100% OOL</span></div>
+      <div class="split-row"><span class="split-label">Music composition</span><span class="split-val yours">100% OOL</span></div>
+      <div class="split-row"><span class="split-label">Master recording</span><span class="split-val theirs">100% Artist</span></div>
+      <div class="split-row"><span class="split-label">Compensation</span><span class="split-val" style="font-size:11px;color:rgba(245,240,232,0.4);">Flat fee or favourable streaming share</span></div>
+    </div>
+    <div class="split-card">
+      <div class="split-who">Model C · Emerging Artist</div>
+      <div class="split-row"><span class="split-label">Lyrics</span><span class="split-val yours">100% OOL</span></div>
+      <div class="split-row"><span class="split-label">Music composition</span><span class="split-val shared">80% OOL / 20% Artist</span></div>
+      <div class="split-row"><span class="split-label">Master recording</span><span class="split-val theirs">100% Artist</span></div>
+      <div class="split-row"><span class="split-label">Platform value</span><span class="split-val" style="font-size:11px;color:rgba(245,240,232,0.4);">Exposure alongside established name</span></div>
+    </div>
+  </div>
+
+  <div class="legal-note r">
+    <div class="legal-note-label">Important — Read Before Year One</div>
+    <p>The splits above are a framework, not legal advice. An entertainment lawyer should draft or review the collaboration agreement before you approach any artist. The agreement needs to cover: what rights are being licensed, what the collaborator can and cannot do with the material, the embargo clause and its consequences, royalty collection and distribution, and what happens if a collaborator wants to remove their version from streaming. This is not expensive to do correctly and it is very expensive to fix after the fact.</p>
+    <p>Register your lyrics and composition with your PRO — ASCAP or BMI — before sending The Source to anyone. Once the lyrics leave your hands, the registration is your proof of prior ownership.</p>
+  </div>
+
+  <div class="embargo-block r">
+    <div class="embargo-label">The Embargo Clause — The Most Important Piece of Paper</div>
+    <p>The embargo clause in the collaboration agreement must specify: the earliest date on which the collaborator may release, discuss, preview, or reference their Transmission in any public forum; that breach of the embargo is a material breach of the agreement; and what the remedy is if a breach occurs.</p>
+    <p>The reveal mechanic — listeners discovering three versions of the same song in sequence, never knowing what the next one sounds like — is the entire creative and commercial engine of The Frequency. A single leak kills it for that year. The embargo clause is not a formality. It is the structural foundation the whole concept rests on. Treat it accordingly.</p>
+  </div>
+
+  <h3 class="r">Practical Administration</h3>
+  <ul class="ilist r">
+    <li><strong>Register lyrics with your PRO before sending The Source</strong> — ASCAP or BMI. One registration, done before any collaboration begins</li>
+    <li><strong>Use DistroKid, TuneCore or your existing distributor for each Transmission</strong> — each release is a separate single. Set publishing splits correctly at the point of distribution for each version</li>
+    <li><strong>Collaborators distribute their own Transmissions</strong> — they own their masters, they handle their own distribution. You handle yours</li>
+    <li><strong>Collect your composition royalties through your PRO</strong> — this happens automatically once songs are registered and generating streams. Make sure your PRO registration includes the correct splits for each version</li>
+    <li><strong>One agreement per collaborator, per year</strong> — do not reuse agreements year to year without review. Terms may need to evolve</li>
+  </ul>
+</section>
+
+<!-- ═══ THE SOURCE TEMPLATE ═══ -->
+<section id="source">
+  <div class="eyebrow gold r">06 — The Source Template</div>
+  <h2 class="r">What leaves your hands.<br>What they<br>work from.</h2>
+
+  <p class="r">The Source is a designed document — not a casual email attachment. It arrives as an artefact. An object. Something that communicates before it's read that what's inside is worth treating with seriousness. The design is consistent with The Order of Light visual identity. The content is exactly and only what the rules permit.</p>
+  <p class="r">Below is the template. Fill in the highlighted fields for each year's song. The structure never changes. The content does.</p>
+
+  <!-- THE SOURCE DOCUMENT -->
+  <div class="source-doc r">
+    <div class="source-header">
+      <div>
+        <div class="source-header-label">The Frequency · Annual Collaboration Series · The Order of Light</div>
+        <div class="source-header-title">The Source</div>
+        <div class="source-header-sub">This document contains everything you need. It contains everything you are being given.</div>
+      </div>
+      <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="rgba(42,106,138,0.6)" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="rgba(42,106,138,0.6)" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="rgba(42,106,138,0.5)" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8" x2="50" y2="31" stroke="rgba(42,106,138,0.5)" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8" y1="50" x2="31" y2="50" stroke="rgba(42,106,138,0.5)" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="rgba(42,106,138,0.5)" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+    </div>
+    <div class="source-body">
+
+      <div class="source-field">
+        <div class="source-field-label">The Frequency — Edition</div>
+        <div class="source-field-content title-field" style="font-size:18px;letter-spacing:0.12em;">[ Year · e.g. The Frequency 2025 ]</div>
+        <div class="source-field-note">This identifies which annual edition of The Frequency this Source belongs to.</div>
+      </div>
+
+      <div class="source-field">
+        <div class="source-field-label">Song Title</div>
+        <div class="source-field-content title-field">[ Song Title ]</div>
+        <div class="source-field-note">The title is fixed. It appears on all three Transmissions regardless of each artist's interpretation.</div>
+      </div>
+
+      <div class="source-field">
+        <div class="source-field-label">Lyrics — Complete</div>
+        <div class="source-field-content lyrics-field">[Verse 1]
+Your lyrics here — every verse, chorus,
+pre-chorus, bridge, and outro.
+Structural section labels included
+so the form of the song is clear.
+
+[Chorus]
+The chorus lyrics here.
+Repeated sections marked accordingly.
+
+[Verse 2]
+Second verse lyrics here.
+
+[Chorus]
+The chorus lyrics here.
+
+[Bridge]
+Bridge lyrics here.
+
+[Outro]
+Outro lyrics or final chorus notation.</div>
+        <div class="source-field-note">Lyrics are provided in full and are not to be altered. Minor structural reordering may be discussed directly with The Order of Light before recording begins. Substantive changes to the text are not permitted.</div>
+      </div>
+
+      <div class="source-field">
+        <div class="source-field-label">Chord Chart — Nashville Number System</div>
+        <div class="source-field-content chart-field">Original key: [ Key ] — for reference only. Record in whatever key serves your voice.
+
+[Verse]
+| 1  .  .  . | 6- .  .  . | 4  .  .  . | 5  .  .  . |
+| 1  .  .  . | 6- .  .  . | 4  .  .  . | 4  .  .  . |
+
+[Pre-Chorus]
+| 4  .  .  . | 5  .  .  . | 6- .  .  . | 5  .  .  . |
+
+[Chorus]
+| 1  .  .  . | 4  .  .  . | 5  .  .  . | 6- .  .  . |  x2
+| 1  .  .  . | 4  .  .  . | 5  .  .  . | 5  .  .  . |
+
+[Bridge]
+| 4△ .  .  . | 4△ .  .  . | 1  .  .  . | 5  .  .  . |
+
+[Outro]
+| 1  .  .  . | 4  .  .  . |  x4  — fade or hard out, your choice</div>
+        <div class="source-field-note">This is an illustrative example chart. Replace with the actual song's Nashville Numbers for each year's edition. Include tempo if helpful — mark it as a suggestion, not a directive.</div>
+      </div>
+
+      <div class="source-rules">
+        <div class="source-rules-label">Rules of The Frequency — Included With Every Source</div>
+        <ol>
+          <li>This document is the complete material package. No additional reference recordings, demos, or communication about the song will be provided.</li>
+          <li>You may not share, discuss, or preview your Transmission publicly in any form before your agreed release date.</li>
+          <li>You may not communicate with other collaborating artists about the song, your version, or your approach until after all Transmissions are publicly released.</li>
+          <li>The lyrics are provided under licence and remain the property of The Order of Light. They are not to be substantially altered.</li>
+          <li>The key noted above is for reference only. Record in whatever key you choose.</li>
+          <li>Your master recording belongs entirely to you. Your melodic composition is yours. The lyrical copyright remains with The Order of Light.</li>
+          <li>By accepting The Source and proceeding with your Transmission, you agree to the terms of the collaboration agreement provided separately.</li>
+        </ol>
+      </div>
+
+    </div>
+    <div class="source-footer">
+      <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+      <p>The Order of Light · The Frequency · tristanmatthew@gmail.com</p>
+      <p>Confidential · Do not distribute · © The Order of Light</p>
+    </div>
+  </div>
+
+  <h3 class="r">Pre-Send Checklist — Every Year</h3>
+  <p class="r">Before The Source leaves your hands, run through this list without exception.</p>
+
+  <div class="checklist r">
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Lyrics registered with your PRO</strong> (ASCAP or BMI) before sending to anyone</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Collaboration agreement drafted and reviewed</strong> by an entertainment lawyer — one per collaborator</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Embargo dates confirmed in writing</strong> with each collaborator and included in their agreement</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Release dates locked</strong> — Week One through Week Three, with Week Four reaction content in the calendar</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Royalty splits agreed</strong> and documented in each collaboration agreement before recording begins</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Distribution set up</strong> for The Order of Light's Transmission — publishing splits entered correctly</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Confirmed collaborators have no prior knowledge</strong> of each other's involvement (if required by your embargo terms)</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>The Source document proofed</strong> — correct year, correct title, correct lyrics, correct chart, reference key noted</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Week Four reaction content planned</strong> — filming logistics confirmed with all three artists in advance</div>
+    </div>
+  </div>
+
+</section>
+
+</div><!-- end page -->
+
+<div class="doc-footer">
+  <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+  <p>The Order of Light · The Frequency · Framework Document · 2025</p>
+  <p>Not legal advice · Consult an entertainment lawyer before Year One · tristanmatthew@gmail.com</p>
+</div>
+
+<script>
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('v'); }), {threshold:0.06, rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
