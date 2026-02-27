@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Musician Recruitment</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0A0A0A;
+  --deep: #121212;
+  --surface: #1A1A1A;
+  --surface2: #222;
+  --crimson: #8B1A2E;
+  --crimson-bright: #A82035;
+  --crimson-dim: #5C1020;
+  --gold: #C8A96E;
+  --gold-dim: #8A6E3E;
+  --parchment: #E8E0D0;
+  --parchment-dim: #C4B89A;
+  --white: #F5F0E8;
+  --grey: #666;
+  --grey-dim: #3A3A3A;
+
+  /* Role accent colours */
+  --singer: #C8A96E;
+  --drummer: #8B1A2E;
+  --guitarist: #7A9E8A;
+  --keys: #9A8AB0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* GRAIN */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.45;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: rgba(10,10,10,0.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(139,26,46,0.15);
+  padding: 0 48px; height: 54px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-id { display: flex; align-items: center; gap: 10px; }
+.nav-id span { font-size: 9.5px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(196,184,154,0.45); }
+nav ul { list-style: none; display: flex; gap: 28px; }
+nav a { text-decoration: none; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); transition: color 0.3s; }
+nav a:hover { color: var(--crimson-bright); }
+
+/* COVER */
+.cover {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 48px 80px; position: relative; overflow: hidden;
+}
+.cover::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(139,26,46,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cover-kicker { font-size: 9.5px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--crimson); margin-bottom: 44px; }
+.cover-mark { margin-bottom: 36px; animation: breathe 7s ease-in-out infinite; }
+@keyframes breathe { 0%,100%{opacity:1} 50%{opacity:0.65} }
+.cover h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(32px,5vw,62px); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 10px; line-height: 1.1;
+}
+.cover-sub { font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 56px; }
+.cover-rule { width: 1px; height: 52px; background: linear-gradient(to bottom, var(--crimson), transparent); margin: 0 auto 44px; }
+.cover-location { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(245,240,232,0.25); }
+
+/* SECTION */
+.page { max-width: 1080px; margin: 0 auto; }
+section { padding: 96px 48px; border-top: 1px solid rgba(255,255,255,0.04); }
+
+.eyebrow {
+  font-size: 9.5px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--crimson);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+}
+.eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(139,26,46,0.2); }
+
+h2 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(28px,3.5vw,48px); letter-spacing: 0.06em;
+  color: var(--white); margin-bottom: 32px; line-height: 1.1;
+}
+h3 { font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 36px 0 12px; }
+h4 { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--parchment-dim); margin: 24px 0 8px; }
+p { font-size: 14px; line-height: 1.85; color: rgba(245,240,232,0.65); max-width: 660px; margin-bottom: 16px; }
+p.wide { max-width: none; }
+strong { color: var(--white); font-weight: 400; }
+em { color: var(--gold); font-style: italic; }
+
+.pull-quote {
+  border-left: 3px solid var(--crimson); padding: 18px 28px; margin: 32px 0;
+  background: rgba(139,26,46,0.06);
+}
+.pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--white); font-weight: 300; max-width: none; margin: 0; line-height: 1.55; }
+
+.ilist { margin: 10px 0 18px 0; }
+.ilist li {
+  font-size: 13.5px; line-height: 1.75; color: rgba(245,240,232,0.65);
+  padding: 5px 0 5px 18px; border-bottom: 1px solid rgba(255,255,255,0.03);
+  position: relative; list-style: none;
+}
+.ilist li::before { content: '◈'; position: absolute; left: 0; color: var(--crimson); font-size: 9px; top: 8px; }
+.ilist li:last-child { border-bottom: none; }
+
+/* ═══ AD CARDS ═══ */
+.ad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 40px 0; }
+
+.ad-card {
+  background: var(--deep);
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative; overflow: hidden;
+  transition: border-color 0.4s;
+  cursor: default;
+}
+.ad-card:hover { border-color: rgba(139,26,46,0.35); }
+
+.ad-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.ad-singer::before { background: var(--singer); }
+.ad-drummer::before { background: var(--drummer); }
+.ad-guitarist::before { background: var(--guitarist); }
+.ad-keys::before { background: var(--keys); }
+
+.ad-bg-glyph {
+  position: absolute; bottom: -10%; right: -5%;
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: 9em; line-height: 1; opacity: 0.04; color: var(--white);
+  pointer-events: none; z-index: 0; letter-spacing: -0.05em;
+  user-select: none;
+}
+
+.ad-inner { padding: 40px 40px 36px; position: relative; z-index: 1; }
+
+.ad-role-tag {
+  display: inline-block; padding: 4px 12px;
+  font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase;
+  border: 1px solid; margin-bottom: 20px; font-family: 'DM Sans', sans-serif; font-weight: 300;
+}
+.ad-singer .ad-role-tag { border-color: var(--singer); color: var(--singer); }
+.ad-drummer .ad-role-tag { border-color: var(--drummer); color: var(--crimson-bright); }
+.ad-guitarist .ad-role-tag { border-color: var(--guitarist); color: var(--guitarist); }
+.ad-keys .ad-role-tag { border-color: var(--keys); color: var(--keys); }
+
+.ad-headline {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(22px,2.2vw,30px); color: var(--white);
+  line-height: 1.2; margin-bottom: 8px; letter-spacing: 0.02em;
+}
+
+.ad-subhead {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
+  font-size: 15px; margin-bottom: 24px; line-height: 1.4;
+}
+.ad-singer .ad-subhead { color: rgba(200,169,110,0.7); }
+.ad-drummer .ad-subhead { color: rgba(139,26,46,0.8); }
+.ad-guitarist .ad-subhead { color: rgba(122,158,138,0.7); }
+.ad-keys .ad-subhead { color: rgba(154,138,176,0.7); }
+
+.ad-body { font-size: 13px; line-height: 1.8; color: rgba(245,240,232,0.6); margin-bottom: 20px; max-width: none; }
+
+.ad-requires {
+  background: rgba(255,255,255,0.03);
+  border-left: 2px solid;
+  padding: 14px 18px; margin: 20px 0;
+}
+.ad-singer .ad-requires { border-color: var(--singer); }
+.ad-drummer .ad-requires { border-color: var(--drummer); }
+.ad-guitarist .ad-requires { border-color: var(--guitarist); }
+.ad-keys .ad-requires { border-color: var(--keys); }
+
+.ad-req-label { font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px; }
+.ad-singer .ad-req-label { color: var(--singer); }
+.ad-drummer .ad-req-label { color: var(--crimson-bright); }
+.ad-guitarist .ad-req-label { color: var(--guitarist); }
+.ad-keys .ad-req-label { color: var(--keys); }
+
+.ad-req-list { list-style: none; }
+.ad-req-list li {
+  font-size: 12px; line-height: 1.7; color: rgba(245,240,232,0.6);
+  padding: 3px 0 3px 14px; position: relative;
+}
+.ad-req-list li::before { content: '—'; position: absolute; left: 0; color: rgba(245,240,232,0.25); }
+
+.ad-not-for {
+  margin-top: 16px; padding: 14px 18px;
+  background: rgba(139,26,46,0.1);
+  border: 1px solid rgba(139,26,46,0.25);
+}
+.ad-not-for-label { font-size: 8.5px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(168,32,53,0.85); margin-bottom: 8px; font-weight: 400; }
+.ad-not-for p { font-size: 12.5px; color: rgba(245,240,232,0.75); margin: 0; max-width: none; line-height: 1.7; }
+
+.ad-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 40px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.3);
+  position: relative; z-index: 1;
+}
+.ad-contact { font-size: 10.5px; letter-spacing: 0.12em; color: rgba(245,240,232,0.4); }
+.ad-contact strong { color: rgba(245,240,232,0.75); font-weight: 400; letter-spacing: 0.05em; }
+.ad-location { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,240,232,0.25); }
+
+/* ═══ CLASSIFIEDS VERSION ═══ */
+.classifieds-note {
+  background: var(--surface); border: 1px solid rgba(255,255,255,0.06);
+  padding: 28px 32px; margin: 32px 0;
+}
+.classifieds-note-label { font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.classifieds-note p { font-size: 13px; max-width: none; margin: 0; }
+
+.plaintext-ad {
+  background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.06);
+  padding: 28px 32px; margin: 12px 0; font-family: monospace;
+}
+.pt-label { font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--crimson); margin-bottom: 14px; font-family: 'DM Sans', sans-serif; }
+.pt-body { font-size: 12px; line-height: 1.85; color: rgba(245,240,232,0.65); white-space: pre-wrap; }
+
+/* ═══ CONCEPT EXPLAINER — IN-WORLD ═══ */
+.inworld-doc {
+  background: var(--deep);
+  border: 1px solid rgba(139,26,46,0.15);
+  margin: 40px 0; overflow: hidden;
+}
+.inworld-header {
+  background: var(--crimson); padding: 36px 44px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.inworld-header-text h3 { color: rgba(245,240,232,0.6); margin: 0 0 6px; font-size: 9px; letter-spacing: 0.3em; }
+.inworld-header-text h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 28px; color: var(--white); margin: 0; letter-spacing: 0.06em; line-height: 1.2; }
+.inworld-body { padding: 44px; }
+.inworld-body p { font-size: 14px; line-height: 1.9; color: rgba(245,240,232,0.7); max-width: 680px; margin-bottom: 18px; }
+.inworld-body h3 { font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 36px 0 12px; }
+.inworld-verse {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
+  font-size: 22px; color: var(--white); line-height: 1.5; padding: 24px 0;
+  border-top: 1px solid rgba(139,26,46,0.2); border-bottom: 1px solid rgba(139,26,46,0.2);
+  margin: 28px 0;
+}
+.inworld-verse span { display: block; }
+.inworld-verse .verse-note { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); font-style: normal; margin-top: 12px; }
+.inworld-footer { padding: 24px 44px; border-top: 1px solid rgba(255,255,255,0.04); background: rgba(0,0,0,0.3); display: flex; align-items: center; gap: 14px; }
+.inworld-footer p { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.3); margin: 0; max-width: none; }
+
+/* ═══ STRAIGHT-TALKING DOC ═══ */
+.straight-doc {
+  background: var(--parchment);
+  margin: 40px 0; overflow: hidden;
+}
+.straight-header {
+  background: var(--void); padding: 36px 44px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 3px solid var(--crimson);
+}
+.straight-header-text {}
+.straight-header-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--crimson); margin-bottom: 6px; }
+.straight-header-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 28px; color: var(--white); letter-spacing: 0.06em; line-height: 1.2; }
+.straight-body { padding: 44px; }
+.straight-body p { font-size: 14px; line-height: 1.9; color: rgba(10,10,10,0.75); max-width: 680px; margin-bottom: 18px; }
+.straight-body h3 { font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--crimson-dim); margin: 36px 0 12px; }
+.straight-body strong { color: #0A0A0A; }
+.straight-body em { color: var(--crimson-dim); font-style: italic; }
+.straight-list { margin: 10px 0 18px 0; }
+.straight-list li {
+  font-size: 13.5px; line-height: 1.75; color: rgba(10,10,10,0.7);
+  padding: 5px 0 5px 18px; border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: relative; list-style: none;
+}
+.straight-list li::before { content: '—'; position: absolute; left: 0; color: var(--crimson-dim); }
+.straight-list li:last-child { border-bottom: none; }
+.straight-callout {
+  background: rgba(139,26,46,0.08); border-left: 3px solid var(--crimson);
+  padding: 18px 24px; margin: 24px 0;
+}
+.straight-callout p { color: rgba(10,10,10,0.8); margin: 0; max-width: none; font-size: 13px; }
+.straight-footer { padding: 24px 44px; border-top: 2px solid rgba(0,0,0,0.08); background: rgba(0,0,0,0.04); display: flex; align-items: center; gap: 14px; }
+.straight-footer p { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(10,10,10,0.35); margin: 0; max-width: none; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media(max-width:860px) {
+  nav ul { display: none; }
+  section { padding: 70px 24px; }
+  .cover { padding: 90px 24px 60px; }
+  .ad-grid { grid-template-columns: 1fr; }
+  .inworld-body, .straight-body { padding: 28px 24px; }
+  .inworld-header, .straight-header { padding: 28px 24px; }
+  .inworld-footer, .straight-footer { padding: 18px 24px; }
+  .ad-inner { padding: 28px 24px 24px; }
+  .ad-footer { padding: 16px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-id">
+    <svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+    <span>Musician Recruitment — The Order of Light</span>
+  </div>
+  <ul>
+    <li><a href="#ads">The Ads</a></li>
+    <li><a href="#classifieds">Classifieds Text</a></li>
+    <li><a href="#inworld">In-World Brief</a></li>
+    <li><a href="#straight">Band Brief</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-kicker">Musician Recruitment · Charlotte, NC</div>
+  <div class="cover-mark">
+    <svg width="88" height="88" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+  </div>
+  <h1>The Order of Light</h1>
+  <div class="cover-sub">Musician Recruitment Package · 2025</div>
+  <div class="cover-rule"></div>
+  <div class="cover-location">Charlotte, NC &amp; Surrounding Areas · In-Person · Serious Applicants Only</div>
+</div>
+
+<div class="page">
+
+<!-- ═══ THE ADS ═══ -->
+<section id="ads">
+  <div class="eyebrow reveal">01 — The Ads</div>
+  <h2 class="reveal">Four Positions.<br>One Signal.</h2>
+  <p class="reveal">These are the designed versions — use as social media posts (Instagram/Facebook) or share directly as a link. Classifieds plain-text versions follow in the next section, formatted for Craigslist, Bandmix, and Musicians Friend.</p>
+
+  <div class="ad-grid reveal">
+
+    <!-- SINGER -->
+    <div class="ad-card ad-singer">
+      <div class="ad-bg-glyph">◈</div>
+      <div class="ad-inner">
+        <div class="ad-role-tag">Vocalist · Charlotte NC</div>
+        <div class="ad-headline">The signal needs<br>a voice.</div>
+        <div class="ad-subhead">Lead vocalist &amp; co-writer sought for serious original project</div>
+        <p class="ad-body">We are building something deliberate and unhurried. A rock band with real melodic ambition — the kind of music that rewards close listening and doesn't apologise for wanting to move people. We write songs that breathe, groove, and stay with you. Atmospherically dark but emotionally warm. The signal is in place. We need the voice that carries it.</p>
+        <p class="ad-body">If your reference points include artists like Thrice, Death Cab for Cutie, Copeland, Nothing But Thieves, Counting Crows, Young the Giant, and Mew — and if you hear those influences not as a genre checklist but as a shared sensibility — we may be looking for each other.</p>
+
+        <div class="ad-requires">
+          <div class="ad-req-label">What this requires</div>
+          <ul class="ad-req-list">
+            <li>Strong lead vocals with genuine range — tone, dynamics, and emotional control</li>
+            <li>Harmony ability is non-negotiable. Stacked vocal arrangements are core to our sound</li>
+            <li>Previous studio recording experience — you know how you sound on tape</li>
+            <li>Live touring history — you know what it means to perform consistently night after night</li>
+            <li>Co-writing capability — lyrics, melody, or both. We have extensive material but this is collaborative</li>
+            <li>The confidence to submit original material and write to existing tracks as part of the audition</li>
+            <li>Based in Charlotte, NC or genuinely willing to be here for rehearsals. This is in-person</li>
+          </ul>
+        </div>
+
+        <div class="ad-not-for">
+          <div class="ad-not-for-label">This is not the project for you if —</div>
+          <p>You're looking to join something casual. If you treat music as an occasional hobby, have no recording or touring experience to show, or if you're not comfortable being part of a project with a strong defined aesthetic and artistic vision, we'll both know quickly that it isn't right. We'd rather be honest about that upfront.</p>
+        </div>
+
+        <p class="ad-body" style="font-size:12.5px;color:rgba(245,240,232,0.4);margin-top:16px;margin-bottom:0;">Age range: 30s–40s preferred. This band holds one non-negotiable: every human being deserves equal dignity regardless of who they are, who they love, or where they come from. If that's a political statement to you, we're genuinely not the right project.</p>
+      </div>
+      <div class="ad-footer">
+        <div class="ad-contact">Contact: <strong>tristanmatthew@gmail.com</strong> · Include links to recordings and a brief introduction</div>
+        <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+    </div>
+
+    <!-- DRUMMER -->
+    <div class="ad-card ad-drummer">
+      <div class="ad-bg-glyph">◈</div>
+      <div class="ad-inner">
+        <div class="ad-role-tag">Drummer · Charlotte NC</div>
+        <div class="ad-headline">The signal needs<br>a pulse.</div>
+        <div class="ad-subhead">Drummer sought for serious original project with forward momentum</div>
+        <p class="ad-body">We are not looking for someone who plays loud. We are looking for someone who plays <em>right</em>. The drumming this project needs is rooted in feel, pocket, and an understanding that restraint is a musical decision — and that when it's time to open up, that means something. Atmospheric and dynamic. Groove-forward. Unwilling to settle for adequate.</p>
+        <p class="ad-body">If you find yourself reaching for records by MuteMath, Minus The Bear, Sunny Day Real Estate, Thrice, Hell Is For Heroes or Mew when you want to hear drumming that serves the song rather than competing with it — you already understand what we're after.</p>
+
+        <div class="ad-requires">
+          <div class="ad-req-label">What this requires</div>
+          <ul class="ad-req-list">
+            <li>Technical ability matched by taste — you know when to fill and when to lock in and breathe</li>
+            <li>Proven studio experience — you've tracked to a click, worked with a producer, heard yourself back</li>
+            <li>Touring history — road experience, not just weekend shows</li>
+            <li>The ability to sing harmony. This band layers vocals. Willingness to contribute is essential</li>
+            <li>Comfortable working with electronic elements and loops as part of the rhythm foundation</li>
+            <li>Ability to learn existing material and demonstrate chemistry in person as part of the process</li>
+            <li>Charlotte, NC based or genuinely available for regular in-person rehearsal</li>
+          </ul>
+        </div>
+
+        <div class="ad-not-for">
+          <div class="ad-not-for-label">This is not the project for you if —</div>
+          <p>Your instinct is always to play more. If your idea of a great drummer is measured purely in speed and volume, or if you've never worked in a studio environment and aren't interested in doing so, this isn't the right fit — and we'd rather say that clearly than waste either of our time.</p>
+        </div>
+
+        <p class="ad-body" style="font-size:12.5px;color:rgba(245,240,232,0.4);margin-top:16px;margin-bottom:0;">Age range: 30s–40s preferred. This band holds one non-negotiable: every human being deserves equal dignity regardless of who they are, who they love, or where they come from. If that's a political statement to you, we're genuinely not the right project.</p>
+      </div>
+      <div class="ad-footer">
+        <div class="ad-contact">Contact: <strong>tristanmatthew@gmail.com</strong> · Include links to recordings and a brief introduction</div>
+        <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+    </div>
+
+    <!-- GUITARIST -->
+    <div class="ad-card ad-guitarist">
+      <div class="ad-bg-glyph">◈</div>
+      <div class="ad-inner">
+        <div class="ad-role-tag">Guitar · Charlotte NC</div>
+        <div class="ad-headline">The signal needs<br>texture &amp; teeth.</div>
+        <div class="ad-subhead">Lead / rhythm guitarist sought — atmosphere, hooks, and the space between</div>
+        <p class="ad-body">The guitar in this project does several things at once. It carries melodic weight. It builds atmosphere. It locks into the groove. And occasionally — when the song earns it — it opens up completely. What it never does is fill space for its own sake. We want a player who understands the difference between a part that's there because it's right and a part that's there because silence felt uncomfortable.</p>
+        <p class="ad-body">If you know the guitar work of Thrice, Nothing But Thieves, Minus The Bear, Copeland, Mae, Young the Giant, and Death Cab — and if what you love about those records is the craft, the restraint, and the way a single well-placed phrase can carry an entire song — then you already hear what we're trying to build.</p>
+
+        <div class="ad-requires">
+          <div class="ad-req-label">What this requires</div>
+          <ul class="ad-req-list">
+            <li>Fluency across rhythm and lead — this is not a strictly siloed role</li>
+            <li>Strong feel for texture and atmosphere — effects, space, and layering are part of your vocabulary</li>
+            <li>Studio recording experience. You understand tone, microphone placement, and the difference between live and recorded sound</li>
+            <li>Touring experience — you've carried gear, survived a van, and played the same set on adrenaline and not much else</li>
+            <li>Harmony vocals required. You sing. You sing well enough to contribute to stacked arrangements</li>
+            <li>Charlotte, NC or surrounding areas. In-person rehearsals are non-negotiable for this project</li>
+          </ul>
+        </div>
+
+        <div class="ad-not-for">
+          <div class="ad-not-for-label">This is not the project for you if —</div>
+          <p>You want a platform to showcase technical ability above all else. This music is collaborative and song-first. If you find restraint frustrating rather than interesting, or if your experience is purely local with no studio work to show, we're probably not a match.</p>
+        </div>
+
+        <p class="ad-body" style="font-size:12.5px;color:rgba(245,240,232,0.4);margin-top:16px;margin-bottom:0;">Age range: 30s–40s preferred. This band holds one non-negotiable: every human being deserves equal dignity regardless of who they are, who they love, or where they come from. If that's a political statement to you, we're genuinely not the right project.</p>
+      </div>
+      <div class="ad-footer">
+        <div class="ad-contact">Contact: <strong>tristanmatthew@gmail.com</strong> · Include links to recordings and a brief introduction</div>
+        <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#7A9E8A" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#7A9E8A" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#7A9E8A" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#7A9E8A" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#7A9E8A" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#7A9E8A" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+    </div>
+
+    <!-- KEYS / SYNTH -->
+    <div class="ad-card ad-keys">
+      <div class="ad-bg-glyph">◈</div>
+      <div class="ad-inner">
+        <div class="ad-role-tag">Keys / Synth · Charlotte NC</div>
+        <div class="ad-headline">The signal needs<br>its frequency.</div>
+        <div class="ad-subhead">Keys &amp; synthesizer player sought — the electronic foundation of something atmospheric</div>
+        <p class="ad-body">This role is the connective tissue of the project. The thing that lives in the spaces between guitar, bass, and drums and makes the whole thing feel larger than its parts. We need a player who is equally comfortable with warm analogue textures, precise electronic programming, piano-rooted melodic work, and knowing instinctively which of those the song needs at any given moment.</p>
+        <p class="ad-body">If your record collection includes MuteMath, Mew, Massive Attack, Portishead, Copeland, and Mae — and if you've spent time understanding how synth and keys operate not just as an instrument but as a production element and a frequency layer — we need to talk.</p>
+
+        <div class="ad-requires">
+          <div class="ad-req-label">What this requires</div>
+          <ul class="ad-req-list">
+            <li>Proficiency across both acoustic/electric piano and synthesizer — this is not one or the other</li>
+            <li>Understanding of sound design — you can create and shape a tone, not just play a preset</li>
+            <li>Familiarity with live electronic performance — loops, triggers, layering in a live context</li>
+            <li>Studio recording experience — you've worked in a professional environment and understand the process</li>
+            <li>Touring experience — live performance history beyond local shows</li>
+            <li>Harmony vocals a significant advantage. This band sings. Being able to contribute matters</li>
+            <li>Charlotte, NC or surrounding areas. Regular in-person presence required</li>
+          </ul>
+        </div>
+
+        <div class="ad-not-for">
+          <div class="ad-not-for-label">This is not the project for you if —</div>
+          <p>Your keyboard experience is limited to one domain — piano only, or synth-preset only — without the range to move between them. Equally, if you've never performed live in a serious touring context or worked in a recording studio, this is a significant ask and we'd rather be honest about the gap upfront than discover it later.</p>
+        </div>
+
+        <p class="ad-body" style="font-size:12.5px;color:rgba(245,240,232,0.4);margin-top:16px;margin-bottom:0;">Age range: 30s–40s preferred. This band holds one non-negotiable: every human being deserves equal dignity regardless of who they are, who they love, or where they come from. If that's a political statement to you, we're genuinely not the right project.</p>
+      </div>
+      <div class="ad-footer">
+        <div class="ad-contact">Contact: <strong>tristanmatthew@gmail.com</strong> · Include links to recordings and a brief introduction</div>
+        <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#9A8AB0" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#9A8AB0" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+    </div>
+
+  </div><!-- end ad-grid -->
+</section>
+
+<!-- ═══ CLASSIFIEDS PLAIN TEXT ═══ -->
+<section id="classifieds">
+  <div class="eyebrow reveal">02 — Classifieds Text</div>
+  <h2 class="reveal">Plain Text Versions</h2>
+  <p class="reveal">Copy-paste ready for Craigslist, Bandmix, Musicians Friend, JoinMyBand and similar platforms. These strip the visual identity but keep the voice and filtering function intact. Replace <strong>tristanmatthew@gmail.com</strong> before posting.</p>
+
+  <div class="classifieds-note reveal">
+    <div class="classifieds-note-label">Posting Strategy — Read Before Placing Ads</div>
+    <p>On Craigslist, post under <strong>Musicians &gt; Wanted: Musicians</strong>. Post Tuesday or Wednesday — these get higher engagement mid-week than weekend posts. Refresh every 48 hours. On Bandmix and Musicians Friend, complete the full profile with the brand identity imagery before posting — applicants will look at the profile and the visual alone filters significantly. On JoinMyBand, use a direct link to this HTML document as the full project brief in your profile description.</p>
+  </div>
+
+  <div class="plaintext-ad reveal">
+    <div class="pt-label">Vocalist — Craigslist / Bandmix / Musicians Friend</div>
+    <div class="pt-body">VOCALIST WANTED — The Order of Light · Charlotte, NC
+
+Serious original project seeking a lead vocalist in their 30s–40s with genuine studio and touring experience. This is not a casual project.
+
+THE MUSIC: Atmospheric, melodic alternative rock. Hooky, harmony-driven, and emotionally honest. Influences include Thrice, Death Cab for Cutie, Nothing But Thieves, Copeland, Young the Giant, Counting Crows, Mew, and Sunny Day Real Estate — but what those share matters more than the genre labels. Songs that breathe, groove, and stay with you.
+
+WHAT WE NEED:
+• Strong lead vocals with genuine range and emotional control
+• Harmony ability is non-negotiable — stacked vocal arrangements are central to this project
+• Proven studio recording experience — you know how you sound on tape
+• Real touring history — you've been on the road and you know what that means
+• Co-writing ability (lyrics, melody, or both) — we have extensive material but this is a collaboration
+• Willingness to submit original material and write to existing tracks as part of the audition process
+• Charlotte, NC or genuinely able to commit to regular in-person rehearsals
+
+This band holds one non-negotiable: every person deserves equal dignity. We don't do politics — but we do believe in basic human decency, without exception. If that's a point of disagreement, this isn't your band.
+
+Not the right fit if you're looking for something casual, have no recording or touring experience, or aren't open to a project with a strong defined aesthetic vision.
+
+To apply: Send tristanmatthew@gmail.com a brief introduction and links to your best recorded work. No recordings = no response.</div>
+  </div>
+
+  <div class="plaintext-ad reveal">
+    <div class="pt-label">Drummer — Craigslist / Bandmix / Musicians Friend</div>
+    <div class="pt-body">DRUMMER WANTED — The Order of Light · Charlotte, NC
+
+Serious original project seeking a drummer in their 30s–40s with studio and touring experience. Groove, taste, and feel over everything.
+
+THE MUSIC: Atmospheric, melodic alternative rock. Groove-forward and dynamic — the kind of drumming that serves the song. Reference points: MuteMath, Thrice, Minus The Bear, Sunny Day Real Estate, Hell Is For Heroes, Mew. Tight where it needs to be tight. Open where that means something.
+
+WHAT WE NEED:
+• Technical ability matched by taste — you know when to fill and when to lock in
+• Proven studio experience — you've tracked to a click and worked with a producer
+• Touring history — road experience, not just local weekend shows
+• Harmony vocals a significant asset — this band sings together
+• Comfortable with electronic elements and loops as part of the live rhythm foundation
+• Charlotte, NC or available for regular in-person rehearsal
+
+Every person is welcome here. We are not a political band, but we do believe every human being deserves respect and dignity — without qualification. If that's contentious to you, we're probably not compatible.
+
+Not the right fit if your instinct is always to play louder and more, or if you have no studio or touring experience to show.
+
+To apply: Send tristanmatthew@gmail.com a brief introduction and links to recorded work. Live footage welcome.</div>
+  </div>
+
+  <div class="plaintext-ad reveal">
+    <div class="pt-label">Guitarist — Craigslist / Bandmix / Musicians Friend</div>
+    <div class="pt-body">GUITARIST WANTED — The Order of Light · Charlotte, NC
+
+Serious original project seeking a lead/rhythm guitarist in their 30s–40s. Atmosphere, hooks, texture, and the discipline to know when silence is the right answer.
+
+THE MUSIC: Melodic alternative rock with atmospheric and electronic elements. Guitar-forward but not guitar-centred — every part earns its place. Reference points: Thrice, Nothing But Thieves, Minus The Bear, Death Cab for Cutie, Young the Giant, Copeland, Mae.
+
+WHAT WE NEED:
+• Comfortable across lead and rhythm — this is not a strictly siloed role
+• Strong feel for texture and atmosphere — effects and space are part of your vocabulary
+• Studio recording experience — you understand tone, signal chain, and the recorded sound
+• Genuine touring history — you've done the work on the road
+• Harmony vocals required — you can sing and contribute to layered arrangements
+• Charlotte, NC or surrounding areas. In-person rehearsals are essential
+
+Every person is welcome here. We believe in human decency — simply, completely, without asterisks. That's not a political position to us. It's a baseline.
+
+Not the right fit if music is purely a technical showcase or if your experience is limited to local shows with no studio work.
+
+To apply: Send tristanmatthew@gmail.com a brief introduction and links to your best recordings.</div>
+  </div>
+
+  <div class="plaintext-ad reveal">
+    <div class="pt-label">Keys / Synth — Craigslist / Bandmix / Musicians Friend</div>
+    <div class="pt-body">KEYS / SYNTH PLAYER WANTED — The Order of Light · Charlotte, NC
+
+Serious original project seeking a keyboard and synthesizer player in their 30s–40s. The frequency layer that makes the whole thing breathe.
+
+THE MUSIC: Atmospheric, melodic alternative rock with significant electronic and synth elements. This role is connective tissue — what lives between guitar, bass, and drums and makes it feel larger. Reference points: MuteMath, Mew, Massive Attack, Copeland, Portishead, Mae.
+
+WHAT WE NEED:
+• Proficiency across both piano/keys and synthesizer — both are required, not one or the other
+• Sound design ability — you shape and create tones, you don't just select presets
+• Experience with live electronic performance — loops, triggers, and layering in a live context
+• Studio recording experience in a professional environment
+• Touring history — you've performed seriously beyond local shows
+• Harmony vocals a significant advantage
+• Charlotte, NC or surrounding areas. Regular in-person presence required
+
+Every person is welcome here. We believe in human decency — simply, completely, without asterisks. That's not a political position to us. It's a baseline. If the music resonates, you are welcome here.
+
+Not the right fit if your experience is limited to one domain (piano only or synth only) or if you have no live touring or studio experience.
+
+To apply: Send tristanmatthew@gmail.com a brief introduction and your best recorded work.</div>
+  </div>
+
+</section>
+
+<!-- ═══ IN-WORLD CONCEPT EXPLAINER ═══ -->
+<section id="inworld">
+  <div class="eyebrow reveal">03 — Concept Explainer</div>
+  <h2 class="reveal">In-World Version:<br>For Those Already<br>Finding the Signal</h2>
+  <p class="reveal">This version is for potential bandmates who have already been referred, who have found the project organically, or who respond to the aesthetic and want to understand it more deeply before making contact. It assumes a degree of curiosity and openness. Share it as a direct link.</p>
+
+  <div class="inworld-doc reveal">
+    <div class="inworld-header">
+      <div class="inworld-header-text">
+        <h3>Internal Transmission · For Those Being Considered</h3>
+        <h2>What The Order of Light Is —<br>and What It Asks of You</h2>
+      </div>
+      <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="rgba(245,240,232,0.6)" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="rgba(245,240,232,0.6)" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="rgba(245,240,232,0.6)" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="rgba(245,240,232,0.6)" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="rgba(245,240,232,0.6)" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="rgba(245,240,232,0.6)" stroke-width="7" stroke-linecap="square"/>
+</svg>
+    </div>
+    <div class="inworld-body">
+
+      <h3>The Music First</h3>
+      <p>The Order of Light is an original alternative rock band based in Charlotte, NC. The music is melodic, atmospheric, harmony-driven, and emotionally direct. It is rooted in the tradition of bands who understood that a great song is a piece of architecture — every element exists to serve the whole. Hooks matter. Space matters. Vocals matter enormously.</p>
+      <p>The sonic territory sits somewhere in the lineage of Thrice, Copeland, Nothing But Thieves, Minus The Bear, MuteMath, Death Cab for Cutie, Sunny Day Real Estate, Mew, Young the Giant, and Mae. What those records share — melodic ambition, emotional honesty, a refusal to be either too soft or too heavy — is the centre of gravity we're building around. The music has a dark atmosphere but a warm core. Dreamy and grooving. The kind of thing that sounds effortless and is anything but.</p>
+      <p>There are approximately 40 songs in various stages of development. Three EPs are planned across the first year of release, structured around a thematic arc that gives the project a shape and momentum most bands never achieve before their first album. The material exists. The vision is clear. What's needed now are the right people to bring it to life.</p>
+
+      <h3>The Mythology — What It Is and Is Not</h3>
+      <p>The project operates under a deliberate artistic identity: The Order of Light. This is a creative and marketing framework, not a belief system. There is no actual religion here, no ideology, no hierarchy of thought that members are expected to adopt. It is a <em>persona</em> — a carefully constructed world that gives the music a context, a mythology, and a visual identity that is distinctive enough to be remembered and resonant enough to mean something.</p>
+      <p>The mythology draws on the aesthetics of spiritual and philosophical traditions — Buddhist numerology, runic symbolism, the language of transmission and signal — not to promote any of those things, but because they carry weight, depth, and a sense of something larger than a band's usual self-presentation. The Order of Light is a story we are telling around the music. A frame that makes the picture more interesting.</p>
+
+      <div class="inworld-verse">
+        <span>First you're something.</span>
+        <span>Then you're nothing.</span>
+        <span>Now you're everything.</span>
+        <span class="verse-note">108 · The Three-EP Arc · The Shape of the First Year</span>
+      </div>
+
+      <p>The number 108 structures the release arc. In Buddhist tradition, 108 beads on a mala mark the passage from attachment to release — from the bounded self toward something larger. Three EPs across twelve months enact that journey through music: the first grounded in identity and selfhood, the second in dissolution and transformation, the third in expansion and arrival. This is the framework. The songs don't need to explain it — they simply need to belong to it.</p>
+
+      <h3>The Marketing &amp; Campaign Strategy</h3>
+      <p>The Order of Light launches with the mythology preceding the music by several months. Social media, a fan club (The Illuminated), a physical ordination kit, a fictional spokesperson figure called The Conduit, and a year of carefully planned content all create the world before the band is revealed within it. This is a deliberate slow-build strategy — the opposite of the launch-and-hope model most independent bands use.</p>
+      <p>The aesthetic references are DHARMA Initiative (LOST), Massive Attack's visual world, the sincerity of cult documentary filmmaking, and early-internet mystery ARGs. Visually striking, emotionally warm, slightly unsettling in the best possible way. The brand has been developed in full — logo, colour system, typography, campaign calendar, content strategy, physical merchandise. It is a complete package. What it needs is the music, and the musicians, at its centre.</p>
+
+      <h3>What the Project Asks of You</h3>
+      <p>Being in this band means being genuinely committed to the artistic vision. That means understanding and respecting the aesthetic framework — not performing it, but believing in it as a creative context worth inhabiting. It means being a serious, experienced musician who brings professionalism to recording and touring. It means being a collaborator, not a passenger.</p>
+      <p>It also means being someone who believes — without caveats — that every human being deserves dignity and respect. This is not a political band. We don't have a party. We do have a baseline: every person in this room is equal, full stop. Anyone who finds that principle controversial will find the rest of this project uncomfortable too, and we'd rather be honest about that now. The music belongs to anyone who can hear it. So does this band.</p>
+      <p>If you're reading this and something in it resonates — if the music, the vision, the ambition, or the ethics of it feels like something you want to be part of — then the signal may already have found you.</p>
+
+      <h3>The Practical Reality</h3>
+      <ul class="ilist">
+        <li><strong>Location:</strong> Charlotte, NC. In-person rehearsals. This is not a remote project</li>
+        <li><strong>Experience required:</strong> Previous studio recording credits and genuine touring history. Both. Not one or the other</li>
+        <li><strong>Audition process:</strong> Submission of existing recorded work, followed by writing to existing material, followed by in-person sessions with the project founder</li>
+        <li><strong>Harmony vocals:</strong> Every member of this band sings. Not necessarily lead, but harmonies are part of the live and recorded sound. This is a requirement, not a preference</li>
+        <li><strong>Timeline:</strong> The campaign infrastructure is built. The mythology launches before the music. Position available now — the right person shapes the sound of what gets recorded</li>
+        <li><strong>Compensation:</strong> This is an artist project with a serious long-term commercial plan. Revenue sharing will be discussed in detail with serious candidates</li>
+      </ul>
+    </div>
+    <div class="inworld-footer">
+      <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      <p>The Order of Light · Charlotte, NC · Internal Document · 2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STRAIGHT-TALKING BAND BRIEF ═══ -->
+<section id="straight">
+  <div class="eyebrow reveal">04 — Band Brief</div>
+  <h2 class="reveal">Straight-Talking Version:<br>Just the Facts</h2>
+  <p class="reveal">This version is for cold contacts — people who found the ads on Bandmix, Craigslist, or through a mutual connection who haven't yet encountered the project's aesthetic. Plain language. All the same information, none of the mythology framing. Share when you want the facts to do the work first.</p>
+
+  <div class="straight-doc reveal">
+    <div class="straight-header">
+      <div class="straight-header-text">
+        <div class="straight-header-label">Band Information Brief · Charlotte, NC · 2025</div>
+        <div class="straight-header-title">The Order of Light —<br>What This Project Is</div>
+      </div>
+      <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+    </div>
+    <div class="straight-body">
+
+      <h3>The Short Version</h3>
+      <p>The Order of Light is a new original rock band based in Charlotte, NC. We are currently recruiting musicians — vocalist, drummer, guitarist, and keys/synth player — to complete the lineup. We are looking for experienced, serious adults in their 30s–40s who have actually been in recording studios and on tour. If that's not you, this isn't the right project.</p>
+
+      <h3>The Music</h3>
+      <p>Melodic alternative rock. Atmospheric, harmony-heavy, groove-forward. The kind of music that's sonically interesting but never loses sight of the song. Reference points include Thrice, Nothing But Thieves, Copeland, Death Cab for Cutie, MuteMath, Minus The Bear, Sunny Day Real Estate, Young the Giant, Mew, Mae, and Counting Crows. Not all of those at once — but that's the family of sound. Very melodic, very hooky, strong on vocals and harmonies. Chilled, dreamy, and grooving rather than heavy.</p>
+      <p>There are around 40 original songs at various stages of completion. The plan is three EPs across the first year, with a full marketing and release strategy already built and ready to execute.</p>
+
+      <div class="straight-callout">
+        <p><strong>On the name and visual identity:</strong> The Order of Light has a specific aesthetic — dark, atmospheric, slightly mysterious. It's an artistic persona, not a belief system. There is no religion, no philosophy members are expected to adopt. It's a creative identity designed to make the music more interesting and give the band a distinctive presence. If you've ever appreciated how a band like Nine Inch Nails or Massive Attack built a world around their music, you'll understand the approach immediately.</p>
+      </div>
+
+      <h3>What's Already Built</h3>
+      <ul class="straight-list">
+        <li>Full brand identity — logo, colour system, visual guidelines, all designed and documented</li>
+        <li>12-month campaign plan — social media strategy, content calendar, release schedule, all mapped out</li>
+        <li>Fan club structure (The Illuminated) — physical merchandise concept, membership tiers, Discord community framework</li>
+        <li>~40 original songs in development across three EP's worth of material</li>
+        <li>Bass player already in place</li>
+        <li>The infrastructure to launch seriously from day one</li>
+      </ul>
+
+      <h3>What We Need From You</h3>
+      <ul class="straight-list">
+        <li>Previous studio recording experience — professional sessions, not just home demos</li>
+        <li>Real touring history — more than local shows; you've been on the road</li>
+        <li>The ability to sing harmonies — every member of this band contributes to the vocal arrangements</li>
+        <li>Willingness to audition by submitting recorded material and writing to existing tracks</li>
+        <li>To be based in Charlotte, NC or genuinely able to commit to regular in-person rehearsals</li>
+        <li>To be a collaborative adult who can take direction and give it in equal measure</li>
+      </ul>
+
+      <h3>Who This Band Is For</h3>
+      <p>Anyone who is serious about music, has the experience to back it up, and wants to be part of something with a real vision and a real plan behind it. We are not interested in casual participation or musicians who have been meaning to get back into it seriously. We are interested in people who have never really stopped.</p>
+      <p>This band is open to every person regardless of background, gender identity, sexual orientation, or ethnicity. What we ask in return is straightforward: be talented, be experienced, be professional, and treat every person in the room with basic human decency. We are not a political band and have no interest in becoming one. We do believe, without negotiation, that every human being deserves equal dignity. That's not a left or right position to us — it's simply the minimum requirement for being in a room together. If that's a sticking point, this isn't the right project.</p>
+
+      <h3>The Audition Process</h3>
+      <ul class="straight-list">
+        <li><strong>Step 1:</strong> Send an introduction email with links to your best recorded work. If you have nothing recorded, we can't move forward</li>
+        <li><strong>Step 2:</strong> If your recordings show the right fit, you'll receive existing tracks to write and record to — a short demo demonstrating your feel for the material</li>
+        <li><strong>Step 3:</strong> In-person session in Charlotte, NC. This is where chemistry either exists or it doesn't</li>
+      </ul>
+
+      <h3>Contact</h3>
+      <p>Send everything to <strong>tristanmatthew@gmail.com</strong>. Include your name, your instrument, a brief description of your background and experience, and links to recordings. The more specific you are about your experience, the faster we can work out whether this is worth both of our time.</p>
+    </div>
+    <div class="straight-footer">
+      <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      <p>The Order of Light · Charlotte, NC · 2025 · Replace tristanmatthew@gmail.com before sharing</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- end page -->
+
+<footer style="padding:64px 48px;text-align:center;border-top:1px solid rgba(255,255,255,0.04);display:flex;flex-direction:column;align-items:center;gap:20px;">
+  <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+  <p style="font-size:9.5px;letter-spacing:0.25em;text-transform:uppercase;color:#444;">The Order of Light · Musician Recruitment · Charlotte, NC · 2025</p>
+  <p style="font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:#2E2E2E;">Replace tristanmatthew@gmail.com throughout before sharing any version of this document</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

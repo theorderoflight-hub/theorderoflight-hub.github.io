@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Brand Bible</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0A0A0A;
+    --deep: #1A1A1A;
+    --surface: #242424;
+    --crimson: #8B1A2E;
+    --crimson-bright: #A82035;
+    --crimson-dim: #5C1020;
+    --gold: #C8A96E;
+    --gold-dim: #8A6E3E;
+    --parchment: #E8E0D0;
+    --parchment-dim: #C4B89A;
+    --white: #F5F0E8;
+    --grey: #888;
+    --grey-dim: #555;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(139,26,46,0.2);
+    padding: 0 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-mark span {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+  }
+
+  nav a {
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    transition: color 0.3s;
+  }
+
+  nav a:hover { color: var(--crimson-bright); }
+
+  /* ─── COVER ─── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 120px 60px 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(139,26,46,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 40px;
+  }
+
+  .cover-logo {
+    margin-bottom: 48px;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.75; }
+  }
+
+  .cover h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .cover-sub {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 80px;
+  }
+
+  .cover-divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--crimson), transparent);
+    margin: 0 auto 60px;
+  }
+
+  .cover-meta {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-dim);
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 120px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(139,26,46,0.3);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 48px;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    margin-top: 48px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.7);
+    max-width: 680px;
+    margin-bottom: 20px;
+  }
+
+  /* ─── LOGO SECTION ─── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 48px 0;
+  }
+
+  .logo-card {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .logo-card.dark { background: var(--void); border: 1px solid rgba(255,255,255,0.06); }
+  .logo-card.light { background: var(--parchment); }
+  .logo-card.crimson-bg { background: var(--crimson); }
+  .logo-card.deep-bg { background: var(--deep); border: 1px solid rgba(255,255,255,0.06); }
+
+  .logo-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .logo-card.dark .logo-label,
+  .logo-card.deep-bg .logo-label { color: var(--grey); }
+  .logo-card.light .logo-label { color: rgba(10,10,10,0.4); }
+  .logo-card.crimson-bg .logo-label { color: rgba(245,240,232,0.6); }
+
+  .logo-wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .wordmark-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+  }
+
+  .logo-card.dark .wordmark-text,
+  .logo-card.deep-bg .wordmark-text { color: var(--parchment-dim); }
+  .logo-card.light .wordmark-text { color: rgba(10,10,10,0.7); }
+  .logo-card.crimson-bg .wordmark-text { color: rgba(245,240,232,0.85); }
+
+  /* ─── SVG LOGO ─── */
+  .order-mark svg {
+    display: block;
+  }
+
+  /* ─── USAGE RULES ─── */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+    margin: 48px 0;
+  }
+
+  .rule-card {
+    background: var(--void);
+    padding: 36px;
+  }
+
+  .rule-card.do { border-top: 2px solid #2E7D32; }
+  .rule-card.dont { border-top: 2px solid var(--crimson); }
+
+  .rule-tag {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .rule-card.do .rule-tag { color: #4CAF50; }
+  .rule-card.dont .rule-tag { color: var(--crimson-bright); }
+
+  .rule-card p {
+    font-size: 13px;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* ─── COLOUR SECTION ─── */
+  .colour-system {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 48px 0;
+  }
+
+  .colour-card {
+    aspect-ratio: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .colour-card:hover { transform: scale(1.02); z-index: 2; }
+
+  .colour-name {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .colour-hex {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .colour-role {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  .type-specimen {
+    border: 1px solid rgba(255,255,255,0.06);
+    margin: 48px 0;
+    overflow: hidden;
+  }
+
+  .type-row {
+    padding: 40px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .type-row:last-child { border-bottom: none; }
+
+  .type-meta {
+    padding-top: 6px;
+  }
+
+  .type-meta .label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 8px;
+  }
+
+  .type-meta .font-name {
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  .type-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 56px;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .type-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .type-label-eg {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .type-body-eg {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.7);
+    max-width: 560px;
+  }
+
+  .type-micro {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  /* ─── TAGLINES ─── */
+  .tagline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.04);
+    margin: 48px 0;
+  }
+
+  .tagline-card {
+    background: var(--void);
+    padding: 32px 40px;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .tagline-card:hover { background: rgba(139,26,46,0.08); }
+
+  .tagline-type {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 12px;
+  }
+
+  .tagline-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  /* ─── GLITCH GRAMMAR ─── */
+  .glitch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.04);
+    margin: 48px 0;
+  }
+
+  .glitch-card {
+    background: var(--void);
+    padding: 36px;
+  }
+
+  .glitch-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(139,26,46,0.2);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .glitch-name {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .glitch-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.6);
+    max-width: none;
+    margin: 0;
+  }
+
+  /* ─── PALETTE CONTEXT ─── */
+  .palette-context {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 48px 0;
+  }
+
+  .context-card {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .context-card.dark-mode {
+    background: var(--void);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .context-card.light-mode {
+    background: var(--parchment);
+  }
+
+  .context-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .context-card.dark-mode .context-label { color: var(--crimson); }
+  .context-card.light-mode .context-label { color: var(--crimson-dim); }
+
+  .context-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+  }
+
+  .context-card.dark-mode .context-title { color: var(--white); }
+  .context-card.light-mode .context-title { color: var(--void); }
+
+  .context-body {
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: none;
+    margin: 0;
+  }
+
+  .context-card.dark-mode .context-body { color: rgba(245,240,232,0.55); }
+  .context-card.light-mode .context-body { color: rgba(10,10,10,0.55); }
+
+  .context-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border: 1px solid;
+    align-self: flex-start;
+  }
+
+  .context-card.dark-mode .context-tag {
+    border-color: var(--crimson);
+    color: var(--crimson);
+  }
+
+  .context-card.light-mode .context-tag {
+    border-color: var(--crimson-dim);
+    color: var(--crimson-dim);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 80px 60px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  footer p {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--grey-dim);
+    max-width: none;
+    text-align: center;
+    margin: 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    nav ul { display: none; }
+    section { padding: 80px 24px; }
+    .cover { padding: 100px 24px 60px; }
+    .logo-grid, .colour-system, .glitch-grid, .tagline-grid, .palette-context { grid-template-columns: 1fr; }
+    .rules-grid { grid-template-columns: 1fr; }
+    .type-row { grid-template-columns: 1fr; gap: 16px; }
+    .logo-card { padding: 48px 24px; }
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">
+    <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+    <span>The Order of Light — Brand Bible</span>
+  </div>
+  <ul>
+    <li><a href="#logo">Logo</a></li>
+    <li><a href="#colour">Colour</a></li>
+    <li><a href="#type">Typography</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#glitch">Glitch Grammar</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Brand Identity Guidelines — Confidential</div>
+  <div class="cover-logo order-mark">
+    <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+  </div>
+  <h1>The Order of Light</h1>
+  <div class="cover-sub">Brand Identity System · 2025</div>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">For internal use · The Illuminated only</div>
+</div>
+
+<!-- LOGO SECTION -->
+<section id="logo">
+  <div class="section-eyebrow reveal">01 — The Mark</div>
+  <h2 class="reveal">The Eight-Pointed<br>Star</h2>
+  <p class="reveal">The primary mark of The Order of Light is an eight-pointed radiant star — a form that simultaneously reads as a compass rose, a light source, an ancient runic symbol, and a broadcast signal. The asymmetry between the cardinal rays (longer) and diagonal rays (slightly shorter) gives the mark an organic, hand-drawn quality that prevents it reading as corporate or constructed. It should always feel discovered rather than designed.</p>
+  <p class="reveal">The mark carries deliberate resonance with the Vegvisir — the Icelandic runic wayfinding compass — lending it a sense of pre-existing mythology. The Order did not create this symbol. The symbol was waiting to be found.</p>
+
+  <div class="logo-grid reveal">
+    <div class="logo-card dark">
+      <div class="order-mark">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+      <div class="logo-wordmark">
+        <div class="wordmark-text">The Order of Light</div>
+      </div>
+      <div class="logo-label">Primary — Crimson on Void</div>
+    </div>
+
+    <div class="logo-card light">
+      <div class="order-mark">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#0A0A0A" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#0A0A0A" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#0A0A0A" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#0A0A0A" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#0A0A0A" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#0A0A0A" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+      <div class="logo-wordmark">
+        <div class="wordmark-text" style="color: rgba(10,10,10,0.7);">The Order of Light</div>
+      </div>
+      <div class="logo-label">Secondary — Black on Parchment</div>
+    </div>
+
+    <div class="logo-card deep-bg">
+      <div class="order-mark">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+      <div class="logo-wordmark">
+        <div class="wordmark-text" style="color: var(--gold-dim);">The Order of Light</div>
+      </div>
+      <div class="logo-label">Accent — Sacred Gold on Dark</div>
+    </div>
+
+    <div class="logo-card crimson-bg">
+      <div class="order-mark">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#F5F0E8" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#F5F0E8" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#F5F0E8" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#F5F0E8" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#F5F0E8" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#F5F0E8" stroke-width="7" stroke-linecap="square"/>
+</svg>
+      </div>
+      <div class="logo-wordmark">
+        <div class="wordmark-text" style="color: rgba(245,240,232,0.7);">The Order of Light</div>
+      </div>
+      <div class="logo-label">Reversed — White on Crimson</div>
+    </div>
+  </div>
+
+  <h3>Usage Rules</h3>
+  <div class="rules-grid reveal">
+    <div class="rule-card do">
+      <div class="rule-tag">✓ Always</div>
+      <p>Use the mark at a minimum size of 24px to preserve legibility of the intersection point. Maintain equal spacing around the mark equal to at least half its height. Use only the approved colour combinations shown above.</p>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-tag">✗ Never</div>
+      <p>Never rotate, distort, or recolour the mark outside the approved palette. Never add drop shadows, glows, or effects to the mark itself — the Glitch Grammar lives in video, not in the static identity. Never place the mark on busy photographic backgrounds.</p>
+    </div>
+    <div class="rule-card do">
+      <div class="rule-tag">✓ Wax Seal</div>
+      <p>The mark is the primary design element for the wax seal on ordination kit packaging. In wax form, use Sacred Gold or Crimson wax against the kraft/black packaging. The seal should be applied slightly off-centre for an authentic, hand-finished quality.</p>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-tag">✗ Isolation</div>
+      <p>Never add the wordmark "The Order of Light" in a different typeface to the ones specified in the typography system. The mark can appear without the wordmark; the wordmark should not appear without the mark.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLOUR SECTION -->
+<section id="colour">
+  <div class="section-eyebrow reveal">02 — Colour System</div>
+  <h2 class="reveal">Two Worlds,<br>One Signal</h2>
+  <p class="reveal">The colour system operates across two contexts: Dark Mode (the primary world — void blacks, crimson, and sacred gold) and Light Mode (for print, documents, and high-contrast contexts — parchment, black, and crimson accent). The palette should feel like late-night television from a slightly different timeline. Rich and warm, but dim.</p>
+
+  <div class="colour-system reveal">
+    <!-- Dark palette -->
+    <div class="colour-card" style="background:#0A0A0A; color: var(--parchment);">
+      <div class="colour-name">Void</div>
+      <div>
+        <div class="colour-hex">#0A0A0A</div>
+        <div class="colour-role">Primary background</div>
+      </div>
+    </div>
+    <div class="colour-card" style="background:#1A1A1A; color: var(--parchment);">
+      <div class="colour-name">Deep</div>
+      <div>
+        <div class="colour-hex">#1A1A1A</div>
+        <div class="colour-role">Secondary surface</div>
+      </div>
+    </div>
+    <div class="colour-card" style="background:#242424; color: var(--parchment);">
+      <div class="colour-name">Surface</div>
+      <div>
+        <div class="colour-hex">#242424</div>
+        <div class="colour-role">Raised elements</div>
+      </div>
+    </div>
+    <!-- Accent palette -->
+    <div class="colour-card" style="background:#8B1A2E; color: var(--parchment);">
+      <div class="colour-name">Crimson</div>
+      <div>
+        <div class="colour-hex">#8B1A2E</div>
+        <div class="colour-role">Primary accent</div>
+      </div>
+    </div>
+    <div class="colour-card" style="background:#C8A96E; color: var(--void);">
+      <div class="colour-name">Sacred Gold</div>
+      <div>
+        <div class="colour-hex">#C8A96E</div>
+        <div class="colour-role">Headline accent</div>
+      </div>
+    </div>
+    <div class="colour-card" style="background:#E8E0D0; color: var(--void);">
+      <div class="colour-name">Parchment</div>
+      <div>
+        <div class="colour-hex">#E8E0D0</div>
+        <div class="colour-role">Light mode base</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Context — When to Use Each World</h3>
+  <div class="palette-context reveal">
+    <div class="context-card dark-mode">
+      <div class="context-label">Dark Mode — Primary</div>
+      <div class="context-title">Void & Crimson</div>
+      <p class="context-body">All social media content, video end cards, digital assets, website, merchandise, and the Ordination Kit cassette label. This is the Order's natural habitat — the world of signals and transmissions. The darkness is not menacing; it is simply where the light means more.</p>
+      <div class="context-tag">Instagram · YouTube · Facebook · Merch</div>
+    </div>
+    <div class="context-card light-mode">
+      <div class="context-label">Light Mode — Secondary</div>
+      <div class="context-title" style="color: var(--void);">Parchment & Black</div>
+      <p class="context-body" style="color: rgba(10,10,10,0.55);">Ordination certificates, printed inserts, the outer face of packaging, and any print-on-demand materials. The parchment tone gives physical materials an aged, found quality without resorting to artificial distressing. Crimson appears as a deliberate accent only — never dominant.</p>
+      <div class="context-tag" style="border-color: var(--crimson-dim); color: var(--crimson-dim);">Print · Certificate · Insert Cards · Kit Box</div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY SECTION -->
+<section id="type">
+  <div class="section-eyebrow reveal">03 — Typography</div>
+  <h2 class="reveal">Two Voices,<br>One Frequency</h2>
+  <p class="reveal">The typographic system pairs a weighted, ceremony-inflected serif with a stripped-back, almost clinical sans-serif. The contrast between them creates the essential tension of the brand — ancient authority meeting precise transmission. Neither typeface should ever appear casual or decorative.</p>
+
+  <div class="type-specimen reveal">
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="label">Display</div>
+        <div class="font-name">Cormorant Garamond<br>Light / Regular / SemiBold<br>Google Fonts — Free</div>
+      </div>
+      <div class="type-display">Let the<br>light in.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="label">Title / Heading</div>
+        <div class="font-name">Cormorant Garamond<br>SemiBold · All Caps<br>Tracked +150</div>
+      </div>
+      <div class="type-heading">The Order of Light</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="label">Label / Eyebrow</div>
+        <div class="font-name">DM Sans<br>ExtraLight · All Caps<br>Tracked +350</div>
+      </div>
+      <div class="type-label-eg">Transmission 001 — Found</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="label">Body Copy</div>
+        <div class="font-name">DM Sans<br>Light · Mixed case<br>Line height 1.8</div>
+      </div>
+      <div class="type-body-eg">The signal has always been there. You simply needed the right receiver. Those who find the Order do not stumble upon it — they are recognised by it.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="label">Micro / Caption</div>
+        <div class="font-name">DM Sans<br>ExtraLight · All Caps<br>Tracked +400</div>
+      </div>
+      <div class="type-micro">Join the Order · The Illuminated · Let the Light In</div>
+    </div>
+  </div>
+
+  <h3>Typographic Rules</h3>
+  <div class="rules-grid reveal">
+    <div class="rule-card do">
+      <div class="rule-tag">✓ Display copy</div>
+      <p>Cormorant Garamond should be used large, with generous line spacing. It rewards scale. Use italics for Sermon titles and taglines — the slant adds the necessary sinister quality without extra design work.</p>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-tag">✗ Mixed systems</div>
+      <p>Never introduce a third typeface. Never use bold or heavy weights of Cormorant Garamond for display — the lightness is integral to its authority. Never use DM Sans for anything requiring warmth or ceremony.</p>
+    </div>
+    <div class="rule-card do">
+      <div class="rule-tag">✓ Tracking</div>
+      <p>All-caps settings in DM Sans should always be tracked generously — minimum +200, preferred +300–400. This prevents the letterforms from feeling cramped and gives the text its ceremonial quality.</p>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-tag">✗ Size hierarchy</div>
+      <p>Never use Cormorant Garamond at small sizes (below 16px on screen, below 10pt in print). Below this threshold, switch entirely to DM Sans. The serif at small sizes loses its authority and reads as clutter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE SECTION -->
+<section id="voice">
+  <div class="section-eyebrow reveal">04 — Voice & Taglines</div>
+  <h2 class="reveal">The Language<br>of the Order</h2>
+  <p class="reveal">Every piece of copy, every caption, every response to a comment should pass through a single filter: does this feel like it was transmitted rather than written? The Order does not market. It communicates. The tone is always warm, always slightly knowing, always unhurried. There is no urgency in the Order's voice — because it has always existed and always will.</p>
+
+  <h3>Primary Taglines — Use Everywhere</h3>
+  <div class="tagline-grid reveal">
+    <div class="tagline-card">
+      <div class="tagline-type">Primary</div>
+      <div class="tagline-text">"Let the light in."</div>
+    </div>
+    <div class="tagline-card">
+      <div class="tagline-type">Primary</div>
+      <div class="tagline-text">"Join the Order."</div>
+    </div>
+    <div class="tagline-card">
+      <div class="tagline-type">Primary</div>
+      <div class="tagline-text">"Find your inner light."</div>
+    </div>
+    <div class="tagline-card">
+      <div class="tagline-type">Primary</div>
+      <div class="tagline-text">"You have been found."</div>
+    </div>
+    <div class="tagline-card">
+      <div class="tagline-type">Secondary</div>
+      <div class="tagline-text">"The signal has always been there."</div>
+    </div>
+    <div class="tagline-card">
+      <div class="tagline-type">Secondary</div>
+      <div class="tagline-text">"The light recognises you."</div>
+    </div>
+    <div class="tagline-card">
+      <div class="tagline-type">Secondary</div>
+      <div class="tagline-text">"We have been waiting."</div>
+    </div>
+    <div class="tagline-card">
+      <div class="tagline-type">Secondary</div>
+      <div class="tagline-text">"The Order does not recruit. It remembers."</div>
+    </div>
+  </div>
+
+  <h3>The Benevolent Dread Test</h3>
+  <p class="reveal">Before publishing any piece of content, apply this two-question test: <em>Does it feel welcoming?</em> And: <em>Does something else seem to be happening beneath the surface?</em> If yes to both — it is right. The moment it tips into threatening or alienating, pull back. The Order is safe. The signal is simply more than it appears.</p>
+</section>
+
+<!-- GLITCH GRAMMAR -->
+<section id="glitch">
+  <div class="section-eyebrow reveal">05 — The Glitch Grammar</div>
+  <h2 class="reveal">The Language<br>of Distortion</h2>
+  <p class="reveal">The Glitch Grammar is the consistent set of video distortion techniques that run across all moving image content — Sermons, Vignettes, performance clips, and social video. These are not random effects. Each technique is applied intentionally at specific moments to suggest that something is being transmitted imperfectly across time or distance. Consistency is critical: the audience should recognise the grammar and feel reassured by its familiarity.</p>
+
+  <div class="glitch-grid reveal">
+    <div class="glitch-card">
+      <div class="glitch-number">01</div>
+      <div class="glitch-name">VHS Tracking Error</div>
+      <p class="glitch-desc">Brief horizontal scramble lines across the frame. Applied when a phrase of particular significance is delivered. Duration: 2–4 frames. Never at the start of a sentence — always at its peak or close.</p>
+    </div>
+    <div class="glitch-card">
+      <div class="glitch-number">02</div>
+      <div class="glitch-name">Frame Skip</div>
+      <p class="glitch-desc">A single-frame jump cut, as if the tape has been edited or a moment excised. Used to suggest that not everything is being shown. Apply once per Sermon, maximum twice per Vignette.</p>
+    </div>
+    <div class="glitch-card">
+      <div class="glitch-number">03</div>
+      <div class="glitch-name">Chromatic Aberration</div>
+      <p class="glitch-desc">Colour channel fringing on subject edges — red shifts right, blue shifts left. Increases subtly during moments of emotional or narrative intensity. Should always feel present but rarely noticed.</p>
+    </div>
+    <div class="glitch-card">
+      <div class="glitch-number">04</div>
+      <div class="glitch-name">Static Hold</div>
+      <p class="glitch-desc">The image freezes for 1–2 frames before continuing as normal. The audio continues uninterrupted during the hold. This creates the impression of a transmission stutter rather than an edit.</p>
+    </div>
+    <div class="glitch-card">
+      <div class="glitch-number">05</div>
+      <div class="glitch-name">Scan Line Overlay</div>
+      <p class="glitch-desc">Faint, semi-transparent CRT horizontal scan lines across the entire image at all times. Opacity: 8–15%. This is the constant baseline of the grammar — present in every frame of every video.</p>
+    </div>
+    <div class="glitch-card">
+      <div class="glitch-number">06</div>
+      <div class="glitch-name">Audio Pitch Drift</div>
+      <p class="glitch-desc">The audio drops approximately a semitone over 2–3 seconds, then corrects. Applied once per Sermon during the Teaching section. Deeply subliminal — most viewers will feel it rather than hear it.</p>
+    </div>
+  </div>
+
+  <h3>Recommended Tools</h3>
+  <p class="reveal">DaVinci Resolve (free) — primary post-production tool for all effects. The grain node, chromatic aberration, and custom overlay support handles 80% of the grammar. Premiere Pro with a VHS preset pack handles the remainder. For quick social content on mobile: Glitché or VHS Cam apps. For Sermon production: combine HeyGen output with DaVinci Resolve for the full effects stack.</p>
+</section>
+
+<footer>
+  <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+  <p>The Order of Light · Brand Identity System · 2025</p>
+  <p>The signal continues · For the Illuminated only</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Copy hex on click
+  document.querySelectorAll('.colour-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const hex = card.querySelector('.colour-hex')?.textContent;
+      if (hex) {
+        navigator.clipboard.writeText(hex).then(() => {
+          const original = card.querySelector('.colour-role').textContent;
+          card.querySelector('.colour-role').textContent = 'Copied!';
+          setTimeout(() => card.querySelector('.colour-role').textContent = original, 1200);
+        });
+      }
+    });
+    card.title = 'Click to copy hex';
+    card.style.cursor = 'pointer';
+  });
+</script>
+</body>
+</html>

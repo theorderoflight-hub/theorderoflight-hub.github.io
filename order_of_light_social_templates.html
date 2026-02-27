@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Social Media Templates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0A0A0A;
+  --deep: #141414;
+  --surface: #1E1E1E;
+  --crimson: #8B1A2E;
+  --crimson-bright: #A82035;
+  --gold: #C8A96E;
+  --gold-dim: #8A6E3E;
+  --parchment: #E8E0D0;
+  --parchment-dim: #C4B89A;
+  --white: #F5F0E8;
+  --grey: #666;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #111;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: rgba(10,10,10,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(139,26,46,0.2);
+  padding: 0 40px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-id { display: flex; align-items: center; gap: 10px; }
+.nav-id span { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(196,184,154,0.4); }
+nav ul { list-style: none; display: flex; gap: 24px; flex-wrap: wrap; }
+nav a { text-decoration: none; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); transition: color 0.3s; }
+nav a:hover { color: var(--crimson-bright); }
+
+/* ── PAGE LAYOUT ── */
+.page { max-width: 1400px; margin: 0 auto; padding: 80px 40px 80px; }
+
+/* ── SECTION HEADERS ── */
+.format-header {
+  padding: 48px 0 32px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 64px;
+}
+.format-header:first-child { margin-top: 0; border-top: none; }
+.fh-eyebrow { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--crimson); margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+.fh-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(139,26,46,0.2); }
+.fh-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 32px; color: var(--white); margin-bottom: 8px; }
+.fh-specs { font-size: 11px; color: var(--grey); letter-spacing: 0.1em; }
+.fh-specs span { color: var(--gold); }
+
+/* ── TEMPLATE GRID ── */
+.template-grid {
+  display: grid;
+  gap: 48px;
+  margin-top: 40px;
+}
+.tg-2 { grid-template-columns: 1fr 1fr; }
+.tg-3 { grid-template-columns: 1fr 1fr 1fr; }
+.tg-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+/* ── TEMPLATE WRAPPER ── */
+.template-wrap {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.template-name {
+  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
+}
+.template-desc { font-size: 12px; color: rgba(245,240,232,0.5); line-height: 1.6; }
+
+/* ── ADOBE SPECS BOX ── */
+.adobe-specs {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(200,169,110,0.15);
+  padding: 16px 18px;
+  margin-top: 4px;
+}
+.as-title { font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 10px; }
+.as-row { display: flex; justify-content: space-between; align-items: baseline; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.as-row:last-child { border-bottom: none; }
+.as-label { font-size: 9px; color: rgba(245,240,232,0.4); letter-spacing: 0.1em; }
+.as-value { font-size: 9px; color: rgba(245,240,232,0.8); letter-spacing: 0.05em; font-weight: 400; }
+.as-value.mono { font-family: monospace; color: var(--gold); }
+
+/* ══════════════════════════════════════════
+   THE TEMPLATES THEMSELVES
+   All templates use a scaled-down preview
+   with the correct aspect ratio
+══════════════════════════════════════════ */
+
+/* ── SQUARE 1:1 (Instagram Feed) ── */
+.t-square { width: 100%; aspect-ratio: 1/1; position: relative; overflow: hidden; }
+
+/* ── STORY 9:16 ── */
+.t-story { width: 100%; aspect-ratio: 9/16; position: relative; overflow: hidden; }
+
+/* ── YOUTUBE 16:9 ── */
+.t-youtube { width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; }
+
+/* ── FACEBOOK 1.91:1 ── */
+.t-facebook { width: 100%; aspect-ratio: 1.91/1; position: relative; overflow: hidden; }
+
+/* ── SHARED TEMPLATE STYLES ── */
+.tmpl {
+  width: 100%; height: 100%;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+
+/* Grain texture overlay */
+.tmpl::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 10; mix-blend-mode: overlay;
+}
+
+.tmpl-bg-void { background: var(--void); }
+.tmpl-bg-parchment { background: var(--parchment); }
+.tmpl-bg-crimson { background: var(--crimson); }
+.tmpl-bg-deep { background: var(--deep); }
+
+/* Photo placeholder */
+.photo-placeholder {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1;
+}
+.photo-placeholder-inner {
+  border: 1px dashed rgba(255,255,255,0.12);
+  padding: 8px 12px;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2); text-align: center;
+}
+.photo-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.1) 40%, rgba(10,10,10,0.6) 100%);
+}
+.photo-overlay-top {
+  background: linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.2) 50%, rgba(10,10,10,0.7) 100%);
+}
+.photo-overlay-radial {
+  background: radial-gradient(ellipse at center, rgba(139,26,46,0.15) 0%, rgba(10,10,10,0.8) 70%);
+}
+
+/* Content layers */
+.tmpl-content {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column;
+}
+
+/* ── ORDER MARK ── */
+.order-mark { display: inline-flex; align-items: center; justify-content: center; }
+
+/* ── SCAN LINES ── */
+.scan-lines {
+  position: absolute; inset: 0; z-index: 8; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+}
+
+/* ── TRANSMISSION TAG ── */
+.tx-tag {
+  font-size: 0.55em; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--crimson); font-family: 'DM Sans', sans-serif; font-weight: 300;
+}
+.tx-tag-gold {
+  font-size: 0.55em; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); font-family: 'DM Sans', sans-serif; font-weight: 300;
+}
+
+/* ── VIGNETTE EDGES ── */
+.vignette {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.7);
+}
+
+/* ── DIVIDER LINE ── */
+.tmpl-divider {
+  width: 2em; height: 1px; background: var(--crimson);
+}
+.tmpl-divider-gold {
+  width: 2em; height: 1px; background: var(--gold);
+}
+
+/* ── FOOTER STRIP ── */
+.tmpl-footer-strip {
+  background: var(--crimson);
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+/* ── CAPTION AREA ── */
+.caption-box {
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(4px);
+}
+
+/* ── SECTION LABEL CHIP ── */
+.chip {
+  display: inline-block;
+  border: 1px solid var(--crimson);
+  color: var(--crimson);
+  font-family: 'DM Sans', sans-serif; font-weight: 300;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.chip-gold {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'DM Sans', sans-serif; font-weight: 300;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+/* ── NUMBER 108 ── */
+.num-108 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  color: var(--white); line-height: 1;
+}
+
+/* ── EP CARD STYLES ── */
+.ep-number-bg {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  position: absolute; line-height: 1;
+  opacity: 0.06; color: var(--white);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .tg-4 { grid-template-columns: 1fr 1fr; }
+  .tg-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .tg-4, .tg-3, .tg-2 { grid-template-columns: 1fr; }
+  nav ul { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-id">
+    <svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+    <span>Social Media Templates — The Order of Light</span>
+  </div>
+  <ul>
+    <li><a href="#feed">Feed 1:1</a></li>
+    <li><a href="#story">Story 9:16</a></li>
+    <li><a href="#youtube">YouTube 16:9</a></li>
+    <li><a href="#facebook">Facebook</a></li>
+    <li><a href="#specs">All Specs</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+<!-- ══════════════════════════════════════════
+     INSTAGRAM FEED — 1:1 SQUARE
+══════════════════════════════════════════ -->
+<div class="format-header" id="feed">
+  <div class="fh-eyebrow">Format 01</div>
+  <div class="fh-title">Instagram Feed — Square</div>
+  <div class="fh-specs">Adobe dimensions: <span>1080 × 1080 px</span> · Resolution: <span>72 dpi</span> · Colour mode: <span>RGB</span> · Format: <span>JPG / PNG</span></div>
+</div>
+
+<div class="template-grid tg-3">
+
+  <!-- T1: ATMOSPHERIC / MARK ONLY -->
+  <div class="template-wrap">
+    <div class="template-name">Feed 01 — The Mark (Phase 0 Launch)</div>
+    <div class="t-square">
+      <div class="tmpl tmpl-bg-void">
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="align-items:center; justify-content:center;">
+          <svg width="32%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">First-ever post. Mark centred on void. No text, no wordmark. Caption: ◈ only.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Background</span><span class="as-value mono">#0A0A0A solid fill</span></div>
+      <div class="as-row"><span class="as-label">Mark SVG</span><span class="as-value">32% canvas width, centred</span></div>
+      <div class="as-row"><span class="as-label">Mark colour</span><span class="as-value mono">#8B1A2E</span></div>
+      <div class="as-row"><span class="as-label">Grain overlay</span><span class="as-value">Noise filter 3%, Overlay blend</span></div>
+      <div class="as-row"><span class="as-label">Scan lines</span><span class="as-value">1px lines, 3% opacity</span></div>
+      <div class="as-row"><span class="as-label">Vignette</span><span class="as-value">Radial gradient, black edges</span></div>
+    </div>
+  </div>
+
+  <!-- T2: ATMOSPHERIC IMAGE + TAGLINE -->
+  <div class="template-wrap">
+    <div class="template-name">Feed 02 — Atmospheric Image + Tagline</div>
+    <div class="t-square">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">ATMOSPHERIC<br>PHOTO<br>FULL BLEED</div>
+        </div>
+        <div class="photo-overlay"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:7% 8%; justify-content:flex-end;">
+          <div style="margin-bottom:3%;">
+            <div class="tmpl-divider" style="margin-bottom:4%;"></div>
+            <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic; font-size:1.7em; color:#F5F0E8; line-height:1.3; letter-spacing:0.02em;">The signal has always been there.</div>
+          </div>
+          <div style="font-size:0.52em; letter-spacing:0.35em; text-transform:uppercase; color:rgba(196,184,154,0.5); font-family:'DM Sans',sans-serif; font-weight:200;">The Order of Light</div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Dark atmospheric photo full bleed. Tagline in Cormorant italic, bottom-left anchored. Gradient overlay ensures legibility.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Photo layer</span><span class="as-value">Full bleed, smart object</span></div>
+      <div class="as-row"><span class="as-label">Gradient overlay</span><span class="as-value">Black → transparent, bottom 50%</span></div>
+      <div class="as-row"><span class="as-label">Divider line</span><span class="as-value mono">#8B1A2E · 2px · 64px wide</span></div>
+      <div class="as-row"><span class="as-label">Tagline font</span><span class="as-value">Cormorant Garamond Light Italic</span></div>
+      <div class="as-row"><span class="as-label">Tagline size</span><span class="as-value">72pt (at 1080px canvas)</span></div>
+      <div class="as-row"><span class="as-label">Tagline colour</span><span class="as-value mono">#F5F0E8</span></div>
+      <div class="as-row"><span class="as-label">Byline font</span><span class="as-value">DM Sans ExtraLight · 22pt · +350 tracking</span></div>
+      <div class="as-row"><span class="as-label">Byline colour</span><span class="as-value mono">#C4B89A · 50% opacity</span></div>
+      <div class="as-row"><span class="as-label">Grain + scan lines</span><span class="as-value">As Feed 01</span></div>
+    </div>
+  </div>
+
+  <!-- T3: QUOTE / TRANSMISSION FRAGMENT -->
+  <div class="template-wrap">
+    <div class="template-name">Feed 03 — Quote / Transmission Fragment</div>
+    <div class="t-square">
+      <div class="tmpl tmpl-bg-void">
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:10% 10%; justify-content:center; align-items:flex-start;">
+          <div style="font-size:0.48em; letter-spacing:0.35em; text-transform:uppercase; color:#8B1A2E; font-family:'DM Sans',sans-serif; font-weight:300; margin-bottom:6%;">Transmission Fragment</div>
+          <svg width="12%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+          <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.9em; color:#F5F0E8; line-height:1.35; letter-spacing:0.02em; margin-bottom:8%;">"The Order does not recruit.<br>It remembers."</div>
+          <div class="tmpl-divider"></div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Text-only quote card. Mark at low opacity as watermark. Used for taglines and Threads-crosspost fragments. No photo needed.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Background</span><span class="as-value mono">#0A0A0A</span></div>
+      <div class="as-row"><span class="as-label">Mark (bg watermark)</span><span class="as-value">60% canvas, centred, 5% opacity</span></div>
+      <div class="as-row"><span class="as-label">Eyebrow font</span><span class="as-value">DM Sans Light · 20pt · +350 tracking</span></div>
+      <div class="as-row"><span class="as-label">Eyebrow colour</span><span class="as-value mono">#8B1A2E</span></div>
+      <div class="as-row"><span class="as-label">Quote font</span><span class="as-value">Cormorant Garamond Light · 80pt</span></div>
+      <div class="as-row"><span class="as-label">Quote colour</span><span class="as-value mono">#F5F0E8</span></div>
+      <div class="as-row"><span class="as-label">Divider</span><span class="as-value mono">#8B1A2E · 2px · 64px</span></div>
+      <div class="as-row"><span class="as-label">Margin</span><span class="as-value">108px all sides (the number is intentional)</span></div>
+    </div>
+  </div>
+
+  <!-- T4: SERMON DROP -->
+  <div class="template-wrap">
+    <div class="template-name">Feed 04 — Sermon Drop Announcement</div>
+    <div class="t-square">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">CONDUIT STILL<br>FROM SERMON<br>FULL BLEED</div>
+        </div>
+        <div class="photo-overlay-top" style="position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,0.75) 0%,rgba(10,10,10,0.1) 40%,rgba(10,10,10,0.85) 100%);"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:7% 8%; justify-content:space-between;">
+          <div>
+            <div style="font-size:0.45em; letter-spacing:0.4em; text-transform:uppercase; color:#8B1A2E; font-family:'DM Sans',sans-serif; font-weight:300; margin-bottom:2%;">Now Transmitting</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.3em; color:#F5F0E8; letter-spacing:0.15em; text-transform:uppercase;">Transmission 001</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic; font-size:1.8em; color:#C8A96E; line-height:1.1;">FOUND</div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <svg width="9%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+            <div style="font-size:0.45em; letter-spacing:0.3em; text-transform:uppercase; color:rgba(196,184,154,0.5); font-family:'DM Sans',sans-serif; font-weight:200;">Link in bio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Conduit still from the Sermon as full-bleed background. Heavy gradient overlays top and bottom for text legibility. Transmission number top-left, title in gold italic.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Photo layer</span><span class="as-value">Conduit still, full bleed, desaturate -40%</span></div>
+      <div class="as-row"><span class="as-label">Top gradient</span><span class="as-value">Black → transparent, top 45%</span></div>
+      <div class="as-row"><span class="as-label">Bottom gradient</span><span class="as-value">Transparent → black, bottom 40%</span></div>
+      <div class="as-row"><span class="as-label">"Now Transmitting"</span><span class="as-value">DM Sans Light · 18pt · +400 tracking</span></div>
+      <div class="as-row"><span class="as-label">TX number</span><span class="as-value">Cormorant Garamond Light · 54pt · +150 tracking</span></div>
+      <div class="as-row"><span class="as-label">Sermon title</span><span class="as-value">Cormorant Garamond Light Italic · 75pt</span></div>
+      <div class="as-row"><span class="as-label">Sermon title colour</span><span class="as-value mono">#C8A96E</span></div>
+      <div class="as-row"><span class="as-label">Mark (bottom-left)</span><span class="as-value">9% canvas width · Crimson</span></div>
+    </div>
+  </div>
+
+  <!-- T5: EP RELEASE -->
+  <div class="template-wrap">
+    <div class="template-name">Feed 05 — EP Release Announcement</div>
+    <div class="t-square">
+      <div class="tmpl tmpl-bg-void">
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <!-- EP number background -->
+        <div style="position:absolute;bottom:-5%;right:3%;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:9em;color:rgba(200,169,110,0.07);line-height:1;z-index:1;letter-spacing:-0.05em;">I</div>
+        <div class="tmpl-content" style="padding:9% 9%; justify-content:space-between; z-index:5;">
+          <div>
+            <div style="font-size:0.45em; letter-spacing:0.4em; text-transform:uppercase; color:#C8A96E; font-family:'DM Sans',sans-serif; font-weight:300; margin-bottom:3%;">New Release</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.0em; color:rgba(245,240,232,0.5); letter-spacing:0.3em; text-transform:uppercase; margin-bottom:1%;">The Order of Light</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:2.4em; color:#F5F0E8; letter-spacing:0.05em; line-height:1.1;">108.I</div>
+          </div>
+          <div>
+            <div style="height:1px;background:rgba(139,26,46,0.4);margin-bottom:4%;"></div>
+            <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic; font-size:1.3em; color:#C8A96E; line-height:1.3;">"First you're something."</div>
+            <div style="margin-top:5%; font-size:0.45em; letter-spacing:0.3em; text-transform:uppercase; color:rgba(245,240,232,0.3); font-family:'DM Sans',sans-serif; font-weight:200;">Available on all frequencies</div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;">
+            <svg width="10%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Typography-only release post. EP number large. Ghost Roman numeral as background texture. Mark in Sacred Gold. Adapt for 108.II (crimson) and 108.III (white).</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Background</span><span class="as-value mono">#0A0A0A</span></div>
+      <div class="as-row"><span class="as-label">Ghost numeral</span><span class="as-value">Cormorant · 380pt · 7% opacity · bottom-right</span></div>
+      <div class="as-row"><span class="as-label">EP number "108.I"</span><span class="as-value">Cormorant Light · 100pt · White</span></div>
+      <div class="as-row"><span class="as-label">Phrase colour</span><span class="as-value mono">#C8A96E (EP1) · #A82035 (EP2) · #F5F0E8 (EP3)</span></div>
+      <div class="as-row"><span class="as-label">Mark</span><span class="as-value">10% canvas · bottom-right · Gold for EP1</span></div>
+      <div class="as-row"><span class="as-label">Separator line</span><span class="as-value mono">#8B1A2E · 1px · full width · 40% opacity</span></div>
+    </div>
+  </div>
+
+  <!-- T6: ORDINATION KIT -->
+  <div class="template-wrap">
+    <div class="template-name">Feed 06 — Ordination Kit Reveal</div>
+    <div class="t-square">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">KIT FLAT-LAY<br>PRODUCT PHOTO<br>DARK SURFACE</div>
+        </div>
+        <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,0) 30%,rgba(10,10,10,0.9) 100%);"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:7% 8%; justify-content:flex-end; z-index:5;">
+          <div>
+            <div style="font-size:0.44em; letter-spacing:0.35em; text-transform:uppercase; color:#8B1A2E; font-family:'DM Sans',sans-serif; font-weight:300; margin-bottom:2%;">Ordination Kit · 108 Units</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.7em; color:#F5F0E8; line-height:1.3; margin-bottom:3%;">The first ordinations<br>are being prepared.</div>
+            <div style="display:flex;align-items:center;gap:4%;margin-top:4%;">
+              <svg width="6%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+              <div style="font-size:0.44em; letter-spacing:0.3em; text-transform:uppercase; color:rgba(245,240,232,0.4); font-family:'DM Sans',sans-serif; font-weight:200;">Link in bio · Limited</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Kit flat-lay photo (shot from above, dark slate surface). Bottom gradient for text. "108 Units" in eyebrow position. Treats the kit as sacred object photography — not merch.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Photo layer</span><span class="as-value">Kit flat-lay, top-down shot, smart object</span></div>
+      <div class="as-row"><span class="as-label">Bottom gradient</span><span class="as-value">Transparent → Black, bottom 50%</span></div>
+      <div class="as-row"><span class="as-label">Colour grade</span><span class="as-value">Warm amber tone · shadows pushed dark</span></div>
+      <div class="as-row"><span class="as-label">Eyebrow font</span><span class="as-value">DM Sans Light · 18pt · +350 tracking</span></div>
+      <div class="as-row"><span class="as-label">Headline</span><span class="as-value">Cormorant Garamond Light · 70pt</span></div>
+      <div class="as-row"><span class="as-label">Mark</span><span class="as-value">6% canvas · Crimson · bottom-left inline</span></div>
+    </div>
+  </div>
+
+</div><!-- end feed template-grid -->
+
+
+<!-- ══════════════════════════════════════════
+     STORY / REEL COVER — 9:16 VERTICAL
+══════════════════════════════════════════ -->
+<div class="format-header" id="story">
+  <div class="fh-eyebrow">Format 02</div>
+  <div class="fh-title">Instagram Story & Reel Cover — Vertical</div>
+  <div class="fh-specs">Adobe dimensions: <span>1080 × 1920 px</span> · Resolution: <span>72 dpi</span> · Colour mode: <span>RGB</span> · Safe zone: <span>250px top + bottom (UI elements)</span></div>
+</div>
+
+<div class="template-grid tg-4">
+
+  <!-- STORY 1: ATMOSPHERIC MYSTERY -->
+  <div class="template-wrap">
+    <div class="template-name">Story 01 — Phase 0 Mystery</div>
+    <div class="t-story">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner" style="font-size:0.65em;">ATMOSPHERIC<br>VERTICAL PHOTO</div>
+        </div>
+        <div class="photo-overlay"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:16% 8% 12%; justify-content:space-between;">
+          <div style="display:flex;justify-content:center;">
+            <svg width="18%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.6em;color:#F5F0E8;line-height:1.3;letter-spacing:0.02em;margin-bottom:4%;">We have been<br>waiting.</div>
+            <div style="font-size:0.5em;letter-spacing:0.35em;text-transform:uppercase;color:rgba(196,184,154,0.45);font-family:'DM Sans',sans-serif;font-weight:200;">The Order of Light</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Phase 0 atmospheric Story. Mark top-centre. Tagline centred bottom-third. Photo full bleed with gradient overlay.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Key Specs</div>
+      <div class="as-row"><span class="as-label">Canvas</span><span class="as-value">1080 × 1920px</span></div>
+      <div class="as-row"><span class="as-label">Safe zone top</span><span class="as-value">250px (avoid — UI)</span></div>
+      <div class="as-row"><span class="as-label">Safe zone bottom</span><span class="as-value">250px (avoid — UI)</span></div>
+      <div class="as-row"><span class="as-label">Mark size</span><span class="as-value">18% canvas width · top-centre</span></div>
+      <div class="as-row"><span class="as-label">Tagline size</span><span class="as-value">Cormorant Light Italic · 68pt</span></div>
+    </div>
+  </div>
+
+  <!-- STORY 2: SERMON ANNOUNCEMENT -->
+  <div class="template-wrap">
+    <div class="template-name">Story 02 — Sermon Announcement</div>
+    <div class="t-story">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner" style="font-size:0.65em;">CONDUIT STILL<br>VERTICAL CROP</div>
+        </div>
+        <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,0.8) 0%,rgba(10,10,10,0) 35%,rgba(10,10,10,0) 55%,rgba(10,10,10,0.9) 100%);"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:16% 8% 14%; justify-content:space-between;">
+          <div>
+            <div style="font-size:0.48em;letter-spacing:0.38em;text-transform:uppercase;color:#8B1A2E;font-family:'DM Sans',sans-serif;font-weight:300;margin-bottom:2%;">Now Transmitting</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:0.95em;color:rgba(245,240,232,0.6);letter-spacing:0.2em;text-transform:uppercase;">Transmission 001</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.9em;color:#C8A96E;line-height:1.1;">FOUND</div>
+          </div>
+          <div style="text-align:center;">
+            <svg width="14%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+            <div style="font-size:0.46em;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,232,0.35);font-family:'DM Sans',sans-serif;font-weight:200;">Link in bio · Watch now</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Conduit still as background — vertical crop showing face upper-half. TX number + title top-left. Mark + CTA bottom-centre.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Key Specs</div>
+      <div class="as-row"><span class="as-label">Title size</span><span class="as-value">Cormorant Light Italic · 80pt</span></div>
+      <div class="as-row"><span class="as-label">Title colour</span><span class="as-value mono">#C8A96E</span></div>
+      <div class="as-row"><span class="as-label">TX label</span><span class="as-value">DM Sans Light · 20pt · +380 tracking</span></div>
+    </div>
+  </div>
+
+  <!-- STORY 3: KIT TEASE SEQUENCE -->
+  <div class="template-wrap">
+    <div class="template-name">Story 03 — Kit Tease (Wax Seal)</div>
+    <div class="t-story">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner" style="font-size:0.65em;">WAX SEAL<br>CLOSE-UP PHOTO<br>MACRO SHOT</div>
+        </div>
+        <div style="position:absolute;inset:0;z-index:2;background:rgba(10,10,10,0.25);"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:16% 8% 14%; justify-content:flex-end;">
+          <div style="text-align:left;">
+            <div style="height:1px;background:#8B1A2E;width:40%;margin-bottom:4%;"></div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.3em;color:rgba(245,240,232,0.9);line-height:1.4;">The first ordinations<br>are being prepared.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Day 1 of the kit tease sequence. Macro wax seal photo. Near-no text — let the visual speak. Part of a 5-Story reveal sequence ending in the full kit.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Key Specs — Tease Sequence</div>
+      <div class="as-row"><span class="as-label">Story 1</span><span class="as-value">Wax seal close-up · No text</span></div>
+      <div class="as-row"><span class="as-label">Story 2</span><span class="as-value">Box corner · No text</span></div>
+      <div class="as-row"><span class="as-label">Story 3</span><span class="as-value">Cassette label (soft focus) · No text</span></div>
+      <div class="as-row"><span class="as-label">Story 4</span><span class="as-value">Certificate (partially obscured)</span></div>
+      <div class="as-row"><span class="as-label">Story 5</span><span class="as-value">Full flat-lay reveal + link sticker</span></div>
+    </div>
+  </div>
+
+  <!-- STORY 4: THE 108 POST — VERTICAL -->
+  <div class="template-wrap">
+    <div class="template-name">Story 04 — The 108 Post</div>
+    <div class="t-story">
+      <div class="tmpl tmpl-bg-void">
+        <div class="scan-lines"></div>
+        <div class="tmpl-content" style="align-items:center;justify-content:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:5.5em;color:#F5F0E8;line-height:1;letter-spacing:0.02em;text-align:center;">108</div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">The campaign's landmark post. No grain. No effects. No border. Just "108" in Signal White on Void. Centred. Nothing else. The absence of treatment is the design.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Exact Spec — Do Not Deviate</div>
+      <div class="as-row"><span class="as-label">Background</span><span class="as-value mono">#0A0A0A · flat fill only</span></div>
+      <div class="as-row"><span class="as-label">Font</span><span class="as-value">Cormorant Garamond · weight 300</span></div>
+      <div class="as-row"><span class="as-value mono">108</span><span class="as-value">240pt · centred H+V</span></div>
+      <div class="as-row"><span class="as-label">Colour</span><span class="as-value mono">#F5F0E8 · 100% opacity</span></div>
+      <div class="as-row"><span class="as-label">Grain</span><span class="as-value">NONE — intentionally clean</span></div>
+      <div class="as-row"><span class="as-label">Scan lines</span><span class="as-value">NONE</span></div>
+      <div class="as-row"><span class="as-label">Vignette</span><span class="as-value">NONE</span></div>
+      <div class="as-row"><span class="as-label">Caption</span><span class="as-value">No caption. No hashtags.</span></div>
+    </div>
+  </div>
+
+</div><!-- end story template-grid -->
+
+
+<!-- ══════════════════════════════════════════
+     YOUTUBE THUMBNAIL — 16:9
+══════════════════════════════════════════ -->
+<div class="format-header" id="youtube">
+  <div class="fh-eyebrow">Format 03</div>
+  <div class="fh-title">YouTube Thumbnail — 16:9</div>
+  <div class="fh-specs">Adobe dimensions: <span>1280 × 720 px</span> · Resolution: <span>72 dpi</span> · Max file size: <span>2MB</span> · Format: <span>JPG</span> · Note: <span>Text must be legible at 120px wide (mobile search result)</span></div>
+</div>
+
+<div class="template-grid tg-2">
+
+  <!-- YT1: SERMON THUMBNAIL -->
+  <div class="template-wrap">
+    <div class="template-name">YT 01 — Sermon Transmission Thumbnail</div>
+    <div class="t-youtube">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">CONDUIT STILL · LEFT-ALIGNED</div>
+        </div>
+        <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to right,rgba(10,10,10,0) 35%,rgba(10,10,10,0.95) 70%);"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:7% 6%; flex-direction:row; align-items:center; justify-content:flex-end; z-index:5;">
+          <div style="width:55%; text-align:right;">
+            <div style="font-size:0.6em;letter-spacing:0.35em;text-transform:uppercase;color:#8B1A2E;font-family:'DM Sans',sans-serif;font-weight:300;margin-bottom:3%;">Transmission 001</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:2.6em;color:#C8A96E;line-height:1.05;">FOUND</div>
+            <div style="margin-top:4%;display:flex;justify-content:flex-end;align-items:center;gap:3%;">
+              <div style="font-size:0.48em;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,232,0.4);font-family:'DM Sans',sans-serif;font-weight:200;">The Order of Light</div>
+              <svg width="8%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Conduit still occupies left 65%. Gradient wipe to black on right. Text right-aligned. Title in Sacred Gold italic — legible even at 120px thumbnail size.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Photo layer</span><span class="as-value">Conduit, left-anchored, desaturate -35%</span></div>
+      <div class="as-row"><span class="as-label">Gradient wipe</span><span class="as-value">Transparent → Black, right-to-left from 35%</span></div>
+      <div class="as-row"><span class="as-label">TX label</span><span class="as-value">DM Sans Light · 24pt · +350 tracking · Crimson</span></div>
+      <div class="as-row"><span class="as-label">Title font</span><span class="as-value">Cormorant Garamond Light Italic · 104pt</span></div>
+      <div class="as-row"><span class="as-label">Title colour</span><span class="as-value mono">#C8A96E</span></div>
+      <div class="as-row"><span class="as-label">Mobile test</span><span class="as-value">Scale to 120px wide — title must be legible</span></div>
+    </div>
+  </div>
+
+  <!-- YT2: VIGNETTE THUMBNAIL -->
+  <div class="template-wrap">
+    <div class="template-name">YT 02 — Vignette Film Thumbnail</div>
+    <div class="t-youtube">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">KEY VIGNETTE STILL</div>
+        </div>
+        <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,0.6) 0%,rgba(10,10,10,0) 40%,rgba(10,10,10,0.8) 100%);"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:6%; justify-content:space-between; z-index:5;">
+          <div style="display:flex;align-items:center;gap:2%;">
+            <svg width="5%" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+            <div style="font-size:0.5em;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,232,0.45);font-family:'DM Sans',sans-serif;font-weight:200;">The Order of Light</div>
+          </div>
+          <div>
+            <div style="font-size:0.5em;letter-spacing:0.35em;text-transform:uppercase;color:#8B1A2E;font-family:'DM Sans',sans-serif;font-weight:300;margin-bottom:2%;">Official Vignette #1</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.0em;color:#F5F0E8;line-height:1.1;">The Unboxing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Key still from the vignette. Mark + band name top-left. Vignette number + title bottom-left. Keep the still emotionally striking — the moment of "infection" or a dramatic character beat.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Vignette label</span><span class="as-value">DM Sans Light · 20pt · +350 tracking · Crimson</span></div>
+      <div class="as-row"><span class="as-label">Title font</span><span class="as-value">Cormorant Garamond Light · 80pt · White</span></div>
+      <div class="as-row"><span class="as-label">Top gradient</span><span class="as-value">Black → transparent · top 35%</span></div>
+      <div class="as-row"><span class="as-label">Bottom gradient</span><span class="as-value">Transparent → Black · bottom 40%</span></div>
+    </div>
+  </div>
+
+</div><!-- end youtube template-grid -->
+
+
+<!-- ══════════════════════════════════════════
+     FACEBOOK FEED — 1.91:1
+══════════════════════════════════════════ -->
+<div class="format-header" id="facebook">
+  <div class="fh-eyebrow">Format 04</div>
+  <div class="fh-title">Facebook Feed Post — Landscape</div>
+  <div class="fh-specs">Adobe dimensions: <span>1200 × 628 px</span> · Resolution: <span>72 dpi</span> · Format: <span>JPG / PNG</span> · Note: <span>Facebook crops to square on mobile feed — keep key content central</span></div>
+</div>
+
+<div class="template-grid tg-2">
+
+  <!-- FB1: STANDARD TRANSMISSION -->
+  <div class="template-wrap">
+    <div class="template-name">FB 01 — Standard Transmission Post</div>
+    <div class="t-facebook">
+      <div class="tmpl tmpl-bg-void">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">ATMOSPHERIC PHOTO<br>LANDSCAPE CROP</div>
+        </div>
+        <div class="photo-overlay"></div>
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <div class="tmpl-content" style="padding:7% 7%; flex-direction:row; align-items:flex-end; justify-content:space-between; z-index:5;">
+          <div style="max-width:60%;">
+            <div style="height:2px;background:#8B1A2E;width:48px;margin-bottom:4%;"></div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.8em;color:#F5F0E8;line-height:1.25;letter-spacing:0.02em;">The signal has always been there.</div>
+            <div style="margin-top:5%;font-size:0.5em;letter-spacing:0.3em;text-transform:uppercase;color:rgba(196,184,154,0.45);font-family:'DM Sans',sans-serif;font-weight:200;">The Order of Light</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4%;">
+            <svg width="42px" height="42px" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Landscape atmospheric photo. Text left-anchored, bottom-third. Mark bottom-right. Important: keep all key content in the central 60% for mobile square crop safety.</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Canvas</span><span class="as-value">1200 × 628px</span></div>
+      <div class="as-row"><span class="as-label">Safe zone</span><span class="as-value">Content within central 720px (mobile crop)</span></div>
+      <div class="as-row"><span class="as-label">Tagline font</span><span class="as-value">Cormorant Garamond Light Italic · 52pt</span></div>
+      <div class="as-row"><span class="as-label">Mark size</span><span class="as-value">42px · fixed · bottom-right margin 48px</span></div>
+      <div class="as-row"><span class="as-label">Gradient</span><span class="as-value">Bottom 50%, Black → transparent</span></div>
+    </div>
+  </div>
+
+  <!-- FB2: EP RELEASE FACEBOOK -->
+  <div class="template-wrap">
+    <div class="template-name">FB 02 — EP Release / Event Header</div>
+    <div class="t-facebook">
+      <div class="tmpl tmpl-bg-void">
+        <div class="scan-lines"></div>
+        <div class="vignette"></div>
+        <!-- Ghost numeral -->
+        <div style="position:absolute;bottom:-15%;right:5%;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:7em;color:rgba(200,169,110,0.06);line-height:1;z-index:1;letter-spacing:-0.05em;">I</div>
+        <div class="tmpl-content" style="padding:8% 8%; flex-direction:row; align-items:center; z-index:5;">
+          <div style="flex:1; padding-right:6%;">
+            <div style="font-size:0.48em;letter-spacing:0.38em;text-transform:uppercase;color:#C8A96E;font-family:'DM Sans',sans-serif;font-weight:300;margin-bottom:3%;">New Release · Available Now</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.5em;color:#F5F0E8;line-height:1.1;letter-spacing:0.05em;">108.I</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.2em;color:#C8A96E;margin-top:2%;line-height:1.3;">"First you're something."</div>
+            <div style="margin-top:5%;font-size:0.42em;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,232,0.3);font-family:'DM Sans',sans-serif;font-weight:200;">Available on all frequencies ◈</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4%;border-left:1px solid rgba(139,26,46,0.3);padding-left:6%;">
+            <svg width="48px" height="48px" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+            <div style="font-size:0.38em;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,169,110,0.4);font-family:'DM Sans',sans-serif;writing-mode:vertical-rl;text-orientation:mixed;">The Order of Light</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="template-desc">Typography-only Facebook EP release. Vertical divider line splits content from mark column. Also works as Facebook Event cover image. Adapt for EP2 (crimson) and EP3 (white).</div>
+    <div class="adobe-specs">
+      <div class="as-title">Adobe Layer Structure</div>
+      <div class="as-row"><span class="as-label">Ghost numeral</span><span class="as-value">Cormorant · 290pt · 6% opacity</span></div>
+      <div class="as-row"><span class="as-label">EP number</span><span class="as-value">Cormorant Light · 100pt · White</span></div>
+      <div class="as-row"><span class="as-label">Phrase</span><span class="as-value">Cormorant Light Italic · 48pt · Gold</span></div>
+      <div class="as-row"><span class="as-label">Divider</span><span class="as-value">1px vertical line · 30% Crimson</span></div>
+      <div class="as-row"><span class="as-label">Mark</span><span class="as-value">48px · Gold · right column · centred V</span></div>
+    </div>
+  </div>
+
+</div><!-- end facebook template-grid -->
+
+
+<!-- ══════════════════════════════════════════
+     MASTER SPECS REFERENCE
+══════════════════════════════════════════ -->
+<div class="format-header" id="specs">
+  <div class="fh-eyebrow">Reference</div>
+  <div class="fh-title">Master Adobe Specs & Asset List</div>
+  <div class="fh-specs">Everything you need to set up your Adobe Photoshop / Illustrator template files</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:32px;">
+
+  <div style="background:#141414;border:1px solid rgba(255,255,255,0.05);padding:32px;">
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#C8A96E;margin-bottom:16px;">Document Sizes — Set These Up First</div>
+    <div class="as-row" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+      <span style="font-size:11px;color:rgba(245,240,232,0.5);">Instagram Feed</span>
+      <span style="font-size:11px;color:#F5F0E8;font-weight:400;">1080 × 1080 px</span>
+    </div>
+    <div class="as-row" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+      <span style="font-size:11px;color:rgba(245,240,232,0.5);">Story / Reel Cover</span>
+      <span style="font-size:11px;color:#F5F0E8;font-weight:400;">1080 × 1920 px</span>
+    </div>
+    <div class="as-row" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+      <span style="font-size:11px;color:rgba(245,240,232,0.5);">YouTube Thumbnail</span>
+      <span style="font-size:11px;color:#F5F0E8;font-weight:400;">1280 × 720 px</span>
+    </div>
+    <div class="as-row" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+      <span style="font-size:11px;color:rgba(245,240,232,0.5);">Facebook Feed</span>
+      <span style="font-size:11px;color:#F5F0E8;font-weight:400;">1200 × 628 px</span>
+    </div>
+    <div class="as-row" style="display:flex;justify-content:space-between;padding:6px 0;">
+      <span style="font-size:11px;color:rgba(245,240,232,0.5);">All files — Resolution</span>
+      <span style="font-size:11px;color:#F5F0E8;font-weight:400;">72 dpi · RGB · sRGB colour profile</span>
+    </div>
+  </div>
+
+  <div style="background:#141414;border:1px solid rgba(255,255,255,0.05);padding:32px;">
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#C8A96E;margin-bottom:16px;">Colour Swatches — Save to Adobe Libraries</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="width:24px;height:24px;background:#0A0A0A;border:1px solid #333;flex-shrink:0;"></div>
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Void</span>
+        <span style="font-size:11px;color:#F5F0E8;margin-left:auto;font-family:monospace;">#0A0A0A</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="width:24px;height:24px;background:#8B1A2E;flex-shrink:0;"></div>
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Crimson</span>
+        <span style="font-size:11px;color:#F5F0E8;margin-left:auto;font-family:monospace;">#8B1A2E</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="width:24px;height:24px;background:#C8A96E;flex-shrink:0;"></div>
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Sacred Gold</span>
+        <span style="font-size:11px;color:#F5F0E8;margin-left:auto;font-family:monospace;">#C8A96E</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="width:24px;height:24px;background:#E8E0D0;flex-shrink:0;"></div>
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Parchment</span>
+        <span style="font-size:11px;color:#F5F0E8;margin-left:auto;font-family:monospace;">#E8E0D0</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:5px 0;">
+        <div style="width:24px;height:24px;background:#F5F0E8;flex-shrink:0;"></div>
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Signal White</span>
+        <span style="font-size:11px;color:#F5F0E8;margin-left:auto;font-family:monospace;">#F5F0E8</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#141414;border:1px solid rgba(255,255,255,0.05);padding:32px;">
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#C8A96E;margin-bottom:16px;">Typography — Adobe Font Sizes (at 1080px canvas)</div>
+    <div style="display:flex;flex-direction:column;gap:4px;">
+      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Display headline</span>
+        <span style="font-size:11px;color:#F5F0E8;">Cormorant Light · 80–100pt</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Tagline italic</span>
+        <span style="font-size:11px;color:#F5F0E8;">Cormorant Light Italic · 68–80pt</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Sermon title</span>
+        <span style="font-size:11px;color:#F5F0E8;">Cormorant Light Italic · 80–104pt</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Eyebrow label</span>
+        <span style="font-size:11px;color:#F5F0E8;">DM Sans Light · 18–22pt · +350 tracking</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">Byline / credits</span>
+        <span style="font-size:11px;color:#F5F0E8;">DM Sans ExtraLight · 16–20pt · +350 tracking</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:5px 0;">
+        <span style="font-size:11px;color:rgba(245,240,232,0.5);">108 (landmark post)</span>
+        <span style="font-size:11px;color:#F5F0E8;">Cormorant Light · 240pt · centred</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#141414;border:1px solid rgba(255,255,255,0.05);padding:32px;">
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#C8A96E;margin-bottom:16px;">Recurring Layer Effects — Save as Adobe Styles</div>
+    <div style="display:flex;flex-direction:column;gap:4px;">
+      <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:11px;color:#F5F0E8;margin-bottom:2px;">Grain Overlay</div>
+        <div style="font-size:10px;color:rgba(245,240,232,0.4);">Filter > Noise > Add Noise · 3% · Gaussian · Monochromatic · Overlay blend mode · 60% opacity</div>
+      </div>
+      <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:11px;color:#F5F0E8;margin-bottom:2px;">Scan Lines</div>
+        <div style="font-size:10px;color:rgba(245,240,232,0.4);">Pattern fill · 1px black line every 4px · Multiply blend · 8% opacity · on top of everything</div>
+      </div>
+      <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:11px;color:#F5F0E8;margin-bottom:2px;">Vignette</div>
+        <div style="font-size:10px;color:rgba(245,240,232,0.4);">Radial gradient fill layer · Black edges → transparent centre · Multiply · 70% opacity</div>
+      </div>
+      <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:11px;color:#F5F0E8;margin-bottom:2px;">Photo Colour Grade</div>
+        <div style="font-size:10px;color:rgba(245,240,232,0.4);">Hue/Sat: -30 saturation · Curves: push shadows to #1A0A0A · Add warm amber tone via Colour Balance (shadows: +R+8, +Y+6)</div>
+      </div>
+      <div style="padding:6px 0;">
+        <div style="font-size:11px;color:#F5F0E8;margin-bottom:2px;">Mark SVG Import</div>
+        <div style="font-size:10px;color:rgba(245,240,232,0.4);">Place as Smart Object · Link to master SVG · Recolour via Layer Style Colour Overlay for each variant</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end master specs grid -->
+
+</div><!-- end page -->
+
+<footer style="padding:60px 40px;text-align:center;border-top:1px solid rgba(255,255,255,0.04);display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:64px;">
+  <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+  <p style="font-size:9.5px;letter-spacing:0.25em;text-transform:uppercase;color:#444;max-width:none;text-align:center;">The Order of Light · Social Media Templates · Adobe Reference Document · 2025</p>
+  <p style="font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:#333;">12 templates across 4 formats · All specs production-ready</p>
+</footer>
+
+</body>
+</html>
