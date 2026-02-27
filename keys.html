@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keys & Synth — The Order of Light</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0A0A0A; --deep: #121212; --surface: #1A1A1A;
+  --crimson: #8B1A2E; --crimson-bright: #A82035; --crimson-dim: #5C1020;
+  --gold: #C8A96E; --gold-dim: #8A6E3E;
+  --parchment: #E8E0D0; --parchment-dim: #C4B89A;
+  --white: #F5F0E8; --grey: #555;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--void); color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-weight: 300;
+  overflow-x: hidden; line-height: 1.6;
+}
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.45;
+}
+.page { max-width:860px; margin:0 auto; padding:72px 48px 96px; }
+
+/* HEADER */
+.doc-header {
+  padding:56px 48px 40px;
+  border-bottom: 1px solid rgba(139,26,46,0.2);
+  display:flex; align-items:flex-start; justify-content:space-between; gap:32px;
+  margin-bottom:0;
+}
+.dh-left {}
+.dh-kicker { font-size:9px; letter-spacing:0.4em; text-transform:uppercase; color:var(--crimson); margin-bottom:14px; }
+.dh-title {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:clamp(28px,4vw,44px); letter-spacing:0.06em;
+  color:var(--white); line-height:1.1; margin-bottom:10px;
+}
+.dh-sub {
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic;
+  font-size:16px; color:var(--gold-dim); line-height:1.4;
+}
+.dh-mark { flex-shrink:0; opacity:0.85; }
+
+/* ROLE BAND */
+.role-band {
+  height:3px; margin-bottom:0;
+}
+
+/* BODY */
+h2 {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:clamp(24px,3vw,36px); letter-spacing:0.06em;
+  color:var(--white); margin-bottom:24px; line-height:1.15;
+}
+h3 {
+  font-size:9.5px; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--gold); margin:44px 0 14px;
+  display:flex; align-items:center; gap:12px;
+}
+h3::after { content:''; flex:1; height:1px; background:rgba(200,169,110,0.15); }
+p { font-size:14px; line-height:1.88; color:rgba(245,240,232,0.68); max-width:680px; margin-bottom:16px; }
+p.wide { max-width:none; }
+strong { color:var(--white); font-weight:400; }
+em { color:var(--gold); font-style:italic; }
+
+/* PULL QUOTE */
+.pull-quote {
+  border-left:3px solid var(--crimson); padding:18px 28px; margin:32px 0;
+  background:rgba(139,26,46,0.07);
+}
+.pull-quote p {
+  font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic;
+  color:var(--white); font-weight:300; max-width:none; margin:0; line-height:1.55;
+}
+
+/* LISTS */
+.ilist { margin:8px 0 20px; }
+.ilist li {
+  font-size:13.5px; line-height:1.8; color:rgba(245,240,232,0.68);
+  padding:5px 0 5px 20px; border-bottom:1px solid rgba(255,255,255,0.03);
+  position:relative; list-style:none;
+}
+.ilist li:last-child { border-bottom:none; }
+.ilist li::before { content:'◈'; position:absolute; left:0; color:var(--crimson); font-size:9px; top:9px; }
+.ilist li strong { color:var(--white); font-weight:400; }
+
+/* BLOCKS */
+.block {
+  background:var(--deep); border:1px solid rgba(255,255,255,0.05);
+  padding:28px 32px; margin:24px 0;
+}
+.block-label {
+  font-size:8.5px; letter-spacing:0.32em; text-transform:uppercase;
+  margin-bottom:14px;
+}
+.block p { font-size:13.5px; max-width:none; margin-bottom:10px; }
+.block p:last-child { margin-bottom:0; }
+
+.block-crimson { border-left:3px solid var(--crimson); background:rgba(139,26,46,0.07); }
+.block-crimson .block-label { color:var(--crimson-bright); }
+.block-gold { border-left:3px solid var(--gold); background:rgba(200,169,110,0.05); }
+.block-gold .block-label { color:var(--gold); }
+.block-surface { border-left:3px solid rgba(255,255,255,0.1); }
+.block-surface .block-label { color:rgba(245,240,232,0.35); }
+
+/* GEAR TABLE */
+.gear-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin:20px 0; }
+.gear-card {
+  background:var(--deep); border:1px solid rgba(255,255,255,0.05);
+  padding:22px 24px;
+}
+.gear-card-label { font-size:8.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px; }
+.gear-card p { font-size:13px; max-width:none; margin:0; color:rgba(245,240,232,0.6); line-height:1.7; }
+
+/* FINANCIAL BLOCK */
+.finance-block {
+  background:rgba(139,26,46,0.08);
+  border:1px solid rgba(139,26,46,0.2);
+  padding:28px 32px; margin:28px 0;
+}
+.finance-label { font-size:8.5px; letter-spacing:0.32em; text-transform:uppercase; color:var(--crimson-bright); margin-bottom:14px; }
+.finance-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin:16px 0; }
+.finance-item { background:rgba(0,0,0,0.3); padding:14px 16px; }
+.finance-item-label { font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,240,232,0.3); margin-bottom:4px; }
+.finance-item-val { font-size:12.5px; color:rgba(245,240,232,0.7); line-height:1.5; }
+.finance-note { font-size:12.5px; color:rgba(245,240,232,0.5); line-height:1.75; margin:12px 0 0; max-width:none; }
+
+/* AUDITION STEPS */
+.steps { margin:20px 0; }
+.step {
+  display:grid; grid-template-columns:40px 1fr; gap:0;
+  margin-bottom:2px;
+}
+.step-num {
+  background:var(--crimson); display:flex; align-items:flex-start;
+  justify-content:center; padding-top:18px;
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-size:22px; color:rgba(245,240,232,0.6);
+}
+.step-body { background:var(--deep); border:1px solid rgba(255,255,255,0.05); padding:18px 24px; }
+.step-title { font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.step-text { font-size:13px; color:rgba(245,240,232,0.65); line-height:1.72; max-width:none; margin:0; }
+
+/* VERSE */
+.verse {
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic;
+  font-size:clamp(20px,2.5vw,26px); color:var(--white); line-height:1.55;
+  padding:28px 0; border-top:1px solid rgba(139,26,46,0.2);
+  border-bottom:1px solid rgba(139,26,46,0.2); margin:32px 0;
+}
+.verse span { display:block; }
+.verse-note { font-family:'DM Sans',sans-serif; font-size:9.5px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold-dim); font-style:normal; margin-top:14px; }
+
+/* FOOTER */
+.doc-footer {
+  margin-top:72px; padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.05);
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.doc-footer p { font-size:9.5px; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,240,232,0.2); margin:0; max-width:none; }
+
+/* REVEAL */
+.r { opacity:0; transform:translateY(14px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.r.v { opacity:1; transform:none; }
+
+@media(max-width:700px){
+  .doc-header { padding:40px 24px 32px; flex-direction:column; }
+  .page { padding:48px 24px 72px; }
+  .gear-grid { grid-template-columns:1fr; }
+  .finance-grid { grid-template-columns:1fr 1fr; }
+  .dh-mark { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="role-band" style="background:#9A8AB0;"></div>
+
+<div class="doc-header">
+  <div class="dh-left">
+    <div class="dh-kicker">Role Brief · Keys & Synthesizer · Charlotte, NC</div>
+    <div class="dh-title">Keys & Synth</div>
+    <div class="dh-sub">What this role is, what it requires, and what the project offers in return</div>
+  </div>
+  <div class="dh-mark">
+    <svg width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#9A8AB0" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#9A8AB0" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#9A8AB0" stroke-width="7" stroke-linecap="square"/>
+</svg>
+  </div>
+</div>
+
+<div class="page">
+
+<div class="pull-quote r">
+  <p>The signal needs its frequency.</p>
+</div>
+
+<p class="r">The keys and synthesizer role in this project is the connective tissue — the element that lives in the spaces between guitar, bass, and drums and makes the whole thing feel larger than its parts. It is arguably the most musically complex role in the band, because it requires simultaneous fluency across multiple sonic identities: warm acoustic piano, atmospheric synthesizer pads, precise electronic programming, and lead melodic work.</p>
+<p class="r">The right person for this role does not think of these as separate skills. They are different registers of the same instrument, and the music moves between them without announcing the transition. That fluency is what we need.</p>
+
+<h3 class="r">The Music</h3>
+<p class="r">The Order of Light is a new original alternative rock band based in Charlotte, NC. The music is melodic, atmospheric, harmony-driven, and emotionally direct. Songs built on feel, groove, and genuine songwriting craft — the kind of music that rewards close listening and doesn't apologise for wanting to move people.</p>
+<p class="r">The sonic territory sits in the lineage of Thrice, Copeland, Nothing But Thieves, Minus The Bear, MuteMath, Death Cab for Cutie, Sunny Day Real Estate, Mew, Young the Giant, Mae, Goo Goo Dolls, Matchbox Twenty, Counting Crows, and Hell Is For Heroes. What those records share — melodic ambition, emotional honesty, a refusal to be either too soft or too heavy — is the centre of gravity. The music is dark atmospherically but warm at its core. Dreamy, grooving, and deliberately sexy. Effortless-sounding and anything but.</p>
+<p class="r">There are approximately 40 songs in various stages of development. Three EPs are planned across the first year of release, structured around a thematic arc. The material exists. The vision is clear.</p>
+
+
+<h3 class="r">The Identity — What It Is and What It Isn't</h3>
+<p class="r">The project operates under the name and artistic identity of <strong>The Order of Light</strong>. This is a creative framework — not a belief system, not a religion, not an ideology members are expected to adopt. It is a deliberately constructed world that gives the music a mythology, a visual identity, and a presence distinctive enough to be remembered.</p>
+<p class="r">The aesthetic draws on the language of spiritual and philosophical traditions — Buddhist numerology, runic symbolism, transmission and signal — not to promote any of those things, but because they carry weight and depth. The Order of Light is a story told around the music. A frame that makes the picture more interesting. Think the way Massive Attack or Nine Inch Nails built a world around their sound. Same principle.</p>
+
+<div class="verse r">
+  <span>First you're something.</span>
+  <span>Then you're nothing.</span>
+  <span>Now you're everything.</span>
+  <span class="verse-note">108 · The three-EP arc · The shape of the first year</span>
+</div>
+
+<p class="r">The number 108 structures the release arc — three EPs across twelve months enacting a journey from identity through dissolution to expansion. The mythology builds before the music drops. The campaign infrastructure, brand identity, content strategy, and fan club are already built and ready to execute.</p>
+
+
+<h3 class="r">Who This Band Is</h3>
+<p class="r">This band holds one non-negotiable: every human being deserves equal dignity regardless of who they are, who they love, or where they come from. We are not a political band and have no interest in becoming one. We do believe — without negotiation, without asterisks — that basic human decency is a baseline requirement for being in a room together. If that is a point of genuine contention for you, this is not the right project. If it isn't, you are welcome here completely.</p>
+
+
+<h3 class="r">What the Keys & Synth Role Specifically Requires</h3>
+<ul class="ilist r">
+  <li><strong>Both piano and synthesizer — not one or the other</strong> — acoustic/electric piano-rooted playing and synthesizer work are both required in this project. An applicant who only plays one will not be the right fit</li>
+  <li><strong>Sound design capability</strong> — you shape and create tones. You understand synthesis fundamentals well enough to build a sound from scratch, not just browse presets</li>
+  <li><strong>Live electronic performance experience</strong> — loops, triggers, MIDI control, and layered live performance in a band context. You have done this before</li>
+  <li><strong>Studio recording experience</strong> — professional session experience, understanding of the recording process, and how keys and synth parts translate from live to recorded</li>
+  <li><strong>Touring history</strong> — live performance at a serious level beyond local shows</li>
+  <li><strong>Harmony vocals</strong> — a significant advantage. Every member of this band is expected to contribute to the vocal arrangements</li>
+  <li><strong>Click track performance</strong> — the live show runs to a locked click. Non-negotiable</li>
+</ul>
+
+<div class="block block-surface r" style="border-left-color:#9A8AB0;">
+  <div class="block-label" style="color:#9A8AB0;">On Live Electronic Integration</div>
+  <p>The live setup for this project involves running electronic elements alongside the full live band — atmospheric layers, synth pads, and additional textures that exist in the recorded versions. The keys player is the member most responsible for bridging the studio sound and the live sound. If your experience is purely live-acoustic performance with no electronic integration, this is a significant gap that needs to be addressed before you would be ready for this role.</p>
+</div>
+
+<h3 class="r">Gear & Live Performance Standards</h3>
+<ul class="ilist r">
+  <li><strong>Stage-ready keyboard rig</strong> — professional keyboard or weighted controller, appropriate for the range of sounds this role requires</li>
+  <li><strong>Synthesizer setup</strong> — hardware, software, or hybrid — but a real, considered, stage-ready synthesis setup</li>
+  <li><strong>In-ear monitors</strong> — required for every rehearsal and show</li>
+  <li><strong>Reliable MIDI and audio routing</strong> — your live setup needs to be consistent, tested, and backed up. Electronic rigs are complex; yours needs to be bulletproof</li>
+</ul>
+
+<h3 class="r">Professional Equipment & Live Performance Standards</h3>
+<p class="r">The Order of Light performs to a click track. Live, we play to a tight synced setup — this is not a loose, feel-it-out situation. If you have never performed to a click live, you will need to get comfortable with that before we can work together. It is non-negotiable and it is the standard we hold ourselves to.</p>
+
+<div class="gear-grid r">
+  <div class="gear-card">
+    <div class="gear-card-label">In-Ear Monitors</div>
+    <p>Professional IEMs are required for every rehearsal and performance. Wedge monitors are not part of this setup. You need a working IEM system — either your own or you need to be actively in the process of acquiring one before we begin rehearsing seriously.</p>
+  </div>
+  <div class="gear-card">
+    <div class="gear-card-label">Professional Gear</div>
+    <p>You are expected to arrive with professional-grade, stage-ready equipment. Gear that is unreliable, underpowered for a live context, or not appropriate to the sonic register of this project is not acceptable at rehearsal or on stage.</p>
+  </div>
+  <div class="gear-card">
+    <div class="gear-card-label">Click Track Performance</div>
+    <p>Every rehearsal runs to a click. Every live show runs to a click. If this is new territory for you, invest the time to get there before applying. The click is the foundation the whole live performance is built around.</p>
+  </div>
+  <div class="gear-card">
+    <div class="gear-card-label">Backup & Reliability</div>
+    <p>A professional musician has backup plans. Cables fail, batteries die, gear malfunctions. You are expected to carry what you need to get through a show if something goes wrong. The show does not stop because of a gear failure.</p>
+  </div>
+</div>
+
+
+<h3 class="r">Financial Commitment</h3>
+<div class="finance-block r">
+  <div class="finance-label">What Being in This Band Costs</div>
+  <p class="wide" style="font-size:14px;color:rgba(245,240,232,0.7);margin-bottom:16px;">Being in a serious, professionally run band has real costs. This project is run like one. Every member is expected to contribute financially toward shared band expenses — not because anyone is profiting from it at this stage, but because the alternative is a band that can't function at the level it needs to.</p>
+  <div class="finance-grid">
+    <div class="finance-item">
+      <div class="finance-item-label">Rehearsal Space</div>
+      <div class="finance-item-val">Regular booked rehearsal room rental, split equally across all members</div>
+    </div>
+    <div class="finance-item">
+      <div class="finance-item-label">Recording Studio</div>
+      <div class="finance-item-val">Professional studio time for the EP sessions — shared cost across the band</div>
+    </div>
+    <div class="finance-item">
+      <div class="finance-item-label">Touring & Travel</div>
+      <div class="finance-item-val">Transport, accommodation, and logistics when the band is on the road</div>
+    </div>
+    <div class="finance-item">
+      <div class="finance-item-label">Merchandise</div>
+      <div class="finance-item-val">Production costs for physical merch — ordination kits, apparel, and physical releases</div>
+    </div>
+    <div class="finance-item">
+      <div class="finance-item-label">Marketing & Campaign</div>
+      <div class="finance-item-val">Campaign execution, content production, social advertising, and release promotion</div>
+    </div>
+    <div class="finance-item">
+      <div class="finance-item-label">Equipment Hire</div>
+      <div class="finance-item-val">Stage and backline equipment hire for shows where this is required</div>
+    </div>
+  </div>
+  <p class="finance-note">The exact contribution will be discussed transparently with serious candidates once mutual fit is established. The expectation is fairness and equal participation — not a significant personal financial burden, but a real and consistent one. A musician who cannot commit to shared band costs is not in a position to be a full member of this project.</p>
+</div>
+
+
+<h3 class="r">Harmony Vocals</h3>
+<p class="r">Every member of this band sings. Not everyone carries lead lines, but everyone contributes to the vocal arrangements. Stacked harmonies are central to this project's sound both on record and live. This is not a preference — it is a requirement across all five members.</p>
+
+
+<h3 class="r">The Audition Process</h3>
+<div class="steps r">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-title">Initial Submission</div>
+      <p class="step-text">Send an introduction to <strong>tristanmatthew@gmail.com</strong> — your background, your experience, and links to your best recorded work. No recordings means no next step. We need to hear how you sound before anything else.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-title">Write to Existing Material</div>
+      <p class="step-text">If your recordings demonstrate the right fit, you'll receive existing tracks to respond to — record your part over them and send it back. This tells us more than any conversation can about whether you hear the music the way we do.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-title">In-Person Session</div>
+      <p class="step-text">Charlotte, NC. This is where chemistry either exists or it doesn't. We'll play together, talk through the project in full, and both decide whether this is the right fit. No decisions are made before this step.</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="block block-crimson r" style="margin-top:44px;">
+  <div class="block-label">Contact</div>
+  <p>Send everything to <strong>tristanmatthew@gmail.com</strong>. Your name, your instrument, a summary of your recording and touring history, and links to recordings. The more specific you are, the faster we can both work out whether this is worth pursuing.</p>
+  <p style="margin-top:8px;font-size:12.5px;color:rgba(245,240,232,0.4);">Charlotte, NC and surrounding areas only. In-person rehearsal is not optional.</p>
+</div>
+
+
+
+<div class="doc-footer r">
+  <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+</svg>
+  <p>The Order of Light · Charlotte, NC · For serious candidates only · tristanmatthew@gmail.com</p>
+  <p>Confidential · 2025</p>
+</div>
+</div>
+
+
+<script>
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('v'); }), {threshold:0.07, rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
