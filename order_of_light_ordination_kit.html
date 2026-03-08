@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Ordination Kit Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void:#0A0A0A; --deep:#141414; --surface:#1E1E1E;
+  --border:#282828; --border-hi:#383838;
+  --crimson:#8B1A2E; --crimson-h:#A82035; --crimson-dim:#5C1020;
+  --gold:#C8A96E; --gold-dim:#8A6E3E;
+  --white:#F5F0E8; --text-2:#C4B89A; --text-3:#7A7060;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.7;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.42;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(10,10,10,.94);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 48px;height:52px;}
+.nav-brand{font-family:'DM Sans',sans-serif;font-weight:200;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);margin-right:auto;}
+.nav-links{display:flex;}
+.nav-links a{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--text-3);text-decoration:none;padding:0 14px;height:52px;display:flex;align-items:center;border-left:1px solid var(--border);transition:color .2s,background .2s;}
+.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.03);}
+
+/* COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 64px 64px;position:relative;overflow:hidden;}
+.cover-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:600px;height:600px;
+  background:radial-gradient(circle,rgba(200,169,110,.08) 0%,rgba(139,26,46,.06) 50%,transparent 70%);pointer-events:none;}
+.cover::before{content:'';position:absolute;left:64px;top:80px;bottom:80px;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--gold) 40%,var(--crimson-h) 70%,transparent);opacity:.3;}
+.cover-tag{font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;position:relative;z-index:2;}
+.cover h1{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(32px,5vw,64px);letter-spacing:.2em;text-transform:uppercase;color:var(--white);margin-bottom:6px;position:relative;z-index:2;}
+.cover-sub{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);margin-bottom:28px;position:relative;z-index:2;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--gold),var(--crimson-h),transparent);opacity:.3;margin:0 0 28px;position:relative;z-index:2;}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;position:relative;z-index:2;}
+.cm-label{font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;}
+.cm-value{font-size:13px;color:var(--text-2);}
+
+/* WRAP / SECTIONS */
+.wrap{max-width:960px;margin:0 auto;padding:0 64px;}
+.section{padding:72px 0 0;scroll-margin-top:52px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:28px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:.1em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin-bottom:28px;max-width:580px;}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 20px;margin:0 0 24px;font-size:13px;color:var(--text-2);line-height:1.75;}
+.callout strong{color:var(--white);font-weight:400;}
+.callout.crit{border-left-color:var(--crimson-h);}
+
+/* KIT CONTENTS */
+.kit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px;margin:0 0 32px;}
+.kit-item{background:var(--deep);border:1px solid var(--border);padding:22px 22px 18px;position:relative;}
+.ki-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:32px;color:var(--border-hi);line-height:1;margin-bottom:10px;}
+.ki-name{font-size:13px;font-weight:400;color:var(--white);margin-bottom:6px;}
+.ki-spec{font-size:12px;color:var(--text-2);line-height:1.65;}
+.ki-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:10.5px;color:var(--text-3);}
+.ki-req{position:absolute;top:14px;right:14px;font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;padding:2px 8px;border:1px solid;}
+
+/* TIERS */
+.tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px;margin:0 0 32px;}
+.tier{background:var(--deep);border:1px solid var(--border);padding:22px 20px;position:relative;}
+.tier::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.tier-name{font-size:12px;font-weight:400;letter-spacing:.06em;color:var(--white);margin-bottom:4px;}
+.tier-price{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:28px;color:var(--gold);margin-bottom:12px;line-height:1;}
+.tier-contents{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.tier-line{font-size:12px;color:var(--text-2);display:flex;align-items:baseline;gap:8px;}
+.tier-line::before{content:'◈';font-size:9px;color:var(--crimson);flex-shrink:0;}
+.tier-note{font-size:11px;color:var(--text-3);line-height:1.5;}
+
+/* PRODUCTION TABLE */
+.prod-table{display:flex;flex-direction:column;gap:2px;margin:0 0 28px;}
+.prod-row{background:var(--deep);border:1px solid var(--border);display:grid;grid-template-columns:200px 1fr auto;align-items:baseline;padding:14px 18px;gap:16px;}
+.prod-item{font-size:13px;color:var(--white);}
+.prod-spec{font-size:12.5px;color:var(--text-2);line-height:1.55;}
+.prod-cost{font-size:12px;color:var(--gold);white-space:nowrap;}
+
+/* RULES */
+.rules{display:flex;flex-direction:column;gap:2px;margin:0 0 24px;}
+.rule{background:var(--deep);border:1px solid var(--border);display:grid;grid-template-columns:80px 1fr;align-items:baseline;padding:14px 18px;gap:14px;}
+.rule-v{font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:3px 8px;border:1px solid;width:fit-content;}
+.do{color:#6AAF8C;border-color:rgba(106,175,140,.35);}
+.dont{color:var(--crimson-h);border-color:rgba(168,32,53,.35);}
+.note{color:var(--gold);border-color:rgba(200,169,110,.35);}
+.rule-t{font-size:13px;color:var(--text-2);line-height:1.6;}
+.rule-t strong{color:var(--white);font-weight:400;}
+
+/* FOOTER */
+footer{max-width:960px;margin:80px auto 0;padding:24px 64px 56px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);letter-spacing:.1em;flex-wrap:wrap;gap:8px;}
+
+@media(max-width:700px){
+  .cover{padding:100px 24px 48px;} .cover::before{left:24px;}
+  .wrap{padding:0 24px;}
+  .prod-row{grid-template-columns:1fr;gap:6px;}
+  .rule{grid-template-columns:1fr;gap:8px;}
+  footer{padding:24px 24px 48px;}
+}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+
+<nav aria-label="Page navigation">
+  <span class="nav-brand">The Order of Light</span>
+  <div class="nav-links">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#contents">Contents</a>
+    <a href="#tiers">Tiers</a>
+    <a href="#production">Production</a>
+    <a href="#fulfillment">Fulfillment</a>
+    <a href="#rules">Rules</a>
+  </div>
+</nav>
+
+<div class="cover" aria-label="Cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+  <div class="cover-tag">Physical Product Brief · The Illuminated</div>
+  <h1>The Order of Light</h1>
+  <p class="cover-sub">Ordination Kit — Design, Contents, Production & Fulfillment</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div><div class="cm-label">Product Type</div><div class="cm-value">Physical fan membership kit</div></div>
+    <div><div class="cm-label">Target Launch</div><div class="cm-value">Alongside EP 01 — Year One</div></div>
+    <div><div class="cm-label">Available To</div><div class="cm-value">The Illuminated — founding & standard tiers</div></div>
+    <div><div class="cm-label">Also in Year Two</div><div class="cm-value">Updated kit with record insert for pre-order bundle</div></div>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+<!-- SECTION 1: PHILOSOPHY -->
+<section class="section" id="philosophy" aria-labelledby="phil-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">01</span>
+    <h2 class="sec-title" id="phil-title">Philosophy</h2>
+  </div>
+  <p class="sec-intro">The Ordination Kit is not merchandise. It is an artefact — a physical object that makes the mythology real in someone's hands.</p>
+
+  <div class="callout">
+    <strong>The difference between merch and an artefact:</strong> merch announces. An artefact initiates. A person who opens the Ordination Kit should feel they have been given something — admitted to something — not that they have bought something. Every design and production decision flows from this distinction.
+  </div>
+
+  <div class="callout crit">
+    <strong>The kit must look like it belongs to the world.</strong> The brand system is the design brief. Void black, crimson, gold. The mark. DM Sans and Cormorant Garamond only. Grain texture where appropriate. The object should feel discovered, not manufactured.
+  </div>
+
+  <div style="font-size:13.5px;color:var(--text-2);line-height:1.85;max-width:640px;margin-bottom:32px;">
+    <p style="margin-bottom:14px;">The kit ships to Illuminated members who join at the Founding Tier level. Standard Tier members can add it to their membership at cost. Year Two pre-orders include a Year Two variant as a bundle option.</p>
+    <p>The kit is not a box of tchotchkes. It is a small number of objects, each meaningful, each made well. Better to ship three things that feel special than eight things that feel random. Quality over quantity without exception.</p>
+  </div>
+</section>
+
+<!-- SECTION 2: CONTENTS -->
+<section class="section" id="contents" aria-labelledby="contents-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">02</span>
+    <h2 class="sec-title" id="contents-title">Kit Contents — Standard</h2>
+  </div>
+  <p class="sec-intro">Six objects. Each serves the mythology. None is purely decorative.</p>
+
+  <div class="kit-grid" role="list" aria-label="Ordination Kit contents">
+
+    <div class="kit-item" role="listitem">
+      <span class="ki-req" style="color:var(--crimson-h);border-color:rgba(168,32,53,.35);">Core</span>
+      <div class="ki-num">01</div>
+      <div class="ki-name">The Ordination Card</div>
+      <div class="ki-spec">Heavy card stock — 600gsm minimum. Void black. The mark foil-stamped in crimson or gold. The recipient's ordination number letterpress-printed. A single line of copy: "You are now inside the signal." Packaged separately within the kit — the first object encountered on opening.</div>
+      <div class="ki-note">Size: 90×55mm (standard card). Unique numbered per recipient from 001 upward. Founding members receive the lowest numbers.</div>
+    </div>
+
+    <div class="kit-item" role="listitem">
+      <span class="ki-req" style="color:var(--crimson-h);border-color:rgba(168,32,53,.35);">Core</span>
+      <div class="ki-num">02</div>
+      <div class="ki-name">The Mark Pin</div>
+      <div class="ki-spec">Hard enamel pin. The eight-pointed mark. 30mm width. Black fill, crimson enamel on X diagonals, gold enamel on cardinal rays. Black rubber clutch backs. The mark as a wearable object — subtle enough that only those who know will recognise it.</div>
+      <div class="ki-note">Supplier: Vograce, Pintrill, or equivalent. Min. order: 100 units. Lead time: 3–4 weeks. Estimate: $4–6 per unit at 100.</div>
+    </div>
+
+    <div class="kit-item" role="listitem">
+      <span class="ki-req" style="color:var(--crimson-h);border-color:rgba(168,32,53,.35);">Core</span>
+      <div class="ki-num">03</div>
+      <div class="ki-name">The Transmission Print</div>
+      <div class="ki-spec">A5 giclée art print. The mark large, centered on void black. A fragment of Broadcast copy beneath it in DM Sans — a line that does not appear in the public-facing Broadcasts. Signed in the mythology — not by a band member name, but as "Transmitted." Matte finish. Sealed in a glassine envelope inside the kit.</div>
+      <div class="ki-note">Print-on-demand via Printful or local print house. A5 (148×210mm). Min. 180gsm. Run to order — no excess stock.</div>
+    </div>
+
+    <div class="kit-item" role="listitem">
+      <span class="ki-req" style="color:var(--gold-dim);border-color:rgba(138,110,62,.35);">Optional</span>
+      <div class="ki-num">04</div>
+      <div class="ki-name">The 108 Wax Seal Sheet</div>
+      <div class="ki-spec">A sheet of 6 custom wax seal stickers — the mark rendered as a wax seal impression in deep red on ivory paper. Sticker-backed for use on envelopes, notebooks, instruments. A reference to the mythology's numerological foundation. The stickers are the most giftable item in the kit — useful, visual, and branded without being loud.</div>
+      <div class="ki-note">Custom sticker sheets via StickerMule or similar. Sheet size: 100×150mm. Cost: ~$2–3/sheet at 100+.</div>
+    </div>
+
+    <div class="kit-item" role="listitem">
+      <span class="ki-req" style="color:var(--crimson-h);border-color:rgba(168,32,53,.35);">Core</span>
+      <div class="ki-num">05</div>
+      <div class="ki-name">The Welcome Scroll</div>
+      <div class="ki-spec">A folded A4 document — the mythology's admission document. Not a thank-you note. A transmission. Printed on aged-looking cream stock (not white). Cormorant Garamond body, DM Sans labels. Copy describes what the recipient is now part of, what The Illuminated is, and what to expect. Contains the Discord/community access code. Rolled and tied, or folded and sealed with the wax seal sticker.</div>
+      <div class="ki-note">In-house print or short-run letterpress. Sealed with kit's wax seal sticker — the seal is broken when opened. One per kit.</div>
+    </div>
+
+    <div class="kit-item" role="listitem">
+      <span class="ki-req" style="color:var(--gold-dim);border-color:rgba(138,110,62,.35);">Year Two</span>
+      <div class="ki-num">06</div>
+      <div class="ki-name">Record Insert (Year Two Bundle)</div>
+      <div class="ki-spec">Added to Year Two pre-order bundle kits only. A folded insert card specific to the full-length record — the record artwork on one side, the tracklist in Cormorant Garamond on the reverse. Printed on the same stock as the Ordination Card. A Year Two-specific artefact that marks the transition from EP arc to full-length.</div>
+      <div class="ki-note">Year Two variant only. Not included in Year One Ordination Kit. Add to Year Two pre-order bundle at same point as kit.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 3: OUTER PACKAGING -->
+<section class="section" id="packaging" aria-labelledby="pack-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">03</span>
+    <h2 class="sec-title" id="pack-title">Outer Packaging</h2>
+  </div>
+  <p class="sec-intro">The box is part of the artefact. The experience begins the moment the kit is held.</p>
+
+  <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:28px;">
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Box Type</div>
+      <div style="font-size:13px;color:var(--text-2);">Rigid two-piece lift-off lid box. Black board — not printed on the outside. The mark hot-foil stamped on the lid in gold, centered. Nothing else on the exterior. The restraint is the point.</div>
+    </div>
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Size</div>
+      <div style="font-size:13px;color:var(--text-2);">Approximately 160×120×40mm. Large enough to hold all contents with dignity — not crammed in. Contents should sit, not be stuffed.</div>
+    </div>
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Interior</div>
+      <div style="font-size:13px;color:var(--text-2);">Black foam insert or black tissue paper. The Ordination Card placed on top, face up — the first thing seen when the lid is removed. Other items beneath or alongside, the print sealed in its glassine envelope.</div>
+    </div>
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Exterior seal</div>
+      <div style="font-size:13px;color:var(--text-2);">The box is sealed with a single wax seal sticker — the same one used on the Welcome Scroll. Breaking the seal is the act of entry. The mythology begins before the box is open.</div>
+    </div>
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Supplier</div>
+      <div style="font-size:13px;color:var(--text-2);">PakFactory, BoxUp, Packlane, or local rigid box supplier. Request samples before committing to print run. Confirm foil stamp capability. Min. order: typically 50–100 units.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: TIERS -->
+<section class="section" id="tiers" aria-labelledby="tiers-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">04</span>
+    <h2 class="sec-title" id="tiers-title">Kit Tiers</h2>
+  </div>
+  <p class="sec-intro">Two ordination kit tiers. Founding is the complete artefact. Standard is the core without the numbered card. Year Two bundle wraps the standard kit with a record insert.</p>
+
+  <div class="tiers" role="list" aria-label="Ordination kit tiers">
+
+    <div class="tier" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);"></div>
+      <div class="tier-name">Founding Ordination Kit</div>
+      <div class="tier-price">$75–$95</div>
+      <div class="tier-contents">
+        <div class="tier-line">Numbered Ordination Card (unique, low number)</div>
+        <div class="tier-line">The Mark Pin (enamel)</div>
+        <div class="tier-line">The Transmission Print (A5, signed "Transmitted")</div>
+        <div class="tier-line">The 108 Wax Seal Sheet</div>
+        <div class="tier-line">The Welcome Scroll (with community access code)</div>
+        <div class="tier-line">Black foil-stamped rigid box</div>
+      </div>
+      <div class="tier-note">Available only to founding Illuminated members — those who join in the first 30 days. Lowest ordination numbers reserved for this tier. Once the founding window closes, this configuration is retired.</div>
+    </div>
+
+    <div class="tier" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--crimson-h);"></div>
+      <div class="tier-name">Standard Ordination Kit</div>
+      <div class="tier-price">$55–$70</div>
+      <div class="tier-contents">
+        <div class="tier-line">Ordination Card (numbered, non-founding)</div>
+        <div class="tier-line">The Mark Pin (enamel)</div>
+        <div class="tier-line">The Transmission Print (A5)</div>
+        <div class="tier-line">The Welcome Scroll (with community access code)</div>
+        <div class="tier-line">Black foil-stamped rigid box</div>
+      </div>
+      <div class="tier-note">Available to all Standard Illuminated members as a membership add-on at cost. Available to non-members as a standalone purchase at a slight premium ($65–$80). No wax seal sheet in this tier.</div>
+    </div>
+
+    <div class="tier" role="listitem" style="opacity:.85;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:rgba(58,122,191,.6);"></div>
+      <div class="tier-name">Year Two Bundle</div>
+      <div class="tier-price">$70–$85</div>
+      <div class="tier-contents">
+        <div class="tier-line">Standard Ordination Kit (all contents)</div>
+        <div class="tier-line">Year Two Record Insert</div>
+        <div class="tier-line">LP or CD of Below the Line of Sight (choice)</div>
+      </div>
+      <div class="tier-note">Available at Year Two pre-order. Includes the physical record. The record insert is exclusive to this bundle — not sold separately. Shipping timed to record release.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 5: PRODUCTION COSTS -->
+<section class="section" id="production" aria-labelledby="prod-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">05</span>
+    <h2 class="sec-title" id="prod-title">Production — Estimates</h2>
+  </div>
+  <p class="sec-intro">Cost estimates at 100 units. Verify with suppliers before committing. These are planning figures, not quotes.</p>
+
+  <div class="callout crit">
+    <strong>Get samples before full production.</strong> Every item requires a physical proof before the full run is approved. This is non-negotiable for the box and the pin especially — both must look and feel exactly right before 100 are made.
+  </div>
+
+  <div class="prod-table" role="list" aria-label="Production cost estimates">
+    <div class="prod-row" role="listitem">
+      <div class="prod-item">Rigid box (foil lid)</div>
+      <div class="prod-spec">100-unit min. Black board, gold foil stamp. Packlane or PakFactory. Verify foil capability early.</div>
+      <div class="prod-cost">$8–$14 / unit</div>
+    </div>
+    <div class="prod-row" role="listitem">
+      <div class="prod-item">Ordination Card</div>
+      <div class="prod-spec">600gsm+ black card. Letterpress-numbered. Foil mark on front. Short-run letterpress or digital foil. Moo.com for digital; local letterpress for authentic feel.</div>
+      <div class="prod-cost">$3–$6 / unit</div>
+    </div>
+    <div class="prod-row" role="listitem">
+      <div class="prod-item">Enamel pin</div>
+      <div class="prod-spec">30mm hard enamel. Black base, crimson + gold fills. Vograce, Pintrill, GS-JJ. Min. 100 units. Include sample approval in lead time.</div>
+      <div class="prod-cost">$4–$7 / unit</div>
+    </div>
+    <div class="prod-row" role="listitem">
+      <div class="prod-item">Transmission Print</div>
+      <div class="prod-spec">A5 giclée or high-quality inkjet. Print-on-demand via Printful or local print studio. Run to order. Glassine envelope for packaging.</div>
+      <div class="prod-cost">$3–$5 / unit</div>
+    </div>
+    <div class="prod-row" role="listitem">
+      <div class="prod-item">Wax seal sticker sheet</div>
+      <div class="prod-spec">StickerMule or PrintingForLess. 100×150mm sheet, 6-up. Custom die cut. Min. 50 sheets economical.</div>
+      <div class="prod-cost">$1.50–$3 / sheet</div>
+    </div>
+    <div class="prod-row" role="listitem">
+      <div class="prod-item">Welcome Scroll</div>
+      <div class="prod-spec">A4 cream stock, folded. In-house print or short-run digital. Cream/ivory paper, not white. Budget for unique access codes per unit.</div>
+      <div class="prod-cost">$1–$2 / unit</div>
+    </div>
+    <div class="prod-row" role="listitem">
+      <div class="prod-item">Packaging materials</div>
+      <div class="prod-spec">Black tissue paper or foam insert, glassine envelopes, interior label. Amazon Business or local packaging supplier.</div>
+      <div class="prod-cost">$1–$2 / unit</div>
+    </div>
+    <div class="prod-row" role="listitem" style="border-top:2px solid var(--gold);background:rgba(200,169,110,.04);">
+      <div class="prod-item" style="color:var(--gold);">Total — Standard Kit</div>
+      <div class="prod-spec" style="color:var(--text-2);">At 100 units. Does not include design time, shipping, or fulfillment labour. Add 20% buffer for overruns and samples.</div>
+      <div class="prod-cost" style="color:var(--gold);">$21–$39 / kit</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:0;">
+    <strong>Target retail pricing:</strong> Standard Kit at $55–$70 leaves $16–$49 margin per unit at the low end of production costs. Founding Kit at $75–$95 accounts for the additional numbered card and lower ordination numbers' perceived value. At 50 Founding Kits sold, break-even on the entire first run of 100 units is achievable.
+  </div>
+</section>
+
+<!-- SECTION 6: FULFILLMENT -->
+<section class="section" id="fulfillment" aria-labelledby="ful-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">06</span>
+    <h2 class="sec-title" id="ful-title">Fulfillment</h2>
+  </div>
+  <p class="sec-intro">The kit ships from home or a local fulfillment point in Year One. Year Two bundle fulfillment may require third-party logistics if order volume warrants it.</p>
+
+  <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:28px;">
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Sales platform</div>
+      <div style="font-size:13px;color:var(--text-2);">Bandcamp (preferred for physical + digital bundles and low fees) or Shopify. Both allow custom order confirmation emails — use these to continue the mythology. The order confirmation is a transmission, not a receipt.</div>
+    </div>
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Shipping</div>
+      <div style="font-size:13px;color:var(--text-2);">USPS Priority Mail for domestic. Flat-rate boxes where possible. Do not use generic shipping boxes — the outer mailer should also be branded. A plain black kraft mailer with the mark rubber-stamped is sufficient and low cost.</div>
+    </div>
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Order confirmation</div>
+      <div style="font-size:13px;color:var(--text-2);">The confirmation email continues the mythology. Not "Thanks for your order" — something like "Your ordination is in transmission." Subject line: "Your number has been assigned." The email experience is part of the product.</div>
+    </div>
+    <div style="background:var(--deep);border:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:baseline;">
+      <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);">Year Two scale</div>
+      <div style="font-size:13px;color:var(--text-2);">If Year Two pre-order volume exceeds 100 units for the bundle, consider Printful or ShipBob for fulfillment. At this scale the print and pin still require pre-production; only the fulfillment is outsourced.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: RULES -->
+<section class="section" id="rules" aria-labelledby="rules-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">07</span>
+    <h2 class="sec-title" id="rules-title">Rules</h2>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Get samples before full production runs.</strong> Every item. No exceptions. A pin that looks slightly off at scale is an artefact that undermines the mythology every time someone looks at it.</div></div>
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Number the Ordination Cards sequentially from 001.</strong> The founding members with the lowest numbers are the mythology's earliest witnesses. That fact carries weight and should be named explicitly in the Welcome Scroll.</div></div>
+    <div class="rule"><div class="rule-v dont">Never</div><div class="rule-t"><strong>Never use white or light packaging stock.</strong> The kit exists in the void-and-crimson world of the brand. Every piece of paper, every envelope, every box is dark, muted, or black. A white packing slip breaks the artefact experience immediately.</div></div>
+    <div class="rule"><div class="rule-v dont">Never</div><div class="rule-t"><strong>Never include anything that reads as generic merchandise.</strong> No band tee in the kit. No CD tucked in as an afterthought. The kit is curated — every object earns its place or it is cut.</div></div>
+    <div class="rule"><div class="rule-v note">Note</div><div class="rule-t"><strong>The Welcome Scroll is a living document.</strong> Update it between Year One and Year Two to reflect the mythology's progression. Founding members get the Year One version; new Year Two members get the updated version. Keep archived copies of each.</div></div>
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Treat the confirmation email as content.</strong> The order experience is part of the membership. Write the confirmation email in the mythology's voice before the first kit ships. Test it against a non-fan — if they can tell it came from a band, rewrite it.</div></div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+
+</body>
+</html>

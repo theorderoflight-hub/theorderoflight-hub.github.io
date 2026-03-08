@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>firstbroadcast</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F5F3EE;--ink:#1A1814;--ink2:#4A4740;--ink3:#9A9690;
+  --rule:#CCC9C0;--sig:#D4360A;
+  --j:'Plus Jakarta Sans',sans-serif;--m:'JetBrains Mono',monospace
+}
+html,body{height:100%;background:var(--bg)}
+body{color:var(--ink);font-family:var(--j);font-weight:300;overflow-x:hidden}
+::selection{background:var(--sig);color:#fff}
+
+/* ── INLINE O MARK ──
+   viewBox tight to circle (5 12 90 76)
+   overflow:visible — cap arcs extend above/below
+   height/width: 0.72em → matches cap height of Jakarta Sans
+*/
+.o{
+  display:inline-block;height:0.72em;width:0.72em;
+  overflow:visible;vertical-align:-0.06em
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:0 48px;height:48px;
+  display:flex;align-items:center;justify-content:space-between;
+  mix-blend-mode:multiply  /* sits cleanly over both panels */
+}
+.nav-wm{
+  font-family:var(--j);font-size:13px;letter-spacing:-.02em;line-height:1;
+  display:inline-flex;align-items:baseline;
+}
+.nav-wm .l{font-weight:200;color:var(--ink)}
+.nav-wm .h{font-weight:600;color:var(--ink)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{
+  font-family:var(--m);font-size:9.5px;letter-spacing:.1em;
+  color:var(--ink3);text-decoration:none;transition:color .15s
+}
+.nav-links a:hover{color:var(--ink)}
+
+/* ── HERO: two panels side by side, full viewport ── */
+.hero{
+  min-height:100vh;padding-top:48px;
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative
+}
+
+/* Left panel: the wordmark huge, flush left, vertically centered */
+.hero-left{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 0 56px 48px;
+  border-right:1px solid var(--rule);
+  overflow:hidden;position:relative
+}
+/* The wordmark is oversized — it bleeds past the panel edge on purpose */
+.hero-wm{
+  display:inline-flex;align-items:baseline;
+  font-family:var(--j);
+  font-size:clamp(56px,8.5vw,128px);
+  letter-spacing:-.03em;line-height:.9;
+  white-space:nowrap
+}
+.hero-wm .l{font-weight:200}
+.hero-wm .h{font-weight:600}
+
+/* stacked: first on one line, broadcast on the next */
+.wm-line{display:block;overflow:visible}
+
+/* Right panel: dark, contains descriptor + contact */
+.hero-right{
+  background:var(--ink);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 48px 56px;
+  position:relative
+}
+.hr-index{
+  font-family:var(--m);font-size:9px;letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(245,243,238,.25);
+  margin-bottom:40px
+}
+.hr-descriptor{
+  font-size:clamp(16px,1.4vw,22px);color:rgba(245,243,238,.7);
+  line-height:1.7;max-width:380px;margin-bottom:48px
+}
+.hr-contacts{border-top:1px solid rgba(255,255,255,.1);padding-top:28px}
+.hrc-row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07)
+}
+.hrc-row:last-child{border-bottom:none}
+.hrc-k{font-family:var(--m);font-size:9.5px;color:rgba(245,243,238,.3)}
+.hrc-v{font-family:var(--m);font-size:9.5px}
+.hrc-v a{color:var(--sig);text-decoration:none}
+.hrc-v a:hover{text-decoration:underline}
+
+/* Vertical label — pinned to the panel split */
+.v-label{
+  position:absolute;left:50%;top:50%;transform:translateX(-50%) translateY(-50%) rotate(90deg);
+  font-family:var(--m);font-size:9px;letter-spacing:.28em;
+  text-transform:uppercase;color:rgba(245,243,238,.15);
+  white-space:nowrap;pointer-events:none;z-index:10
+}
+
+/* ── CATALOGUE STRIP ── */
+.cat-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:2px solid var(--ink)
+}
+.cs-item{
+  padding:36px 40px;border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:12px;
+  transition:background .15s
+}
+.cs-item:last-child{border-right:none}
+.cs-item:hover{background:#ECEAE4}
+.cs-num{font-family:var(--m);font-size:11px;color:var(--sig)}
+.cs-artist{font-weight:700;font-size:20px;letter-spacing:-.01em}
+.cs-title{font-size:13px;color:var(--ink3);font-style:italic}
+.cs-badge{
+  font-family:var(--m);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;
+  width:fit-content;padding:3px 10px;border:1px solid var(--sig);color:var(--sig)
+}
+
+/* ── STATEMENT ── */
+.statement{
+  border-top:1px solid var(--rule);
+  padding:100px 48px;
+  display:flex;flex-direction:column;gap:0;
+  position:relative;overflow:hidden
+}
+/* Giant background number */
+.statement::before{
+  content:'01';
+  position:absolute;right:-20px;top:-20px;
+  font-family:var(--j);font-weight:700;font-size:clamp(200px,28vw,400px);
+  color:rgba(26,24,20,.04);line-height:1;pointer-events:none;letter-spacing:-.04em
+}
+.st-label{
+  font-family:var(--m);font-size:9px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:36px;display:flex;align-items:center;gap:12px
+}
+.st-label::before{content:'';display:block;width:20px;height:1px;background:var(--ink3)}
+.st-hed{
+  font-weight:700;font-size:clamp(28px,3.5vw,52px);letter-spacing:-.025em;
+  line-height:1.12;max-width:800px;margin-bottom:0
+}
+.st-body{
+  font-size:16px;color:var(--ink2);line-height:1.85;
+  max-width:520px;margin-top:36px;margin-left:auto;
+  padding-top:36px;border-top:1px solid var(--rule)
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--rule);padding:18px 48px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px
+}
+.ft-wm{display:inline-flex;align-items:baseline;font-family:var(--j);font-size:12px;letter-spacing:-.015em;color:var(--ink3)}
+.ft-wm .l{font-weight:200}.ft-wm .h{font-weight:600}
+.ft-r{font-family:var(--m);font-size:10px;color:var(--ink3)}
+.ft-r a{color:var(--ink3);text-decoration:none}.ft-r a:hover{color:var(--sig)}
+
+/* ── ANIMATIONS ── */
+/* O mark draws in: circle first, then waves outward */
+.hero-wm .anim-circle{stroke-dasharray:214;stroke-dashoffset:214;animation:draw .5s .05s cubic-bezier(.4,0,.2,1) forwards}
+.hero-wm .anim-w1u{stroke-dasharray:154;stroke-dashoffset:154;animation:draw .32s .52s cubic-bezier(.4,0,.2,1) forwards}
+.hero-wm .anim-w1l{stroke-dasharray:154;stroke-dashoffset:154;animation:draw .32s .56s cubic-bezier(.4,0,.2,1) forwards}
+.hero-wm .anim-w2u{stroke-dasharray:201;stroke-dashoffset:201;animation:draw .35s .74s cubic-bezier(.4,0,.2,1) forwards}
+.hero-wm .anim-w2l{stroke-dasharray:201;stroke-dashoffset:201;animation:draw .35s .78s cubic-bezier(.4,0,.2,1) forwards}
+.hero-wm .anim-w3u{stroke-dasharray:248;stroke-dashoffset:248;animation:draw .38s .94s cubic-bezier(.4,0,.2,1) forwards}
+.hero-wm .anim-w3l{stroke-dasharray:248;stroke-dashoffset:248;animation:draw .38s .98s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* Text lines stagger in */
+.t-first{opacity:0;animation:up .5s 0s ease forwards}
+.t-br{opacity:0;animation:up .5s .06s ease forwards}
+.t-adcast{opacity:0;animation:up .5s .5s ease forwards}
+/* Right panel content rises after wordmark settles */
+.hr-index{opacity:0;animation:up .5s .8s ease forwards}
+.hr-descriptor{opacity:0;animation:up .5s .9s ease forwards}
+.hr-contacts{opacity:0;animation:up .5s 1.05s ease forwards}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:56px 28px 44px;border-right:none;border-bottom:1px solid var(--rule)}
+  .hero-right{padding:44px 28px}
+  nav{padding:0 28px}
+  .cat-strip{grid-template-columns:1fr}
+  .cs-item{border-right:none;border-bottom:1px solid var(--rule)}
+  .cs-item:last-child{border-bottom:none}
+  .statement{padding:64px 28px}
+  footer{padding:16px 28px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wm">
+    <span class="l">first</span><span class="h">br</span><!--
+    --><svg class="o" viewBox="5 12 90 76" fill="none">
+      <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+      <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+      <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+    </svg><!--
+    --><span class="h">adcast</span>
+  </div>
+  <div class="nav-links">
+    <a href="#releases">Releases</a>
+    <a href="#about">About</a>
+    <a href="mailto:info@firstbroadcast.co">info@firstbroadcast.co</a>
+  </div>
+</nav>
+
+<!-- HERO: split screen -->
+<section class="hero">
+
+  <!-- LEFT: wordmark stacked, oversized -->
+  <div class="hero-left">
+    <div class="hero-wm">
+      <span class="wm-line"><span class="t-first l">first</span></span>
+      <span class="wm-line"><span class="t-br h">br</span><!--
+        --><svg class="o" viewBox="5 12 90 76" fill="none">
+          <circle class="anim-circle" cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path class="anim-w1u" d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path class="anim-w1l" d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path class="anim-w2u" d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path class="anim-w2l" d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path class="anim-w3u" d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path class="anim-w3l" d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+        </svg><!--
+        --><span class="t-adcast h">adcast</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- RIGHT: dark, descriptor + contact -->
+  <div class="hero-right">
+    <div class="v-label">Independent label</div>
+    <p class="hr-index">EST. 2024 &nbsp;·&nbsp; FB-001</p>
+    <p class="hr-descriptor">An independent label. We put our name on records we believe in — music that creates worlds, built for the long view.</p>
+    <div class="hr-contacts">
+      <div class="hrc-row"><span class="hrc-k">General</span><span class="hrc-v"><a href="mailto:info@firstbroadcast.co">info@firstbroadcast.co</a></span></div>
+    </div>
+  </section>
+
+</body>
+</html>

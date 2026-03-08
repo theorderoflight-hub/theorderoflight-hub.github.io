@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>firstbroadcast — Brand Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#FFFFFF;--bg-2:#F6F6F6;--surface:#EEEEEE;
+  --border:#E0E0E0;--border-hi:#C0C0C0;
+  --text-1:#0D0D0D;--text-2:#444444;--text-3:#909090;
+  --accent:#E03A2A;--accent-h:#F04030;--accent-pale:#FEF0EE;
+  --display:'Plus Jakarta Sans',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;background:var(--bg);}
+body{color:var(--text-1);font-family:var(--display);font-weight:300;line-height:1.7;overflow-x:hidden;}
+::selection{background:var(--accent);color:#fff;}
+.fb-first{font-weight:300;}
+.fb-broadcast{font-weight:600;}
+
+.cover{min-height:84vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 64px 56px;border-bottom:2px solid var(--text-1);}
+.cover-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.cover-kicker::before{content:'';display:block;width:24px;height:1.5px;background:var(--accent);}
+.cover-wm{display:flex;align-items:center;gap:16px;margin-bottom:28px;}
+.cover-wm svg{width:56px;height:56px;color:var(--text-1);}
+.cover-wm-text{font-size:clamp(36px,5vw,72px);letter-spacing:-0.03em;line-height:0.95;}
+.cover-sub{font-size:15.5px;color:var(--text-2);max-width:520px;line-height:1.8;margin-bottom:36px;}
+.cover-meta{display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:28px;}
+.cm{display:flex;flex-direction:column;gap:4px;}
+.cm-k{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-3);}
+.cm-v{font-family:var(--mono);font-size:12px;color:var(--text-1);}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 64px 100px;}
+.section{padding-top:72px;}
+.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:32px;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';display:block;width:20px;height:1px;background:var(--text-3);}
+.prose{font-size:15px;color:var(--text-2);line-height:1.85;max-width:640px;}
+.prose p{margin-bottom:1.2em;}
+.prose strong{color:var(--text-1);font-weight:600;}
+
+/* MARK BREAKDOWN */
+.mark-grid{display:grid;grid-template-columns:200px 1fr;gap:48px;align-items:center;background:var(--bg-2);border:1px solid var(--border);padding:36px;margin:20px 0;}
+.mark-display{display:flex;flex-direction:column;gap:20px;align-items:flex-start;}
+.mark-sizes{display:flex;gap:16px;align-items:flex-end;}
+.mark-display svg{color:var(--text-1);}
+.mark-specs{}
+.ms-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px;gap:12px;}
+.ms-row:last-child{border-bottom:none;}
+.ms-k{font-family:var(--mono);color:var(--text-3);font-size:11px;}
+.ms-v{font-family:var(--mono);color:var(--text-1);font-size:11px;text-align:right;}
+
+/* WORDMARK SPECS */
+.wm-spec{background:var(--bg-2);border:1px solid var(--border);padding:32px 36px;margin:20px 0;}
+.wm-render{margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.wm-render svg{width:40px;height:40px;color:var(--text-1);}
+.wm-text-lg{font-size:42px;letter-spacing:-0.03em;line-height:1;}
+.wm-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.wm-col-label{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;}
+.wm-col-specimen{font-size:28px;letter-spacing:-0.02em;line-height:1;margin-bottom:8px;}
+.wm-col-spec{font-family:var(--mono);font-size:11px;color:var(--text-3);}
+
+/* PALETTE */
+.palette{display:flex;gap:0;margin:20px 0;}
+.sw{flex:1;}
+.sw-color{height:60px;}
+.sw-name{font-family:var(--mono);font-size:9px;color:var(--text-2);padding:6px 10px 2px;}
+.sw-hex{font-family:var(--mono);font-size:8.5px;color:var(--text-3);padding:0 10px 8px;}
+
+/* TYPE */
+.type-block{background:var(--bg-2);border:1px solid var(--border);padding:32px;margin:20px 0;}
+.tb-label{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;}
+.tb-display{font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:-0.02em;color:var(--text-1);margin-bottom:6px;}
+.tb-body{font-family:var(--display);font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:16px;max-width:480px;}
+.tb-mono{font-family:var(--mono);font-size:12px;color:var(--text-3);letter-spacing:0.04em;}
+
+/* VOICE COMPARE */
+.voice-split{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin:20px 0;}
+.vs-cell{background:var(--bg-2);border:1px solid var(--border);padding:20px;}
+.vs-cell.highlight{background:var(--text-1);border-color:var(--text-1);}
+.vs-entity{font-family:var(--mono);font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;color:var(--text-3);}
+.vs-cell.highlight .vs-entity{color:rgba(255,255,255,0.4);}
+.vs-example{font-size:13.5px;color:var(--text-2);line-height:1.65;font-style:italic;}
+.vs-cell.highlight .vs-example{color:rgba(255,255,255,0.8);font-style:normal;}
+
+/* DIFF */
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:20px 0;}
+.diff-card{background:var(--bg-2);border:1px solid var(--border);padding:22px;}
+.diff-card.current{background:var(--accent);border-color:var(--accent);}
+.diff-entity{font-family:var(--mono);font-size:8px;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:8px;color:var(--text-3);}
+.diff-card.current .diff-entity{color:rgba(255,255,255,0.6);}
+.diff-role{font-size:15px;font-weight:600;color:var(--text-1);margin-bottom:6px;}
+.diff-card.current .diff-role{color:#fff;}
+.diff-body{font-family:var(--mono);font-size:11px;color:var(--text-3);line-height:1.6;}
+.diff-card.current .diff-body{color:rgba(255,255,255,0.55);}
+
+/* CALLOUT */
+.callout{background:var(--accent-pale);border:1px solid rgba(224,58,42,0.2);border-left:3px solid var(--accent);padding:16px 20px;margin:20px 0;font-size:13.5px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:600;}
+
+/* PR TEMPLATE */
+.pr-ex{background:var(--bg-2);border:1px solid var(--border);padding:32px;margin:20px 0;}
+.pr-label{font-family:var(--mono);font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px;}
+.pr-dateline{font-family:var(--mono);font-size:10px;color:var(--text-3);margin-bottom:16px;}
+.pr-head{font-family:var(--display);font-weight:700;font-size:22px;color:var(--text-1);margin-bottom:4px;line-height:1.2;}
+.pr-sub{font-size:14px;color:var(--text-2);margin-bottom:20px;font-style:italic;}
+.pr-body{font-size:13.5px;color:var(--text-2);line-height:1.8;max-width:560px;}
+.pr-contact{border-top:1px solid var(--border);margin-top:20px;padding-top:14px;font-family:var(--mono);font-size:10.5px;color:var(--text-3);}
+
+footer{border-top:1px solid var(--border);padding:22px 64px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft{font-family:var(--mono);font-size:10.5px;color:var(--text-3);display:flex;align-items:center;gap:12px;}
+.ft svg{color:var(--text-3);}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="cover-kicker">Brand Framework — Internal Reference</p>
+  <div class="cover-wm">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="3" fill="currentColor"/>
+      <path d="M9 16 A7 7 0 0 1 23 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M4.5 16 A11.5 11.5 0 0 1 27.5 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+    <span class="cover-wm-text"><span class="fb-first">first</span><span class="fb-broadcast">broadcast</span></span>
+  </div>
+  <p class="cover-sub">The label imprint of Signal House LLC. How firstbroadcast presents itself to press, listeners, and the industry. Distinct from Signal House. Distinct from The Order of Light.</p>
+  <div class="cover-meta">
+    <div class="cm"><span class="cm-k">Type</span><span class="cm-v">Independent label imprint</span></div>
+    <div class="cm"><span class="cm-k">Parent</span><span class="cm-v">Signal House LLC</span></div>
+    <div class="cm"><span class="cm-k">Register</span><span class="cm-v">Modern. Clean. Editorial.</span></div>
+    <div class="cm"><span class="cm-k">Accent</span><span class="cm-v">Signal orange — #E03A2A</span></div>
+  </div>
+</div>
+
+<main><div class="wrap">
+
+  <section class="section">
+    <div class="sec-label">01 — Identity</div>
+    <div class="prose">
+      <p>firstbroadcast is the label imprint — the name on the record. It faces press, streaming platforms, playlist curators, and the listening public. Where Signal House is cold corporate authority, firstbroadcast is modern editorial confidence. Where The Order of Light is mythological darkness, firstbroadcast is clean and direct.</p>
+      <p><strong>The name is styled as one word, all lowercase.</strong> "first" in light weight, "broadcast" in semibold. Same baseline. The visual weight difference creates a natural emphasis — the transmission is what matters.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 — The Mark</div>
+    <div class="prose" style="margin-bottom:20px;"><p>The broadcast signal icon: a dot (the source) and two arcs (the transmission reaching outward). Reads immediately as broadcast/signal. Clean at any size. Geometric — fits alongside modern sans typography without conflict.</p></div>
+    <div class="mark-grid">
+      <div class="mark-display">
+        <div class="mark-sizes">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px;">
+            <circle cx="16" cy="16" r="3" fill="currentColor"/>
+            <path d="M9 16 A7 7 0 0 1 23 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M4.5 16 A11.5 11.5 0 0 1 27.5 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;">
+            <circle cx="16" cy="16" r="3" fill="currentColor"/>
+            <path d="M9 16 A7 7 0 0 1 23 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M4.5 16 A11.5 11.5 0 0 1 27.5 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+            <circle cx="16" cy="16" r="3" fill="currentColor"/>
+            <path d="M9 16 A7 7 0 0 1 23 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M4.5 16 A11.5 11.5 0 0 1 27.5 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;color:#E03A2A;">
+          <circle cx="16" cy="16" r="3" fill="currentColor"/>
+          <path d="M9 16 A7 7 0 0 1 23 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M4.5 16 A11.5 11.5 0 0 1 27.5 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="mark-specs">
+        <div class="ms-row"><span class="ms-k">Construction</span><span class="ms-v">Dot + 2 arcs — broadcast signal</span></div>
+        <div class="ms-row"><span class="ms-k">Viewbox</span><span class="ms-v">32×32</span></div>
+        <div class="ms-row"><span class="ms-k">Primary colour</span><span class="ms-v">#0D0D0D (near-black)</span></div>
+        <div class="ms-row"><span class="ms-k">Accent use</span><span class="ms-v">#E03A2A — single colour variant</span></div>
+        <div class="ms-row"><span class="ms-k">Min size</span><span class="ms-v">16px — readable at favicon scale</span></div>
+        <div class="ms-row"><span class="ms-k">Usage</span><span class="ms-v">Always with wordmark in lockup</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 — Wordmark</div>
+    <div class="wm-spec">
+      <div class="wm-render">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;">
+          <circle cx="16" cy="16" r="3" fill="currentColor"/>
+          <path d="M9 16 A7 7 0 0 1 23 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M4.5 16 A11.5 11.5 0 0 1 27.5 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+        <span class="wm-text-lg"><span class="fb-first">first</span><span class="fb-broadcast">broadcast</span></span>
+      </div>
+      <div class="wm-grid">
+        <div>
+          <div class="wm-col-label">"first" — weight 300</div>
+          <div class="wm-col-specimen"><span style="font-weight:300;">first</span></div>
+          <div class="wm-col-spec">Plus Jakarta Sans Light<br>No modification</div>
+        </div>
+        <div>
+          <div class="wm-col-label">"broadcast" — weight 600</div>
+          <div class="wm-col-specimen"><span style="font-weight:600;">broadcast</span></div>
+          <div class="wm-col-spec">Plus Jakarta Sans SemiBold<br>Visual anchor of the lockup</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout"><strong>Usage rule:</strong> Always one word, all lowercase, no space. The mark always precedes the text in a lockup. Never separate the mark from the wordmark in primary usage.</div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 — Colour &amp; Typography</div>
+    <div class="palette">
+      <div class="sw"><div class="sw-color" style="background:#FFFFFF;border:1px solid #E0E0E0;"></div><div class="sw-name">White</div><div class="sw-hex">#FFFFFF</div></div>
+      <div class="sw"><div class="sw-color" style="background:#F6F6F6;border:1px solid #E0E0E0;border-left:none;"></div><div class="sw-name">Surface</div><div class="sw-hex">#F6F6F6</div></div>
+      <div class="sw"><div class="sw-color" style="background:#0D0D0D;"></div><div class="sw-name">Ink</div><div class="sw-hex">#0D0D0D</div></div>
+      <div class="sw"><div class="sw-color" style="background:#E03A2A;"></div><div class="sw-name">Signal</div><div class="sw-hex">#E03A2A</div></div>
+      <div class="sw"><div class="sw-color" style="background:#909090;"></div><div class="sw-name">Muted</div><div class="sw-hex">#909090</div></div>
+    </div>
+    <div class="type-block">
+      <div class="tb-label">Display — Plus Jakarta Sans 700</div>
+      <div class="tb-display">Music that creates worlds.</div>
+      <div class="tb-label" style="margin-top:16px;">Body — Plus Jakarta Sans 300</div>
+      <div class="tb-body">firstbroadcast is an independent label imprint. We release a small number of records and give each one the attention it deserves.</div>
+      <div class="tb-label" style="margin-top:16px;">Data / functional — JetBrains Mono 300</div>
+      <div class="tb-mono">FB-001 · The Order of Light · 2025 · Symphonic Distribution</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 — Voice</div>
+    <div class="prose"><p>firstbroadcast is editorial but not pretentious. It talks about music concretely — what it does, not what it "is." It doesn't use the mythological language of The Order of Light. It doesn't use the corporate precision of Signal House. It sounds like a label that actually listens to what it releases.</p></div>
+    <div class="voice-split">
+      <div class="vs-cell"><div class="vs-entity">Signal House</div><div class="vs-example">"Please find the rider attached. Confirm receipt within 5 business days."</div></div>
+      <div class="vs-cell highlight"><div class="vs-entity">firstbroadcast</div><div class="vs-example">The Order of Light's debut EP arrives this spring. Eight songs. No filler. Available everywhere.</div></div>
+      <div class="vs-cell"><div class="vs-entity">The Order of Light</div><div class="vs-example">"The signal is coming. The Conduit has been broadcasting. The first transmission arrives."</div></div>
+    </div>
+    <div class="callout"><strong>The distinction:</strong> firstbroadcast describes music with editorial precision. It says what something does to the listener, not what mythology surrounds it. Leave the mythology to OOL.</div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 — Press Release Template</div>
+    <div class="pr-ex">
+      <div class="pr-label">Press release — firstbroadcast format</div>
+      <div class="pr-dateline">FOR IMMEDIATE RELEASE · [DATE] · FIRSTBROADCAST / SIGNAL HOUSE LLC</div>
+      <div class="pr-head">The Order of Light Announce Debut EP — <em>[Title]</em></div>
+      <div class="pr-sub">Eight tracks. Released [Date]. Available everywhere.</div>
+      <div class="pr-body">Charlotte, NC alternative rock act The Order of Light release their debut EP <em>[Title]</em> on [Date] through firstbroadcast.<br><br>[2–3 sentences: what the music actually sounds like and does. Specific. No "sonic journey." Describe texture, intent, emotional register.]<br><br>The EP was [recorded/produced context if relevant]. [Any genuinely interesting context.]<br><br><em>[Title]</em> is available on all major platforms from [Date].</div>
+      <div class="pr-contact">Press: Marcus Webb · <a href="mailto:info@firstbroadcast.co" ><span class="__cf_em
+</body>
+</html>

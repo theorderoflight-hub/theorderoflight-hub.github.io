@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Signal House — Brand Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F0F2F4;--bg-2:#E8EBEE;--surface:#DDE1E6;
+  --border:#C4CAD2;--border-hi:#9BA4AE;
+  --text-1:#141820;--text-2:#3D4450;--text-3:#7A8290;
+  --accent:#1B4F6E;--accent-h:#1E5C80;--accent-pale:#EBF2F7;
+  --display:'Syne',sans-serif;--body:'Outfit',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;background:var(--bg);}
+body{color:var(--text-1);font-family:var(--body);font-weight:300;line-height:1.7;overflow-x:hidden;}
+::selection{background:var(--accent);color:#fff;}
+
+.cover{min-height:86vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 64px 56px;border-bottom:2px solid var(--text-1);position:relative;}
+.cover-label{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.cover-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.cover-wm{display:block;margin-bottom:32px;}
+.cover-wm svg{width:320px;height:auto;color:var(--text-1);}
+.cover-sub{font-family:var(--body);font-size:15px;color:var(--text-2);max-width:520px;line-height:1.8;margin-bottom:36px;}
+.cover-meta{display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:28px;}
+.cm{display:flex;flex-direction:column;gap:4px;}
+.cm-k{font-family:var(--mono);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);}
+.cm-v{font-family:var(--mono);font-size:12px;color:var(--text-1);}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 64px 100px;}
+.section{padding-top:72px;}
+.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.prose{font-size:15px;color:var(--text-2);line-height:1.85;max-width:640px;}
+.prose p{margin-bottom:1.2em;}
+.prose strong{color:var(--text-1);font-weight:500;}
+
+/* IDENTITY CARDS */
+.id-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:24px 0;}
+.id-card{background:var(--bg-2);border:1px solid var(--border);padding:22px 24px;}
+.id-card-k{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.id-card-v{font-size:14px;color:var(--text-2);line-height:1.6;}
+
+/* PALETTE */
+.palette{display:flex;gap:0;margin:20px 0;}
+.sw{flex:1;}
+.sw-color{height:60px;}
+.sw-name{font-family:var(--mono);font-size:9px;color:var(--text-2);padding:6px 10px 2px;}
+.sw-hex{font-family:var(--mono);font-size:8.5px;color:var(--text-3);padding:0 10px 8px;}
+
+/* TYPE SPECIMEN */
+.type-block{background:var(--bg-2);border:1px solid var(--border);padding:36px;margin:20px 0;}
+.tb-label{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px;}
+.tb-display{font-family:var(--display);font-weight:700;font-size:36px;letter-spacing:0.02em;color:var(--text-1);margin-bottom:6px;}
+.tb-sub{font-family:var(--display);font-weight:400;font-size:18px;color:var(--text-2);margin-bottom:20px;}
+.tb-mono{font-family:var(--mono);font-size:12.5px;color:var(--text-3);margin-bottom:16px;letter-spacing:0.06em;}
+.tb-body{font-family:var(--body);font-size:14.5px;color:var(--text-2);line-height:1.8;max-width:480px;}
+
+/* WORDMARK BREAKDOWN */
+.wm-breakdown{background:var(--surface);border:1px solid var(--border);padding:32px 36px;margin:20px 0;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+.wm-render svg{width:100%;max-width:260px;height:auto;color:var(--text-1);}
+.wm-specs{}
+.wm-spec-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:12.5px;gap:12px;}
+.wm-spec-row:last-child{border-bottom:none;}
+.ws-k{font-family:var(--mono);color:var(--text-3);font-size:11px;}
+.ws-v{font-family:var(--mono);color:var(--text-1);font-size:11px;text-align:right;}
+
+/* VOICE TABLE */
+.voice-grid{margin:20px 0;}
+.vg-header{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.vg-hcell{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-3);padding:8px 16px;}
+.vg-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;}
+.vg-cell{background:var(--bg-2);border:1px solid var(--border);padding:16px;font-size:13.5px;color:var(--text-2);line-height:1.6;}
+.vg-cell.yes{color:var(--text-1);}
+.vg-cell.no{color:var(--text-3);text-decoration:line-through;}
+
+/* DIFF TABLE */
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:24px 0;}
+.diff-card{background:var(--bg-2);border:1px solid var(--border);padding:22px 24px;}
+.diff-card.current{background:var(--text-1);border-color:var(--text-1);}
+.diff-entity{font-family:var(--mono);font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:8px;}
+.diff-card .diff-entity{color:var(--text-3);}
+.diff-card.current .diff-entity{color:var(--accent-pale);opacity:0.7;}
+.diff-role{font-family:var(--display);font-weight:600;font-size:14px;margin-bottom:8px;color:var(--text-1);}
+.diff-card.current .diff-role{color:var(--bg);}
+.diff-body{font-family:var(--mono);font-size:11px;color:var(--text-3);line-height:1.6;}
+.diff-card.current .diff-body{color:rgba(240,242,244,0.45);}
+
+/* EMAIL */
+.email-ex{background:var(--bg-2);border:1px solid var(--border);padding:28px 32px;margin:20px 0;font-family:var(--mono);font-size:12px;line-height:1.8;}
+.ee-hdr{border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:16px;}
+.ee-f{display:flex;gap:10px;margin-bottom:3px;}
+.ee-k{color:var(--text-3);flex-shrink:0;width:52px;}
+.ee-v{color:var(--text-1);}
+.ee-body{color:var(--text-2);}
+.ee-sig{border-top:1px solid var(--border);padding-top:12px;margin-top:16px;color:var(--text-3);}
+
+/* USAGE */
+.usage-rows{margin:20px 0;}
+.u-row{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:baseline;}
+.u-row:last-child{border-bottom:none;}
+.u-dot{width:6px;height:6px;background:var(--accent);flex-shrink:0;margin-top:4px;}
+.u-dot.dim{background:var(--border-hi);}
+.u-body{color:var(--text-2);line-height:1.6;}
+.u-body strong{color:var(--text-1);font-weight:500;}
+
+footer{border-top:1px solid var(--border);padding:22px 64px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft{font-family:var(--mono);font-size:10.5px;color:var(--text-3);display:flex;align-items:center;gap:14px;}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="cover-label">Internal Brand Reference — Signal House LLC</p>
+  <div class="cover-wm">
+    <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="24" font-family="Syne, sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="currentColor">SIGNAL</text>
+      <line x1="0" y1="30" x2="220" y2="30" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+      <text x="0" y="48" font-family="Syne, sans-serif" font-weight="300" font-size="22" letter-spacing="9" fill="currentColor" opacity="0.7">HOUSE</text>
+    </svg>
+  </div>
+  <p class="cover-sub">How Signal House presents itself to the industry. The business behind the music. Distinct from First Broadcast. Distinct from the artists it represents.</p>
+  <div class="cover-meta">
+    <div class="cm"><span class="cm-k">Type</span><span class="cm-v">Management & publishing</span></div>
+    <div class="cm"><span class="cm-k">Audience</span><span class="cm-v">Industry — labels, venues, press, legal</span></div>
+    <div class="cm"><span class="cm-k">Register</span><span class="cm-v">Professional. Precise. No warmth.</span></div>
+    <div class="cm"><span class="cm-k">Accent</span><span class="cm-v">Steel blue — #1B4F6E</span></div>
+  </div>
+</div>
+
+<main><div class="wrap">
+
+  <section class="section">
+    <div class="sec-label">01 — What Signal House Is</div>
+    <div class="prose">
+      <p>Signal House LLC is a management and publishing company. It exists to handle the business side of a music operation — legal structure, publishing administration, artist development strategy, label services through the First Broadcast imprint.</p>
+      <p>When industry contacts receive a communication from Signal House, they should immediately understand they are dealing with a professional operation. Not a bedroom project. A real company with real processes. <strong>That is the only job this brand has to do.</strong></p>
+    </div>
+    <div class="id-grid">
+      <div class="id-card"><div class="id-card-k">What it is</div><div class="id-card-v">Management company. Publishing administrator. Label parent. Legal and financial entity for all creative operations.</div></div>
+      <div class="id-card"><div class="id-card-k">What it isn't</div><div class="id-card-v">A record label (that's First Broadcast). An artist (that's OOL). A creative brand. A thing fans interact with.</div></div>
+      <div class="id-card"><div class="id-card-k">Primary audience</div><div class="id-card-v">Booking agents, promoters, sync licensors, PROs, legal contacts, distributors, label A&R, press.</div></div>
+      <div class="id-card"><div class="id-card-k">Not for</div><div class="id-card-v">Fans. The general public. Anyone looking for music or merch — they go to The Order of Light.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 — Visual Identity</div>
+    <div class="prose"><p>Signal House uses a <strong>cool slate-white palette</strong> — decisively different from The Order of Light's near-black world and from First Broadcast's contemporary clean-white. The steel blue accent has no warmth, no crimson. Professional authority without personality.</p></div>
+
+    <div class="wm-breakdown">
+      <div class="wm-render">
+        <svg viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="24" font-family="Syne, sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="#141820">SIGNAL</text>
+          <line x1="0" y1="30" x2="220" y2="30" stroke="#141820" stroke-width="0.75" opacity="0.4"/>
+          <text x="0" y="48" font-family="Syne, sans-serif" font-weight="300" font-size="22" letter-spacing="9" fill="#141820" opacity="0.7">HOUSE</text>
+        </svg>
+      </div>
+      <div class="wm-specs">
+        <div class="wm-spec-row"><span class="ws-k">Display font</span><span class="ws-v">Syne</span></div>
+        <div class="wm-spec-row"><span class="ws-k">SIGNAL weight</span><span class="ws-v">800 (ExtraBold)</span></div>
+        <div class="wm-spec-row"><span class="ws-k">HOUSE weight</span><span class="ws-v">300 (Light)</span></div>
+        <div class="wm-spec-row"><span class="ws-k">Separator</span><span class="ws-v">0.75pt rule, 40% opacity</span></div>
+        <div class="wm-spec-row"><span class="ws-k">Body font</span><span class="ws-v">Outfit 300</span></div>
+        <div class="wm-spec-row"><span class="ws-k">Functional / data</span><span class="ws-v">JetBrains Mono 300</span></div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="sw"><div class="sw-color" style="background:#F0F2F4;border:1px solid #C4CAD2;"></div><div class="sw-name">Ground</div><div class="sw-hex">#F0F2F4</div></div>
+      <div class="sw"><div class="sw-color" style="background:#E8EBEE;border:1px solid #C4CAD2;border-left:none;"></div><div class="sw-name">Surface</div><div class="sw-hex">#E8EBEE</div></div>
+      <div class="sw"><div class="sw-color" style="background:#141820;"></div><div class="sw-name">Void</div><div class="sw-hex">#141820</div></div>
+      <div class="sw"><div class="sw-color" style="background:#1B4F6E;"></div><div class="sw-name">Accent</div><div class="sw-hex">#1B4F6E</div></div>
+      <div class="sw"><div class="sw-color" style="background:#7A8290;"></div><div class="sw-name">Secondary</div><div class="sw-hex">#7A8290</div></div>
+    </div>
+
+    <div class="type-block">
+      <div class="tb-label">Display — Syne 700</div>
+      <div class="tb-display">Management &amp; Publishing</div>
+      <div class="tb-label" style="margin-top:16px;">Functional — JetBrains Mono 300</div>
+      <div class="tb-mono"><a href="mailto:info@signalhouse.co">info@signalhouse.co</a> · Charlotte, NC · Est. 2024</div>
+      <div class="tb-label" style="margin-top:16px;">Body — Outfit 300</div>
+      <div class="tb-body">Signal House LLC works with a small number of artists at a time. Real artist development requires attention, not volume.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 — Voice &amp; Tone</div>
+    <div class="prose"><p>Signal House communicates with economy and precision. Every word earns its place. No creative language in a business context. No enthusiasm. No hedging.</p></div>
+    <div class="voice-grid">
+      <div class="vg-header">
+        <div class="vg-hcell">Signal House writes like this</div>
+        <div class="vg-hcell">Not like this</div>
+      </div>
+      <div class="vg-row">
+        <div class="vg-cell yes">"We'd like to discuss a booking for Q2. Available dates attached."</div>
+        <div class="vg-cell no">"We're SO excited about this opportunity and would love to connect!"</div>
+      </div>
+      <div class="vg-row">
+        <div class="vg-cell yes">"The rider is attached. Please confirm receipt within 5 business days."</div>
+        <div class="vg-cell no">"Just following up to see if you had a chance to look things over!"</div>
+      </div>
+      <div class="vg-row">
+        <div class="vg-cell yes">"Our rate for this is $X. We can discuss if the budget is different."</div>
+        <div class="vg-cell no">"We're totally flexible and open to whatever works best for you!"</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 — Email Standard</div>
+    <div class="prose" style="margin-bottom:20px;"><p>All Signal House correspondence uses the same signature format. Consistent across every contact. The name, title, entity, contact. Nothing else.</p></div>
+    <div class="email-ex">
+      <div class="ee-hdr">
+        <div class="ee-f"><span class="ee-k">From:</span><span class="ee-v">Marcus Webb &lt;<a href="mailto:info@signalhouse.co">info@signalhouse.co</a>&gt;</span></div>
+        <div class="ee-f"><span class="e
+</body>
+</html>

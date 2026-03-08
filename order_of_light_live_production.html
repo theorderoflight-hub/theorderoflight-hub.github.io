@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Live Production Document</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --crimson:#C0384F;--crimson-h:#D94E65;
+  --gold:#C8A55A;--gold-dim:#7A6030;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--text-1);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--gold);color:#0A0A0A;padding:8px 16px;font-size:14px;text-decoration:none;z-index:9999;}
+.skip-link:focus{top:16px;}
+
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 56px;position:relative;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--crimson-h) 40%,var(--gold) 70%,transparent);opacity:0.3;}
+.cover-eyebrow{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:16px;padding-left:20px;}
+.cover-title{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(38px,5.5vw,76px);letter-spacing:0.2em;text-transform:uppercase;color:var(--text-1);line-height:0.92;padding-left:20px;}
+.cover-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(15px,2vw,21px);color:var(--text-2);padding-left:20px;margin-top:14px;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--crimson-h),var(--gold),transparent);opacity:0.3;margin:28px 0;}
+.cover-meta{display:flex;gap:32px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-size:13px;color:var(--text-2);}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+.prose{font-size:14.5px;color:var(--text-2);line-height:1.85;max-width:640px;}
+.prose p{margin-bottom:1.3em;}
+.prose strong{color:var(--text-1);font-weight:400;}
+
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+.callout.crit{border-left-color:var(--crimson-h);}
+
+/* SPEC GRID */
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:16px 0 24px;}
+.spec-card{background:var(--deep);border:1px solid var(--border);padding:20px 20px;}
+.spec-label{font-size:8px;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.spec-label::after{content:'';flex:1;height:1px;background:rgba(200,165,90,0.15);}
+.spec-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px;gap:12px;}
+.spec-row:last-child{border-bottom:none;}
+.spec-k{color:var(--text-3);flex-shrink:0;}
+.spec-v{color:var(--text-1);text-align:right;}
+
+/* LIGHTING */
+.light-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;margin:16px 0;}
+.light-card{background:var(--deep);border:1px solid var(--border);padding:18px 18px;}
+.light-name{font-size:13px;color:var(--text-1);margin-bottom:5px;}
+.light-desc{font-size:12px;color:var(--text-2);line-height:1.6;}
+.light-cue{font-size:10px;color:var(--gold);margin-top:8px;letter-spacing:0.1em;}
+
+/* STAGE PLOT */
+.stage{background:var(--deep);border:1px solid var(--border);padding:32px;margin:16px 0;}
+.stage-label{font-size:8px;letter-spacing:0.34em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px;}
+.stage-diagram{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+.stage-pos{background:var(--surface);border:1px solid var(--border);padding:12px 8px;text-align:center;}
+.pos-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;}
+.pos-name{font-size:11px;color:var(--text-1);}
+.stage-upstage{text-align:center;padding:10px;border-bottom:2px solid var(--border);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;}
+.stage-front{text-align:center;padding:10px;border-top:2px solid var(--crimson-h);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--crimson-h);}
+
+/* RIDER */
+.rider-section{margin-bottom:24px;}
+.rider-section-title{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:12px;}
+.rider-row{display:flex;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text-2);}
+.rider-row:last-child{border-bottom:none;}
+.rider-dot{width:4px;height:4px;transform:rotate(45deg);background:var(--text-3);flex-shrink:0;margin-top:2px;}
+.rider-row strong{color:var(--text-1);font-weight:400;}
+
+/* SET LIST */
+.setlist{display:flex;flex-direction:column;gap:0;margin:16px 0;}
+.sl-row{display:grid;grid-template-columns:40px 1fr auto;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);align-items:baseline;}
+.sl-row:last-child{border-bottom:none;}
+.sl-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:13px;color:var(--text-3);}
+.sl-title{font-size:14px;color:var(--text-1);}
+.sl-note{font-size:11px;color:var(--text-3);font-style:italic;}
+.sl-ep{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;padding:2px 8px;border:1px solid;white-space:nowrap;}
+.ep1{color:var(--crimson-h);border-color:rgba(217,78,101,0.3);}
+.ep2{color:var(--gold);border-color:rgba(200,165,90,0.3);}
+.ep3{color:var(--text-3);border-color:var(--border-hi);}
+.sl-special{color:var(--gold);border-color:rgba(200,165,90,0.5);}
+
+footer{max-width:900px;margin:72px auto 0;padding:22px 60px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);letter-spacing:0.1em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.cover{padding:80px 24px 48px;}.cover-line{left:24px;}.wrap{padding:0 24px 80px;}.spec-grid{grid-template-columns:1fr;}.sl-row{grid-template-columns:32px 1fr;}.sl-ep{display:none;}footer{padding:22px 24px 48px;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="cover">
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-eyebrow">The Order of Light · Live Production Document · Internal</p>
+  <h1 class="cover-title">Live<br>Production</h1>
+  <p class="cover-sub">A show is a transmission. The stage is the medium.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Version</span><span class="cm-value">Working document — refine as lineup solidifies</span></div>
+    <div class="cm-item"><span class="cm-label">Rider & merch</span><span class="cm-value">Covered in separate document</span></div>
+    <div class="cm-item"><span class="cm-label">Soundcheck</span><span class="cm-value">Covered in separate document</span></div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+  <!-- PHILOSOPHY -->
+  <section class="section" id="philosophy" aria-labelledby="phil-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="phil-title" style="color:var(--crimson-h);">Show Philosophy</h2>
+    </div>
+    <div class="prose">
+      <p>A live show is not a performance of the recorded material — it's a transmission of it. The two things are different. A performance reproduces. A transmission delivers something to the room that wasn't there before. That distinction should inform every decision about how the show is built and run.</p>
+      <p>The Conduit doesn't appear on stage. The band is the physical signal the Conduit has been broadcasting — five people locked together, playing songs that mean something. That's it. No mythology theatre, no complicated narrative staging. The world is built before the audience arrives. The job of the show is to make the music as good as it can possibly be.</p>
+      <p>Between songs: say less. A ten-second pause is always better than ninety seconds of stage talk. If something needs to be said, say it plainly and move on. The music is the message. Anything said from stage should serve the music, not explain it.</p>
+      <p>No encore. The show ends when the last song ends. The blackout is the ending. Playing a false exit and coming back out is a performance convention — skip it.</p>
+    </div>
+  </section>
+
+  <!-- PRE-SHOW -->
+  <section class="section" id="preshow" aria-labelledby="preshow-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="preshow-title" style="color:var(--crimson-h);">Pre-Show Treatment</h2>
+    </div>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>The show begins before the first note. Changeover is not dead time — it's atmosphere building.</p>
+    </div>
+
+    <div class="spec-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="spec-card">
+        <div class="spec-label">Changeover audio</div>
+        <div class="spec-row"><span class="spec-k">Source</span><span class="spec-v">Band-provided audio file</span></div>
+        <div class="spec-row"><span class="spec-k">Content</span><span class="spec-v">Low dissonant tone — uncomfortable, not ambient</span></div>
+        <div class="spec-row"><span class="spec-k">Level</span><span class="spec-v">Low — felt more than heard</span></div>
+        <div class="spec-row"><span class="spec-k">Duration</span><span class="spec-v">Runs from stage clear to first note</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Conduit intro broadcast</div>
+        <div class="spec-row"><span class="spec-k">Content</span><span class="spec-v">Short Conduit video — mythology context, 60–90 seconds</span></div>
+        <div class="spec-row"><span class="spec-k">Display</span><span class="spec-v">Rear screen / projection if available</span></div>
+        <div class="spec-row"><span class="spec-k">Timing</span><span class="spec-v">Plays immediately before band takes stage</span></div>
+        <div class="spec-row"><span class="spec-k">Note</span><span class="spec-v">TBC — requires screen capability at venue</span></div>
+      </div>
+    </div>
+
+    <div class="callout" role="note">
+      <strong>If no screen is available:</strong> changeover tone only. The mark displayed on a printed or projected element if possible — even a simple gobo. The intro broadcast is the ideal but not the blocker.
+    </div>
+  </section>
+
+  <!-- STAGE PLOT -->
+  <section class="section" id="stage" aria-labelledby="stage-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="stage-title" style="color:var(--crimson-h);">Stage Plot</h2>
+    </div>
+    <p class="sec-intro">Standard layout. Adjust to venue — this is the default, not a demand.</p>
+
+    <div class="stage" role="figure" aria-label="Stage plot">
+      <div class="stage-upstage">Upstage ↑</div>
+      <div class="stage-diagram" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px;">
+        <div class="stage-pos" style="grid-column:3;"><div class="pos-label">Upstage C</div><div class="pos-name">Drums<br><span style="font-size:10px;color:var(--text-3);">riser if available</span></div></div>
+      </div>
+      <div class="stage-diagram" style="grid-template-columns:repeat(5,1fr);">
+        <div class="stage-pos"><div class="pos-label">SL Out</div><div class="pos-name">Guitar 2</div></div>
+        <div class="stage-pos"><div class="pos-label">SL In</div><div class="pos-name">Bass</div></div>
+        <div class="stage-pos" style="background:transparent;border-color:transparent;"></div>
+        <div class="stage-pos"><div class="pos-label">SR In</div><div class="pos-name">Keys /<br>Synth</div></div>
+        <div class="stage-pos"><div class="pos-label">SR Out</div><div class="pos-name">Guitar 1</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;padding:16px 0 8px;">
+        <div class="stage-pos" style="width:160px;"><div class="pos-label">Downstage C</div><div class="pos-name">Vocals /<br>Guitar</div></div>
+      </div>
+      <div class="stage-front">↓ Audience</div>
+    </div>
+
+    <div class="callout" role="note">
+      Drums upstage centre on a riser where possible — positions the rhythmic anchor above the stage plane. Lead vocals / guitar downstage centre. Guitar 2 SL out. Bass SL in. Keys/Synth SR in. Guitar 1 SR out. All five members sing — no one hides behind position.
+    </div>
+  </section>
+
+  <!-- TECHNICAL SPEC -->
+  <section class="section" id="tech" aria-labelledby="tech-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">04</span>
+      <h2 class="sec-title" id="tech-title" style="color:var(--crimson-h);">Technical Specification</h2>
+    </div>
+    <p class="sec-intro">Working document — update as lineup and backline solidify. Send the relevant sections to venue production ahead of load-in.</p>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-label">IEM &amp; Click — artist provided</div>
+        <div class="spec-row"><span class="spec-k">IEM rig</span><span class="spec-v">Full system provided by band — self-contained</span></div>
+        <div class="spec-row"><span class="spec-k">FOH requirement</span><span class="spec-v">Patch into band-provided patch bay only</span></div>
+        <div class="spec-row"><span class="spec-k">Click to FOH</span><span class="spec-v">No</span></div>
+        <div class="spec-row"><span class="spec-k">Stage monitors</span><span class="spec-v">Not required</span></div>
+        <div class="spec-row"><span class="spec-k">Backing tracks</span><span class="spec-v">TBC — pads only, via patch bay if used</span></div>
+      </div>
+      <div class="spec-card" style="grid-column:1/-1;">
+        <div class="spec-label">Input list — working draft</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+          <div>
+            <div class="spec-row"><span class="spec-k">Kick</span><span class="spec-v">1</span></div>
+            <div class="spec-row"><span class="spec-k">Snare top / bottom</span><span class="spec-v">2</span></div>
+            <div class="spec-row"><span class="spec-k">Hi-hat</span><span class="spec-v">1</span></div>
+            <div class="spec-row"><span class="spec-k">Toms</span><span class="spec-v">3</span></div>
+            <div class="spec-row"><span class="spec-k">Overheads</span><span class="spec-v">2</span></div>
+            <div class="spec-row"><span class="spec-k">Bass DI / amp mic</span><span class="spec-v">1–2</span></div>
+          </div>
+          <div>
+            <div class="spec-row"><span class="spec-k">Guitar 1</span><span class="spec-v">TBC — amp or DI</span></div>
+            <div class="spec-row"><span class="spec-k">Guitar 2</span><span class="spec-v">TBC — amp or DI</span></div>
+            <div class="spec-row"><span class="spec-k">Keys / synth</span><span class="spec-v">2 (stereo DI)</span></div>
+            <div class="spec-row"><span class="spec-k">Lead vocal</span><span class="spec-v">1</span></div>
+            <div class="spec-row"><span class="spec-k">BG vocals × 4</span><span class="spec-v">4</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">FOH requirements</div>
+        <div class="spec-row"><span class="spec-k">PA</span><span class="spec-v">Full-range with sub</span></div>
+        <div class="spec-row"><span class="spec-k">Console</span><span class="spec-v">Digital — 24ch minimum</span></div>
+        <div class="spec-row"><span class="spec-k">Stage power</span><span class="spec-v">4× 20A circuits minimum</span></div>
+        <div class="spec-row"><span class="spec-k">IEM TX power</span><span class="spec-v">1× strip SL</span></div>
+        <div class="spec-row"><span class="spec-k">Projection / screen</span><span class="spec-v">Preferred — for intro broadcast</span></div>
+      </div>
+    </div>
+
+    <div class="callout" role="note">
+      <strong>This input list is a draft.</strong> It will be confirmed once the full lineup is locked and individual backline choices are finalised. The guitar input for Guitar 1 reflects a Fender amp rig (dual mic). Update before distributing to venue production.
+    </div>
+  </section>
+
+  <!-- LIGHTING -->
+  <section class="section" id="lighting" aria-labelledby="light-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">05</span>
+      <h2 class="sec-title" id="light-title" style="color:var(--crimson-h);">Lighting Brief</h2>
+    </div>
+    <p class="sec-intro">Send to the LD before load-in. This is a brief, not a rigid spec — the LD has creative input within these parameters.</p>
+
+    <div class="light-grid" role="list" aria-label="Lighting direction">
+      <div class="light-card" role="listitem">
+        <div class="light-name">Colour palette</div>
+        <div class="light-desc">Deep red/crimson and warm amber. No blues, greens, or whites except as rare punctuation. The stage should feel like the inside of the visual world — dark, warm at the edges.</div>
+      </div>
+      <div class="light-card" role="listitem">
+        <div class="light-name">Base wash</div>
+        <div class="light-desc">Very low-level amber wash across the whole stage. Musicians visible, not illuminated. Darkness is the default state.</div>
+        <div class="light-cue">Throughout — all songs</div>
+      </div>
+      <div class="light-card" role="listitem">
+        <div class="light-name">Vocal spot</div>
+        <div class="light-desc">Tight spot on the vocalist — warm amber, soft edge. Not a harsh theatrical spot. Lit from within the darkness rather than spotlit from above.</div>
+        <div class="light-cue">Vocal moments, choruses</div>
+      </div>
+      <div class="light-card" role="listitem">
+        <div class="light-name">Crimson pulse</div>
+        <div class="light-desc">On heavy rhythmic accents — a brief red flash across the full stage. Not a strobe. Used sparingly, maximum 3–4 times per song on the biggest moments only.</div>
+        <div class="light-cue">Song climaxes — cued to BPM</div>
+      </div>
+      <div class="light-card" role="listitem">
+        <div class="light-name">Pre-show</div>
+        <div class="light-desc">Stage fully dark. The eight-pointed mark on the rear wall if screen/gobo is available. Changeover tone through PA. The audience arrives to an already-present world.</div>
+        <div class="light-cue">Stage clear through first note</div>
+      </div>
+      <div class="light-card" role="listitem">
+        <div class="light-name">Post-show</div>
+        <div class="light-desc">Last note — immediate full blackout. No walk-off lighting, no bow. 5–10 seconds of complete darkness before house lights. The transmission ends without ceremony.</div>
+        <div class="light-cue">Final note → instant black</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SET PHILOSOPHY -->
+  <section class="section" id="setlist" aria-labelledby="set-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">06</span>
+      <h2 class="sec-title" id="set-title" style="color:var(--crimson-h);">Set List Philosophy</h2>
+    </div>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>A set list is a transmission arc — it has an opening, a middle, a climax, and an ending. Every song has a position. The audience should feel the set going somewhere even if they can't name where.</p>
+      <p>Start hard. Don't dip too early — earn the quieter moments. Build. The last song should be the biggest moment in the room. Then: immediate blackout.</p>
+    </div>
+
+    <div class="setlist" role="list" aria-label="Set structure template">
+      <div class="sl-row" role="listitem"><div class="sl-num">01</div><div><div>Opener — signal arrives</div><div class="sl-note">No introduction. First note hits and the room is already inside it.</div></div><div class="sl-ep ep1">EP 01</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">02</div><div><div>Track 2</div><div class="sl-note">Hold the energy — the set earns its slower moments, it doesn't start there.</div></div><div class="sl-ep ep1">EP 01</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">03</div><div><div>First breath</div><div class="sl-note">The set's first moment of space. Not slow — patient.</div></div><div class="sl-ep ep1">EP 01</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">04</div><div><div>Tone shift</div><div class="sl-note">The set moves — from Something into Nothing territory.</div></div><div class="sl-ep ep2">EP 02</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">05</div><div><div>Deepest point</div><div class="sl-note">Most atmospheric. The darkness peak of the set.</div></div><div class="sl-ep ep2">EP 02</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">06</div><div><div>The turn</div><div class="sl-note">Energy returns — earned now, not announced.</div></div><div class="sl-ep ep1">EP 01</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">07</div><div><div>Frequency live version</div><div class="sl-note">If released — the collaboration made physical.</div></div><div class="sl-ep sl-special">Freq</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">08</div><div><div>Pre-closer</div><div class="sl-note">High intensity. The room knows something is ending.</div></div><div class="sl-ep ep2">EP 02</div></div>
+      <div class="sl-row" role="listitem"><div class="sl-num">09</div><div><div>Closer — final transmission</div><div class="sl-note">Biggest moment. Last note → immediate blackout. No encore.</div></div><div class="sl-ep ep1">EP 01</div></div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+
+</body>
+</html>

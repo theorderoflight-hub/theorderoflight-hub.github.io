@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Carousel Ads</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:#111;
+  font-family:'DM Sans', sans-serif;
+  font-weight:300;
+  color:#F5F0E8;
+  padding-bottom:80px;
+}
+
+/* ── HEADER ── */
+.hdr {
+  background:#0A0A0A;
+  border-bottom:1px solid rgba(139,26,46,0.25);
+  padding:16px 40px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:200;
+}
+.hdr-l { display:flex; align-items:center; gap:10px; }
+.hdr-title { font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(200,169,110,0.45); }
+.hdr-note { font-size:10px; letter-spacing:0.15em; color:rgba(139,26,46,0.55); }
+
+/* ── SECTION LABELS ── */
+.sec {
+  padding:48px 40px 6px;
+  font-size:9px; letter-spacing:0.4em; text-transform:uppercase; color:#8B1A2E;
+  display:flex; align-items:center; gap:14px;
+}
+.sec::after { content:''; flex:1; height:1px; background:rgba(139,26,46,0.2); }
+.sec-sub { padding:8px 40px 24px; font-size:12px; color:rgba(245,240,232,0.38); line-height:1.65; }
+
+.tip {
+  margin:0 40px 32px;
+  background:rgba(200,169,110,0.05);
+  border:1px solid rgba(200,169,110,0.14);
+  padding:13px 18px;
+  font-size:12px; color:rgba(245,240,232,0.5); line-height:1.7;
+}
+.tip strong { color:rgba(245,240,232,0.82); font-weight:400; }
+
+/* ── ROLE BLOCK ── */
+.role-block { margin-bottom:64px; }
+.role-lbl {
+  margin:0 40px 20px;
+  display:flex; align-items:center; gap:12px;
+}
+.role-dot { width:9px; height:9px; transform:rotate(45deg); flex-shrink:0; }
+.role-name { font-size:10px; letter-spacing:0.3em; text-transform:uppercase; }
+
+/* card number labels */
+.card-row {
+  display:flex; gap:16px; padding:0 40px;
+  align-items:flex-start; flex-wrap:wrap;
+}
+.card-col { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.card-num {
+  font-size:8px; letter-spacing:0.28em; text-transform:uppercase;
+  color:rgba(245,240,232,0.22);
+}
+
+/* ══════════════════════════════
+   CARD BASE — portrait 1080×1350
+   Displayed at 270×338 (¼ scale)
+══════════════════════════════ */
+.card {
+  width:270px;
+  height:338px;
+  position:relative;
+  overflow:hidden;
+  background:#0A0A0A;
+  flex-shrink:0;
+}
+
+/* grain */
+.card::after {
+  content:''; position:absolute; inset:0; z-index:20; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+
+/* scan lines */
+.c-scan {
+  position:absolute; inset:0; z-index:8; pointer-events:none;
+  background:repeating-linear-gradient(0deg,
+    transparent, transparent 3px,
+    rgba(0,0,0,0.025) 3px, rgba(0,0,0,0.025) 4px);
+}
+
+/* vignette */
+.c-vig {
+  position:absolute; inset:0; z-index:9; pointer-events:none;
+  box-shadow:inset 0 0 70px rgba(0,0,0,0.65);
+}
+
+/* top accent bar */
+.c-bar { position:absolute; top:0; left:0; right:0; height:3px; z-index:15; }
+
+/* bottom bar */
+.c-bot {
+  position:absolute; bottom:0; left:0; right:0; z-index:15;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:9px 16px 10px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  background:rgba(0,0,0,0.35);
+}
+.c-bot-band {
+  font-size:6px; letter-spacing:0.28em; text-transform:uppercase;
+  color:rgba(245,240,232,0.35);
+}
+.c-bot-loc {
+  font-size:6px; letter-spacing:0.22em; text-transform:uppercase;
+  color:rgba(245,240,232,0.2);
+}
+
+/* card number indicator — top right */
+.c-num {
+  position:absolute; top:10px; right:14px; z-index:16;
+  font-size:6px; letter-spacing:0.25em; text-transform:uppercase;
+  color:rgba(245,240,232,0.2);
+}
+
+/* content layer */
+.c-inner {
+  position:absolute; inset:0; z-index:12;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:36px 20px 36px;
+}
+
+/* bg radial glow */
+.c-glow {
+  position:absolute; z-index:1; pointer-events:none;
+  border-radius:50%;
+}
+
+/* bg watermark mark */
+.c-bgm {
+  position:absolute; z-index:2; pointer-events:none;
+  opacity:0.04;
+}
+
+/* ── CARD 1 — COVER ── */
+.c1-kicker {
+  font-size:7px; letter-spacing:0.42em; text-transform:uppercase;
+  color:rgba(245,240,232,0.4); margin-bottom:18px; text-align:center;
+}
+.c1-title {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:28px; letter-spacing:0.1em; text-transform:uppercase;
+  color:#F5F0E8; text-align:center; line-height:1.05;
+  margin-bottom:18px;
+}
+.c1-seeking {
+  font-size:7px; letter-spacing:0.38em; text-transform:uppercase;
+  color:rgba(245,240,232,0.28); margin-top:14px; text-align:center;
+}
+
+/* ── CARD 2 — ROLE + TAGLINE ── */
+.c2-seeking {
+  font-size:7px; letter-spacing:0.4em; text-transform:uppercase;
+  margin-bottom:8px; text-align:center;
+}
+.c2-role {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:38px; letter-spacing:0.04em;
+  color:#F5F0E8; line-height:0.95; text-align:center;
+  margin-bottom:14px;
+}
+.c2-div { flex-shrink:0; height:2px; margin:4px 0 14px; }
+.c2-tag {
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic;
+  font-size:14px; color:rgba(245,240,232,0.65);
+  text-align:center; line-height:1.45; letter-spacing:0.02em;
+  margin-bottom:20px;
+}
+.c2-sound-label {
+  font-size:6.5px; letter-spacing:0.32em; text-transform:uppercase;
+  color:rgba(245,240,232,0.28); margin-bottom:8px; text-align:center;
+}
+.c2-sound {
+  font-size:10px; color:rgba(245,240,232,0.55);
+  text-align:center; line-height:1.65; letter-spacing:0.04em;
+}
+
+/* ── CARD 3 — REQUIREMENTS ── */
+.c3-label {
+  font-size:7px; letter-spacing:0.38em; text-transform:uppercase;
+  margin-bottom:14px; text-align:center;
+  width:100%;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.c3-reqs { width:100%; }
+.c3-req {
+  display:flex; align-items:flex-start; gap:8px;
+  padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  font-size:11px; color:rgba(245,240,232,0.78);
+  line-height:1.5; font-family:'DM Sans',sans-serif; font-weight:300;
+}
+.c3-req:last-child { border-bottom:none; }
+.c3-dia { width:5px; height:5px; transform:rotate(45deg); flex-shrink:0; margin-top:3px; }
+
+/* ── CARD 4 — GEAR + VALUES ── */
+.c4-section { width:100%; margin-bottom:16px; }
+.c4-label {
+  font-size:6.5px; letter-spacing:0.35em; text-transform:uppercase;
+  margin-bottom:8px;
+  padding-bottom:7px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  width:100%;
+}
+.c4-item {
+  display:flex; align-items:baseline; gap:7px;
+  font-size:10.5px; color:rgba(245,240,232,0.72);
+  line-height:1.55; padding:3px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.c4-item:last-child { border-bottom:none; }
+.c4-dot { width:4px; height:4px; transform:rotate(45deg); flex-shrink:0; margin-top:3px; }
+.c4-values {
+  font-size:10px; color:rgba(245,240,232,0.55);
+  line-height:1.65; font-style:italic;
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  text-align:center; padding:0 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-l">
+    <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+      <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+    </svg>
+    <span class="hdr-title">Carousel Ads — The Order of Light</span>
+  </div>
+  <span class="hdr-note">5 roles · 4 cards each · portrait 1080×1350</span>
+</div>
+
+<div class="tip" style="margin-top:32px;">
+  <strong>To export:</strong> Chrome → right-click any card → Inspect → select the <code>.card</code> div → Cmd/Ctrl+Shift+P → <strong>Capture node screenshot</strong>. Each card exports as a clean 270×338px PNG — upload all 4 in sequence as your carousel. Name them <strong>ool_[role]_card[n].png</strong>.
+</div>
+
+<!-- ═══════════════════════════════════════
+     VOCALIST  #C8A96E
+═══════════════════════════════════════ -->
+<div class="sec">Vocalist Carousel</div>
+<div class="role-block">
+  <div class="role-lbl">
+    <div class="role-dot" style="background:#C8A96E;"></div>
+    <span class="role-name" style="color:#C8A96E;">Vocalist · 4 Cards</span>
+  </div>
+  <div class="card-row">
+
+    <!-- V · CARD 1 -->
+    <div class="card-col">
+      <span class="card-num">Card 1 — Cover</span>
+      <div class="card">
+        <div class="c-bar" style="background:#C8A96E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 45%,rgba(200,169,110,0.16) 0%,#0A0A0A 65%);"></div>
+        <div class="c-glow" style="width:180px;height:180px;top:44%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(200,169,110,0.14) 0%,transparent 70%);"></div>
+        <div class="c-bgm" style="width:230px;bottom:-30px;right:-30px;">
+          <svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/></svg>
+        </div>
+        <div class="c-scan"></div><div class="c-vig"></div>
+        <span class="c-num">1 / 4</span>
+        <div class="c-inner" style="justify-content:center;gap:0;">
+          <div class="c1-kicker">The Order of Light</div>
+          <svg width="64" height="64" viewBox="0 0 100 100" fill="none" style="margin-bottom:16px;">
+            <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+          </svg>
+          <div class="c1-title">The Order<br>of Light</div>
+          <div style="width:50px;height:2px;background:#C8A96E;opacity:0.45;margin:0 auto;"></div>
+          <div class="c1-seeking" style="margin-top:16px;">Now seeking musicians<br>Charlotte, NC &amp; surrounding areas</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+
+    <!-- V · CARD 2 -->
+    <div class="card-col">
+      <span class="card-num">Card 2 — Role</span>
+      <div class="card">
+        <div class="c-bar" style="background:#C8A96E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,169,110,0.14) 0%,#0A0A0A 62%);"></div>
+        <div class="c-glow" style="width:160px;height:160px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(200,169,110,0.12) 0%,transparent 70%);"></div>
+        <div class="c-bgm" style="width:210px;bottom:-25px;right:-25px;">
+          <svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/></svg>
+        </div>
+        <div class="c-scan"></div><div class="c-vig"></div>
+        <span class="c-num">2 / 4</span>
+        <div class="c-inner">
+          <svg width="42" height="42" viewBox="0 0 100 100" fill="none" style="margin-bottom:12px;opacity:0.7;">
+            <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+          </svg>
+          <div class="c2-seeking" style="color:#C8A96E;opacity:0.75;">Seeking</div>
+          <div class="c2-role">Vocalist</div>
+          <div class="c2-div" style="width:56px;background:#C8A96E;opacity:0.45;"></div>
+          <div class="c2-tag">"The signal needs a voice."</div>
+          <div class="c2-sound-label">Sounds like</div>
+          <div class="c2-sound">Thrice · Copeland · Nothing But Thieves<br>Death Cab · Young the Giant · Mew</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+
+    <!-- V · CARD 3 -->
+    <div class="card-col">
+      <span class="card-num">Card 3 — Requirements</span>
+      <div class="card">
+        <div class="c-bar" style="background:#C8A96E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div>
+        <span class="c-num">3 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:32px;">
+          <div class="c3-label" style="color:#C8A96E;">What we need from you</div>
+          <div class="c3-reqs">
+            <div class="c3-req"><div class="c3-dia" style="background:#C8A96E;opacity:0.75;"></div><span>Lead vocals — range, dynamics &amp; emotional control</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#C8A96E;opacity:0.75;"></div><span>Harmony vocals — stacked arrangements are central</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#C8A96E;opacity:0.75;"></div><span>Proven studio recording experience</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#C8A96E;opacity:0.75;"></div><span>Real touring history</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#C8A96E;opacity:0.75;"></div><span>Co-writing ability — lyrics, melody or both</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#C8A96E;opacity:0.75;"></div><span>Age range: 30s–40s</span></div>
+          </div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+
+    <!-- V · CARD 4 -->
+    <div class="card-col">
+      <span class="card-num">Card 4 — Gear + Values</span>
+      <div class="card">
+        <div class="c-bar" style="background:#C8A96E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div>
+        <span class="c-num">4 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:28px;">
+          <div class="c4-section">
+            <div class="c4-label" style="color:#C8A96E;">Professional requirements</div>
+            <div class="c4-item"><div class="c4-dot" style="background:#C8A96E;opacity:0.7;"></div><span>In-ear monitors required</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#C8A96E;opacity:0.7;"></div><span>Performs to a click track live</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#C8A96E;opacity:0.7;"></div><span>Professional-grade gear</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#C8A96E;opacity:0.7;"></div><span>Financial contribution to band costs</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#C8A96E;opacity:0.7;"></div><span>Charlotte, NC — in-person rehearsals</span></div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(255,255,255,0.06);margin-bottom:16px;"></div>
+          <div class="c4-values">"Every human being deserves equal dignity. If that's contentious to you, this isn't your band. Everyone else is fully welcome here."</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     DRUMMER  #8B1A2E
+═══════════════════════════════════════ -->
+<div class="sec">Drummer Carousel</div>
+<div class="role-block">
+  <div class="role-lbl">
+    <div class="role-dot" style="background:#8B1A2E;"></div>
+    <span class="role-name" style="color:#A82035;">Drummer · 4 Cards</span>
+  </div>
+  <div class="card-row">
+
+    <!-- D · CARD 1 -->
+    <div class="card-col">
+      <span class="card-num">Card 1 — Cover</span>
+      <div class="card">
+        <div class="c-bar" style="background:#8B1A2E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 45%,rgba(139,26,46,0.2) 0%,#0A0A0A 65%);"></div>
+        <div class="c-glow" style="width:180px;height:180px;top:44%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(139,26,46,0.18) 0%,transparent 70%);"></div>
+        <div class="c-bgm" style="width:230px;bottom:-30px;right:-30px;">
+          <svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+        </div>
+        <div class="c-scan"></div><div class="c-vig"></div>
+        <span class="c-num">1 / 4</span>
+        <div class="c-inner" style="justify-content:center;gap:0;">
+          <div class="c1-kicker">The Order of Light</div>
+          <svg width="64" height="64" viewBox="0 0 100 100" fill="none" style="margin-bottom:16px;">
+            <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+          </svg>
+          <div class="c1-title">The Order<br>of Light</div>
+          <div style="width:50px;height:2px;background:#8B1A2E;opacity:0.55;margin:0 auto;"></div>
+          <div class="c1-seeking" style="margin-top:16px;">Now seeking musicians<br>Charlotte, NC &amp; surrounding areas</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+
+    <!-- D · CARD 2 -->
+    <div class="card-col">
+      <span class="card-num">Card 2 — Role</span>
+      <div class="card">
+        <div class="c-bar" style="background:#8B1A2E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(139,26,46,0.18) 0%,#0A0A0A 62%);"></div>
+        <div class="c-glow" style="width:160px;height:160px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(139,26,46,0.16) 0%,transparent 70%);"></div>
+        <div class="c-bgm" style="width:210px;bottom:-25px;right:-25px;">
+          <svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+        </div>
+        <div class="c-scan"></div><div class="c-vig"></div>
+        <span class="c-num">2 / 4</span>
+        <div class="c-inner">
+          <svg width="42" height="42" viewBox="0 0 100 100" fill="none" style="margin-bottom:12px;opacity:0.7;">
+            <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+          </svg>
+          <div class="c2-seeking" style="color:#A82035;opacity:0.85;">Seeking</div>
+          <div class="c2-role">Drummer</div>
+          <div class="c2-div" style="width:56px;background:#8B1A2E;opacity:0.55;"></div>
+          <div class="c2-tag">"The signal needs a pulse."</div>
+          <div class="c2-sound-label">Sounds like</div>
+          <div class="c2-sound">MuteMath · Thrice · Minus The Bear<br>Sunny Day Real Estate · Mew</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+
+    <!-- D · CARD 3 -->
+    <div class="card-col">
+      <span class="card-num">Card 3 — Requirements</span>
+      <div class="card">
+        <div class="c-bar" style="background:#8B1A2E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div>
+        <span class="c-num">3 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:32px;">
+          <div class="c3-label" style="color:#A82035;">What we need from you</div>
+          <div class="c3-reqs">
+            <div class="c3-req"><div class="c3-dia" style="background:#8B1A2E;opacity:0.85;"></div><span>Groove and feel — taste over everything</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#8B1A2E;opacity:0.85;"></div><span>Performs to a click track live — non-negotiable</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#8B1A2E;opacity:0.85;"></div><span>Proven studio recording experience</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#8B1A2E;opacity:0.85;"></div><span>Real touring history</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#8B1A2E;opacity:0.85;"></div><span>Comfortable with hybrid electronic/live setup</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#8B1A2E;opacity:0.85;"></div><span>Age range: 30s–40s</span></div>
+          </div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+
+    <!-- D · CARD 4 -->
+    <div class="card-col">
+      <span class="card-num">Card 4 — Gear + Values</span>
+      <div class="card">
+        <div class="c-bar" style="background:#8B1A2E;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div>
+        <span class="c-num">4 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:28px;">
+          <div class="c4-section">
+            <div class="c4-label" style="color:#A82035;">Professional requirements</div>
+            <div class="c4-item"><div class="c4-dot" style="background:#8B1A2E;opacity:0.85;"></div><span>In-ear monitors required</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#8B1A2E;opacity:0.85;"></div><span>Performs to a click track live</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#8B1A2E;opacity:0.85;"></div><span>Professional kit — stage ready</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#8B1A2E;opacity:0.85;"></div><span>Financial contribution to band costs</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#8B1A2E;opacity:0.85;"></div><span>Charlotte, NC — in-person rehearsals</span></div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(255,255,255,0.06);margin-bottom:16px;"></div>
+          <div class="c4-values">"Every human being deserves equal dignity. If that's contentious to you, this isn't your band. Everyone else is fully welcome here."</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     GUITARIST  #5A8A72
+═══════════════════════════════════════ -->
+<div class="sec">Guitarist Carousel</div>
+<div class="role-block">
+  <div class="role-lbl">
+    <div class="role-dot" style="background:#5A8A72;"></div>
+    <span class="role-name" style="color:#5A8A72;">Guitarist · 4 Cards</span>
+  </div>
+  <div class="card-row">
+    <!-- G · CARD 1 -->
+    <div class="card-col"><span class="card-num">Card 1 — Cover</span>
+      <div class="card">
+        <div class="c-bar" style="background:#5A8A72;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 45%,rgba(90,138,114,0.15) 0%,#0A0A0A 65%);"></div>
+        <div class="c-glow" style="width:180px;height:180px;top:44%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(90,138,114,0.13) 0%,transparent 70%);"></div>
+        <div class="c-bgm" style="width:230px;bottom:-30px;right:-30px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="c-scan"></div><div class="c-vig"></div><span class="c-num">1 / 4</span>
+        <div class="c-inner" style="justify-content:center;gap:0;">
+          <div class="c1-kicker">The Order of Light</div>
+          <svg width="64" height="64" viewBox="0 0 100 100" fill="none" style="margin-bottom:16px;"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg>
+          <div class="c1-title">The Order<br>of Light</div>
+          <div style="width:50px;height:2px;background:#5A8A72;opacity:0.45;margin:0 auto;"></div>
+          <div class="c1-seeking" style="margin-top:16px;">Now seeking musicians<br>Charlotte, NC &amp; surrounding areas</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- G · CARD 2 -->
+    <div class="card-col"><span class="card-num">Card 2 — Role</span>
+      <div class="card">
+        <div class="c-bar" style="background:#5A8A72;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(90,138,114,0.13) 0%,#0A0A0A 62%);"></div>
+        <div class="c-bgm" style="width:210px;bottom:-25px;right:-25px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="c-scan"></div><div class="c-vig"></div><span class="c-num">2 / 4</span>
+        <div class="c-inner">
+          <svg width="42" height="42" viewBox="0 0 100 100" fill="none" style="margin-bottom:12px;opacity:0.7;"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg>
+          <div class="c2-seeking" style="color:#5A8A72;opacity:0.85;">Seeking</div>
+          <div class="c2-role">Guitarist</div>
+          <div class="c2-div" style="width:56px;background:#5A8A72;opacity:0.45;"></div>
+          <div class="c2-tag">"Texture, teeth &amp; restraint."</div>
+          <div class="c2-sound-label">Sounds like</div>
+          <div class="c2-sound">Thrice · Nothing But Thieves<br>Minus The Bear · Copeland · Mae</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- G · CARD 3 -->
+    <div class="card-col"><span class="card-num">Card 3 — Requirements</span>
+      <div class="card">
+        <div class="c-bar" style="background:#5A8A72;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div><span class="c-num">3 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:32px;">
+          <div class="c3-label" style="color:#5A8A72;">What we need from you</div>
+          <div class="c3-reqs">
+            <div class="c3-req"><div class="c3-dia" style="background:#5A8A72;opacity:0.8;"></div><span>Lead &amp; rhythm fluency — not a siloed role</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#5A8A72;opacity:0.8;"></div><span>Effects vocabulary — atmosphere &amp; texture</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#5A8A72;opacity:0.8;"></div><span>Proven studio recording experience</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#5A8A72;opacity:0.8;"></div><span>Real touring history</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#5A8A72;opacity:0.8;"></div><span>Harmony vocals required</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#5A8A72;opacity:0.8;"></div><span>Age range: 30s–40s</span></div>
+          </div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- G · CARD 4 -->
+    <div class="card-col"><span class="card-num">Card 4 — Gear + Values</span>
+      <div class="card">
+        <div class="c-bar" style="background:#5A8A72;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div><span class="c-num">4 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:28px;">
+          <div class="c4-section">
+            <div class="c4-label" style="color:#5A8A72;">Professional requirements</div>
+            <div class="c4-item"><div class="c4-dot" style="background:#5A8A72;opacity:0.8;"></div><span>In-ear monitors required</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#5A8A72;opacity:0.8;"></div><span>Performs to a click track live</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#5A8A72;opacity:0.8;"></div><span>Professional guitar rig — stage ready</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#5A8A72;opacity:0.8;"></div><span>Financial contribution to band costs</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#5A8A72;opacity:0.8;"></div><span>Charlotte, NC — in-person rehearsals</span></div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(255,255,255,0.06);margin-bottom:16px;"></div>
+          <div class="c4-values">"Every human being deserves equal dignity. If that's contentious to you, this isn't your band. Everyone else is fully welcome here."</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     KEYS  #7A6A9A
+═══════════════════════════════════════ -->
+<div class="sec">Keys / Synth Carousel</div>
+<div class="role-block">
+  <div class="role-lbl">
+    <div class="role-dot" style="background:#7A6A9A;"></div>
+    <span class="role-name" style="color:#7A6A9A;">Keys / Synth · 4 Cards</span>
+  </div>
+  <div class="card-row">
+    <!-- K · CARD 1 -->
+    <div class="card-col"><span class="card-num">Card 1 — Cover</span>
+      <div class="card">
+        <div class="c-bar" style="background:#7A6A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 45%,rgba(122,106,154,0.15) 0%,#0A0A0A 65%);"></div>
+        <div class="c-glow" style="width:180px;height:180px;top:44%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(122,106,154,0.13) 0%,transparent 70%);"></div>
+        <div class="c-bgm" style="width:230px;bottom:-30px;right:-30px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="c-scan"></div><div class="c-vig"></div><span class="c-num">1 / 4</span>
+        <div class="c-inner" style="justify-content:center;gap:0;">
+          <div class="c1-kicker">The Order of Light</div>
+          <svg width="64" height="64" viewBox="0 0 100 100" fill="none" style="margin-bottom:16px;"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <div class="c1-title">The Order<br>of Light</div>
+          <div style="width:50px;height:2px;background:#7A6A9A;opacity:0.45;margin:0 auto;"></div>
+          <div class="c1-seeking" style="margin-top:16px;">Now seeking musicians<br>Charlotte, NC &amp; surrounding areas</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- K · CARD 2 -->
+    <div class="card-col"><span class="card-num">Card 2 — Role</span>
+      <div class="card">
+        <div class="c-bar" style="background:#7A6A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(122,106,154,0.13) 0%,#0A0A0A 62%);"></div>
+        <div class="c-bgm" style="width:210px;bottom:-25px;right:-25px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="c-scan"></div><div class="c-vig"></div><span class="c-num">2 / 4</span>
+        <div class="c-inner">
+          <svg width="42" height="42" viewBox="0 0 100 100" fill="none" style="margin-bottom:12px;opacity:0.7;"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <div class="c2-seeking" style="color:#7A6A9A;opacity:0.85;">Seeking</div>
+          <div class="c2-role" style="font-size:30px;">Keys / Synth</div>
+          <div class="c2-div" style="width:56px;background:#7A6A9A;opacity:0.45;"></div>
+          <div class="c2-tag">"The signal needs its frequency."</div>
+          <div class="c2-sound-label">Sounds like</div>
+          <div class="c2-sound">MuteMath · Mew · Copeland<br>Massive Attack · Portishead · Mae</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- K · CARD 3 -->
+    <div class="card-col"><span class="card-num">Card 3 — Requirements</span>
+      <div class="card">
+        <div class="c-bar" style="background:#7A6A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div><span class="c-num">3 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:32px;">
+          <div class="c3-label" style="color:#7A6A9A;">What we need from you</div>
+          <div class="c3-reqs">
+            <div class="c3-req"><div class="c3-dia" style="background:#7A6A9A;opacity:0.8;"></div><span>Piano AND synthesizer — both required</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#7A6A9A;opacity:0.8;"></div><span>Sound design — shape tones, not presets</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#7A6A9A;opacity:0.8;"></div><span>Live electronic performance experience</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#7A6A9A;opacity:0.8;"></div><span>Proven studio recording experience</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#7A6A9A;opacity:0.8;"></div><span>Real touring history</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#7A6A9A;opacity:0.8;"></div><span>Age range: 30s–40s</span></div>
+          </div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- K · CARD 4 -->
+    <div class="card-col"><span class="card-num">Card 4 — Gear + Values</span>
+      <div class="card">
+        <div class="c-bar" style="background:#7A6A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div><span class="c-num">4 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:28px;">
+          <div class="c4-section">
+            <div class="c4-label" style="color:#7A6A9A;">Professional requirements</div>
+            <div class="c4-item"><div class="c4-dot" style="background:#7A6A9A;opacity:0.8;"></div><span>In-ear monitors required</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#7A6A9A;opacity:0.8;"></div><span>Performs to a click track live</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#7A6A9A;opacity:0.8;"></div><span>Bulletproof MIDI rig — stage ready</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#7A6A9A;opacity:0.8;"></div><span>Financial contribution to band costs</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#7A6A9A;opacity:0.8;"></div><span>Charlotte, NC — in-person rehearsals</span></div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(255,255,255,0.06);margin-bottom:16px;"></div>
+          <div class="c4-values">"Every human being deserves equal dignity. If that's contentious to you, this isn't your band. Everyone else is fully welcome here."</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     BASSIST  #4A7A9A
+═══════════════════════════════════════ -->
+<div class="sec">Bassist Carousel</div>
+<div class="role-block">
+  <div class="role-lbl">
+    <div class="role-dot" style="background:#4A7A9A;"></div>
+    <span class="role-name" style="color:#4A7A9A;">Bassist · 4 Cards</span>
+  </div>
+  <div class="card-row">
+    <!-- B · CARD 1 -->
+    <div class="card-col"><span class="card-num">Card 1 — Cover</span>
+      <div class="card">
+        <div class="c-bar" style="background:#4A7A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 45%,rgba(74,122,154,0.15) 0%,#0A0A0A 65%);"></div>
+        <div class="c-glow" style="width:180px;height:180px;top:44%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(74,122,154,0.13) 0%,transparent 70%);"></div>
+        <div class="c-bgm" style="width:230px;bottom:-30px;right:-30px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="c-scan"></div><div class="c-vig"></div><span class="c-num">1 / 4</span>
+        <div class="c-inner" style="justify-content:center;gap:0;">
+          <div class="c1-kicker">The Order of Light</div>
+          <svg width="64" height="64" viewBox="0 0 100 100" fill="none" style="margin-bottom:16px;"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <div class="c1-title">The Order<br>of Light</div>
+          <div style="width:50px;height:2px;background:#4A7A9A;opacity:0.45;margin:0 auto;"></div>
+          <div class="c1-seeking" style="margin-top:16px;">Now seeking musicians<br>Charlotte, NC &amp; surrounding areas</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- B · CARD 2 -->
+    <div class="card-col"><span class="card-num">Card 2 — Role</span>
+      <div class="card">
+        <div class="c-bar" style="background:#4A7A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(74,122,154,0.13) 0%,#0A0A0A 62%);"></div>
+        <div class="c-bgm" style="width:210px;bottom:-25px;right:-25px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="c-scan"></div><div class="c-vig"></div><span class="c-num">2 / 4</span>
+        <div class="c-inner">
+          <svg width="42" height="42" viewBox="0 0 100 100" fill="none" style="margin-bottom:12px;opacity:0.7;"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <div class="c2-seeking" style="color:#4A7A9A;opacity:0.85;">Seeking</div>
+          <div class="c2-role">Bassist</div>
+          <div class="c2-div" style="width:56px;background:#4A7A9A;opacity:0.45;"></div>
+          <div class="c2-tag">"The signal needs its foundation."</div>
+          <div class="c2-sound-label">Sounds like</div>
+          <div class="c2-sound">Thrice · MuteMath · Minus The Bear<br>Death Cab · Sunny Day Real Estate</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- B · CARD 3 -->
+    <div class="card-col"><span class="card-num">Card 3 — Requirements</span>
+      <div class="card">
+        <div class="c-bar" style="background:#4A7A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div><span class="c-num">3 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:32px;">
+          <div class="c3-label" style="color:#4A7A9A;">What we need from you</div>
+          <div class="c3-reqs">
+            <div class="c3-req"><div class="c3-dia" style="background:#4A7A9A;opacity:0.8;"></div><span>Groove &amp; pocket — locked with the drummer</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#4A7A9A;opacity:0.8;"></div><span>Performs to a click track live — non-negotiable</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#4A7A9A;opacity:0.8;"></div><span>Proven studio recording experience</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#4A7A9A;opacity:0.8;"></div><span>Real touring history</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#4A7A9A;opacity:0.8;"></div><span>Melodically aware bass lines</span></div>
+            <div class="c3-req"><div class="c3-dia" style="background:#4A7A9A;opacity:0.8;"></div><span>Age range: 30s–40s</span></div>
+          </div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <!-- B · CARD 4 -->
+    <div class="card-col"><span class="card-num">Card 4 — Gear + Values</span>
+      <div class="card">
+        <div class="c-bar" style="background:#4A7A9A;"></div>
+        <div style="position:absolute;inset:0;z-index:0;background:#0A0A0A;"></div>
+        <div class="c-scan"></div><div class="c-vig" style="box-shadow:inset 0 0 50px rgba(0,0,0,0.5);"></div><span class="c-num">4 / 4</span>
+        <div class="c-inner" style="justify-content:flex-start;padding-top:28px;">
+          <div class="c4-section">
+            <div class="c4-label" style="color:#4A7A9A;">Professional requirements</div>
+            <div class="c4-item"><div class="c4-dot" style="background:#4A7A9A;opacity:0.8;"></div><span>In-ear monitors required</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#4A7A9A;opacity:0.8;"></div><span>Performs to a click track live</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#4A7A9A;opacity:0.8;"></div><span>Professional bass rig — stage ready</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#4A7A9A;opacity:0.8;"></div><span>Financial contribution to band costs</span></div>
+            <div class="c4-item"><div class="c4-dot" style="background:#4A7A9A;opacity:0.8;"></div><span>Charlotte, NC — in-person rehearsals</span></div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(255,255,255,0.06);margin-bottom:16px;"></div>
+          <div class="c4-values">"Every human being deserves equal dignity. If that's contentious to you, this isn't your band. Everyone else is fully welcome here."</div>
+        </div>
+        <div class="c-bot"><span class="c-bot-band">The Order of Light</span><span class="c-bot-loc">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

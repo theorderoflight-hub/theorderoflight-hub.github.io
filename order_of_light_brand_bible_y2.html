@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Brand Bible · Year Two</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Year Two palette — same foundation, new frequency */
+    --void:          #080808;
+    --deep:          #111111;
+    --surface:       #1A1A1A;
+    --surface2:      #222222;
+    --border:        #2A2A2A;
+    --border-hi:     #3A3A3A;
+
+    /* Inherited from Year One — slightly cooler */
+    --crimson:       #B83048;
+    --crimson-bright:#CC3D56;
+    --crimson-dim:   #7A1F30;
+    --gold:          #B8965A;
+    --gold-dim:      #7A6030;
+
+    /* Year Two additions */
+    --deep-blue:     #2A5A8A;
+    --deep-blue-h:   #3A7ABF;
+    --ice:           #8AB0C8;
+    --static:        #4A4A4A;
+
+    /* Text */
+    --white:         #EDE8E0;
+    --parchment:     #C8C0B0;
+    --parchment-dim: #8A8278;
+    --grey:          #6A6A6A;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* Heavier grain — Year Two */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.065'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1000; opacity: 0.5;
+  }
+
+  /* Scan lines — new in Year Two */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 4px,
+      rgba(0,0,0,0.016) 4px, rgba(0,0,0,0.016) 5px
+    );
+    pointer-events: none; z-index: 999;
+  }
+
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .skip-link {
+    position:absolute; top:-100%; left:16px;
+    background:var(--gold); color:#080808;
+    padding:8px 16px; font-size:14px; font-weight:500;
+    text-decoration:none; z-index:9999;
+  }
+  .skip-link:focus { top:16px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 500;
+    background: rgba(8,8,8,0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center;
+    padding: 0 40px; height: 52px;
+    gap: 0;
+  }
+
+  .nav-brand {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200; font-size: 10px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--parchment-dim); margin-right: 32px; white-space: nowrap;
+  }
+
+  .nav-links { display: flex; gap: 0; margin-left: auto; }
+
+  .nav-links a {
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--parchment-dim); text-decoration: none;
+    padding: 0 16px; height: 52px;
+    display: flex; align-items: center;
+    border-left: 1px solid var(--border);
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.03); }
+
+  /* Year Two indicator */
+  .nav-y2 {
+    font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--deep-blue-h); padding: 2px 10px;
+    border: 1px solid rgba(58,122,191,0.35);
+    margin-left: 16px; white-space: nowrap;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 60px 64px;
+    position: relative; overflow: hidden;
+  }
+
+  /* Deep blue left-edge frequency line */
+  .cover::before {
+    content: '';
+    position: absolute; left: 60px; top: 80px; bottom: 80px;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      transparent, var(--deep-blue-h) 30%, var(--crimson) 70%, transparent);
+    opacity: 0.4;
+  }
+
+  /* Degraded radial — cooler than Y1 */
+  .cover-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle,
+      rgba(42,90,138,0.12) 0%,
+      rgba(184,48,72,0.06) 45%,
+      transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+    position: relative; z-index: 2;
+  }
+
+  /* Glitch offset on cover title */
+  .cover h1::before {
+    content: 'The Order of Light';
+    position: absolute;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
+    font-size: inherit;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    opacity: 0.1;
+    top: 3px; left: 2px;
+    pointer-events: none;
+  }
+
+  .cover-edition {
+    font-size: 9px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--deep-blue-h); margin-bottom: 28px;
+    position: relative; z-index: 2;
+  }
+
+  .cover-sub {
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--parchment-dim); margin-bottom: 8px;
+    position: relative; z-index: 2;
+  }
+
+  .cover-rule {
+    width: 100%; height: 1px; margin: 28px 0;
+    background: linear-gradient(to right,
+      var(--deep-blue-h), var(--crimson), transparent);
+    opacity: 0.35; position: relative; z-index: 2;
+  }
+
+  .cover-meta {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    position: relative; z-index: 2;
+  }
+
+  .cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .cover-meta-label {
+    font-size: 8px; letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--parchment-dim);
+  }
+  .cover-meta-value { font-size: 13px; color: var(--parchment); letter-spacing: 0.05em; }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 900px; margin: 0 auto;
+    padding: 80px 60px 0;
+    scroll-margin-top: 52px;
+  }
+
+  .section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-size: 11px;
+    color: var(--parchment-dim); letter-spacing: 0.12em;
+  }
+
+  .section-title {
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase;
+  }
+
+  .section-intro {
+    font-size: 13px; color: var(--parchment-dim);
+    line-height: 1.7; margin: 14px 0 32px;
+    max-width: 560px;
+  }
+
+  /* Inheritance callout */
+  .inherited {
+    background: var(--deep);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--deep-blue-h);
+    padding: 14px 18px; margin-bottom: 28px;
+    font-size: 12.5px; color: var(--parchment-dim); line-height: 1.7;
+  }
+  .inherited strong { color: var(--white); font-weight: 400; }
+
+  .callout {
+    background: var(--deep);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 14px 18px; margin: 24px 0;
+    font-size: 12.5px; color: var(--parchment-dim); line-height: 1.7;
+  }
+  .callout strong { color: var(--white); font-weight: 400; }
+  .callout.crit { border-left-color: var(--crimson-bright); }
+  .callout.blue { border-left-color: var(--deep-blue-h); }
+
+  /* ── PROSE ── */
+  .prose {
+    font-size: 14.5px; color: var(--parchment-dim);
+    line-height: 1.85; max-width: 640px;
+  }
+  .prose p { margin-bottom: 1.3em; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--white); font-weight: 400; }
+
+  /* ── MARK SECTION ── */
+  .mark-display {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    align-items: center; margin: 32px 0;
+  }
+
+  .mark-svg-wrap {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+  }
+
+  .mark-label {
+    font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--parchment-dim); text-align: center;
+  }
+
+  /* ── LOGO CARDS ── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2px; margin: 24px 0;
+  }
+
+  .logo-card {
+    padding: 32px 24px; display: flex;
+    flex-direction: column; align-items: center;
+    gap: 16px; border: 1px solid var(--border);
+  }
+
+  .logo-card.dark      { background: var(--void); }
+  .logo-card.deep-bg   { background: var(--deep); }
+  .logo-card.blue-bg   { background: rgba(42,90,138,0.15); border-color: rgba(58,122,191,0.3); }
+  .logo-card.forbidden { background: var(--surface2); opacity: 0.5; position: relative; }
+  .logo-card.forbidden::after {
+    content: 'DO NOT USE';
+    position: absolute; top: 10px; right: 12px;
+    font-size: 7px; letter-spacing: 0.22em;
+    color: var(--crimson-bright);
+  }
+
+  .logo-wordmark { text-align: center; }
+
+  .wordmark-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200; font-size: 13px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--white); display: block;
+    margin-top: 4px;
+  }
+
+  .logo-card-label {
+    font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--parchment-dim); text-align: center;
+  }
+
+  /* ── PALETTE ── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 2px; margin: 24px 0;
+  }
+
+  .swatch-card {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--border); overflow: hidden;
+  }
+
+  .swatch-block { height: 72px; position: relative; }
+
+  .swatch-new::after {
+    content: 'Year Two';
+    position: absolute; top: 8px; right: 8px;
+    font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.4); padding: 2px 6px;
+  }
+
+  .swatch-inherited::after {
+    content: 'Inherited';
+    position: absolute; top: 8px; right: 8px;
+    font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    background: rgba(0,0,0,0.4); padding: 2px 6px;
+  }
+
+  .swatch-info {
+    padding: 10px 12px;
+    background: var(--deep);
+  }
+
+  .swatch-name {
+    font-size: 10px; font-weight: 400; letter-spacing: 0.08em;
+    color: var(--white); margin-bottom: 2px;
+  }
+
+  .swatch-hex {
+    font-size: 10px; color: var(--parchment-dim);
+    font-variant-numeric: tabular-nums; letter-spacing: 0.05em;
+  }
+
+  .swatch-role {
+    font-size: 9px; color: var(--grey);
+    letter-spacing: 0.04em; margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .type-specimens {
+    display: flex; flex-direction: column;
+    gap: 2px; margin: 24px 0;
+  }
+
+  .type-specimen {
+    background: var(--deep); border: 1px solid var(--border);
+    padding: 28px 28px 24px;
+    display: grid; grid-template-columns: 1fr 200px;
+    gap: 20px; align-items: start;
+  }
+
+  .type-display { overflow: hidden; }
+
+  .type-wordmark {
+    font-family: 'DM Sans', sans-serif; font-weight: 200;
+    font-size: 28px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--white); line-height: 1;
+  }
+
+  .type-heading-cg {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: 32px; letter-spacing: 0.08em;
+    color: var(--white); line-height: 1;
+  }
+
+  .type-subhead {
+    font-family: 'DM Sans', sans-serif; font-weight: 200;
+    font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .type-body-dm {
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    font-size: 14px; color: var(--parchment-dim); line-height: 1.8;
+  }
+
+  .type-label-dm {
+    font-family: 'DM Sans', sans-serif; font-weight: 200;
+    font-size: 9px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--ice);
+  }
+
+  .type-meta {
+    display: flex; flex-direction: column; gap: 4px;
+    padding-top: 4px;
+  }
+
+  .type-font-name {
+    font-size: 9px; letter-spacing: 0.18em; color: var(--parchment-dim);
+  }
+
+  .type-usage {
+    font-size: 10px; color: var(--grey); line-height: 1.5;
+  }
+
+  .type-rule {
+    width: 100%; height: 1px; background: var(--border);
+    margin: 8px 0; border: none;
+  }
+
+  /* ── RULES TABLE ── */
+  .rules-list { display: flex; flex-direction: column; gap: 2px; margin: 24px 0; }
+
+  .rule-item {
+    background: var(--deep); border: 1px solid var(--border);
+    padding: 16px 20px;
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 16px; align-items: baseline;
+  }
+
+  .rule-verdict {
+    font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 3px 8px; border: 1px solid; width: fit-content;
+  }
+  .rule-do   { color: #6AAF8C; border-color: rgba(106,175,140,0.35); }
+  .rule-dont { color: var(--crimson-bright); border-color: rgba(204,61,86,0.35); }
+  .rule-note { color: var(--ice); border-color: rgba(138,176,200,0.35); }
+
+  .rule-text {
+    font-size: 13px; color: var(--parchment-dim); line-height: 1.6;
+  }
+  .rule-text strong { color: var(--white); font-weight: 400; }
+
+  /* ── GLITCH GRAMMAR ── */
+  .glitch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2px; margin: 24px 0;
+  }
+
+  .glitch-card {
+    background: var(--deep); border: 1px solid var(--border);
+    padding: 22px 20px;
+    position: relative;
+  }
+
+  .glitch-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+
+  .glitch-num {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: 32px; color: var(--border-hi); line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .glitch-name {
+    font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
+    color: var(--white); margin-bottom: 8px;
+  }
+
+  .glitch-desc {
+    font-size: 12px; color: var(--parchment-dim); line-height: 1.65;
+  }
+
+  .glitch-freq {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+
+  /* ── DIFF BLOCK — Year One vs Year Two ── */
+  .diff-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; margin: 24px 0;
+  }
+
+  .diff-col {
+    background: var(--deep); border: 1px solid var(--border);
+    padding: 22px 20px;
+  }
+
+  .diff-label {
+    font-size: 8px; letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--parchment-dim); margin-bottom: 14px; display: block;
+  }
+
+  .diff-item {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+    font-size: 12.5px; color: var(--parchment-dim); line-height: 1.5;
+  }
+  .diff-item:last-child { border-bottom: none; }
+
+  .diff-dot {
+    width: 4px; height: 4px; transform: rotate(45deg);
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 900px; margin: 80px auto 0;
+    padding: 24px 60px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--parchment-dim);
+    letter-spacing: 0.1em; flex-wrap: wrap; gap: 8px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .cover { padding: 100px 24px 48px; }
+    .cover::before { left: 24px; }
+    .section { padding: 60px 24px 0; }
+    .type-specimen { grid-template-columns: 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .rule-item { grid-template-columns: 1fr; gap: 8px; }
+    .nav-links { display: none; }
+    footer { padding: 24px 24px 48px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav aria-label="Page navigation">
+  <span class="nav-brand">The Order of Light</span>
+  <span class="nav-y2" aria-label="Year Two edition">Year Two</span>
+  <div class="nav-links">
+    <a href="#identity">Identity</a>
+    <a href="#palette">Palette</a>
+    <a href="#typography">Typography</a>
+    <a href="#mark">Mark</a>
+    <a href="#glitch">Glitch Grammar</a>
+    <a href="#rules">Rules</a>
+  </div>
+</nav>
+
+
+<!-- ══════════ COVER ══════════ -->
+<div class="cover" id="cover" aria-label="Cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+  <div class="cover-edition">Brand Bible · Year Two Edition</div>
+  <h1>The Order of Light</h1>
+  <p class="cover-sub">Signal House LLC · First Broadcast · Charlotte, NC</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta" role="list" aria-label="Document metadata">
+    <div class="cover-meta-item" role="listitem">
+      <span class="cover-meta-label">Edition</span>
+      <span class="cover-meta-value">Year Two</span>
+    </div>
+    <div class="cover-meta-item" role="listitem">
+      <span class="cover-meta-label">Supersedes</span>
+      <span class="cover-meta-value">Year One Brand Bible (read alongside)</span>
+    </div>
+    <div class="cover-meta-item" role="listitem">
+      <span class="cover-meta-label">Record</span>
+      <span class="cover-meta-value">Below the Line of Sight (working title)</span>
+    </div>
+    <div class="cover-meta-item" role="listitem">
+      <span class="cover-meta-label">Label</span>
+      <span class="cover-meta-value">First Broadcast</span>
+    </div>
+  </div>
+</div>
+
+
+<main id="main" tabindex="-1">
+
+
+<!-- ══════════ SECTION 1 — HOW THIS DOCUMENT WORKS ══════════ -->
+<section class="section" id="identity" aria-labelledby="s1-title">
+  <div class="section-head">
+    <span class="section-num" aria-hidden="true">01</span>
+    <h2 class="section-title" id="s1-title" style="color:var(--deep-blue-h);">How This Document Works</h2>
+  </div>
+  <p class="section-intro">
+    Year Two does not replace Year One's brand system — it inherits it, and extends it.
+    Read this document alongside the Year One Brand Bible, not instead of it.
+  </p>
+
+  <div class="inherited" role="note">
+    <strong>Inheritance principle:</strong> every rule in the Year One Brand Bible remains in effect
+    unless explicitly updated here. This document records what changes, what is added, and why.
+    Anything not mentioned is unchanged.
+  </div>
+
+  <div class="prose">
+    <p>
+      The Year Two identity is the same identity under pressure. The mark is unchanged.
+      The typefaces are unchanged. The core palette is unchanged. What Year Two adds
+      is a new frequency — deep blue, the colour of depth and signal travelling through
+      water — and a heavier treatment of degradation across all visual assets.
+    </p>
+    <p>
+      The guiding principle: <strong>same world, more worn.</strong> The grain sits heavier.
+      The damage is more present. The signal still arrives — it is simply more visibly
+      worn by the distance it has traveled. Nothing is broken. Everything has been in use.
+    </p>
+    <p>
+      The band name <strong>The Order of Light</strong> is set in DM Sans throughout —
+      on covers, in typography specimens, in the wordmark, in all public-facing materials.
+      Cormorant Garamond remains the serif layer for titles, taglines, pull quotes,
+      and display — but never for the band name itself.
+    </p>
+  </div>
+
+  <div class="diff-grid" aria-label="Year One versus Year Two comparison">
+    <div class="diff-col">
+      <span class="diff-label">Year One — What Was</span>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--crimson-bright);"></div><span>Grain: subtle, controlled — 0.04 opacity</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--crimson-bright);"></div><span>Scan lines: absent</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--crimson-bright);"></div><span>Palette: void, crimson, gold</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--crimson-bright);"></div><span>Glitch: punctuation — applied sparingly</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--crimson-bright);"></div><span>Broadcasts: open with static, structured sections</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--crimson-bright);"></div><span>Radial glow: warm, gold-tinted</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--crimson-bright);"></div><span>Conduit: certain, declarative</span></div>
+    </div>
+    <div class="diff-col" style="border-color:var(--deep-blue-h);">
+      <span class="diff-label" style="color:var(--deep-blue-h);">Year Two — What Changes</span>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--deep-blue-h);"></div><span>Grain: heavier, more persistent — 0.065 opacity</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--deep-blue-h);"></div><span>Scan lines: present across all assets</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--deep-blue-h);"></div><span>Palette: void, crimson, gold + deep blue + ice</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--deep-blue-h);"></div><span>Glitch: background condition — more persistent</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--deep-blue-h);"></div><span>Broadcasts: open mid-transmission, sections bleed</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--deep-blue-h);"></div><span>Radial glow: cooler, blue-shifted</span></div>
+      <div class="diff-item"><div class="diff-dot" style="background:var(--deep-blue-h);"></div><span>Conduit: examines, uncertain in earned ways</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SECTION 2 — PALETTE ══════════ -->
+<section class="section" id="palette" aria-labelledby="s2-title">
+  <div class="section-head">
+    <span class="section-num" aria-hidden="true">02</span>
+    <h2 class="section-title" id="s2-title" style="color:var(--deep-blue-h);">Colour Palette — Year Two</h2>
+  </div>
+  <p class="section-intro">
+    The Year One palette is inherited unchanged. Year Two adds deep blue and ice as
+    the new frequency — the colour of depth, pressure, and signal traveling through water.
+    These new colours do not replace the existing palette. They enter it as an undertone.
+  </p>
+
+  <div class="callout blue" role="note">
+    <strong>The three-pole palette:</strong> gold (the warmth of the original signal),
+    crimson (the urgency of transmission), deep blue (the cold depth of where the signal has gone).
+    The interplay between all three across a year of content is the visual story of Year Two.
+  </div>
+
+  <div class="palette-grid" role="list" aria-label="Year Two colour palette">
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-inherited" style="background:#080808;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Void</div>
+        <div class="swatch-hex">#080808</div>
+        <div class="swatch-role">Primary background. Darker than Year One's #0A0A0A — more pressure.</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-inherited" style="background:#B83048;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Crimson</div>
+        <div class="swatch-hex">#B83048</div>
+        <div class="swatch-role">Inherited. Slightly cooler than Year One. Urgency, signal, broadcast.</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-inherited" style="background:#B8965A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Gold</div>
+        <div class="swatch-hex">#B8965A</div>
+        <div class="swatch-role">Inherited. Warmth, memory, The Frequency. Moments of before.</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-new" style="background:#2A5A8A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Deep Blue</div>
+        <div class="swatch-hex">#2A5A8A</div>
+        <div class="swatch-role">New in Year Two. Depth, pressure, the further-in feeling. Use sparingly — it earns its weight through restraint.</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-new" style="background:#3A7ABF;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Deep Blue · Hi</div>
+        <div class="swatch-hex">#3A7ABF</div>
+        <div class="swatch-role">New in Year Two. Active state, typography emphasis, section labels where blue leads.</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-new" style="background:#8AB0C8;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Ice</div>
+        <div class="swatch-hex">#8AB0C8</div>
+        <div class="swatch-role">New in Year Two. Typography — primary label colour where blue leads. Cold, clear, distant.</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-new" style="background:#4A4A4A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Static</div>
+        <div class="swatch-hex">#4A4A4A</div>
+        <div class="swatch-role">New in Year Two. Degradation colour — borders, disabled states, signal damage elements.</div>
+      </div>
+    </div>
+
+    <div class="swatch-card" role="listitem">
+      <div class="swatch-block swatch-inherited" style="background:#EDE8E0;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Parchment</div>
+        <div class="swatch-hex">#EDE8E0</div>
+        <div class="swatch-role">Inherited. Primary text. Slightly cooler than Year One's #F5F0E8.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rules-list" role="list" aria-label="Palette rules">
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text">Use deep blue as the <strong>leading colour for Year Two section headers</strong>, key typography, and the accent line on Broadcasts. It signals to the audience that something has changed without explaining it.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text">Reserve gold for <strong>warmth and memory</strong> — moments that reference the past, The Frequency materials, anything that predates the deepening. Gold is now the colour of what was.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Don't</div>
+      <div class="rule-text"><strong>Do not use deep blue and gold together prominently</strong> in the same composition. They represent opposite poles — past warmth and present depth. When they appear together the tension should be intentional and controlled.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Don't</div>
+      <div class="rule-text"><strong>Do not introduce warm backgrounds</strong> — no navy gradients, no teal, no purple. The depth implied by deep blue is cold. Warmth undermines it.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-note">Note</div>
+      <div class="rule-text">The <strong>mark remains unchanged in colour</strong> — it can be rendered in any of the palette's colours as it was in Year One, with the addition of deep blue as a new valid mark colour for Year Two-specific contexts.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SECTION 3 — TYPOGRAPHY ══════════ -->
+<section class="section" id="typography" aria-labelledby="s3-title">
+  <div class="section-head">
+    <span class="section-num" aria-hidden="true">03</span>
+    <h2 class="section-title" id="s3-title" style="color:var(--deep-blue-h);">Typography</h2>
+  </div>
+  <p class="section-intro">
+    The typeface system is unchanged — DM Sans and Cormorant Garamond. The application
+    shifts in Year Two: ice replaces gold as the primary label and navigation colour,
+    gold is reserved for warmth and memory contexts. The band name is DM Sans throughout
+    without exception.
+  </p>
+
+  <div class="callout crit" role="note">
+    <strong>The Order of Light is always set in DM Sans, weight 200, tracked wide.</strong>
+    This applies to the cover, to typography specimens, to all public-facing materials,
+    to all internal documents. Cormorant Garamond is never used for the band name.
+    Cormorant remains for display titles, taglines, pull quotes, and Broadcast script styling only.
+  </div>
+
+  <div class="type-specimens" aria-label="Typography specimens">
+
+    <div class="type-specimen">
+      <div class="type-display">
+        <div class="type-wordmark">The Order of Light</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-font-name">DM Sans · ExtraLight (200)</div>
+        <hr class="type-rule">
+        <div class="type-usage">Band name / wordmark. All caps. Letter-spacing: 0.22em minimum. Used on all covers, social assets, and any context where the band name appears as a primary visual element.</div>
+      </div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-display">
+        <div class="type-heading-cg">Below the Line of Sight</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-font-name">Cormorant Garamond · Light (300)</div>
+        <hr class="type-rule">
+        <div class="type-usage">Record title, Broadcast titles, taglines. Mixed case. Letter-spacing: 0.04–0.08em. This is where Cormorant lives — display titles with weight and ceremony.</div>
+      </div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-display">
+        <div class="type-label-dm">Transmission · Year Two · First Broadcast</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-font-name">DM Sans · ExtraLight (200)</div>
+        <hr class="type-rule">
+        <div class="type-usage">Section labels, kickers, navigation, metadata. All caps. Letter-spacing: 0.38–0.45em. In Year Two: use ice (#8AB0C8) where gold was used in Year One for this role.</div>
+      </div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-display">
+        <div class="type-body-dm">The signal has gone further in. What it finds there is not dark — it is simply honest in ways that the surface could not afford to be.</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-font-name">DM Sans · Light (300)</div>
+        <hr class="type-rule">
+        <div class="type-usage">Body text, descriptions, supporting copy. Mixed case. Line height 1.75–1.85. Colour: #B0A89A (text-secondary) for supporting copy.</div>
+      </div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-display">
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:22px;color:var(--white);letter-spacing:0.02em;line-height:1.35;">"What the signal carries is not what you expected to find at this depth."</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-font-name">Cormorant Garamond · Light Italic (300)</div>
+        <hr class="type-rule">
+        <div class="type-usage">Pull quotes, Broadcast taglines, Frequency source material references. Never for the band name. This is Cormorant's primary role in Year Two.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rules-list" role="list" aria-label="Typography rules">
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text">Use <strong>ice (#8AB0C8) for navigation labels, kickers, and section markers</strong> where Year One used gold. Gold is now reserved for memory — warmth, The Frequency, the past.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text">The record title <strong>Below the Line of Sight</strong> is set in Cormorant Garamond Light — not DM Sans. Record titles and Broadcast titles are Cormorant territory.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Don't</div>
+      <div class="rule-text"><strong>Never set the band name in Cormorant Garamond</strong> — in any weight, in any context, at any size. DM Sans weight 200, tracked wide, is the only acceptable treatment.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Don't</div>
+      <div class="rule-text"><strong>Never use Cormorant below 16px</strong> on screen. At small sizes switch entirely to DM Sans. This rule is unchanged from Year One and remains absolute.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-note">Note</div>
+      <div class="rule-text">The <strong>two-typeface rule remains absolute</strong>. No third typeface enters the system in Year Two. The added depth comes from colour and degradation, not from typographic variety.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SECTION 4 — THE MARK ══════════ -->
+<section class="section" id="mark" aria-labelledby="s4-title">
+  <div class="section-head">
+    <span class="section-num" aria-hidden="true">04</span>
+    <h2 class="section-title" id="s4-title" style="color:var(--deep-blue-h);">The Mark — Year Two</h2>
+  </div>
+  <p class="section-intro">
+    The mark geometry is unchanged — the asymmetric eight-pointed form, 19-unit gaps between
+    cardinal and diagonal rays, thicker X diagonals. What changes is the treatment context
+    and the addition of deep blue as a valid mark colour.
+  </p>
+
+  <div class="inherited" role="note">
+    <strong>Geometry is locked.</strong> Cardinal rays longer. Diagonal rays slightly shorter.
+    X diagonals at stroke-width 8.5. Cardinal rays at stroke-width 7. 19-unit gaps. These
+    proportions do not change in Year Two. The mark is not redesigned — it is re-contextualised.
+  </div>
+
+  <!-- Mark display — Year Two colour variants -->
+  <div class="mark-display" role="list" aria-label="Mark colour variants for Year Two">
+
+    <div class="mark-svg-wrap" role="listitem">
+      <svg width="72" height="72" viewBox="0 0 100 100" fill="none" aria-label="Mark in parchment on void">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#EDE8E0" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#EDE8E0" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <span class="mark-label">Parchment<br>on void</span>
+    </div>
+
+    <div class="mark-svg-wrap" role="listitem">
+      <svg width="72" height="72" viewBox="0 0 100 100" fill="none" aria-label="Mark in deep blue on void — new in Year Two">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#3A7ABF" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#3A7ABF" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#3A7ABF" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#3A7ABF" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#3A7ABF" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#3A7ABF" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <span class="mark-label">Deep Blue Hi<br>on void · Year Two</span>
+    </div>
+
+    <div class="mark-svg-wrap" role="listitem">
+      <svg width="72" height="72" viewBox="0 0 100 100" fill="none" aria-label="Mark in crimson on void — inherited">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#B83048" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#B83048" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#B83048" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#B83048" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#B83048" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#B83048" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <span class="mark-label">Crimson<br>on void · inherited</span>
+    </div>
+
+    <div class="mark-svg-wrap" role="listitem">
+      <svg width="72" height="72" viewBox="0 0 100 100" fill="none" aria-label="Mark in gold on void — inherited, memory contexts">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#B8965A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#B8965A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#B8965A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#B8965A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#B8965A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#B8965A" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <span class="mark-label">Gold · memory<br>contexts only</span>
+    </div>
+
+    <div class="mark-svg-wrap" role="listitem" style="opacity:0.35;">
+      <svg width="72" height="72" viewBox="0 0 100 100" fill="none" aria-label="Mark in static — degraded treatment, controlled use only">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#4A4A4A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#4A4A4A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <span class="mark-label">Static · degraded<br>controlled use only</span>
+    </div>
+
+  </div>
+
+  <!-- Wordmark pairings -->
+  <div class="logo-grid" role="list" aria-label="Mark and wordmark pairings — Year Two">
+
+    <div class="logo-card dark" role="listitem">
+      <svg width="52" height="52" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#EDE8E0" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#EDE8E0" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="wordmark-text">The Order of Light</span>
+      </div>
+      <div class="logo-card-label">Primary — void</div>
+    </div>
+
+    <div class="logo-card blue-bg" role="listitem">
+      <svg width="52" height="52" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#EDE8E0" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#EDE8E0" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#EDE8E0" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span class="wordmark-text">The Order of Light</span>
+      </div>
+      <div class="logo-card-label">Year Two — deep blue context</div>
+    </div>
+
+    <div class="logo-card forbidden" role="listitem" aria-label="Forbidden: mark in Cormorant Garamond">
+      <svg width="52" height="52" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#4A4A4A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#4A4A4A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8"  x2="50" y2="31" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8"  y1="50" x2="31" y2="50" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#4A4A4A" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-wordmark">
+        <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:13px;letter-spacing:0.1em;color:#4A4A4A;display:block;margin-top:4px;">The Order of Light</span>
+      </div>
+      <div class="logo-card-label">Wordmark in Cormorant — forbidden</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════ SECTION 5 — GLITCH GRAMMAR ══════════ -->
+<section class="section" id="glitch" aria-labelledby="s5-title">
+  <div class="section-head">
+    <span class="section-num" aria-hidden="true">05</span>
+    <h2 class="section-title" id="s5-title" style="color:var(--deep-blue-h);">Glitch Grammar — Year Two</h2>
+  </div>
+  <p class="section-intro">
+    Year One's Glitch Grammar is inherited and extended. The techniques are the same.
+    The application is heavier — glitch moves from punctuation to background condition.
+    It is no longer occasional. It is the persistent evidence of wear.
+  </p>
+
+  <div class="inherited" role="note">
+    <strong>Year One grammar inherited:</strong> VHS tracking errors, chromatic aberration,
+    pitch drop, static hold, and tape splice all remain in use. Frequency of application
+    increases across all. The signal still arrives — it is simply more visibly worn.
+  </div>
+
+  <div class="glitch-grid" role="list" aria-label="Glitch grammar techniques — Year Two">
+
+    <div class="glitch-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--static);"></div>
+      <div class="glitch-num" aria-hidden="true">01</div>
+      <div class="glitch-name">Persistent Chromatic Aberration</div>
+      <div class="glitch-desc">
+        Year One: chromatic aberration increased briefly, then settled. Year Two: it is present
+        at a low level throughout — not dramatic, subliminal. The RGB channels are very slightly
+        misaligned at all times. Punctuation moments push it further.
+      </div>
+      <div class="glitch-freq" style="color:var(--ice);">Always present · Punctuation: 3× per Broadcast</div>
+    </div>
+
+    <div class="glitch-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--deep-blue-h);"></div>
+      <div class="glitch-num" aria-hidden="true">02</div>
+      <div class="glitch-name">Heavier Grain</div>
+      <div class="glitch-desc">
+        Grain opacity increased from 0.04 to 0.065 across all static assets. In motion content,
+        grain is more visible during moments of thematic weight — not applied randomly,
+        but with the same intentionality as Year One's tracking errors.
+      </div>
+      <div class="glitch-freq" style="color:var(--ice);">Always present · All assets</div>
+    </div>
+
+    <div class="glitch-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--crimson);"></div>
+      <div class="glitch-num" aria-hidden="true">03</div>
+      <div class="glitch-name">VHS Tracking — Extended Duration</div>
+      <div class="glitch-desc">
+        Year One: tracking errors lasted 2–3 frames. Year Two: up to 8–10 frames before recovery.
+        The signal takes longer to stabilise. Apply once in opening section, once in the
+        Message, once in the Close — never more than three times per Broadcast.
+      </div>
+      <div class="glitch-freq" style="color:var(--crimson-bright);">3× per Broadcast · max 10 frames each</div>
+    </div>
+
+    <div class="glitch-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);"></div>
+      <div class="glitch-num" aria-hidden="true">04</div>
+      <div class="glitch-name">Pitch Drop — Retained</div>
+      <div class="glitch-desc">
+        Inherited unchanged from Year One. Audio drops approximately a semitone over 2–3 seconds
+        during the Message section. Applied once per Broadcast. Most viewers will feel it rather
+        than hear it. The audio cue that something is traveling from further away.
+      </div>
+      <div class="glitch-freq" style="color:var(--gold);">Once per Broadcast · Message section</div>
+    </div>
+
+    <div class="glitch-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--deep-blue-h);"></div>
+      <div class="glitch-num" aria-hidden="true">05</div>
+      <div class="glitch-name">Scan Lines</div>
+      <div class="glitch-desc">
+        New in Year Two. A persistent horizontal scan line pattern across all video assets —
+        barely visible at normal viewing size, present on close inspection. Applied to
+        static images as well. Reinforces the sense that everything is being received
+        through an imperfect medium.
+      </div>
+      <div class="glitch-freq" style="color:var(--ice);">Always present · All assets</div>
+    </div>
+
+    <div class="glitch-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--static);"></div>
+      <div class="glitch-num" aria-hidden="true">06</div>
+      <div class="glitch-name">The Second Figure</div>
+      <div class="glitch-desc">
+        New in Year Two. From Broadcast 002: a second figure, partial, at the edge of frame.
+        Never addressed. Never explained. Appears three times across the five Broadcasts.
+        Not a glitch technique — a narrative element introduced through visual grammar.
+        The audience will find it. Let them.
+      </div>
+      <div class="glitch-freq" style="color:var(--crimson-bright);">Broadcasts 002, 004, 005 · Edge of frame only</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════ SECTION 6 — RULES ══════════ -->
+<section class="section" id="rules" aria-labelledby="s6-title">
+  <div class="section-head">
+    <span class="section-num" aria-hidden="true">06</span>
+    <h2 class="section-title" id="s6-title" style="color:var(--deep-blue-h);">Year Two Rules — Complete</h2>
+  </div>
+  <p class="section-intro">
+    All Year One rules remain in effect. The following are Year Two-specific rules and
+    updates. Where a rule conflicts with Year One, Year Two takes precedence for Year Two content.
+  </p>
+
+  <div class="rules-list" role="list" aria-label="Year Two brand rules">
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Never</div>
+      <div class="rule-text"><strong>Never set the band name in Cormorant Garamond.</strong> DM Sans weight 200, tracked wide, is the only acceptable wordmark treatment. This overrides any conflicting usage from Year One materials.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text"><strong>Use deep blue as the leading accent colour for Year Two.</strong> Section headers, navigation labels, Broadcast kickers, the accent line on covers — wherever crimson led in Year One, deep blue leads in Year Two.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text"><strong>Use gold only for warmth and memory.</strong> The Frequency materials, moments referencing Year One, anything that carries the past forward. Gold is no longer the primary accent — it is the accent of before.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Never</div>
+      <div class="rule-text"><strong>Never introduce warm backgrounds.</strong> The void remains the primary background. Deep blue enters as a surface tint (rgba, low opacity) — never as a solid field. The world is still dark.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-note">Note</div>
+      <div class="rule-text"><strong>The record title Below the Line of Sight is a working title</strong> and may change before release. All brand materials referencing the record title should treat it as provisional until confirmed.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text"><strong>Open Broadcasts mid-transmission.</strong> No static opening. The Conduit is already speaking when you arrive. This is the single most important structural change from Year One to Year Two — it reframes the nature of the broadcast from event to fragment of something continuous.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Never</div>
+      <div class="rule-text"><strong>Never explain the second figure.</strong> It appears three times. It is never addressed in any Broadcast, in any social copy, in any press material. If asked directly, the answer is silence or deflection. The audience who finds it should feel they found something real.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-dont">Never</div>
+      <div class="rule-text"><strong>Never use three typefaces.</strong> DM Sans and Cormorant Garamond remain the complete type system. No additions in Year Two. The depth comes from colour and degradation — not typographic variety.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-do">Do</div>
+      <div class="rule-text"><strong>Allow the brand to feel worn.</strong> Year Two assets should not look freshly made. The grain is heavier, the scan lines are present, the chromatic aberration is persistent. This is not careless production — it is deliberate. The signal has been traveling for a year.</div>
+    </div>
+    <div class="rule-item" role="listitem">
+      <div class="rule-verdict rule-note">Note</div>
+      <div class="rule-text"><strong>Signal House LLC / First Broadcast / The Order of Light</strong> — the three-layer structure is fixed. Signal House LLC is the legal entity. First Broadcast is the label. The Order of Light is the artist. These are not interchangeable in any public-facing context.</div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+
+</body>
+</html>

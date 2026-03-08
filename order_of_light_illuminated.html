@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — The Illuminated</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --crimson:#C0384F;--crimson-h:#D94E65;
+  --gold:#C8A55A;--gold-dim:#7A6030;--gold-hi:#E0BE78;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--text-1);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--gold);color:#0A0A0A;padding:8px 16px;font-size:14px;text-decoration:none;z-index:9999;}
+.skip-link:focus{top:16px;}
+
+/* COVER */
+.cover{min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 64px;position:relative;}
+.cover-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(200,165,90,0.1) 0%,rgba(192,56,79,0.04) 50%,transparent 75%);pointer-events:none;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--gold) 50%,transparent);opacity:0.4;}
+.cover-eyebrow{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-left:20px;}
+.cover-title{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(42px,6vw,82px);letter-spacing:0.2em;text-transform:uppercase;color:var(--text-1);line-height:0.92;padding-left:20px;}
+.cover-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(16px,2vw,22px);color:var(--text-2);padding-left:20px;margin-top:14px;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--gold),var(--crimson-h),transparent);opacity:0.3;margin:32px 0;}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-size:13px;color:var(--text-2);}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+.prose{font-size:14.5px;color:var(--text-2);line-height:1.85;max-width:640px;}
+.prose p{margin-bottom:1.3em;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--text-1);font-weight:400;}
+
+/* TIER CARDS */
+.tier-stack{display:flex;flex-direction:column;gap:2px;margin:24px 0;}
+.tier-card{border:1px solid var(--border);overflow:hidden;}
+.tier-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:22px 24px;background:var(--deep);}
+.tier-mark{width:36px;height:36px;display:flex;align-items:center;justify-content:center;}
+.tier-name{font-family:'DM Sans',sans-serif;font-weight:300;font-size:16px;letter-spacing:0.06em;color:var(--text-1);}
+.tier-price{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;color:var(--gold);letter-spacing:0.04em;}
+.tier-price-note{font-size:9px;color:var(--text-3);letter-spacing:0.12em;margin-top:2px;text-align:right;}
+.tier-body{padding:20px 24px;background:var(--void);border-top:1px solid var(--border);}
+.tier-desc{font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:16px;max-width:600px;}
+.tier-benefits{display:flex;flex-direction:column;gap:0;}
+.benefit-row{display:flex;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text-2);}
+.benefit-row:last-child{border-bottom:none;}
+.benefit-dot{width:4px;height:4px;transform:rotate(45deg);flex-shrink:0;margin-top:2px;}
+.benefit-row strong{color:var(--text-1);font-weight:400;}
+
+/* KIT CONTENTS */
+.kit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2px;margin:20px 0 28px;}
+.kit-item{background:var(--deep);border:1px solid var(--border);padding:20px 18px;}
+.kit-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:28px;color:var(--border-hi);line-height:1;margin-bottom:8px;}
+.kit-name{font-size:13px;color:var(--text-1);margin-bottom:6px;font-weight:300;letter-spacing:0.04em;}
+.kit-desc{font-size:11.5px;color:var(--text-2);line-height:1.6;}
+
+/* DISCORD */
+.discord-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:20px 0;}
+.dc-card{background:var(--deep);border:1px solid var(--border);padding:20px 20px;}
+.dc-label{font-size:8px;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.dc-channel{font-size:13px;color:var(--text-1);margin-bottom:3px;}
+.dc-desc{font-size:11px;color:var(--text-3);line-height:1.55;}
+.dc-channels{display:flex;flex-direction:column;gap:10px;}
+
+/* TIMELINE */
+.launch-steps{display:flex;flex-direction:column;gap:0;margin:20px 0;}
+.ls-item{display:grid;grid-template-columns:80px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--border);}
+.ls-item:last-child{border-bottom:none;}
+.ls-phase{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);}
+.ls-title{font-size:14px;color:var(--text-1);margin-bottom:5px;}
+.ls-desc{font-size:12.5px;color:var(--text-2);line-height:1.65;}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+.callout.crit{border-left-color:var(--crimson-h);}
+
+footer{max-width:900px;margin:72px auto 0;padding:22px 60px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);letter-spacing:0.1em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.cover{padding:80px 24px 48px;}.cover-line{left:24px;}.wrap{padding:0 24px 80px;}.discord-grid{grid-template-columns:1fr;}.ls-item{grid-template-columns:1fr;gap:6px;}.tier-head{grid-template-columns:auto 1fr;}.tier-price{display:none;}footer{padding:22px 24px 48px;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-eyebrow">The Order of Light · Fan Membership Framework · Internal</p>
+  <h1 class="cover-title">The<br>Illuminated</h1>
+  <p class="cover-sub">A community, not a mailing list. A world to belong to, not a product to buy.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Launch</span><span class="cm-value">Alongside EP 01</span></div>
+    <div class="cm-item"><span class="cm-label">Founding cap</span><span class="cm-value">108 members</span></div>
+    <div class="cm-item"><span class="cm-label">Platform</span><span class="cm-value">Discord + email</span></div>
+    <div class="cm-item"><span class="cm-label">Kit fulfilment</span><span class="cm-value">Founding tier only</span></div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+  <!-- PHILOSOPHY -->
+  <section class="section" id="philosophy" aria-labelledby="phil-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="phil-title" style="color:var(--gold);">Philosophy</h2>
+    </div>
+    <div class="prose">
+      <p>
+        The Illuminated is the inner community of The Order of Light. It is designed as a
+        genuine creative community — not a revenue stream disguised as one. The distinction matters:
+        members pay to be closer to the work, not to be marketed at from a shorter distance.
+      </p>
+      <p>
+        Everything the Illuminated receives — early access, exclusive content, physical objects —
+        should feel like it was made for them specifically. The mythology of the project makes
+        this natural: they are not subscribers, they are <strong>members of an order</strong>.
+        That framing should be consistent across every touchpoint.
+      </p>
+      <p>
+        The founding cap of <strong>108</strong> is not arbitrary — it is the mythology's
+        central number, and it makes the founding cohort genuinely finite. Once 108 founding
+        memberships are issued, they cannot be reissued. This is not a marketing trick.
+        It is a commitment to the people who arrived first.
+      </p>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section class="section" id="tiers" aria-labelledby="tiers-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="tiers-title" style="color:var(--gold);">Membership Tiers</h2>
+    </div>
+    <p class="sec-intro">Three tiers. All include Discord access. Prices are indicative — confirm before launch.</p>
+
+    <div class="tier-stack" role="list" aria-label="Membership tiers">
+
+      <!-- TIER 1 — THE SIGNAL -->
+      <div class="tier-card" role="listitem" style="border-color:rgba(200,165,90,0.25);">
+        <div class="tier-head" style="background:rgba(200,165,90,0.05);">
+          <div class="tier-mark">
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <line x1="20" y1="20" x2="80" y2="80" stroke="#C8A55A" stroke-width="8" stroke-linecap="square"/>
+              <line x1="80" y1="20" x2="20" y2="80" stroke="#C8A55A" stroke-width="8" stroke-linecap="square"/>
+              <line x1="50" y1="50" x2="50" y2="88" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+              <line x1="50" y1="10" x2="50" y2="32" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+              <line x1="10" y1="50" x2="32" y2="50" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+              <line x1="68" y1="50" x2="90" y2="50" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tier-name">The Signal</div>
+            <div style="font-size:10px;color:var(--text-3);letter-spacing:0.1em;margin-top:2px;">Entry level · Digital access</div>
+          </div>
+          <div><div class="tier-price">$5<span style="font-size:14px;">/mo</span></div><div class="tier-price-note">or $50/yr</div></div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">The base tier — for those who want to be inside the world without the physical component. Discord access, early music, and a presence in the community.</p>
+          <div class="tier-benefits">
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Discord access — all community channels</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span><strong>48-hour early access</strong> to all releases before public</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Illuminated-only behind-the-scenes content</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Advance notice of live shows and tickets</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Name in the credits of all releases</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 2 — THE FREQUENCY -->
+      <div class="tier-card" role="listitem" style="border-color:rgba(192,56,79,0.3);">
+        <div class="tier-head" style="background:rgba(192,56,79,0.06);">
+          <div class="tier-mark">
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <line x1="20" y1="20" x2="80" y2="80" stroke="#D94E65" stroke-width="8" stroke-linecap="square"/>
+              <line x1="80" y1="20" x2="20" y2="80" stroke="#D94E65" stroke-width="8" stroke-linecap="square"/>
+              <line x1="50" y1="50" x2="50" y2="88" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+              <line x1="50" y1="10" x2="50" y2="32" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+              <line x1="10" y1="50" x2="32" y2="50" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+              <line x1="68" y1="50" x2="90" y2="50" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tier-name">The Frequency</div>
+            <div style="font-size:10px;color:var(--text-3);letter-spacing:0.1em;margin-top:2px;">Mid tier · Digital + exclusive</div>
+          </div>
+          <div><div class="tier-price">$12<span style="font-size:14px;">/mo</span></div><div class="tier-price-note">or $120/yr</div></div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">For those who want deeper access to the creative process — demos, the stories behind songs, and direct interaction with the project.</p>
+          <div class="tier-benefits">
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span><strong>Everything in The Signal</strong></span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span><strong>1-week early access</strong> to all releases</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Demo recordings — raw versions before production</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Monthly voice memo — the story behind a song in progress</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>The Frequency — full context before public announcement</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Priority access to limited merch drops</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Discounted show tickets — Frequency tier and above</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 3 — THE ILLUMINATED FOUNDING -->
+      <div class="tier-card" role="listitem" style="border-color:rgba(200,165,90,0.6);">
+        <div class="tier-head" style="background:linear-gradient(135deg,rgba(200,165,90,0.12),rgba(192,56,79,0.06));">
+          <div class="tier-mark">
+            <svg width="32" height="32" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <line x1="13" y1="13" x2="87" y2="87" stroke="#E0BE78" stroke-width="8.5" stroke-linecap="square"/>
+              <line x1="87" y1="13" x2="13" y2="87" stroke="#E0BE78" stroke-width="8.5" stroke-linecap="square"/>
+              <line x1="50" y1="50" x2="50" y2="91" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+              <line x1="50" y1="8"  x2="50" y2="31" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+              <line x1="8"  y1="50" x2="31" y2="50" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+              <line x1="69" y1="50" x2="92" y2="50" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tier-name" style="color:var(--gold-hi);">The Illuminated — Founding</div>
+            <div style="font-size:10px;color:var(--gold-dim);letter-spacing:0.1em;margin-top:2px;">Limited to 108 · Physical ordination kit included</div>
+          </div>
+          <div><div class="tier-price" style="color:var(--gold-hi);">$108<span style="font-size:12px;"> once</span></div><div class="tier-price-note">+ $12/mo after</div></div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">The original 108. A one-time founding payment that covers the physical ordination kit and establishes your membership permanently. After the founding payment, billed monthly at The Frequency rate. Non-transferable. Limited to 108 members, ever.</p>
+          <div class="tier-benefits">
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span><strong>Everything in The Frequency tier — permanently</strong></span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span><strong>Physical ordination kit</strong> — shipped to founding members</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Numbered ordination certificate — your number in the 108</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Founding member Discord role — permanent, visible</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Guest list access to first three live shows</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Name inscribed in liner notes of all Year One releases</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Exclusive: Year End broadcast made for founding members only</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" role="note">
+      <strong>Pricing review:</strong> confirm final pricing with an accountant before launch.
+      Consider platform fees (Patreon takes 8–12%, Memberful 4.9%+$0.30, Ko-fi 0% on Gold).
+      The $108 founding fee is intentionally the mythology number — non-negotiable on that figure.
+    </div>
+  </section>
+
+  <!-- ORDINATION KIT -->
+  <section class="section" id="kit" aria-labelledby="kit-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="kit-title" style="color:var(--gold);">Ordination Kit — Contents</h2>
+    </div>
+    <p class="sec-intro">Physical kit shipped to founding members only. Each item numbered 1–108. Production brief — not final design.</p>
+
+    <div class="kit-grid" role="list" aria-label="Ordination kit contents">
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">01</div>
+        <div class="kit-name">Ordination Certificate</div>
+        <div class="kit-desc">Heavyweight uncoated stock. Numbered in sequence. The Order of Light mark blind-embossed. Member's number hand-written or letterpressed. The founding document.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">02</div>
+        <div class="kit-name">The Mark — Enamel Pin</div>
+        <div class="kit-desc">The eight-pointed geometry in hard enamel. Black base, gold fill. 25mm. A physical version of the mark — the only official merchandise that carries it in three dimensions.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">03</div>
+        <div class="kit-name">The Frequency — Year One Source</div>
+        <div class="kit-desc">A printed copy of The Source — the chart and lyric sheet sent to collaborators. The same object the artists received, printed and numbered. Evidence of the process.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">04</div>
+        <div class="kit-name">The 108 — Print</div>
+        <div class="kit-desc">A4 or letter format. Void black background. The number 108 in DM Sans ExtraLight at extreme scale. Nothing else. The mythology's central number as a physical object.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">05</div>
+        <div class="kit-name">Wax Seal Sticker Sheet</div>
+        <div class="kit-desc">The Order of Light mark reproduced as a sheet of premium foil stickers. The mark in gold, crimson, and parchment. Eight stickers per sheet.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">06</div>
+        <div class="kit-name">The Kit — Outer Packaging</div>
+        <div class="kit-desc">Black rigid mailer or folding box. The mark and member number printed on the exterior. Inside: black tissue, sealed with the wax-impression sticker. The unboxing is part of the mythology.</div>
+      </div>
+    </div>
+
+    <div class="callout crit" role="note">
+      <strong>Production note:</strong> source quotes for print and enamel manufacturing before
+      confirming the $108 price point. Minimum order quantities for enamel pins are typically
+      50–100 units — the 108 cap works with this. Recommend using a print-on-demand certificate
+      printer for the numbered certificates to avoid holding stock. Budget approximately
+      $30–45 per kit all-in at 108 units.
+    </div>
+  </section>
+
+  <!-- DISCORD -->
+  <section class="section" id="discord" aria-labelledby="disc-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">04</span>
+      <h2 class="sec-title" id="disc-title" style="color:var(--gold);">Discord Structure</h2>
+    </div>
+    <p class="sec-intro">The community backbone. All tiers access Discord — channels are gated by role.</p>
+
+    <div class="discord-grid" role="list" aria-label="Discord channel structure">
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">All members</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">#welcome-to-the-order</div><div class="dc-desc">Pinned orientation. The mythology framing. Rules.</div></div>
+          <div><div class="dc-channel">#transmissions</div><div class="dc-desc">Official announcements — releases, shows, Broadcasts.</div></div>
+          <div><div class="dc-channel">#the-signal</div><div class="dc-desc">General community discussion.</div></div>
+          <div><div class="dc-channel">#the-frequency</div><div class="dc-desc">Music discussion — what the sound is doing and why.</div></div>
+        </div>
+      </div>
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">The Frequency tier + Founding</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">#signal-room</div><div class="dc-desc">Demos, voice memos, work-in-progress. The raw signal.</div></div>
+          <div><div class="dc-channel">#the-process</div><div class="dc-desc">Behind the scenes — recording, writing, decisions.</div></div>
+          <div><div class="dc-channel">#merch-access</div><div class="dc-desc">Early and priority access to merchandise drops.</div></div>
+        </div>
+      </div>
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">Founding members only</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">#the-108</div><div class="dc-desc">Private channel. Founding members only. The inner order.</div></div>
+          <div><div class="dc-channel">#before-the-signal</div><div class="dc-desc">Content that predates the public release — the origin material.</div></div>
+        </div>
+      </div>
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">Moderation notes</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">Identity protection</div><div class="dc-desc">No discussion of band member identities in any public channel. Founding channel excepted — founding members are vetted.</div></div>
+          <div><div class="dc-channel">Mythology integrity</div><div class="dc-desc">The Conduit and mythology are treated as real within the server. Breaking the fourth wall should be redirected quietly.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNCH PLAN -->
+  <section class="section" id="launch" aria-labelledby="launch-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">05</span>
+      <h2 class="sec-title" id="launch-title" style="color:var(--gold);">Launch Sequence</h2>
+    </div>
+
+    <div class="launch-steps" role="list" aria-label="Illuminated launch sequence">
+      <div class="ls-item" role="listitem">
+        <div class="ls-phase">Pre-launch<br>Month −2</div>
+        <div>
+          <div class="ls-title">Set up membership platform and Discord</div>
+          <div class="ls-desc">Choose platform (Memberful recommended for direct Stripe integration), configure tiers and pricing, build out Discord channels and role gating. Test the full flow end-to-end before any public announcement.</div>
+        </div>
+      </div>
+      <div class="ls-item" role="listitem">
+        <div class="ls-phase">Pre-launch<br>Month −1</div>
+        <div>
+          <div class="ls-title">Finalise and manufacture ordination kits</div>
+          <div class="ls-desc">Place manufacturing orders for enamel pins and print materials. Confirm all 108 kit components are ready to ship within two weeks of founding membership close. Do not open founding memberships until kit stock is confirmed.</div>
+        </div>
+      </div>
+      <div class="ls-item" role="listitem">
+        <div class="ls-phase">Launch<br>EP 01 week</div>
+        <div>
+          <div class="ls-title">Founding memberships open — 108 only</div>
+          <div class="ls-desc">Announce alongside EP 01. The Illuminated opens simultaneously with the first release. The founding cap is prominently displayed — a live counter if the platform supports it. The mythology framing in all announcement copy: these are the first to receive the signal.</div>
+        </div>
+      </div>
+      <div class="ls-item" role="listitem">
+        <div class="ls-phase">Post-launch<br>+2 weeks</div>
+        <div>
+          <div class="ls-title">Kit fulfilment — founding members</div>
+          <div class="ls-desc">Ship all ordination kits within two weeks of founding memberships closing or reaching 108, whichever comes first. Tracking number sent to each member. Document the packing and shipping process for social content — the kits being packed is content.</div>
+        </div>
+      </div>
+      <div class="ls-item" role="listitem">
+        <div class="ls-phase">Ongoing<br>Monthly</div>
+        <div>
+          <div class="ls-title">Regular tier and general memberships open permanently</div>
+          <div class="ls-desc">The Signal and The Frequency tiers remain open indefinitely after launch. Founding tier closes once 108 is reached — permanently. Monthly voice memo and exclusive content delivered consistently. Consistency is the foundation of the community's trust.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="section" id="platform" aria-labelledby="plat-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">06</span>
+      <h2 class="sec-title" id="plat-title" style="color:var(--gold);">Platform Recommendation</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;margin:16px 0;">
+      <div style="background:var(--deep);border:1px solid rgba(200,165,90,0.4);padding:20px 22px;">
+        <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Recommended</div>
+        <div style="font-size:15px;color:var(--text-1);margin-bottom:6px;">Memberful</div>
+        <div style="font-size:12.5px;color:var(--text-2);line-height:1.7;">Integrates directly with Stripe (lowest fees), allows custom branding, supports Discord role integration natively, and lets you host content directly. No marketplace — members join through your own site. 4.9% + $0.30 per transaction. Most professional option for a project that wants to control its own presentation.</div>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;">
+        <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;">Alternative</div>
+        <div style="font-size:15px;color:var(--text-1);margin-bottom:6px;">Patreon</div>
+        <div style="font-size:12.5px;color:var(--text-2);line-height:1.7;">Higher discoverability, established audience familiarity with the format. 8% platform fee on the Pro plan. Built-in Discord integration. Lower control over branding and presentation — members see the Patreon interface, not yours. Acceptable if launching quickly is the priority.</div>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;">
+        <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;">Not recommended</div>
+        <div style="font-size:15px;color:var(--text-1);margin-bottom:6px;">Bandcamp subscriptions</div>
+        <div style="font-size:12.5px;color:var(--text-2);line-height:1.7;">Limited to music and downloads. No Discord integration, no physical tier support, no community features. Fine as an additional channel but not a primary membership platform.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+</body>
+</html>

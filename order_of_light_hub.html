@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Document Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --card-accent: transparent;
+  --text-primary: rgba(245,240,232,0.9);
+  /* Core palette */
+  --void:      #0A0A0A;
+  --deep:      #141414;
+  --surface:   #1C1C1C;
+  --border:    #2E2E2E;
+  --border-hi: #444444;
+
+  /* Text — all pass WCAG AA against --deep */
+  --text-primary:   #F0EBE1;   /* 14.2:1 against #141414 */
+  --text-secondary: #B8AFA0;   /* 7.1:1  against #141414 */
+  --text-tertiary:  #8A8278;   /* 4.6:1  against #141414 */
+  --text-disabled:  #5C5650;   /* 3.1:1  — decorative only, never content */
+
+  /* Accent */
+  --crimson:    #C0384F;   /* 4.6:1 against #141414 — AA large text */
+  --crimson-hi: #D94E65;   /* 5.8:1 against #141414 — AA body text */
+  --gold:       #C8A55A;   /* 5.2:1 against #141414 — AA body text */
+  --gold-dim:   #9A7D3E;   /* 3.5:1 — decorative only */
+
+  /* Role accents — all ≥ 4.5:1 against #1C1C1C */
+  --r-vocalist:  #D4B06A;   /* 5.6:1 */
+  --r-drummer:   #D94E65;   /* 5.8:1 */
+  --r-guitarist: #6AAF8C;   /* 5.1:1 */
+  --r-keys:      #9B8EBF;   /* 5.3:1 */
+  --r-bassist:   #6AA3C8;   /* 5.4:1 */
+
+  /* Layout */
+  --nav-w: 240px;
+  --max-w: 960px;
+  --radius: 2px;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--void);
+  color: var(--text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── FOCUS STYLES — WCAG 2.4.7 ── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* ── SKIP LINK — WCAG 2.4.1 ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--gold);
+  color: #0A0A0A;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: var(--radius);
+}
+.skip-link:focus { top: 16px; }
+
+
+/* ══════════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════════ */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR NAV ── */
+.sidebar {
+  width: var(--nav-w);
+  background: var(--deep);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo {
+  padding: 28px 20px 24px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.wordmark {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  font-size: 11px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1.6;
+  display: block;
+}
+
+.wordmark-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Nav sections */
+.nav-section { padding: 20px 0 8px; }
+
+.nav-section-label {
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 0 20px 8px;
+  display: block;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  line-height: 1.4;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.04);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  border-left-color: var(--crimson-hi);
+  background: rgba(217,78,101,0.06);
+}
+
+.nav-dot {
+  width: 6px; height: 6px;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.nav-footer {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  margin-left: var(--nav-w);
+  flex: 1;
+  max-width: 100%;
+}
+
+.main-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 64px 48px 80px;
+}
+
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero {
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 64px;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--crimson-hi);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 40px;
+  height: 1px;
+  background: var(--crimson-hi);
+  opacity: 0.5;
+}
+
+.hero-wordmark {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 580px;
+}
+
+/* Stats row */
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 28px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+
+/* ══════════════════════════════════════════
+   SECTION
+══════════════════════════════════════════ */
+.doc-section {
+  margin-bottom: 64px;
+  scroll-margin-top: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.section-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.section-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 12px;
+  border: none;
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 560px;
+  letter-spacing: 0.01em;
+}
+
+
+/* ══════════════════════════════════════════
+   DOCUMENT CARDS
+══════════════════════════════════════════ */
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2px;
+}
+
+.doc-grid-full {
+  grid-template-columns: 1fr;
+}
+
+.doc-card {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.doc-card:hover {
+  border-color: var(--border-hi);
+  background: var(--surface);
+}
+
+/* colour bar top */
+.doc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--card-accent, transparent);
+  transition: opacity 0.2s;
+}
+
+.doc-card-tag {
+  font-size: 8.5px;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doc-card-dot {
+  width: 5px; height: 5px;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.doc-card-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.doc-card-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+
+.doc-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.doc-card-size {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.12em;
+}
+
+.doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 7px 14px;
+  border: 1px solid var(--border-hi);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.doc-link:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--text-tertiary);
+}
+
+/* Arrow icon */
+.doc-link-arrow {
+  font-size: 10px;
+  opacity: 0.6;
+  transition: transform 0.2s;
+}
+.doc-link:hover .doc-link-arrow {
+  transform: translateX(2px);
+}
+
+
+/* ══════════════════════════════════════════
+   ROLE CARDS — recruitment grid
+══════════════════════════════════════════ */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 2px;
+}
+
+.role-card {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.role-card:hover {
+  border-color: var(--border-hi);
+  background: var(--surface);
+}
+
+.role-card-label {
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.role-card-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.role-card-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.role-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid var(--border-hi);
+  transition: background 0.2s, border-color 0.2s;
+  align-self: flex-start;
+}
+.role-link:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--text-tertiary);
+}
+
+
+/* ══════════════════════════════════════════
+   AD FORMAT TABLE
+══════════════════════════════════════════ */
+.format-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.format-table caption {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.format-table th {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--deep);
+}
+
+.format-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.format-table tr:last-child td { border-bottom: none; }
+
+.format-table tr:hover td {
+  background: rgba(255,255,255,0.02);
+  color: var(--text-primary);
+}
+
+.format-check {
+  color: var(--r-guitarist);
+  font-size: 13px;
+}
+.format-cross {
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+.format-note {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+
+/* ══════════════════════════════════════════
+   CALLOUT / NOTE BOX
+══════════════════════════════════════════ */
+.callout {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.callout strong {
+  color: var(--text-primary);
+  font-weight: 400;
+}
+.callout.info { border-left-color: var(--r-bassist); }
+.callout.warn { border-left-color: var(--gold); }
+.callout.crit { border-left-color: var(--r-drummer); }
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root { --nav-w: 0px; }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main { margin-left: 0; }
+  .main-inner { padding: 32px 20px 60px; }
+
+  .doc-grid { grid-template-columns: 1fr; }
+  .role-grid { grid-template-columns: 1fr 1fr; }
+  .hero-stats { gap: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="layout">
+
+  <nav class="sidebar" aria-label="Document navigation">
+    <div class="sidebar-logo" aria-hidden="true">
+      <span class="wordmark">The Order<br>of Light</span>
+      <span class="wordmark-sub">Document Hub</span>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label" id="nav-setup-label">Setup</span>
+      <ul role="list" aria-labelledby="nav-setup-label" style="list-style:none;">
+        <li><a href="#setup" class="nav-link"><div class="nav-dot" style="background:var(--gold);" aria-hidden="true"></div>Launch Checklist</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label" id="nav-brand-label">Brand &amp; Identity</span>
+      <ul role="list" aria-labelledby="nav-brand-label" style="list-style:none;">
+        <li><a href="#brand-identity" class="nav-link"><div class="nav-dot" style="background:var(--crimson-hi);" aria-hidden="true"></div>Brand Bible</a></li>
+        <li><a href="#brand-identity" class="nav-link"><div class="nav-dot" style="background:var(--crimson-hi);" aria-hidden="true"></div>Concept Explainer</a></li>
+        <li><a href="#brand-identity" class="nav-link"><div class="nav-dot" style="background:var(--crimson-hi);" aria-hidden="true"></div>EPK</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label" id="nav-recruit-label">Recruitment</span>
+      <ul role="list" aria-labelledby="nav-recruit-label" style="list-style:none;">
+        <li><a href="#recruitment" class="nav-link"><div class="nav-dot" style="background:var(--gold);" aria-hidden="true"></div>Recruitment Package</a></li>
+        <li><a href="#roles" class="nav-link"><div class="nav-dot" style="background:var(--r-vocalist);" aria-hidden="true"></div>Vocalist</a></li>
+        <li><a href="#roles" class="nav-link"><div class="nav-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Drummer</a></li>
+        <li><a href="#roles" class="nav-link"><div class="nav-dot" style="background:var(--r-guitarist);" aria-hidden="true"></div>Guitarist</a></li>
+        <li><a href="#roles" class="nav-link"><div class="nav-dot" style="background:var(--r-keys);" aria-hidden="true"></div>Keys / Synth</a></li>
+        <li><a href="#roles" class="nav-link"><div class="nav-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Bassist</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label" id="nav-ads-label">Ad Materials</span>
+      <ul role="list" aria-labelledby="nav-ads-label" style="list-style:none;">
+        <li><a href="#ad-materials" class="nav-link"><div class="nav-dot" style="background:var(--r-keys);" aria-hidden="true"></div>Facebook / Craigslist</a></li>
+        <li><a href="#ad-materials" class="nav-link"><div class="nav-dot" style="background:var(--r-keys);" aria-hidden="true"></div>Social Images</a></li>
+        <li><a href="#ad-materials" class="nav-link"><div class="nav-dot" style="background:var(--r-keys);" aria-hidden="true"></div>Carousel Ads</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label" id="nav-campaign-label">Campaign &amp; Strategy</span>
+      <ul role="list" aria-labelledby="nav-campaign-label" style="list-style:none;">
+        <li><a href="#campaign" class="nav-link"><div class="nav-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Campaign Master</a></li>
+        <li><a href="#campaign" class="nav-link"><div class="nav-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Social Templates</a></li>
+        <li><a href="#campaign" class="nav-link"><div class="nav-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Landing Page</a></li>
+        <li><a href="#campaign" class="nav-link"><div class="nav-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>The Frequency</a></li>
+        <li><a href="#campaign" class="nav-link"><div class="nav-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Content Calendar</a></li>
+        <li><a href="#campaign" class="nav-link"><div class="nav-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>The Source</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label" id="nav-ops-label">Operations & Live</span>
+      <ul role="list" aria-labelledby="nav-ops-label" style="list-style:none;">
+        <li><a href="#operations" class="nav-link"><div class="nav-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Broadcast Guide</a></li>
+        <li><a href="#operations" class="nav-link"><div class="nav-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Live Production</a></li>
+        <li><a href="#operations" class="nav-link"><div class="nav-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>The Illuminated</a></li>
+        <li><a href="#operations" class="nav-link"><div class="nav-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Ordination Kit</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section" style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;">
+      <span class="nav-section-label" id="nav-y2-label" style="color:rgba(106,163,200,0.5);">Future · Year Two</span>
+      <ul role="list" aria-labelledby="nav-y2-label" style="list-style:none;">
+        <li><a href="#year-two" class="nav-link" style="opacity:0.6;"><div class="nav-dot" style="background:var(--r-bassist);opacity:0.5;" aria-hidden="true"></div>Year Two Concept</a></li>
+        <li><a href="#year-two" class="nav-link" style="opacity:0.6;"><div class="nav-dot" style="background:var(--r-bassist);opacity:0.5;" aria-hidden="true"></div>Brand Bible Y2</a></li>
+        <li><a href="#year-two" class="nav-link" style="opacity:0.6;"><div class="nav-dot" style="background:var(--r-bassist);opacity:0.5;" aria-hidden="true"></div>Campaign Master Y2</a></li>
+      </ul>
+    </div>
+
+        <div class="nav-section" style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;">
+      <span class="nav-section-label" id="nav-entities-label">Signal House &amp; FB</span>
+      <ul role="list" aria-labelledby="nav-entities-label" style="list-style:none;">
+        <li><a href="#entities" class="nav-link"><div class="nav-dot" style="background:var(--gold-dim);" aria-hidden="true"></div>Signal House</a></li>
+        <li><a href="#entities" class="nav-link"><div class="nav-dot" style="background:var(--gold-dim);" aria-hidden="true"></div>First Broadcast</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label" id="nav-merch-label">Merch &amp; Membership</span>
+      <ul role="list" aria-labelledby="nav-merch-label" style="list-style:none;">
+        <li><a href="#merch" class="nav-link"><div class="nav-dot" style="background:var(--crimson);" aria-hidden="true"></div>Merch &amp; Illuminated</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-footer" aria-label="Document count">
+      29 documents · Charlotte, NC
+    </div>
+  </nav>
+
+
+  <main class="main" id="main-content" tabindex="-1">
+    <div class="main-inner">
+
+      <header class="hero">
+        <p class="hero-eyebrow" aria-hidden="true">Internal Document Hub</p>
+        <h1 class="hero-wordmark">The Order of Light</h1>
+        <p class="hero-subtitle">Charlotte, NC — Original Alternative Rock</p>
+        <p class="hero-desc">
+          All brand, recruitment, advertising, campaign, and operations documents in one place.
+          Legal entity: <strong style="color:var(--text-primary);font-weight:400;">Signal House LLC</strong> &nbsp;·&nbsp;
+          Label: <strong style="color:var(--text-primary);font-weight:400;">First Broadcast</strong> &nbsp;·&nbsp;
+          Artist: <strong style="color:var(--text-primary);font-weight:400;">The Order of Light</strong>
+          <br>Each document opens in a new tab. Keep this page bookmarked as your master reference.
+        </p>
+        <div class="hero-stats" role="list" aria-label="Document summary">
+          <div class="stat" role="listitem"><span class="stat-num">27</span><span class="stat-label">Documents</span></div>
+          <div class="stat" role="listitem"><span class="stat-num">6</span><span class="stat-label">Sections</span></div>
+          <div class="stat" role="listitem"><span class="stat-num">5</span><span class="stat-label">Open Roles</span></div>
+        </div>
+      </header>
+
+
+      <!-- SETUP -->
+      <section class="doc-section" id="setup" aria-labelledby="section-setup-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">00</span>
+          <h2 class="section-title" id="section-setup-title">Setup Checklist</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">The phased launch checklist — from legal foundation through first release. Complete in order.</p>
+        <div class="doc-grid doc-grid-full">
+          <div class="doc-card" style="--card-accent: var(--gold);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--gold);" aria-hidden="true"></div>Setup · Phase 1–8</div>
+            <h3 class="doc-card-title">Launch Checklist</h3>
+            <p class="doc-card-desc">Eight phases covering LLC formation, label setup, member protection framework (pseudonym system, equity structure, writing credit log), platform registration, pre-launch, and release. Date picker with automatic offsets. Progress tracking across ~42 items.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">64 KB · 8 phases · ~42 items</span><a href="order_of_light_checklist.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Launch Checklist in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- BRAND & IDENTITY -->
+      <section class="doc-section" id="brand-identity" aria-labelledby="section-brand-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">01</span>
+          <h2 class="section-title" id="section-brand-title">Brand &amp; Identity</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">The visual and narrative identity of the project — plus the press-facing EPK for media and industry use.</p>
+        <div class="doc-grid">
+          <div class="doc-card" style="--card-accent: var(--crimson-hi);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--crimson-hi);" aria-hidden="true"></div>Brand · Identity System</div>
+            <h3 class="doc-card-title">Brand Bible</h3>
+            <p class="doc-card-desc">Complete visual identity system — the mark, colour palette, typography (DM Sans + Cormorant Garamond), Glitch Grammar, logo variants, do/don't rules. The definitive reference for all Year One visual decisions.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">36 KB</span><a href="order_of_light_brand_bible.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Brand Bible in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--crimson-hi);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--crimson-hi);" aria-hidden="true"></div>Brand · Prospective Members</div>
+            <h3 class="doc-card-title">Concept Explainer</h3>
+            <p class="doc-card-desc">The full picture for serious candidates — the music, the mythology, the campaign infrastructure, professional standards, financial expectations, and the audition process. Designed to filter for fit before a conversation happens.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">21 KB</span><a href="ool_concept_explainer.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Concept Explainer in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--crimson-hi);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--crimson-hi);" aria-hidden="true"></div>Brand · Press &amp; Industry</div>
+            <h3 class="doc-card-title">Electronic Press Kit (EPK)</h3>
+            <p class="doc-card-desc">For media, blogs, playlist curators, and venue bookers. Two biography lengths (50 and 200 words), sound references, the project framework, release timeline, asset links, and contact. Includes Fender and Ernie Ball endorsement credits.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">23 KB · 6 sections</span><a href="order_of_light_epk.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open EPK in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- RECRUITMENT -->
+      <section class="doc-section" id="recruitment" aria-labelledby="section-recruit-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">02</span>
+          <h2 class="section-title" id="section-recruit-title">Recruitment</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">The full recruitment package and individual role documents for all five open positions.</p>
+        <div class="doc-grid" style="margin-bottom:2px;">
+          <div class="doc-card" style="--card-accent: var(--gold); grid-column: 1 / -1;">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--gold);" aria-hidden="true"></div>Recruitment · Master Document</div>
+            <h3 class="doc-card-title">Recruitment Package</h3>
+            <p class="doc-card-desc">The complete musician recruitment document — mythology, music direction, professional standards, financial commitment, the audition process, and all five role ads in both in-world and straight-copy formats. The primary document for musician outreach.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">57 KB</span><a href="order_of_light_recruitment.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Recruitment Package in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+        <div id="roles" class="role-grid">
+          <div class="role-card" style="--card-accent:var(--r-vocalist)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--r-vocalist);"></div><div class="role-card-label" style="color:var(--r-vocalist);">Role</div><div class="role-card-title">Vocalist</div><div class="role-card-tag">The voice that carries the signal</div><a href="ool_role_vocalist.html" target="_blank" rel="noopener" class="role-link" aria-label="Open Vocalist role document">Open →</a></div>
+          <div class="role-card" style="--card-accent:var(--r-drummer)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--r-drummer);"></div><div class="role-card-label" style="color:var(--r-drummer);">Role</div><div class="role-card-title">Drummer</div><div class="role-card-tag">The pulse beneath the transmission</div><a href="ool_role_drummer.html" target="_blank" rel="noopener" class="role-link" aria-label="Open Drummer role document">Open →</a></div>
+          <div class="role-card" style="--card-accent:var(--r-guitarist)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--r-guitarist);"></div><div class="role-card-label" style="color:var(--r-guitarist);">Role</div><div class="role-card-title">Guitarist</div><div class="role-card-tag">Atmosphere, melody, restraint</div><a href="ool_role_guitarist.html" target="_blank" rel="noopener" class="role-link" aria-label="Open Guitarist role document">Open →</a></div>
+          <div class="role-card" style="--card-accent:var(--r-keys)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--r-keys);"></div><div class="role-card-label" style="color:var(--r-keys);">Role</div><div class="role-card-title">Keys / Synth</div><div class="role-card-tag">Texture and harmonic depth</div><a href="ool_role_keys.html" target="_blank" rel="noopener" class="role-link" aria-label="Open Keys role document">Open →</a></div>
+          <div class="role-card" style="--card-accent:var(--r-bassist)"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--r-bassist);"></div><div class="role-card-label" style="color:var(--r-bassist);">Role</div><div class="role-card-title">Bassist</div><div class="role-card-tag">The groove that holds the world</div><a href="ool_role_bassist.html" target="_blank" rel="noopener" class="role-link" aria-label="Open Bassist role document">Open →</a></div>
+        </div>
+      </section>
+
+
+      <!-- AD MATERIALS -->
+      <section class="doc-section" id="ad-materials" aria-labelledby="section-ads-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">03</span>
+          <h2 class="section-title" id="section-ads-title">Ad Materials</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">All recruitment advertising assets — text ads for musician platforms and image assets for paid social.</p>
+        <div class="doc-grid">
+          <div class="doc-card" style="--card-accent: var(--r-keys);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-keys);" aria-hidden="true"></div>Ads · Text</div>
+            <h3 class="doc-card-title">Facebook &amp; Craigslist Ads</h3>
+            <p class="doc-card-desc">Copy-ready text ads for Facebook Groups, Craigslist, BandMix, and Musicians Friend — all five roles in both straight and in-world formats. Ready to post.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">36 KB</span><a href="order_of_light_ads.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Facebook and Craigslist Ads in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-keys);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-keys);" aria-hidden="true"></div>Ads · Social Images</div>
+            <h3 class="doc-card-title">Social Ad Images</h3>
+            <p class="doc-card-desc">15 static images across three formats — square 1080×1080, portrait 1080×1350, and story 1080×1920. All five roles with role-specific accent colours. Download-ready for Facebook and Instagram.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">65 KB · 15 images</span><a href="order_of_light_social_ads.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Social Ad Images in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-keys);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-keys);" aria-hidden="true"></div>Ads · Carousel</div>
+            <h3 class="doc-card-title">Carousel Ads</h3>
+            <p class="doc-card-desc">20 portrait images — five roles × four carousel cards each. Designed for Facebook and Instagram carousel format. BandMix compatible. Role accent colours maintained throughout.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">56 KB · 20 images</span><a href="order_of_light_carousel_ads.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Carousel Ads in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- CAMPAIGN & STRATEGY -->
+      <section class="doc-section" id="campaign" aria-labelledby="section-campaign-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">04</span>
+          <h2 class="section-title" id="section-campaign-title">Campaign &amp; Strategy</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">The full Year One campaign infrastructure — strategy, templates, content, and release frameworks.</p>
+        <div class="doc-grid">
+          <div class="doc-card" style="--card-accent: var(--r-bassist);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Campaign · Master Strategy</div>
+            <h3 class="doc-card-title">Campaign Master</h3>
+            <p class="doc-card-desc">The complete Year One campaign strategy — phased timeline from mythology build through three EP releases, Broadcast schedule, The Frequency framework, The Illuminated launch, and content strategy across 12 months.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">104 KB</span><a href="order_of_light_campaign_master.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Campaign Master in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-bassist);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Campaign · Content</div>
+            <h3 class="doc-card-title">Social Templates</h3>
+            <p class="doc-card-desc">Post templates for every content category — mythology posts, release announcements, Broadcast releases, Frequency posts, recruitment content, and Illuminated community posts. With copy direction and visual guidance.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">63 KB</span><a href="order_of_light_social_templates.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Social Templates in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-bassist);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Campaign · Web</div>
+            <h3 class="doc-card-title">Landing Page</h3>
+            <p class="doc-card-desc">The pre-launch landing page with ambient audio — mythology-first design, email capture for The Illuminated, and the mark as the primary visual. Deploy at the start of the mythology-build phase.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">21 KB</span><a href="order_of_light_landing.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Landing Page in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-bassist);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Campaign · Collaboration Series</div>
+            <h3 class="doc-card-title">The Frequency</h3>
+            <p class="doc-card-desc">Full framework for the annual three-collaborator series — three-word naming system, staggered release strategy, Nashville Numbers chart format, royalty split models, legal checklist, and The Source template design.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">53 KB</span><a href="order_of_light_the_frequency.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open The Frequency in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-bassist);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Campaign · Calendar</div>
+            <h3 class="doc-card-title">Content Calendar</h3>
+            <p class="doc-card-desc">52-week structural scaffold mapping content categories, cadence, and milestones from Week 1 through Week 52. The working bridge between the Campaign Master strategy and day-to-day execution.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">32 KB · 52 weeks</span><a href="order_of_light_content_calendar.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Content Calendar in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-bassist);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);" aria-hidden="true"></div>Campaign · Frequency Source</div>
+            <h3 class="doc-card-title">The Source</h3>
+            <p class="doc-card-desc">The standalone deliverable sent to Frequency collaborators — the chart, the lyric sheet, The Rules, and the embargo clause. A designed artefact that is the full brief. Nothing else accompanies it.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">25 KB</span><a href="order_of_light_the_source.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open The Source in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- OPERATIONS & LIVE -->
+      <section class="doc-section" id="operations" aria-labelledby="section-ops-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">05</span>
+          <h2 class="section-title" id="section-ops-title">Operations &amp; Live</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">Production, live show, fan membership, and physical product frameworks. Complete once the lineup is locked.</p>
+        <div class="doc-grid">
+          <div class="doc-card" style="--card-accent: var(--r-drummer);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Operations · Broadcast Production</div>
+            <h3 class="doc-card-title">Broadcast Production Guide</h3>
+            <p class="doc-card-desc">Script to published video — the complete production workflow. HeyGen setup, DaVinci Resolve Glitch Grammar techniques, export specs, platform delivery requirements, and the step-by-step production checklist for each Broadcast.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">31 KB</span><a href="order_of_light_broadcast_guide.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Broadcast Production Guide in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-drummer);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Operations · Live Show</div>
+            <h3 class="doc-card-title">Live Production Document</h3>
+            <p class="doc-card-desc">Stage philosophy, live show structure, technical rider, stage plot, lighting brief, pre-show and post-show treatment, identity protection on stage, and how the mythology translates to a live performance context.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">27 KB</span><a href="order_of_light_live_production.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Live Production Document in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-drummer);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Operations · Fan Membership</div>
+            <h3 class="doc-card-title">The Illuminated</h3>
+            <p class="doc-card-desc">Complete fan membership framework — founding and standard tier structure, what each tier receives, Discord community setup, exclusive content schedule, and how the fan community integrates with the campaign and the mythology.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">31 KB</span><a href="ool_merch_membership.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Merch &amp; Illuminated Membership in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--r-drummer);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-drummer);" aria-hidden="true"></div>Operations · Physical Product</div>
+            <h3 class="doc-card-title">Ordination Kit Brief</h3>
+            <p class="doc-card-desc">Design brief, contents specification, production costs (estimated at 100 units), tier pricing, outer packaging spec, and fulfillment plan for the physical fan membership kit. Includes founding vs. standard tier breakdown and Year Two bundle variant.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">31 KB · 7 sections</span><a href="order_of_light_ordination_kit.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Ordination Kit Brief in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- YEAR TWO -->
+      <section class="doc-section" id="year-two" aria-labelledby="section-y2-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">06</span>
+          <h2 class="section-title" id="section-y2-title" style="color:rgba(106,163,200,0.6);">Year Two — Future Reference</h2>
+        </div>
+        <hr class="section-rule">
+        <div class="callout info" style="margin-bottom:20px;">
+          This section is future planning material. <strong>Year One campaign is the active priority.</strong> Return here once Year One is fully underway.
+        </div>
+        <div class="doc-grid" style="opacity:0.78;">
+          <div class="doc-card" style="--card-accent: rgba(106,163,200,0.3);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);opacity:0.6;" aria-hidden="true"></div>Year Two · Concept</div>
+            <h3 class="doc-card-title">Year Two — Concept Document</h3>
+            <p class="doc-card-desc">Record title candidates, thematic framework (Memory, Depth, Transformation), 11-track structural skeleton, Conduit evolution, visual direction update, The Frequency Year Two, and campaign arc overview.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">63 KB · 8 sections</span><a href="order_of_light_year_two.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Year Two Concept Document in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: rgba(106,163,200,0.3);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);opacity:0.6;" aria-hidden="true"></div>Year Two · Brand</div>
+            <h3 class="doc-card-title">Brand Bible — Year Two</h3>
+            <p class="doc-card-desc">Extends Year One's brand system. Documents deep blue palette entry, heavier grain and scan lines, ice typography shift, updated Glitch Grammar, Conduit evolution comparison, the second figure rules, and all Year Two brand decisions.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">53 KB · 6 sections</span><a href="order_of_light_brand_bible_y2.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Year Two Brand Bible in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+          <div class="doc-card" style="--card-accent: rgba(106,163,200,0.3);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--r-bassist);opacity:0.6;" aria-hidden="true"></div>Year Two · Campaign</div>
+            <h3 class="doc-card-title">Campaign Master — Year Two</h3>
+            <p class="doc-card-desc">Month-by-month campaign strategy for the full-length record era. Phase timeline, singles plan, five Broadcast schedule (including second figure appearances), Frequency Year Two execution, content pillars, and Year Two campaign rules.</p>
+            <div class="doc-card-meta"><span class="doc-card-size">38 KB · 7 sections</span><a href="order_of_light_campaign_master_y2.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Year Two Campaign Master in new tab">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+      </section>
+
+
+
+  <!-- SIGNAL HOUSE & FIRST BROADCAST -->
+      <section class="doc-section" id="entities" aria-labelledby="section-entities-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">07</span>
+          <h2 class="section-title" id="section-entities-title">Signal House &amp; First Broadcast</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">The parent company and label — identity, landing pages, and brand standards for both entities.</p>
+        <div class="doc-grid">
+          <div class="doc-card" style="--card-accent: var(--gold-dim);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--gold-dim);" aria-hidden="true"></div>Signal House LLC · Landing Page</div>
+            <h3 class="doc-card-title">Signal House LLC</h3>
+            <p class="doc-card-desc">Public-facing company site. Industry contacts, roster, contact information.</p>
+            <div class="doc-card-meta">
+              <span class="doc-card-size">11 KB</span>
+              <a href="signal_house_landing.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Signal House landing page">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--gold-dim);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--gold-dim);" aria-hidden="true"></div>Signal House LLC · Brand Framework</div>
+            <h3 class="doc-card-title">Signal House — Brand</h3>
+            <p class="doc-card-desc">Identity, voice, palette, email standards, entity differentiation guide.</p>
+            <div class="doc-card-meta">
+              <span class="doc-card-size">16 KB</span>
+              <a href="signal_house_brand_framework.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Signal House brand framework">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--gold-dim);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--gold-dim);" aria-hidden="true"></div>First Broadcast · Landing Page</div>
+            <h3 class="doc-card-title">First Broadcast</h3>
+            <p class="doc-card-desc">Public-facing label site. Catalogue, about, press contacts.</p>
+            <div class="doc-card-meta">
+              <span class="doc-card-size">10 KB</span>
+              <a href="first_broadcast_landing.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open First Broadcast landing page">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="doc-card" style="--card-accent: var(--gold-dim);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--gold-dim);" aria-hidden="true"></div>First Broadcast · Brand Framework</div>
+            <h3 class="doc-card-title">First Broadcast — Brand</h3>
+            <p class="doc-card-desc">Label identity, voice, press release template, release philosophy, catalogue standards.</p>
+            <div class="doc-card-meta">
+              <span class="doc-card-size">19 KB</span>
+              <a href="first_broadcast_brand_framework.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open First Broadcast brand framework">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MERCH & MEMBERSHIP -->
+      <section class="doc-section" id="merch" aria-labelledby="section-merch-title">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">08</span>
+          <h2 class="section-title" id="section-merch-title">Merch &amp; Membership</h2>
+        </div>
+        <hr class="section-rule">
+        <p class="section-desc">Physical objects, garment range, and The Illuminated membership structure — pricing, tiers, Discord, and launch sequence.</p>
+        <div class="doc-grid doc-grid-full">
+          <div class="doc-card" style="--card-accent: var(--crimson);">
+            <div class="doc-card-tag"><div class="doc-card-dot" style="background:var(--crimson);" aria-hidden="true"></div>Strategy Document</div>
+            <h3 class="doc-card-title">Merch &amp; Illuminated Membership</h3>
+            <p class="doc-card-desc">Garment range, object concepts, tagline options, pricing framework, production model, membership tiers, ordination kit contents, Discord structure, and launch sequence.</p>
+            <div class="doc-card-meta">
+              <span class="doc-card-size">45 KB</span>
+              <a href="ool_merch_membership.html" target="_blank" rel="noopener" class="doc-link" aria-label="Open Merch &amp; Illuminated Membership document">Open <span class="doc-link-arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+</main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Content Calendar Year One</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;--surface2:#222;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --crimson:#C0384F;--crimson-h:#D94E65;
+  --gold:#C8A55A;--gold-dim:#7A6030;
+  /* Content type colours */
+  --c-broadcast:#D94E65;
+  --c-release:#C8A55A;
+  --c-social:#5A9AC8;
+  --c-freq:#8C6AC8;
+  --c-illuminated:#6AAF8C;
+  --c-live:#C87A3A;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--text-1);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--gold);color:#0A0A0A;padding:8px 16px;font-size:14px;text-decoration:none;z-index:9999;}
+.skip-link:focus{top:16px;}
+
+/* COVER */
+.cover{min-height:72vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 56px;position:relative;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--crimson-h) 40%,var(--gold) 70%,transparent);opacity:0.3;}
+.cover-eyebrow{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:16px;padding-left:20px;}
+.cover-title{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(36px,5vw,72px);letter-spacing:0.18em;text-transform:uppercase;color:var(--text-1);line-height:0.92;padding-left:20px;}
+.cover-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(15px,2vw,20px);color:var(--text-2);padding-left:20px;margin-top:14px;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--crimson-h),var(--gold),transparent);opacity:0.3;margin:28px 0;}
+.cover-meta{display:flex;gap:32px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-size:13px;color:var(--text-2);}
+
+/* LAYOUT */
+.wrap{max-width:1040px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+
+/* LEGEND */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:16px 0 28px;}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-2);letter-spacing:0.06em;}
+.legend-dot{width:8px;height:8px;transform:rotate(45deg);}
+
+/* CADENCE TABLE */
+.cadence{width:100%;border-collapse:collapse;margin:16px 0 28px;}
+.cadence th{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-3);padding:0 12px 10px 0;text-align:left;border-bottom:1px solid var(--border);}
+.cadence td{padding:10px 12px 10px 0;border-bottom:1px solid var(--border);font-size:12.5px;color:var(--text-2);vertical-align:top;}
+.cadence tr:last-child td{border-bottom:none;}
+.ctype{display:inline-block;padding:2px 8px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;border:1px solid;margin-right:4px;margin-bottom:4px;}
+
+/* PHASE CALENDAR */
+.phase{margin-bottom:2px;}
+.phase-head{background:var(--surface2);border:1px solid var(--border);padding:16px 20px;display:flex;align-items:baseline;justify-content:space-between;cursor:pointer;user-select:none;}
+.phase-head:hover{background:var(--surface);}
+.phase-label{font-size:9px;letter-spacing:0.34em;text-transform:uppercase;color:var(--text-3);}
+.phase-name{font-size:14px;color:var(--text-1);margin-top:3px;}
+.phase-weeks{font-size:10px;color:var(--text-3);}
+.phase-body{display:none;border:1px solid var(--border);border-top:none;}
+.phase-body.open{display:block;}
+
+.week-row{display:grid;grid-template-columns:80px 1fr;border-bottom:1px solid var(--border);}
+.week-row:last-child{border-bottom:none;}
+.week-label{padding:14px 16px;border-right:1px solid var(--border);background:var(--deep);}
+.week-num{font-size:10px;color:var(--text-3);letter-spacing:0.1em;}
+.week-date{font-size:9px;color:var(--text-3);margin-top:2px;font-style:italic;}
+.week-content{padding:12px 16px;display:flex;flex-direction:column;gap:6px;}
+.content-item{display:flex;align-items:baseline;gap:10px;font-size:12.5px;color:var(--text-2);}
+.content-dot{width:5px;height:5px;transform:rotate(45deg);flex-shrink:0;margin-top:2px;}
+.content-text strong{color:var(--text-1);font-weight:400;}
+.content-note{font-size:10.5px;color:var(--text-3);font-style:italic;margin-left:15px;}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+
+footer{max-width:1040px;margin:72px auto 0;padding:22px 60px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);letter-spacing:0.1em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.cover{padding:80px 24px 48px;}.cover-line{left:24px;}.wrap{padding:0 24px 80px;}.week-row{grid-template-columns:60px 1fr;}footer{padding:22px 24px 48px;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="cover">
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-eyebrow">The Order of Light · Year One Content Calendar</p>
+  <h1 class="cover-title">Content Calendar<br>Year One</h1>
+  <p class="cover-sub">52-week structural scaffold — Week 1 to Week 52.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Year</span><span class="cm-value">Year One — 52 weeks</span></div>
+    <div class="cm-item"><span class="cm-label">Phases</span><span class="cm-value">5 — Pre-launch, EP1, EP2, EP3, Sustain</span></div>
+    <div class="cm-item"><span class="cm-label">Social cadence</span><span class="cm-value">3–4 posts/week</span></div>
+    <div class="cm-item"><span class="cm-label">Set start date in checklist</span><span class="cm-value">All dates relative to Week 1</span></div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+  <!-- LEGEND + CADENCE -->
+  <section class="section" id="cadence" aria-labelledby="cad-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="cad-title" style="color:var(--crimson-h);">Content Categories & Cadence</h2>
+    </div>
+    <p class="sec-intro">Six content categories. Each has a cadence. Together they form a week.</p>
+
+    <div class="legend" role="list" aria-label="Content type legend">
+      <div class="legend-item" role="listitem"><div class="legend-dot" style="background:var(--c-broadcast);"></div>Broadcast</div>
+      <div class="legend-item" role="listitem"><div class="legend-dot" style="background:var(--c-release);"></div>Release</div>
+      <div class="legend-item" role="listitem"><div class="legend-dot" style="background:var(--c-social);"></div>Social</div>
+      <div class="legend-item" role="listitem"><div class="legend-dot" style="background:var(--c-freq);"></div>The Frequency</div>
+      <div class="legend-item" role="listitem"><div class="legend-dot" style="background:var(--c-illuminated);"></div>The Illuminated</div>
+      <div class="legend-item" role="listitem"><div class="legend-dot" style="background:var(--c-live);"></div>Live</div>
+    </div>
+
+    <table class="cadence" aria-label="Content cadence by category">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Cadence</th>
+          <th>Format</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ctype" style="color:var(--c-broadcast);border-color:rgba(217,78,101,0.3);">Broadcast</span></td>
+          <td>Quarterly — 5 total</td>
+          <td>Video 90s–3min</td>
+          <td>Scheduled 24hrs out minimum. Instagram Reels, TikTok, YouTube simultaneously.</td>
+        </tr>
+        <tr>
+          <td><span class="ctype" style="color:var(--c-release);border-color:rgba(200,165,90,0.3);">Release</span></td>
+          <td>3 EPs — Q1/2, Q2/3, Q4</td>
+          <td>DSP + social campaign</td>
+          <td>Each EP has a 4-week campaign window: tease, announce, pre-save, release day, sustain.</td>
+        </tr>
+        <tr>
+          <td><span class="ctype" style="color:var(--c-social);border-color:rgba(90,154,200,0.3);">Social</span></td>
+          <td>3–4 posts/week</td>
+          <td>Static image, short video, text</td>
+          <td>Mix: 1 mythology/atmospheric, 1 behind-the-scenes, 1 community/interaction per week. Templates in Social Templates document.</td>
+        </tr>
+        <tr>
+          <td><span class="ctype" style="color:var(--c-freq);border-color:rgba(140,106,200,0.3);">Frequency</span></td>
+          <td>Weeks 30–33 (4-week series)</td>
+          <td>Single releases + reaction</td>
+          <td>Week 30: OOL Transmission 1. Week 31: collaborator 2. Week 32: collaborator 3. Week 33: reaction content.</td>
+        </tr>
+        <tr>
+          <td><span class="ctype" style="color:var(--c-illuminated);border-color:rgba(106,175,140,0.3);">Illuminated</span></td>
+          <td>Monthly exclusive drop</td>
+          <td>Voice memo, demo, update</td>
+          <td>Consistent monthly delivery is non-negotiable. Illuminated members leave if the content stops arriving.</td>
+        </tr>
+        <tr>
+          <td><span class="ctype" style="color:var(--c-live);border-color:rgba(200,122,58,0.3);">Live</span></td>
+          <td>From Week 24 onwards</td>
+          <td>Shows, residency, support slots</td>
+          <td>No live shows before the band is rehearsal-ready. First show after full EP 01 campaign is complete.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout" role="note">
+      <strong>On social cadence:</strong> 3–4 posts per week is the minimum to maintain algorithmic visibility. Quality above quantity — a week with 3 strong posts beats a week with 6 mediocre ones. Never post just to post. If there is nothing worth saying, post the mark on void black and nothing else. That is always sufficient.
+    </div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="section" id="calendar" aria-labelledby="cal-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="cal-title" style="color:var(--crimson-h);">52-Week Calendar</h2>
+    </div>
+    <p class="sec-intro">Click any phase to expand. All weeks relative to your start date — set in the setup checklist.</p>
+
+    <!-- PHASE 1 — PRE-LAUNCH -->
+    <div class="phase">
+      <div class="phase-head" onclick="togglePhase(this)" aria-expanded="false" role="button" tabindex="0">
+        <div><div class="phase-label">Phase 1 · Weeks 1–8</div><div class="phase-name">Pre-Launch — The world before the music</div></div>
+        <div class="phase-weeks">8 weeks ▾</div>
+      </div>
+      <div class="phase-body">
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 1–2</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text"><strong>Accounts go live.</strong> Instagram, TikTok, YouTube created. The mark on void black. No bio text yet. No music. The presence exists before it explains itself.</div></div>
+          <div class="content-note">Post frequency: 1–2/week. Just the mark. No caption or minimal caption.</div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 3–4</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text"><strong>Atmospheric content begins.</strong> Short abstract videos — signal, darkness, the frequency aesthetic. No band members. No music. The world, not the band.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-broadcast);"></div><div class="content-text"><strong>Broadcast 001 in production.</strong> Not live yet — this is production week.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 5</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-broadcast);"></div><div class="content-text"><strong>Broadcast 001 drops.</strong> The first transmission. The mythology's public debut. Instagram Reels, TikTok, YouTube simultaneously. No press release. No announcement. It simply appears.</div></div>
+          <div class="content-note">Allow 48 hours before any follow-up social post. Let it exist alone first.</div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 6–7</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">Post-Broadcast content — atmospheric follow-ups. Short clips from the Broadcast. The mark. Silence posts.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-illuminated);"></div><div class="content-text"><strong>The Illuminated soft launch.</strong> Landing page live with waitlist. No active promotion yet — just available for those who find it through the Broadcast.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 8</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text"><strong>EP 01 tease begins.</strong> First mention of music — not the EP itself, but the fact that there is music coming. Abstract. Cryptic. "Something is being prepared."</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text">EP 01 submitted to Symphonic Distribution this week — minimum 4-week lead time required.</div></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 — EP 01 -->
+    <div class="phase">
+      <div class="phase-head" onclick="togglePhase(this)" aria-expanded="false" role="button" tabindex="0">
+        <div><div class="phase-label">Phase 2 · Weeks 9–20</div><div class="phase-name">EP 01 — Something · Campaign and release</div></div>
+        <div class="phase-weeks">12 weeks ▾</div>
+      </div>
+      <div class="phase-body">
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 9–10</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>EP 01 announced.</strong> Artwork, track list, release date. Pre-save link live. Press kit sent to target blogs and playlist curators.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-illuminated);"></div><div class="content-text"><strong>The Illuminated officially launches.</strong> Founding memberships open (108 cap). Kit fulfilment ordered.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 11</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>Single 1 from EP 01 released.</strong> The most accessible track. Social campaign — static ads, short video clips, lyric posts.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 12–13</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">Single campaign sustain. Behind-the-scenes content. The Illuminated exclusive: demo version of EP track.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-broadcast);"></div><div class="content-text"><strong>Broadcast 002 in production.</strong></div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 14</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>EP 01 release day.</strong> All tracks live. Release day social campaign. Illuminated members had 1-week early access — this is the public release.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-broadcast);"></div><div class="content-text"><strong>Broadcast 002 drops.</strong> Release day + Broadcast on the same day — the mythology and the music arrive together.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 15–18</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">EP 01 sustain campaign. Playlist pitching follow-ups. Blog coverage coordination. Social: fan reception content, reaction, atmospheric follow-ups.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-illuminated);"></div><div class="content-text">Monthly Illuminated drop — voice memo: the story behind an EP 01 track.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-live);"></div><div class="content-text">First live show conversations begin — venue booking, support slot outreach.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 19–20</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">Bridge content — between EP 01 and EP 02. Atmospheric, mysterious. Signal of what's coming without announcement.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text">EP 02 submitted to Symphonic Distribution this week.</div></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 — EP 02 -->
+    <div class="phase">
+      <div class="phase-head" onclick="togglePhase(this)" aria-expanded="false" role="button" tabindex="0">
+        <div><div class="phase-label">Phase 3 · Weeks 21–33</div><div class="phase-name">EP 02 — Nothing · Dissolution arc + The Frequency</div></div>
+        <div class="phase-weeks">13 weeks ▾</div>
+      </div>
+      <div class="phase-body">
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 21–22</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>EP 02 announced.</strong> The tone shifts — "Nothing" is darker, more uncertain. Artwork reflects this. Social content changes register from EP 01.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 23</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>Single from EP 02 released.</strong></div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-live);"></div><div class="content-text"><strong>First live show (if ready).</strong> Small venue, Charlotte. The live show as a transmission — production consistent with the visual identity.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 24–25</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>EP 02 release day.</strong></div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-broadcast);"></div><div class="content-text"><strong>Broadcast 003 drops.</strong> Aligned with EP 02 release.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 26–29</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">EP 02 sustain. Live show content if shows have happened. Illuminated monthly drop.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-freq);"></div><div class="content-text"><strong>The Frequency announcement.</strong> Series name, concept, collaborators revealed. The Source has already been sent — collaborators are recording. Announcement goes live Week 29.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 30</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-freq);"></div><div class="content-text"><strong>The Frequency — Transmission 1 (The Order of Light).</strong> OOL's version released as a standalone single. Social campaign for the series launch.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 31</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-freq);"></div><div class="content-text"><strong>Transmission 2 — Established collaborator.</strong> Their version drops. Coordination with their social team. Cross-promotion.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 32</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-freq);"></div><div class="content-text"><strong>Transmission 3 — Emerging collaborator.</strong> Final version drops.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 33</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-freq);"></div><div class="content-text"><strong>Week 4 — Reaction content.</strong> All three versions are live. The Order of Light publishes reaction content: side-by-side comparisons, commentary on the differences. The Illuminated exclusive: an extended commentary.</div></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 — EP 03 -->
+    <div class="phase">
+      <div class="phase-head" onclick="togglePhase(this)" aria-expanded="false" role="button" tabindex="0">
+        <div><div class="phase-label">Phase 4 · Weeks 34–46</div><div class="phase-name">EP 03 — Everything · Completion and expansion</div></div>
+        <div class="phase-weeks">13 weeks ▾</div>
+      </div>
+      <div class="phase-body">
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 34–35</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>EP 03 announced.</strong> "Everything" — the arc completes. Announcement tone: arrival, not urgency. The campaign has been building to this.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text">EP 03 submitted to Symphonic Distribution.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 36</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>Single from EP 03 released.</strong></div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 38</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text"><strong>EP 03 release day.</strong></div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-broadcast);"></div><div class="content-text"><strong>Broadcast 004 drops.</strong></div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 39–42</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">EP 03 sustain. The arc complete — social content can look back across the three EPs as a complete body of work for the first time.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-live);"></div><div class="content-text">Live shows — with three EPs complete, a proper set list exists. Expand show ambition beyond Charlotte.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 43–46</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-illuminated);"></div><div class="content-text">Illuminated Year End exclusive — a Broadcast made only for founding members. Never published publicly.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">Year One retrospective content. The 108 arc from Something to Nothing to Everything — documented.</div></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- PHASE 5 — YEAR TWO SIGNAL -->
+    <div class="phase">
+      <div class="phase-head" onclick="togglePhase(this)" aria-expanded="false" role="button" tabindex="0">
+        <div><div class="phase-label">Phase 5 · Weeks 47–52</div><div class="phase-name">Year Two Signal — The first transmission forward</div></div>
+        <div class="phase-weeks">6 weeks ▾</div>
+      </div>
+      <div class="phase-body">
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 47–49</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-broadcast);"></div><div class="content-text"><strong>Broadcast 005 drops.</strong> The final Year One Broadcast — plants the first signal of Year Two. Something unresolved. Something new entering the frequency. No announcement. Just the signal.</div></div>
+        </div></div>
+        <div class="week-row"><div class="week-label"><div class="week-num">Wk 50–52</div></div><div class="week-content">
+          <div class="content-item"><div class="content-dot" style="background:var(--c-social);"></div><div class="content-text">Year Two pre-production begins quietly. The visual palette shift starts appearing in social content — the deep blue entering at the edges. Audience notices before anything is said.</div></div>
+          <div class="content-item"><div class="content-dot" style="background:var(--c-release);"></div><div class="content-text">Year Two record recording and production active. The Year Two campaign document takes over from this point.</div></div>
+        </div></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- WEEKLY TEMPLATE -->
+  <section class="section" id="template" aria-labelledby="tmpl-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="tmpl-title" style="color:var(--crimson-h);">Standard Week Template</h2>
+    </div>
+    <p class="sec-intro">The default week when no major campaign event is active. Adjust when releases, Broadcasts, or The Frequency are live.</p>
+
+    <table class="cadence" aria-label="Standard week content schedule">
+      <thead><tr><th>Day</th><th>Platform</th><th>Content type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--text-1);">Monday</td><td style="color:var(--text-3);">Instagram / TikTok</td><td><span class="ctype" style="color:var(--c-social);border-color:rgba(90,154,200,0.3);">Social</span></td><td style="color:var(--text-3);font-size:12px;">Atmospheric — the mark, signal imagery, no copy or minimal copy. The week opens with presence, not content.</td></tr>
+        <tr><td style="color:var(--text-1);">Wednesday</td><td style="color:var(--text-3);">Instagram / TikTok</td><td><span class="ctype" style="color:var(--c-social);border-color:rgba(90,154,200,0.3);">Social</span></td><td style="color:var(--text-3);font-size:12px;">Behind the signal — process, rehearsal, creation. Not personal. The work, not the people.</td></tr>
+        <tr><td style="color:var(--text-1);">Friday</td><td style="color:var(--text-3);">All platforms</td><td><span class="ctype" style="color:var(--c-social);border-color:rgba(90,154,200,0.3);">Social</span></td><td style="color:var(--text-3);font-size:12px;">Community — question, prompt, response to comments. The week closes with interaction.</td></tr>
+        <tr><td style="color:var(--text-1);">Monthly</td><td style="color:var(--text-3);">Discord + email</td><td><span class="ctype" style="color:var(--c-illuminated);border-color:rgba(106,175,140,0.3);">Illuminated</span></td><td style="color:var(--text-3);font-size:12px;">Voice memo or demo — exclusive to Illuminated members. Delivered first of each month without fail.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+
+<script>
+function togglePhase(el) {
+  var body = el.nextElementSibling;
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  el.setAttribute('aria-expanded', !isOpen);
+}
+document.querySelectorAll('.phase-head').forEach(function(el) {
+  el.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePhase(el); }
+  });
+});
+// Open phase 1 by default
+var first = document.querySelector('.phase-body');
+if (first) { first.classList.add('open'); first.previousElementSibling.setAttribute('aria-expanded','true'); }
+</script>
+</body>
+</html>

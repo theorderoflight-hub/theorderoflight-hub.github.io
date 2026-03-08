@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Electronic Press Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;--surface2:#242424;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --crimson:#C0384F;--crimson-h:#D94E65;--gold:#C8A55A;--gold-dim:#7A6030;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--text-1);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--gold);color:#0A0A0A;padding:8px 16px;font-size:14px;text-decoration:none;z-index:9999;}
+.skip-link:focus{top:16px;}
+
+/* COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 64px;position:relative;overflow:hidden;}
+.cover-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(192,56,79,0.09) 0%,rgba(200,165,90,0.04) 40%,transparent 70%);pointer-events:none;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--crimson-h) 40%,var(--gold) 70%,transparent);opacity:0.3;}
+.cover-kicker{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:24px;padding-left:20px;}
+.cover-name{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(48px,7vw,96px);letter-spacing:0.2em;text-transform:uppercase;color:var(--text-1);line-height:0.92;padding-left:20px;position:relative;}
+
+.cover-tagline{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(16px,2vw,22px);color:var(--text-2);padding-left:20px;margin-top:14px;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--crimson-h),var(--gold),transparent);opacity:0.3;margin:36px 0;}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-size:13px;color:var(--text-2);letter-spacing:0.05em;}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+
+/* BIO BLOCKS */
+.bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:24px;}
+.bio-card{background:var(--deep);border:1px solid var(--border);padding:28px 26px;}
+.bio-card-label{font-size:8px;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.bio-card-label::after{content:'';flex:1;height:1px;background:rgba(200,165,90,0.15);}
+.bio-text{font-size:14px;color:var(--text-2);line-height:1.85;}
+.bio-text strong{color:var(--text-1);font-weight:400;}
+
+/* SOUND */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:2px;margin:16px 0 24px;}
+.ref-item{background:var(--deep);border:1px solid var(--border);padding:14px 16px;}
+.ref-name{font-size:13px;color:var(--text-1);margin-bottom:3px;}
+.ref-note{font-size:10.5px;color:var(--text-3);line-height:1.5;}
+
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:2px;margin:16px 0 28px;}
+.stat-card{background:var(--deep);border:1px solid var(--border);padding:20px 18px;text-align:center;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:36px;color:var(--crimson-h);line-height:1;}
+.stat-l{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);margin-top:6px;}
+
+/* PRESS NOTES */
+.press-note{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--crimson-h);padding:20px 22px;margin-bottom:2px;}
+.pn-context{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:10px;}
+.pn-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;font-weight:300;color:var(--text-1);line-height:1.5;}
+.pn-attr{font-size:10px;color:var(--text-3);margin-top:8px;letter-spacing:0.1em;}
+
+/* LINKS */
+.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;margin:16px 0;}
+.link-card{background:var(--deep);border:1px solid var(--border);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:border-color 0.2s,background 0.2s;}
+.link-card:hover{border-color:var(--border-hi);background:var(--surface);}
+.link-label{font-size:12px;color:var(--text-1);letter-spacing:0.04em;}
+.link-sub{font-size:10px;color:var(--text-3);margin-top:2px;}
+.link-arrow{font-size:14px;color:var(--gold);}
+
+/* CONTACT */
+.contact-block{background:var(--deep);border:1px solid var(--border);padding:28px 28px;margin-top:16px;}
+.contact-label{font-size:9px;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.contact-row{display:flex;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.contact-row:last-child{border-bottom:none;}
+.contact-key{color:var(--text-3);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;min-width:100px;}
+.contact-val{color:var(--text-1);}
+.contact-val a{color:var(--gold);text-decoration:none;}
+.contact-val a:hover{color:var(--text-1);}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+
+footer{max-width:900px;margin:72px auto 0;padding:22px 60px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);letter-spacing:0.1em;flex-wrap:wrap;gap:8px;}
+
+@media(max-width:700px){
+  .cover{padding:80px 24px 48px;}.cover-line{left:24px;}
+  .wrap{padding:0 24px 80px;}
+  .bio-grid{grid-template-columns:1fr;}
+  footer{padding:22px 24px 48px;}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+
+.asset-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:20px 0 32px;}
+.asset-item{display:flex;flex-direction:column;gap:8px;}
+.asset-box{background:var(--deep);border:1px dashed rgba(200,165,90,0.2);padding:32px 16px;text-align:center;font-size:11px;color:rgba(245,240,232,0.25);letter-spacing:0.08em;}
+.asset-tall{padding:48px 16px;}
+.asset-label{font-size:10.5px;color:var(--text-3);line-height:1.5;}
+
+
+.contact-block{margin-bottom:24px;}
+.contact-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:0;}
+.contact-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;gap:16px;}
+.contact-row:last-child{border-bottom:none;}
+.contact-key{color:var(--text-3);flex-shrink:0;}
+.contact-val{color:var(--text-1);}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-kicker">Electronic Press Kit · First Broadcast · Signal House LLC</p>
+  <h1 class="cover-name">The Order<br>of Light</h1>
+  <p class="cover-tagline">Alternative rock from Charlotte, NC — atmospheric, melodic, emotionally direct.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Based in</span><span class="cm-value">Charlotte, NC</span></div>
+    <div class="cm-item"><span class="cm-label">Genre</span><span class="cm-value">Alternative Rock</span></div>
+    <div class="cm-item"><span class="cm-label">Label</span><span class="cm-value">First Broadcast</span></div>
+    <div class="cm-item"><span class="cm-label">Contact</span><span class="cm-value"><a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a></span></div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+  <!-- BIO -->
+  <section class="section" id="bio" aria-labelledby="bio-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="bio-title" style="color:var(--crimson-h);">Biography</h2>
+    </div>
+    <p class="sec-intro">Two versions — short for listings and social, long for features and editorial.</p>
+
+    <div class="bio-grid">
+      <div class="bio-card">
+        <div class="bio-card-label">50 words</div>
+        <p class="bio-text">
+          <strong>The Order of Light</strong> are an alternative rock band from Charlotte, NC.
+          Atmospheric and melodic, their music sits in the lineage of Thrice, Copeland, and
+          Nothing But Thieves — dark at the edges, warm at its core. Their debut release
+          arrives via First Broadcast.
+        </p>
+      </div>
+      <div class="bio-card">
+        <div class="bio-card-label">200 words</div>
+        <p class="bio-text">
+          <strong>The Order of Light</strong> are an alternative rock band from Charlotte, NC,
+          operating under their own label First Broadcast. Their music is melodic, atmospheric,
+          and emotionally direct — built on harmony, groove, and the conviction that a song
+          should move you before it explains itself.<br><br>
+          The sonic territory spans the lineage of Thrice, Copeland, Nothing But Thieves,
+          Minus The Bear, MuteMath, and Death Cab for Cutie: melodic ambition, emotional
+          honesty, and a refusal to be either too soft or too heavy. Dark atmospherically,
+          warm at its core. Dreamy, grooving, and deliberately intentional in every detail.<br><br>
+          The project operates under a constructed mythology — a visual and narrative world
+          built around the music rather than behind it. The mythology is a frame, not a
+          belief system. It gives the audience something to find and something to return to.<br><br>
+          Their debut release is a three-EP arc — three transmissions across twelve months,
+          structured around a thematic journey. The campaign, brand identity, and fan
+          community infrastructure are fully built and ready to execute.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOUND -->
+  <section class="section" id="sound" aria-labelledby="sound-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="sound-title" style="color:var(--crimson-h);">Sounds Like</h2>
+    </div>
+    <p class="sec-intro">Reference points for editorial context. Not a genre box — a lineage.</p>
+
+    <div class="ref-grid" role="list" aria-label="Sound references">
+      <div class="ref-item" role="listitem"><div class="ref-name">Thrice</div><div class="ref-note">Melodic weight, emotional depth</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Copeland</div><div class="ref-note">Atmospheric warmth, vocal harmony</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Nothing But Thieves</div><div class="ref-note">Modern alt-rock ambition</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Minus the Bear</div><div class="ref-note">Groove, texture, precision</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">MuteMath</div><div class="ref-note">Rhythmic complexity, atmosphere</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Death Cab for Cutie</div><div class="ref-note">Emotional directness, craft</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Young the Giant</div><div class="ref-note">Energy, melodic instinct</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Mew</div><div class="ref-note">Ambitious scope, layered sound</div></div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES IT DIFFERENT -->
+  <section class="section" id="frame" aria-labelledby="frame-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="frame-title" style="color:var(--crimson-h);">The Framework</h2>
+    </div>
+    <p class="sec-intro">For journalists and editorial — what makes this project distinctive.</p>
+
+    <div class="callout">
+      The Order of Light is a fully constructed artistic world — mythology, visual identity,
+      and narrative arc built <em>around</em> the music. The project uses an AI-generated
+      fictional spokesperson (The Conduit) whose video Broadcasts form the mythology's
+      public face. The members remain anonymous. The world speaks for itself.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:16px;">
+      <div class="press-note">
+        <div class="pn-context">The Mythology</div>
+        <div class="pn-text">An AI-generated Conduit delivers the mythology as a series of video Broadcasts — a fictional spokesperson whose identity is never revealed. The world is built before the audience arrives.</div>
+      </div>
+      <div class="press-note">
+        <div class="pn-context">The Release Arc</div>
+        <div class="pn-text">Three EPs across twelve months — titled Something, Nothing, Everything — enacting a journey from identity through dissolution to expansion. The number 108 structures the arc.</div>
+      </div>
+      <div class="press-note">
+        <div class="pn-context">The Frequency</div>
+        <div class="pn-text">An annual collaboration series: one song sent as a bare chart and lyric sheet to three artists — established, mid-level, and emerging. Each records independently. The results release in sequence. No one hears the others' versions until they're published.</div>
+      </div>
+      <div class="press-note">
+        <div class="pn-context">The Illuminated</div>
+        <div class="pn-text">A tiered fan membership community — early access, exclusive content, and a physical ordination kit for founding members. Designed as a community, not a mailing list.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELEASE INFO -->
+  <section class="section" id="releases" aria-labelledby="rel-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">04</span>
+      <h2 class="sec-title" id="rel-title" style="color:var(--crimson-h);">Releases</h2>
+    </div>
+    <p class="sec-intro">Year One release plan. Dates TBC — timeline active once lineup is locked.</p>
+
+    <div class="stat-row" role="list">
+      <div class="stat-card" role="listitem"><div class="stat-n">3</div><div class="stat-l">EPs · Year One</div></div>
+      <div class="stat-card" role="listitem"><div class="stat-n">~40</div><div class="stat-l">Songs in development</div></div>
+      <div class="stat-card" role="listitem"><div class="stat-n">5</div><div class="stat-l">Broadcasts scripted</div></div>
+      <div class="stat-card" role="listitem"><div class="stat-n">3</div><div class="stat-l">Frequency collaborators</div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;">
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">EP 01 — Something</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">Identity. The signal found.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson-h);padding:3px 10px;border:1px solid rgba(217,78,101,0.3);">Year One · Q1–Q2</span>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">EP 02 — Nothing</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">Dissolution. The signal questioned.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson-h);padding:3px 10px;border:1px solid rgba(217,78,101,0.3);">Year One · Q2–Q3</span>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">EP 03 — Everything</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">Expansion. The signal completed.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);padding:3px 10px;border:1px solid rgba(200,165,90,0.3);">Year One · Q4</span>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">LP — Below the Line of Sight <span style="font-size:10px;color:var(--text-3);">(working title)</span></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">The first full-length. The signal deepens.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-3);padding:3px 10px;border:1px solid var(--border);">Year Two</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <!-- ASSETS & LINKS -->
+  <section class="section" id="links" aria-labelledby="links-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">05</span>
+      <h2 class="sec-title" id="links-title" style="color:var(--crimson-h);">Assets &amp; Links</h2>
+    </div>
+    <p class="sec-intro">For editorial use. High-resolution assets available on request.</p>
+
+    <div class="callout" style="margin-bottom:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(245,240,232,0.35);">Guitar Endorser</span>
+      <svg viewBox="0 0 349.7 128.4" style="height:16px;width:auto;" aria-label="Fender" role="img">
+        <g fill="currentColor" opacity="0.6">
+    <path  d="M271.3,67.7c1.8-0.1,6.2,0.5,15.6,0.9c9.9,0.4,11.9-7.3,11.5-12.1c-10.1,2.2-12.5,2.7-21.2,2.7
+		c-9.2,0-20.4,2.6-20.7,10.6c-0.2,8,10.3,9.8,15.7,11.3c1.5,0.4,2.1,1.6,1.1,2.4c-2.3,1.9-7.6,4.3-8.2,8.7
+		c-0.9,6.2,4.8,11.1,11.9,10.9c9.5-0.2,20-4.2,30.2-16.4c2.9-3.4,6.1-9.2,8-11.8c0.5-0.9,1.8-1.4,2.4-1.3c1.8,0.4,4.4,1.8,4,3.7
+		c-0.5,3-8.7,12.4-3.3,18c3.3,3.5,11.8,6,18.5,1.1c6.3-4.6,4.1-8.7,1.6-9c-1.8-0.2-6.7,6-10.8,1.6c-3.3-3.7,4.6-11.3,6.2-14.1
+		c2.3-3.9-6.6-6.9-10.3-11.8c-2.4-3.2,3.8-13.1-4-15.7c-2.6-0.9-10.4,3.9-7.6,17.5c-3.6,13.5-30.9,37.1-34.5,27.6
+		c-0.9-2.3,1.5-6.2,7.7-7.5c10.3-2.2,9.5-8.5,4.6-9.2c-7.7-1-9.9-1-19.1-3.2C266.9,72.4,267,67.6,271.3,67.7">
+  </path>
+    <path  d="M121.8,82.5c-2.5,2.5-5.4,6-5.7,8.8c-0.8,6.1,2.3,11.5,10,11.3c8.3-0.1,11-6.2,25-14.6
+		c3.9-2.4,8.7-6.4,10.7-6.7c0.8,0,1.9,0.2,1.8,1.7c-1.2,5.6-2.5,9.3-1,14c1,3.3,5.4,5.4,8.6,3c5.3-4,5.4-6.3,12.3-15.4
+		c1.1-1.5,5.3-8.4,7.3-7.5c1.6,0.8,1.2,3,0.9,4.7c-1.4,8.5-5.1,21.9,11.6,19.8c4-0.5,7.2-3.2,4.2-6c-1.8-1.7-3.9-0.5-6.2-1
+		c-5.4-1.2,7.9-25.7,1.6-30.3c-8.9-6.4-17.2,4.9-23.4,13.2c-2.4,3.3-4.3,1.8-5.8-2.8c-1.8-5.1-12.4-1.4-18.5,1.8
+		c-9.7,5-27.6,21.8-29.3,13.4c-0.3-1.4,2.1-4.7,6.4-6.2c5.1-1.9,10.9-3.5,10.9-6.6c0-2.4-1.4-4.1-3-4c-7.1,0.4-15.4,2.3-25-0.3
+		c-2.2,0-3.1-5.5,3.3-4.8c1.7,0.2,5.5,0.4,19.9,0.7c10.1,0.2,10.3-7.4,9-11.4c-8.4,2.5-12.7,2.2-21.6,2.2c-9.3,0-21.9,1.3-21.4,10.3
+		c0.5,7.6,11.1,9.7,16.6,10.3C122.5,80.2,123,81.7,121.8,82.5">
+  </path>
+    <path  d="M91.1,63.1c0.9-3.2,2.7-3.9,5.2-4.4c3.6-1.2,8.8-2.8,11.9-3.4c7.9-2,10.2-1.5,11.2-7c0.7-3.8-0.9-5.6-0.9-5.6
+		s-17.3,5.4-20.7,6.4c-3,1.3-2.4-1.9-2.4-1.9s-0.4,2,1.4-6.2c5.7-24.9,2.3-31.5-2.2-35.3c-11.4-9.4-53,10.1-82.7,33.6
+		C2,47.9-3.7,49.9,2.7,56.8c5.7,5.7,9.5,1.4,9.5,1.4c5.5-4.3,17.2-16.4,25-22.1c11-8.2,26.3-19.9,39.7-23.1
+		c10.7-2.7,13.9,0.4,12.5,11.3c-0.8,9.4-8,30.4-8,30.4s-11,4.9-14.3,6.2c-2.6,1-5.3,0.3-5.6,6.2c-0.1,6.3,3.7,3.9,6.3,3
+		c2-0.8,6.7-3,8.4-3.7c1.3-1,2.7-0.1,2,1.7c-1.3,4.2-3.6,10.9-8,20.7c-5.6,13.3-15.6,31.6-16.9,36.2c0.1,3,3.4,3.4,7.8,3.5
+		c4-0.3,5.8-3.1,5.8-3.1s5.2-11.2,13.2-30.8C85.7,80.2,89.5,68.4,91.1,63.1">
+  </path>
+    <path  d="M233.9,68.3c-6.2-1.8-11.7,5.6-13.3,12.1c-1.4,6-0.7,14,4.7,15.1c4.3,0.8,9.4-3,10.7-10
+		c0.3-1.9,1.1-7.9,1.4-9.4c1.5-9.5,2.6-13.7,2.6-13.7c5.2-19.9,17.6-58.6,21-60.9c3.5-2.3,13.2-2.7,10.2,5.3
+		C266.5,19.4,261,30.5,256.1,46c-5.8,18.2-17.1,47.3-7,48.6c4.7,0.6,6.6-3.7,9.4-1.5c4.3,3.4-0.4,9.5-8.7,10.3
+		c-11.4,0.4-11.2-6.3-16.3-3.4c-16.2,9.2-26.3-3.7-23.1-19.8c2.7-13.9,13.4-23.6,25.3-17.6c0,0,3.1,1.5,2.8,4.1
+		C238.4,68.6,236.9,69,233.9,68.3">
+  </path>
+    <path  d="M347.2,60.4c-1.7,1.7-3.7,2.5-6,2.5c-2.4,0-4.4-0.8-6-2.5c-1.7-1.7-2.5-3.7-2.5-6s0.8-4.3,2.5-6s3.7-2.5,6-2.5
+		c2.4,0,4.4,0.8,6,2.5c1.7,1.7,2.5,3.7,2.5,6S348.9,58.7,347.2,60.4 M336,49.2c-1.4,1.4-2.1,3.2-2.1,5.2s0.7,3.8,2.1,5.2
+		s3.1,2.2,5.2,2.2c2,0,3.8-0.7,5.2-2.2c1.4-1.4,2.1-3.2,2.1-5.2s-0.7-3.8-2.1-5.2s-3.2-2.2-5.2-2.2S337.5,47.8,336,49.2 M341,49.7
+		c1.2,0,2,0.1,2.6,0.3c1,0.4,1.4,1.2,1.4,2.4c0,0.8-0.3,1.5-0.9,1.8c-0.3,0.2-0.8,0.4-1.4,0.5c0.7,0.1,1.3,0.4,1.6,0.9
+		c0.3,0.5,0.5,1,0.5,1.5v0.7c0,0.2,0,0.4,0,0.7c0,0.2,0,0.4,0.1,0.5v0.1h-1.5V59v-0.1v-0.3v-0.7c0-1.1-0.3-1.8-0.9-2.1
+		c-0.4-0.2-1-0.3-1.8-0.3h-1.3V59h-1.7v-9.3H341z M342.8,51.1c-0.4-0.2-1.1-0.4-2-0.4h-1.4v3.4h1.5c0.7,0,1.2-0.1,1.6-0.2
+		c0.6-0.3,1-0.7,1-1.5C343.4,51.8,343.2,51.4,342.8,51.1">
+  </path>
+        </g>
+      </svg>
+    </div>
+
+    <div class="asset-grid">
+      <div class="asset-item">
+        <div class="asset-box asset-tall" style="min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">Press photo 1</span>
+          <span style="font-size:9px;color:rgba(245,240,232,0.12);">Placeholder — TBC</span>
+        </div>
+        <span class="asset-label">Band photo · Hi-res · 300dpi</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box asset-tall" style="min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">Press photo 2</span>
+          <span style="font-size:9px;color:rgba(245,240,232,0.12);">Placeholder — TBC</span>
+        </div>
+        <span class="asset-label">Band photo · alternate · Hi-res</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box" style="min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">Primary wordmark</span>
+        </div>
+        <span class="asset-label">SVG + PNG · Light and dark</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box" style="min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+          <svg width="28" height="28" viewBox="-38 -38 176 176" fill="none" stroke="rgba(200,165,90,0.4)" stroke-linecap="round" aria-hidden="true">
+            <circle cx="50" cy="50" r="34" stroke-width="8.5"/>
+            <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke-width="8.5"/>
+            <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke-width="8.5"/>
+            <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke-width="5" opacity="0.5"/>
+            <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke-width="5" opacity="0.5"/>
+          </svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">First Broadcast mark</span>
+        </div>
+        <span class="asset-label">SVG + PNG · Mark system</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box" style="min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">EP artwork</span>
+        </div>
+        <span class="asset-label">Release artwork · 3000×3000px · TBC</span>
+      </div>
+    </div>
+
+    <div class="link-grid" role="list" aria-label="Press assets and links">
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Music</div><div class="link-sub">Streaming links — TBC on release</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Instagram</div><div class="link-sub">@theorderoflight</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Press Photos</div><div class="link-sub">Hi-res available on request</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Website</div><div class="link-sub">theorderoflight.com — TBC</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <strong>For high-resolution artwork, additional assets, or interview requests:</strong>
+      contact <a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a>. Response within 48 hours.
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">06</span>
+      <h2 class="sec-title" id="contact-title" style="color:var(--crimson-h);">Contact</h2>
+    </div>
+
+    <div class="contact-block">
+      <div class="contact-label">Management — press, booking, licensing</div>
+      <div class="contact-row"><span class="contact-key">Name</span><span class="contact-val">Marcus Webb</span></div>
+      <div class="contact-row"><span class="contact-key">Title</span><span class="contact-val">Management</span></div>
+      <div class="contact-row"><span class="contact-key">Email</span><span class="contact-val"><a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a></span></div>
+      <div class="contact-row"><span class="contact-key">Response</span><span class="contact-val">Within 48 hours</span></div>
+    </div>
+
+    <div class="contact-block" style="margin-top:20px;">
+      <div class="contact-label">General information</div>
+      <div class="contact-row"><span class="contact-key">Location</span><span class="contact-val">Charlotte, NC</span></div>
+      <div class="contact-row"><span class="contact-key">Label</span><span class="contact-val">First Broadcast</span></div>
+      <div class="contact-row"><span class="contact-key">Distribution</span><span class="contact-val">Symphonic Distribution</span></div>
+      <div class="contact-row"><span class="contact-key">General</span><span class="contact-val"><a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a></span></div>
+    </div>
+  </section>
+
+</div><!-- end wrap -->
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  <div class="footer-logos">
+    <svg viewBox="0 0 349.7 128.4" style="height:18px;width:auto;" aria-label="Fender" role="img">
+      <g fill="currentColor">
+    <path  d="M271.3,67.7c1.8-0.1,6.2,0.5,15.6,0.9c9.9,0.4,11.9-7.3,11.5-12.1c-10.1,2.2-12.5,2.7-21.2,2.7
+		c-9.2,0-20.4,2.6-20.7,10.6c-0.2,8,10.3,9.8,15.7,11.3c1.5,0.4,2.1,1.6,1.1,2.4c-2.3,1.9-7.6,4.3-8.2,8.7
+		c-0.9,6.2,4.8,11.1,11.9,10.9c9.5-0.2,20-4.2,30.2-16.4c2.9-3.4,6.1-9.2,8-11.8c0.5-0.9,1.8-1.4,2.4-1.3c1.8,0.4,4.4,1.8,4,3.7
+		c-0.5,3-8.7,12.4-3.3,18c3.3,3.5,11.8,6,18.5,1.1c6.3-4.6,4.1-8.7,1.6-9c-1.8-0.2-6.7,6-10.8,1.6c-3.3-3.7,4.6-11.3,6.2-14.1
+		c2.3-3.9-6.6-6.9-10.3-11.8c-2.4-3.2,3.8-13.1-4-15.7c-2.6-0.9-10.4,3.9-7.6,17.5c-3.6,13.5-30.9,37.1-34.5,27.6
+		c-0.9-2.3,1.5-6.2,7.7-7.5c10.3-2.2,9.5-8.5,4.6-9.2c-7.7-1-9.9-1-19.1-3.2C266.9,72.4,267,67.6,271.3,67.7">
+  </path>
+    <path  d="M121.8,82.5c-2.5,2.5-5.4,6-5.7,8.8c-0.8,6.1,2.3,11.5,10,11.3c8.3-0.1,11-6.2,25-14.6
+		c3.9-2.4,8.7-6.4,10.7-6.7c0.8,0,1.9,0.2,1.8,1.7c-1.2,5.6-2.5,9.3-1,14c1,3.3,5.4,5.4,8.6,3c5.3-4,5.4-6.3,12.3-15.4
+		c1.1-1.5,5.3-8.4,7.3-7.5c1.6,0.8,1.2,3,0.9,4.7c-1.4,8.5-5.1,21.9,11.6,19.8c4-0.5,7.2-3.2,4.2-6c-1.8-1.7-3.9-0.5-6.2-1
+		c-5.4-1.2,7.9-25.7,1.6-30.3c-8.9-6.4-17.2,4.9-23.4,13.2c-2.4,3.3-4.3,1.8-5.8-2.8c-1.8-5.1-12.4-1.4-18.5,1.8
+		c-9.7,5-27.6,21.8-29.3,13.4c-0.3-1.4,2.1-4.7,6.4-6.2c5.1-1.9,10.9-3.5,10.9-6.6c0-2.4-1.4-4.1-3-4c-7.1,0.4-15.4,2.3-25-0.3
+		c-2.2,0-3.1-5.5,3.3-4.8c1.7,0.2,5.5,0.4,19.9,0.7c10.1,0.2,10.3-7.4,9-11.4c-8.4,2.5-12.7,2.2-21.6,2.2c-9.3,0-21.9,1.3-21.4,10.3
+		c0.5,7.6,11.1,9.7,16.6,10.3C122.5,80.2,123,81.7,121.8,82.5">
+  </path>
+    <path  d="M91.1,63.1c0.9-3.2,2.7-3.9,5.2-4.4c3.6-1.2,8.8-2.8,11.9-3.4c7.9-2,10.2-1.5,11.2-7c0.7-3.8-0.9-5.6-0.9-5.6
+		s-17.3,5.4-20.7,6.4c-3,1.3-2.4-1.9-2.4-1.9s-0.4,2,1.4-6.2c5.7-24.9,2.3-31.5-2.2-35.3c-11.4-9.4-53,10.1-82.7,33.6
+		C2,47.9-3.7,49.9,2.7,56.8c5.7,5.7,9.5,1.4,9.5,1.4c5.5-4.3,17.2-16.4,25-22.1c11-8.2,26.3-19.9,39.7-23.1
+		c10.7-2.7,13.9,0.4,12.5,11.3c-0.8,9.4-8,30.4-8,30.4s-11,4.9-14.3,6.2c-2.6,1-5.3,0.3-5.6,6.2c-0.1,6.3,3.7,3.9,6.3,3
+		c2-0.8,6.7-3,8.4-3.7c1.3-1,2.7-0.1,2,1.7c-1.3,4.2-3.6,10.9-8,20.7c-5.6,13.3-15.6,31.6-16.9,36.2c0.1,3,3.4,3.4,7.8,3.5
+		c4-0.3,5.8-3.1,5.8-3.1s5.2-11.2,13.2-30.8C85.7,80.2,89.5,68.4,91.1,63.1">
+  </path>
+    <path  d="M233.9,68.3c-6.2-1.8-11.7,5.6-13.3,12.1c-1.4,6-0.7,14,4.7,15.1c4.3,0.8,9.4-3,10.7-10
+		c0.3-1.9,1.1-7.9,1.4-9.4c1.5-9.5,2.6-13.7,2.6-13.7c5.2-19.9,17.6-58.6,21-60.9c3.5-2.3,13.2-2.7,10.2,5.3
+		C266.5,19.4,261,30.5,256.1,46c-5.8,18.2-17.1,47.3-7,48.6c4.7,0.6,6.6-3.7,9.4-1.5c4.3,3.4-0.4,9.5-8.7,10.3
+		c-11.4,0.4-11.2-6.3-16.3-3.4c-16.2,9.2-26.3-3.7-23.1-19.8c2.7-13.9,13.4-23.6,25.3-17.6c0,0,3.1,1.5,2.8,4.1
+		C238.4,68.6,236.9,69,233.9,68.3">
+  </path>
+    <path  d="M347.2,60.4c-1.7,1.7-3.7,2.5-6,2.5c-2.4,0-4.4-0.8-6-2.5c-1.7-1.7-2.5-3.7-2.5-6s0.8-4.3,2.5-6s3.7-2.5,6-2.5
+		c2.4,0,4.4,0.8,6,2.5c1.7,1.7,2.5,3.7,2.5,6S348.9,58.7,347.2,60.4 M336,49.2c-1.4,1.4-2.1,3.2-2.1,5.2s0.7,3.8,2.1,5.2
+		s3.1,2.2,5.2,2.2c2,0,3.8-0.7,5.2-2.2c1.4-1.4,2.1-3.2,2.1-5.2s-0.7-3.8-2.1-5.2s-3.2-2.2-5.2-2.2S337.5,47.8,336,49.2 M341,49.7
+		c1.2,0,2,0.1,2.6,0.3c1,0.4,1.4,1.2,1.4,2.4c0,0.8-0.3,1.5-0.9,1.8c-0.3,0.2-0.8,0.4-1.4,0.5c0.7,0.1,1.3,0.4,1.6,0.9
+		c0.3,0.5,0.5,1,0.5,1.5v0.7c0,0.2,0,0.4,0,0.7c0,0.2,0,0.4,0.1,0.5v0.1h-1.5V59v-0.1v-0.3v-0.7c0-1.1-0.3-1.8-0.9-2.1
+		c-0.4-0.2-1-0.3-1.8-0.3h-1.3V59h-1.7v-9.3H341z M342.8,51.1c-0.4-0.2-1.1-0.4-2-0.4h-1.4v3.4h1.5c0.7,0,1.2-0.1,1.6-0.2
+		c0.6-0.3,1-0.7,1-1.5C343.4,51.8,343.2,51.4,342.8,51.1">
+  </path>
+      </g>
+    </svg>
+    <svg viewBox="0 0 206.6 54.5" style="height:13px;width:auto;" aria-label="Ernie Ball" role="img">
+      <g fill="currentColor">
+    <path  d="M68.3,53.7c-4.9,0.1-8.1-0.2-14.4,0.1c-0.6,0-0.8,0-0.8-0.1l-0.3-0.6c-0.5-0.9-1-2.2-1.7-3.7
+		c-0.7-1.5-1.5-3.3-2.6-5C46.2,40.9,43,37.2,38,35l-0.5-0.2l0.1,0.6c0.5,3.5,0.7,6,1,7.8c0.2,1.8,0.5,3.1,1,4
+		c0.5,0.9,1.6,1.8,3.1,2.8c1.1,0.7,2.5,1.5,4,2.4c0.8,0.4,0.5,0.8,0,0.8C41.3,53,31.6,53,28.1,53c-0.7,0-0.8-0.4,0-0.8
+		c3.8-1.7,6-3.6,6.1-5c0.1-1.4,0.3-8,0.2-13C34.2,24.6,34,21,33.8,20.5l-0.3-0.3l-0.4-0.4l-1.4-1.3c-0.9-0.8-1.9-1.7-2.8-2.6
+		c-0.7-0.6-0.3-0.8,0-0.8c3.3,0.1,14.3-0.1,21,0.4c1.5,0.1,2.4,0.2,2.9,0.3c0.4,0.1,0.6,0.2,0.7,0.4c1.7,2.2,3.6,7.3,1.9,12
+		c-1.7,4.7-4.8,5.8-11.6,6.3l-1.1,0.1l0.9,0.5c1.1,0.6,2.3,1.7,3.6,3c1.3,1.3,2.7,2.8,4.1,4.3c2.8,3,5.8,6.2,8.5,7.6
+		c2.9,1.5,5.7,2.4,8.4,2.9C69.3,53.1,69.3,53.7,68.3,53.7L68.3,53.7z M48.9,19.2c-0.6-1.3-1.2-2.1-3.2-1.5c-3.4,1.1-6.3,2-9.3,3.3
+		l-0.2,0.3c0.1,1.6,0.3,6.8,1,11.4l0.3,0.3C48.3,32.9,51.7,25.7,48.9,19.2L48.9,19.2z"/>
+    <path  d="M118.3,12.1c2.4-0.1,7-0.2,11.3-0.2c4.9,0,9.3,0.1,10.2,0.4c3.8,1.7,6.9,10.7,3.3,14.2
+		c-0.8,0.8-1.8,1.4-2.9,1.9c-1.1,0.5-2.4,1-3.9,1.7l-0.7,0.3l0.7,0.3c1.5,0.7,2.7,1.1,3.7,1.3c0.5,0.1,0.9,0.2,1.2,0.4
+		c0.3,0.1,0.6,0.2,0.8,0.4c5.3,4.4,3.1,15.1,0.1,16.6c-3,1.5-4.9,1.8-8.1,1.8c-3.3,0-8-0.5-16.6-0.4c-0.1,0-0.3,0-0.4,0
+		c-0.5,0-0.8-0.3,0-0.8c1.9-1.2,3.6-2,4.9-2.7c0.8-0.4,1.5-0.8,2.1-1.2c0.5-0.4,0.9-0.8,1-1.3c0.6-4.3,1-7.1,1.3-9.1
+		c0.3-2.1,0.4-3.4,0.4-4.7c0-1.3-0.2-2.7-0.6-4.8c-0.3-2.1-0.8-5-1.5-9.4c-1.3-1.1-2.4-1.7-3.4-2.4c-0.8-0.5-1.6-0.9-2.6-1.5
+		C117.6,12.6,117.5,12.1,118.3,12.1L118.3,12.1z M128.4,28.5c0,0.1,0,0.2,0.1,0.4c0.1,0.2,0.3,0.2,0.4,0.2c0.1,0,0.3,0,0.5-0.1
+		c1.7-0.6,3.3-0.9,4.6-1.3c1.3-0.4,2.4-1,3.2-1.9c2.5-3.1-0.4-9.9-2-11l-0.3,0c-1.7,0.7-2.9,0.9-4.3,1.5c-1,6.3-1.9,9.5-2.1,12
+		L128.4,28.5L128.4,28.5z M131.1,46.5c3.1,3.3,10.2,3.5,8.7-5.9c-1.1-6.4-8.6-9.8-11.3-9.2C127.7,32.3,129.7,45.1,131.1,46.5
+		L131.1,46.5z"/>
+    <path  d="M135.6,53.9c6.6-2,8.9-5.4,10.8-9.3c2.1-4.2,4.3-17.5,5.8-27.7c0.2-1.7-0.2-2.4-1.7-3.3
+		c-1.3-0.8-3.6-1.7-7.1-3.8c-0.7-0.4-0.7-0.8,0-0.8c3.5-0.1,13.2,0.4,19,0.1c0.7,0,0.7,0.3,0,0.8c-1.9,1.1-4.7,3-5.4,3.3
+		c-1.5,0.7-1.4,2.3-1.2,3.3c1.2,5.4,2.3,12,3.3,17.7c1,5.7,2,10.7,2.9,13c0.7,1.8,5.6,3.8,14.6,6.3c0.6,0.2,0.4,0.3,0,0.4
+		c-6.1,0.7-14.3,0.1-17.1,0.3c-1.3,0.1-1.4-0.2-1.4-0.2c0-0.1,0-0.2,0-0.3c0.1-0.2,0.1-0.4,0.2-0.5c0.2-1,0.6-3.7-0.2-5.3
+		c-0.4-0.9-1.3-1.2-2.1-1.3c-0.4,0-0.9,0-1.3,0l-1,0.1c-0.6,0-1.2,0-1.8,0.1c-0.5,0-1.1,0.2-1.5,0.5c-0.9,0.8-0.5,2.4,0,3.7
+		c0.5,1.2,1.2,2.4,1.7,3c0.1,0.1,1.1,0.8,0,0.8c-5.9-0.1-13.1-0.1-16.5-0.2C135,54.3,135.1,54.1,135.6,53.9L135.6,53.9z M150.6,39.9
+		c-0.1,0.6-0.1,1.7,0.2,2.5c0.4,0.9,1.3,1.3,2.7,0.6c2.7-1.2,3.2-2.6,3.1-4c-0.4-3-1.3-15.3-2.1-19.1l-0.4-1.8l-0.3,1.8
+		C152.3,30.5,151.8,32.9,150.6,39.9L150.6,39.9z"/>
+    <path d="M8,19.2c-0.7-0.5-4.6-2.8-7.7-4.9c-0.6-0.4-0.3-0.8,0.2-0.7c5.1,0.5,16.4,0.8,26.5,1.2l0.7,0c0.3,0.1,0.3,0.1,0.3,0.2
+		c0,0.2,0,0.4,0,0.8c-0.2,1.5-0.4,5.2-0.7,8.8c0,0.5-0.5,0.6-0.8,0c-0.3-0.6-0.8-1.4-1.2-2.3c-0.9-1.6-2-3.5-2.7-5
+		c-0.2-0.4-0.5-0.8-1.3-0.5c-4.9,2.1-5.9,2.5-6.3,2.9c-0.3,0.3-0.5,1.2-0.7,2.4c-0.2,1.3-0.5,3.1-1,5.6c-0.1,0.7,0.1,1.1,0.7,1.3
+		c0.2,0.1,0.5,0.1,0.8,0.1c0.3,0,0.6,0.1,1,0.1l1.2,0.2c0.3,0,0.6,0.1,0.8,0.1c0.5,0,0.8-0.3,1.1-0.8c0.4-0.7,1.8-3.1,2.9-5.3
+		c0.3-0.5,0.8-0.6,0.8,0c0,3,0,9.2,0.1,14.3c0,0.5-0.5,0.5-0.8,0c-0.9-1.6-1.5-3-2-4.1c-0.3-0.7-0.6-1.2-0.8-1.6l-0.3-0.4
+		c-0.4-0.4-0.6-0.3-0.7-0.3c-0.1,0-0.2,0.1-0.4,0.1c-0.3,0.1-0.6,0.3-1,0.5c-0.8,0.4-1.7,1-2.7,1.6c-0.5,0.3-0.6,0.5-0.4,1.4
+		c0.9,3.7,1.6,5,2.6,8.7c0.2,0.7,0.5,1.1,1.2,1.3c0.6,0.2,1.5,0.4,3.2,0.9c1.9,0.6,3,1,3.7,1.1c0.7,0.1,1.1,0,1.3-0.6
+		c1.2-3.8,1.9-5.6,2.6-7.2c0.5-1.3,1-2.5,1.6-4.4c0.2-0.5,0.7-0.5,0.8,0c1,7.5,0.9,10.2,1.3,12.4c0.3,1.9-0.4,2.3-1.3,2.3
+		c-8.8,0.2-22-0.3-27.1-0.2c-0.8,0-0.7-0.4,0-0.8c4.7-2.8,6-4.4,6.4-5c0.6-0.7,1.1-5.9,1.3-8.5c0.1-2-0.4-10.5-0.6-12.2
+		C10,20.8,9.7,20.4,8,19.2L8,19.2z"/>
+    <path d="M52.6,12.7c1.5,0,4,0.1,6.5,0.4c3.5,0.4,6.7,1.2,7.5,2.4c2.1,3.3,3.3,6.4,4.5,10.2c1.2,3.8,2.5,8,4.7,13.4l0.7,1.6l0-1.8
+		c-0.2-7.8-0.2-17.4-0.1-25c0-3.4,0.7-3.7,2.5-3.9c3.9-0.3,8-0.3,11.2-0.2c0.8,0,0.8,0.4,0,0.8C84,13.5,81,18.4,79.5,25
+		c-0.8,3.4-1.2,7.4-1.4,11.7c-0.2,4.3-0.3,8.9-0.5,13.9c0,0.8-0.3,1.1-0.4,1.2c-0.1,0-0.2,0-0.3-0.3c-0.8-2.7-2-7.2-4.1-12.3
+		c-2.1-5.2-5.1-11-9.4-16.2l-0.7-0.9l0.1,1.1c1.4,13,2.6,16,3.6,17.8c0.7,1.3,3.1,3,4.6,4c0.8,0.5,0.5,0.8,0,0.8
+		c-4.1-0.1-11.3-0.5-15.5-0.6c-1.2,0-0.5-0.4,0-0.8c1.7-1.3,5.4-4.7,5.5-7.1c0.1-2.1-0.6-4.5-1-17.8c-1.5-1.9-4.9-4.3-7.4-6
+		C52,13.1,52.1,12.7,52.6,12.7L52.6,12.7z"/>
+    <path d="M77.2,52.7c0.5-0.3,1.1-0.7,1.7-1.1c1.7-1.1,3.8-2.5,5-3.8c2.2-2.4,2.7-19.3,0.9-22.8c-0.4-0.8-0.9-1.5-1.3-2.1
+		c-0.4-0.6-0.8-1.1-1.1-1.5c-0.2-0.2-0.3-0.4-0.4-0.6c-0.6-0.8-0.2-0.8,0-0.8c0.1,0,0.3,0,0.5,0c0.8,0,2.1,0.1,4.4,0.1
+		c2.7,0,4.3-0.1,5.3-0.2c0.3,0,0.5,0,0.7,0c0.2,0,0.5,0.2,0,0.8c-0.1,0.1-0.1,0.1-0.2,0.2c-0.7,0.8-2,2.3-3.9,4.8
+		c-1,1.3-0.4,18.7,1.6,22.2c0.8,1.3,2,2.6,3.2,3.6c0.6,0.5,1.1,1.3,1.6,1.7l0.1,0c0.7,0.4,0.5,0.4,0,0.4c-2.2,0.1-6.1,0.2-10-0.1
+		c-3.4-0.2-5.7-0.2-7.2-0.1c-0.3,0-0.6,0-0.9,0C76.9,53.5,76.3,53.3,77.2,52.7L77.2,52.7z"/>
+    <path d="M92.1,5.8c-1.6,4-7,3-8.3,1c-1.4-2.2-1-5.5,3-6.6C90.9-0.9,93.1,3.2,92.1,5.8L92.1,5.8z"/>
+    <path d="M176.8,9.8c4.1,0.3,14.8,1,23.5,1c0.7,0,0.6,0.4,0,0.8c-1.7,0.9-3.4,1.8-4.8,2.5c-0.9,0.5-1.7,0.9-2.2,1.2
+		c-0.3,0.2-0.5,0.3-0.7,0.5c-0.3,0.3-0.3,0.4-0.4,0.5c-0.4,3.5-1.3,10.4-2,16.6c-0.7,6.1-1.2,11.9-0.6,12.7c0.4,0.5,1.4,0.9,3,1.6
+		c1.6,0.6,3.8,1.5,6.8,2.6c0.2,0.1,4.3-6.7,5.8-9.3c0.3-0.5,0.8-0.9,0.8,0c0.1,3.3,0.2,8.5,0.5,11.6c0.1,0.7-0.1,0.8-0.1,0.9
+		c-0.1,0.1-0.4,0.1-0.6,0.1c-10.4-0.2-15.3-0.3-26.4-0.3c-0.2,0-1,0,0-0.8c2.2-1.6,6.1-4.8,6.8-5.6c1.3-1.5,1.3-4.5,1-9.3
+		c-0.3-4.9-1.1-11.9-1.7-21.4c0-0.6-2.2-1.8-8.8-5.2C176.3,10.3,175.8,9.7,176.8,9.8L176.8,9.8z"/>
+    <path d="M196.6,36.7c-2.3,0-4.1,1.8-4.1,4.1c0,2.3,1.8,4.1,4.1,4.1c2.3,0,4.1-1.8,4.1-4.1C200.7,38.5,198.9,36.7,196.6,36.7
+		L196.6,36.7z M196.6,36c2.7,0,4.8,2.1,4.8,4.8c0,2.7-2.1,4.8-4.8,4.8c-2.7,0-4.8-2.1-4.8-4.8C191.8,38.1,194,36,196.6,36L196.6,36z
+		"/>
+    <path d="M196,41.1v2.2h-0.7v-5.4h1.1c1.1,0,1.9,0.5,1.9,1.6c0,0.9-0.8,1.4-1.3,1.5l1.7,2.4h-0.9l-1.6-2.2L196,41.1L196,41.1z
+		 M196,40.5h0.5c0.6,0,1.1-0.3,1.1-0.9c0-0.6-0.4-0.9-1.1-0.9H196V40.5L196,40.5z"/>
+    <path d="M91.6,47.3c1.2-1.2,2.9-3,3.8-4.3c0.3-0.4,0.4-2.6,0.5-4.8c0.1-2.3,0.1-5,0.1-6.7c0.1-3.4-1.3-14.2-1.6-14.5
+		c-0.1-0.1-0.2-0.2-0.4-0.3l-0.6-0.4c-0.5-0.3-1-0.6-1.7-1c-1.3-0.7-2.8-1.6-4-2.4c-0.2-0.2,0-0.3,0.5-0.3c7.3,0,21.6,0,23.1,0.2
+		c0.1,0,0.1,0,0.1,0.1c0,0,0,0,0,0.1c0,0.4,0,1.6,0,3.4c0,1.8-0.1,4.1-0.1,6.4c0,1.1-0.3,0.7-0.8,0c-1-1.5-1.9-3-2.6-4.2
+		c-0.4-0.7-0.8-1.3-1.1-1.8c-0.3-0.5-0.6-0.8-0.8-1c-0.2-0.1-0.4-0.1-0.6-0.1c-0.2,0-0.4,0-0.7,0.1c-0.5,0.1-1.1,0.3-1.9,0.6
+		c-0.8,0.2-1.4,0.4-1.9,0.5c-0.2,0.1-0.5,0.2-0.7,0.3c-0.2,0.1-0.3,0.3-0.4,0.6c-0.4,2.5-1.7,8.5-1.9,9.9c0,0.5,0.2,0.8,0.6,0.9
+		c0.2,0.1,0.4,0.1,0.7,0.1l0.9,0.1c0.7,0.1,1.2,0.2,1.5,0.2c0.3,0,0.7,0,0.9-0.4c1.1-2.1,2.3-4.3,3.1-5.8c0.6-1,0.8-1.1,0.8,0
+		c-0.2,3.5-0.4,11.1-0.5,14.5c0,1.3-0.4,0.8-0.8,0c-1.1-2.4-1.8-3.9-2.9-6c-0.2-0.4-0.5-0.5-1-0.4c-0.3,0.1-0.8,0.3-1.5,0.6l-1,0.3
+		c-0.3,0.1-0.5,0.2-0.6,0.3c-0.4,0.2-0.5,0.5-0.4,0.8c1.5,5.8,3,11.1,3.5,11.4c1,0.6,1.8,1.1,2.5,1.5c0.3,0.2,0.6,0.4,0.8,0.4
+		c0.1,0,0.2,0.1,0.3,0.1c0.1,0,0.3,0,0.4-0.1c1-0.8,2.1-2.8,3.2-5c0.8-1.6,1.5-3.4,2.2-4.9c0.4-0.9,0.7-1.2,0.8,0
+		c0.2,3.3,0.5,10.6,0.4,11.3c0,0.2,0,0.3,0,0.5c-0.1,0.2-0.3,0.2-0.6,0.2c-1.2,0-15.5-0.2-20.1-0.1C90.6,48.1,91.2,47.7,91.6,47.3
+		L91.6,47.3z"/>
+    <path d="M184.9,36.4c0.2,3.3,0.3,8,0.3,9.4c0.1,0.9-0.3,0.9-0.7,1c-5.2,0.6-15.2,0.2-21.9,0.2c-0.5,0-0.5-0.2,0-0.8
+		c0.9-1.1,2.2-2.6,3.3-3.9l1.7-2c0.5-0.5,0.8-0.9,0.9-1.1c0.2-0.4-1.5-14.2-2.3-19.4c-0.5-0.6-1.8-1.5-3.3-2.4
+		c-1.1-0.7-2.4-1.4-3.6-2.1c-0.5-0.3-0.8-0.8,0-0.8c3.9-0.1,7.8,0.4,21,0.5c0.9,0,0.6,0.5,0,0.8c-1.1,0.5-2.6,1.2-4,1.9
+		c-1.9,0.9-3.9,1.9-4.2,2.3c-0.7,6.3-1.2,11.6-1.5,15.3c-0.1,1.9-0.2,3.3-0.3,4.4c0,0.5,0,0.9,0,1.2c0,0.2,0,0.3,0.1,0.4
+		c0.1,0.2,0.2,0.3,0.3,0.4c1.5,0.6,3.5,1.3,5.1,1.9c0.8,0.3,1.6,0.5,2.1,0.7c0.3,0.1,0.5,0.1,0.7,0.2c0.4,0,0.5,0,0.6,0
+		c0.5-0.3,1.5-2,2.4-3.8c0.8-1.4,1.6-3,2.2-4.1C184.4,35.9,184.8,35.5,184.9,36.4L184.9,36.4z"/>
+      </g>
+    </svg>
+  </div>
+</footer>E html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Electronic Press Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;--surface2:#242424;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --crimson:#C0384F;--crimson-h:#D94E65;--gold:#C8A55A;--gold-dim:#7A6030;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--text-1);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--gold);color:#0A0A0A;padding:8px 16px;font-size:14px;text-decoration:none;z-index:9999;}
+.skip-link:focus{top:16px;}
+
+/* COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 64px;position:relative;overflow:hidden;}
+.cover-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(192,56,79,0.09) 0%,rgba(200,165,90,0.04) 40%,transparent 70%);pointer-events:none;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--crimson-h) 40%,var(--gold) 70%,transparent);opacity:0.3;}
+.cover-kicker{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:24px;padding-left:20px;}
+.cover-name{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(48px,7vw,96px);letter-spacing:0.2em;text-transform:uppercase;color:var(--text-1);line-height:0.92;padding-left:20px;position:relative;}
+
+.cover-tagline{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(16px,2vw,22px);color:var(--text-2);padding-left:20px;margin-top:14px;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--crimson-h),var(--gold),transparent);opacity:0.3;margin:36px 0;}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-size:13px;color:var(--text-2);letter-spacing:0.05em;}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+
+/* BIO BLOCKS */
+.bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:24px;}
+.bio-card{background:var(--deep);border:1px solid var(--border);padding:28px 26px;}
+.bio-card-label{font-size:8px;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.bio-card-label::after{content:'';flex:1;height:1px;background:rgba(200,165,90,0.15);}
+.bio-text{font-size:14px;color:var(--text-2);line-height:1.85;}
+.bio-text strong{color:var(--text-1);font-weight:400;}
+
+/* SOUND */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:2px;margin:16px 0 24px;}
+.ref-item{background:var(--deep);border:1px solid var(--border);padding:14px 16px;}
+.ref-name{font-size:13px;color:var(--text-1);margin-bottom:3px;}
+.ref-note{font-size:10.5px;color:var(--text-3);line-height:1.5;}
+
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:2px;margin:16px 0 28px;}
+.stat-card{background:var(--deep);border:1px solid var(--border);padding:20px 18px;text-align:center;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:36px;color:var(--crimson-h);line-height:1;}
+.stat-l{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);margin-top:6px;}
+
+/* PRESS NOTES */
+.press-note{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--crimson-h);padding:20px 22px;margin-bottom:2px;}
+.pn-context{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:10px;}
+.pn-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;font-weight:300;color:var(--text-1);line-height:1.5;}
+.pn-attr{font-size:10px;color:var(--text-3);margin-top:8px;letter-spacing:0.1em;}
+
+/* LINKS */
+.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;margin:16px 0;}
+.link-card{background:var(--deep);border:1px solid var(--border);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:border-color 0.2s,background 0.2s;}
+.link-card:hover{border-color:var(--border-hi);background:var(--surface);}
+.link-label{font-size:12px;color:var(--text-1);letter-spacing:0.04em;}
+.link-sub{font-size:10px;color:var(--text-3);margin-top:2px;}
+.link-arrow{font-size:14px;color:var(--gold);}
+
+/* CONTACT */
+.contact-block{background:var(--deep);border:1px solid var(--border);padding:28px 28px;margin-top:16px;}
+.contact-label{font-size:9px;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.contact-row{display:flex;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.contact-row:last-child{border-bottom:none;}
+.contact-key{color:var(--text-3);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;min-width:100px;}
+.contact-val{color:var(--text-1);}
+.contact-val a{color:var(--gold);text-decoration:none;}
+.contact-val a:hover{color:var(--text-1);}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+
+footer{max-width:900px;margin:72px auto 0;padding:22px 60px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);letter-spacing:0.1em;flex-wrap:wrap;gap:8px;}
+
+@media(max-width:700px){
+  .cover{padding:80px 24px 48px;}.cover-line{left:24px;}
+  .wrap{padding:0 24px 80px;}
+  .bio-grid{grid-template-columns:1fr;}
+  footer{padding:22px 24px 48px;}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+
+.asset-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:20px 0 32px;}
+.asset-item{display:flex;flex-direction:column;gap:8px;}
+.asset-box{background:var(--deep);border:1px dashed rgba(200,165,90,0.2);padding:32px 16px;text-align:center;font-size:11px;color:rgba(245,240,232,0.25);letter-spacing:0.08em;}
+.asset-tall{padding:48px 16px;}
+.asset-label{font-size:10.5px;color:var(--text-3);line-height:1.5;}
+
+
+.contact-block{margin-bottom:24px;}
+.contact-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:0;}
+.contact-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;gap:16px;}
+.contact-row:last-child{border-bottom:none;}
+.contact-key{color:var(--text-3);flex-shrink:0;}
+.contact-val{color:var(--text-1);}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-kicker">Electronic Press Kit · First Broadcast · Signal House LLC</p>
+  <h1 class="cover-name">The Order<br>of Light</h1>
+  <p class="cover-tagline">Alternative rock from Charlotte, NC — atmospheric, melodic, emotionally direct.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Based in</span><span class="cm-value">Charlotte, NC</span></div>
+    <div class="cm-item"><span class="cm-label">Genre</span><span class="cm-value">Alternative Rock</span></div>
+    <div class="cm-item"><span class="cm-label">Label</span><span class="cm-value">First Broadcast</span></div>
+    <div class="cm-item"><span class="cm-label">Contact</span><span class="cm-value"><a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a></span></div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+  <!-- BIO -->
+  <section class="section" id="bio" aria-labelledby="bio-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="bio-title" style="color:var(--crimson-h);">Biography</h2>
+    </div>
+    <p class="sec-intro">Two versions — short for listings and social, long for features and editorial.</p>
+
+    <div class="bio-grid">
+      <div class="bio-card">
+        <div class="bio-card-label">50 words</div>
+        <p class="bio-text">
+          <strong>The Order of Light</strong> are an alternative rock band from Charlotte, NC.
+          Atmospheric and melodic, their music sits in the lineage of Thrice, Copeland, and
+          Nothing But Thieves — dark at the edges, warm at its core. Their debut release
+          arrives via First Broadcast.
+        </p>
+      </div>
+      <div class="bio-card">
+        <div class="bio-card-label">200 words</div>
+        <p class="bio-text">
+          <strong>The Order of Light</strong> are an alternative rock band from Charlotte, NC,
+          operating under their own label First Broadcast. Their music is melodic, atmospheric,
+          and emotionally direct — built on harmony, groove, and the conviction that a song
+          should move you before it explains itself.<br><br>
+          The sonic territory spans the lineage of Thrice, Copeland, Nothing But Thieves,
+          Minus The Bear, MuteMath, and Death Cab for Cutie: melodic ambition, emotional
+          honesty, and a refusal to be either too soft or too heavy. Dark atmospherically,
+          warm at its core. Dreamy, grooving, and deliberately intentional in every detail.<br><br>
+          The project operates under a constructed mythology — a visual and narrative world
+          built around the music rather than behind it. The mythology is a frame, not a
+          belief system. It gives the audience something to find and something to return to.<br><br>
+          Their debut release is a three-EP arc — three transmissions across twelve months,
+          structured around a thematic journey. The campaign, brand identity, and fan
+          community infrastructure are fully built and ready to execute.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOUND -->
+  <section class="section" id="sound" aria-labelledby="sound-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="sound-title" style="color:var(--crimson-h);">Sounds Like</h2>
+    </div>
+    <p class="sec-intro">Reference points for editorial context. Not a genre box — a lineage.</p>
+
+    <div class="ref-grid" role="list" aria-label="Sound references">
+      <div class="ref-item" role="listitem"><div class="ref-name">Thrice</div><div class="ref-note">Melodic weight, emotional depth</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Copeland</div><div class="ref-note">Atmospheric warmth, vocal harmony</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Nothing But Thieves</div><div class="ref-note">Modern alt-rock ambition</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Minus the Bear</div><div class="ref-note">Groove, texture, precision</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">MuteMath</div><div class="ref-note">Rhythmic complexity, atmosphere</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Death Cab for Cutie</div><div class="ref-note">Emotional directness, craft</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Young the Giant</div><div class="ref-note">Energy, melodic instinct</div></div>
+      <div class="ref-item" role="listitem"><div class="ref-name">Mew</div><div class="ref-note">Ambitious scope, layered sound</div></div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES IT DIFFERENT -->
+  <section class="section" id="frame" aria-labelledby="frame-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="frame-title" style="color:var(--crimson-h);">The Framework</h2>
+    </div>
+    <p class="sec-intro">For journalists and editorial — what makes this project distinctive.</p>
+
+    <div class="callout">
+      The Order of Light is a fully constructed artistic world — mythology, visual identity,
+      and narrative arc built <em>around</em> the music. The project uses an AI-generated
+      fictional spokesperson (The Conduit) whose video Broadcasts form the mythology's
+      public face. The members remain anonymous. The world speaks for itself.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;margin-top:16px;">
+      <div class="press-note">
+        <div class="pn-context">The Mythology</div>
+        <div class="pn-text">An AI-generated Conduit delivers the mythology as a series of video Broadcasts — a fictional spokesperson whose identity is never revealed. The world is built before the audience arrives.</div>
+      </div>
+      <div class="press-note">
+        <div class="pn-context">The Release Arc</div>
+        <div class="pn-text">Three EPs across twelve months — titled Something, Nothing, Everything — enacting a journey from identity through dissolution to expansion. The number 108 structures the arc.</div>
+      </div>
+      <div class="press-note">
+        <div class="pn-context">The Frequency</div>
+        <div class="pn-text">An annual collaboration series: one song sent as a bare chart and lyric sheet to three artists — established, mid-level, and emerging. Each records independently. The results release in sequence. No one hears the others' versions until they're published.</div>
+      </div>
+      <div class="press-note">
+        <div class="pn-context">The Illuminated</div>
+        <div class="pn-text">A tiered fan membership community — early access, exclusive content, and a physical ordination kit for founding members. Designed as a community, not a mailing list.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELEASE INFO -->
+  <section class="section" id="releases" aria-labelledby="rel-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">04</span>
+      <h2 class="sec-title" id="rel-title" style="color:var(--crimson-h);">Releases</h2>
+    </div>
+    <p class="sec-intro">Year One release plan. Dates TBC — timeline active once lineup is locked.</p>
+
+    <div class="stat-row" role="list">
+      <div class="stat-card" role="listitem"><div class="stat-n">3</div><div class="stat-l">EPs · Year One</div></div>
+      <div class="stat-card" role="listitem"><div class="stat-n">~40</div><div class="stat-l">Songs in development</div></div>
+      <div class="stat-card" role="listitem"><div class="stat-n">5</div><div class="stat-l">Broadcasts scripted</div></div>
+      <div class="stat-card" role="listitem"><div class="stat-n">3</div><div class="stat-l">Frequency collaborators</div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;">
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">EP 01 — Something</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">Identity. The signal found.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson-h);padding:3px 10px;border:1px solid rgba(217,78,101,0.3);">Year One · Q1–Q2</span>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">EP 02 — Nothing</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">Dissolution. The signal questioned.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson-h);padding:3px 10px;border:1px solid rgba(217,78,101,0.3);">Year One · Q2–Q3</span>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">EP 03 — Everything</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">Expansion. The signal completed.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);padding:3px 10px;border:1px solid rgba(200,165,90,0.3);">Year One · Q4</span>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:13px;color:var(--text-1);margin-bottom:4px;">LP — Below the Line of Sight <span style="font-size:10px;color:var(--text-3);">(working title)</span></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--text-3);">The first full-length. The signal deepens.</div>
+        </div>
+        <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-3);padding:3px 10px;border:1px solid var(--border);">Year Two</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <!-- ASSETS & LINKS -->
+  <section class="section" id="links" aria-labelledby="links-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">05</span>
+      <h2 class="sec-title" id="links-title" style="color:var(--crimson-h);">Assets &amp; Links</h2>
+    </div>
+    <p class="sec-intro">For editorial use. High-resolution assets available on request.</p>
+
+    <div class="callout" style="margin-bottom:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(245,240,232,0.35);">Guitar Endorser</span>
+      <svg viewBox="0 0 349.7 128.4" style="height:16px;width:auto;" aria-label="Fender" role="img">
+        <g fill="currentColor" opacity="0.6">
+    <path  d="M271.3,67.7c1.8-0.1,6.2,0.5,15.6,0.9c9.9,0.4,11.9-7.3,11.5-12.1c-10.1,2.2-12.5,2.7-21.2,2.7
+		c-9.2,0-20.4,2.6-20.7,10.6c-0.2,8,10.3,9.8,15.7,11.3c1.5,0.4,2.1,1.6,1.1,2.4c-2.3,1.9-7.6,4.3-8.2,8.7
+		c-0.9,6.2,4.8,11.1,11.9,10.9c9.5-0.2,20-4.2,30.2-16.4c2.9-3.4,6.1-9.2,8-11.8c0.5-0.9,1.8-1.4,2.4-1.3c1.8,0.4,4.4,1.8,4,3.7
+		c-0.5,3-8.7,12.4-3.3,18c3.3,3.5,11.8,6,18.5,1.1c6.3-4.6,4.1-8.7,1.6-9c-1.8-0.2-6.7,6-10.8,1.6c-3.3-3.7,4.6-11.3,6.2-14.1
+		c2.3-3.9-6.6-6.9-10.3-11.8c-2.4-3.2,3.8-13.1-4-15.7c-2.6-0.9-10.4,3.9-7.6,17.5c-3.6,13.5-30.9,37.1-34.5,27.6
+		c-0.9-2.3,1.5-6.2,7.7-7.5c10.3-2.2,9.5-8.5,4.6-9.2c-7.7-1-9.9-1-19.1-3.2C266.9,72.4,267,67.6,271.3,67.7">
+  </path>
+    <path  d="M121.8,82.5c-2.5,2.5-5.4,6-5.7,8.8c-0.8,6.1,2.3,11.5,10,11.3c8.3-0.1,11-6.2,25-14.6
+		c3.9-2.4,8.7-6.4,10.7-6.7c0.8,0,1.9,0.2,1.8,1.7c-1.2,5.6-2.5,9.3-1,14c1,3.3,5.4,5.4,8.6,3c5.3-4,5.4-6.3,12.3-15.4
+		c1.1-1.5,5.3-8.4,7.3-7.5c1.6,0.8,1.2,3,0.9,4.7c-1.4,8.5-5.1,21.9,11.6,19.8c4-0.5,7.2-3.2,4.2-6c-1.8-1.7-3.9-0.5-6.2-1
+		c-5.4-1.2,7.9-25.7,1.6-30.3c-8.9-6.4-17.2,4.9-23.4,13.2c-2.4,3.3-4.3,1.8-5.8-2.8c-1.8-5.1-12.4-1.4-18.5,1.8
+		c-9.7,5-27.6,21.8-29.3,13.4c-0.3-1.4,2.1-4.7,6.4-6.2c5.1-1.9,10.9-3.5,10.9-6.6c0-2.4-1.4-4.1-3-4c-7.1,0.4-15.4,2.3-25-0.3
+		c-2.2,0-3.1-5.5,3.3-4.8c1.7,0.2,5.5,0.4,19.9,0.7c10.1,0.2,10.3-7.4,9-11.4c-8.4,2.5-12.7,2.2-21.6,2.2c-9.3,0-21.9,1.3-21.4,10.3
+		c0.5,7.6,11.1,9.7,16.6,10.3C122.5,80.2,123,81.7,121.8,82.5">
+  </path>
+    <path  d="M91.1,63.1c0.9-3.2,2.7-3.9,5.2-4.4c3.6-1.2,8.8-2.8,11.9-3.4c7.9-2,10.2-1.5,11.2-7c0.7-3.8-0.9-5.6-0.9-5.6
+		s-17.3,5.4-20.7,6.4c-3,1.3-2.4-1.9-2.4-1.9s-0.4,2,1.4-6.2c5.7-24.9,2.3-31.5-2.2-35.3c-11.4-9.4-53,10.1-82.7,33.6
+		C2,47.9-3.7,49.9,2.7,56.8c5.7,5.7,9.5,1.4,9.5,1.4c5.5-4.3,17.2-16.4,25-22.1c11-8.2,26.3-19.9,39.7-23.1
+		c10.7-2.7,13.9,0.4,12.5,11.3c-0.8,9.4-8,30.4-8,30.4s-11,4.9-14.3,6.2c-2.6,1-5.3,0.3-5.6,6.2c-0.1,6.3,3.7,3.9,6.3,3
+		c2-0.8,6.7-3,8.4-3.7c1.3-1,2.7-0.1,2,1.7c-1.3,4.2-3.6,10.9-8,20.7c-5.6,13.3-15.6,31.6-16.9,36.2c0.1,3,3.4,3.4,7.8,3.5
+		c4-0.3,5.8-3.1,5.8-3.1s5.2-11.2,13.2-30.8C85.7,80.2,89.5,68.4,91.1,63.1">
+  </path>
+    <path  d="M233.9,68.3c-6.2-1.8-11.7,5.6-13.3,12.1c-1.4,6-0.7,14,4.7,15.1c4.3,0.8,9.4-3,10.7-10
+		c0.3-1.9,1.1-7.9,1.4-9.4c1.5-9.5,2.6-13.7,2.6-13.7c5.2-19.9,17.6-58.6,21-60.9c3.5-2.3,13.2-2.7,10.2,5.3
+		C266.5,19.4,261,30.5,256.1,46c-5.8,18.2-17.1,47.3-7,48.6c4.7,0.6,6.6-3.7,9.4-1.5c4.3,3.4-0.4,9.5-8.7,10.3
+		c-11.4,0.4-11.2-6.3-16.3-3.4c-16.2,9.2-26.3-3.7-23.1-19.8c2.7-13.9,13.4-23.6,25.3-17.6c0,0,3.1,1.5,2.8,4.1
+		C238.4,68.6,236.9,69,233.9,68.3">
+  </path>
+    <path  d="M347.2,60.4c-1.7,1.7-3.7,2.5-6,2.5c-2.4,0-4.4-0.8-6-2.5c-1.7-1.7-2.5-3.7-2.5-6s0.8-4.3,2.5-6s3.7-2.5,6-2.5
+		c2.4,0,4.4,0.8,6,2.5c1.7,1.7,2.5,3.7,2.5,6S348.9,58.7,347.2,60.4 M336,49.2c-1.4,1.4-2.1,3.2-2.1,5.2s0.7,3.8,2.1,5.2
+		s3.1,2.2,5.2,2.2c2,0,3.8-0.7,5.2-2.2c1.4-1.4,2.1-3.2,2.1-5.2s-0.7-3.8-2.1-5.2s-3.2-2.2-5.2-2.2S337.5,47.8,336,49.2 M341,49.7
+		c1.2,0,2,0.1,2.6,0.3c1,0.4,1.4,1.2,1.4,2.4c0,0.8-0.3,1.5-0.9,1.8c-0.3,0.2-0.8,0.4-1.4,0.5c0.7,0.1,1.3,0.4,1.6,0.9
+		c0.3,0.5,0.5,1,0.5,1.5v0.7c0,0.2,0,0.4,0,0.7c0,0.2,0,0.4,0.1,0.5v0.1h-1.5V59v-0.1v-0.3v-0.7c0-1.1-0.3-1.8-0.9-2.1
+		c-0.4-0.2-1-0.3-1.8-0.3h-1.3V59h-1.7v-9.3H341z M342.8,51.1c-0.4-0.2-1.1-0.4-2-0.4h-1.4v3.4h1.5c0.7,0,1.2-0.1,1.6-0.2
+		c0.6-0.3,1-0.7,1-1.5C343.4,51.8,343.2,51.4,342.8,51.1">
+  </path>
+        </g>
+      </svg>
+    </div>
+
+    <div class="asset-grid">
+      <div class="asset-item">
+        <div class="asset-box asset-tall" style="min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">Press photo 1</span>
+          <span style="font-size:9px;color:rgba(245,240,232,0.12);">Placeholder — TBC</span>
+        </div>
+        <span class="asset-label">Band photo · Hi-res · 300dpi</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box asset-tall" style="min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">Press photo 2</span>
+          <span style="font-size:9px;color:rgba(245,240,232,0.12);">Placeholder — TBC</span>
+        </div>
+        <span class="asset-label">Band photo · alternate · Hi-res</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box" style="min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">Primary wordmark</span>
+        </div>
+        <span class="asset-label">SVG + PNG · Light and dark</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box" style="min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+          <svg width="28" height="28" viewBox="-38 -38 176 176" fill="none" stroke="rgba(200,165,90,0.4)" stroke-linecap="round" aria-hidden="true">
+            <circle cx="50" cy="50" r="34" stroke-width="8.5"/>
+            <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke-width="8.5"/>
+            <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke-width="8.5"/>
+            <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke-width="5" opacity="0.5"/>
+            <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke-width="5" opacity="0.5"/>
+          </svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">First Broadcast mark</span>
+        </div>
+        <span class="asset-label">SVG + PNG · Mark system</span>
+      </div>
+      <div class="asset-item">
+        <div class="asset-box" style="min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(200,165,90,0.35)" stroke-width="1.5" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <span style="font-size:10px;color:rgba(245,240,232,0.2);letter-spacing:0.08em;">EP artwork</span>
+        </div>
+        <span class="asset-label">Release artwork · 3000×3000px · TBC</span>
+      </div>
+    </div>
+
+    <div class="link-grid" role="list" aria-label="Press assets and links">
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Music</div><div class="link-sub">Streaming links — TBC on release</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Instagram</div><div class="link-sub">@theorderoflight</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Press Photos</div><div class="link-sub">Hi-res available on request</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#" class="link-card" role="listitem">
+        <div><div class="link-label">Website</div><div class="link-sub">theorderoflight.com — TBC</div></div>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <strong>For high-resolution artwork, additional assets, or interview requests:</strong>
+      contact <a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a>. Response within 48 hours.
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">06</span>
+      <h2 class="sec-title" id="contact-title" style="color:var(--crimson-h);">Contact</h2>
+    </div>
+
+    <div class="contact-block">
+      <div class="contact-label">Management — press, booking, licensing</div>
+      <div class="contact-row"><span class="contact-key">Name</span><span class="contact-val">Marcus Webb</span></div>
+      <div class="contact-row"><span class="contact-key">Title</span><span class="contact-val">Management</span></div>
+      <div class="contact-row"><span class="contact-key">Email</span><span class="contact-val"><a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a></span></div>
+      <div class="contact-row"><span class="contact-key">Response</span><span class="contact-val">Within 48 hours</span></div>
+    </div>
+
+    <div class="contact-block" style="margin-top:20px;">
+      <div class="contact-label">General information</div>
+      <div class="contact-row"><span class="contact-key">Location</span><span class="contact-val">Charlotte, NC</span></div>
+      <div class="contact-row"><span class="contact-key">Label</span><span class="contact-val">First Broadcast</span></div>
+      <div class="contact-row"><span class="contact-key">Distribution</span><span class="contact-val">Symphonic Distribution</span></div>
+      <div class="contact-row"><span class="contact-key">General</span><span class="contact-val"><a href="mailto:marcus.webb@signalhouse.co">marcus.webb@signalhouse.co</a></span></div>
+    </div>
+  </section>
+
+</div><!-- end wrap -->
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  <div class="footer-logos">
+    <svg viewBox="0 0 349.7 128.4" style="height:18px;width:auto;" aria-label="Fender" role="img">
+      <g fill="currentColor">
+    <path  d="M271.3,67.7c1.8-0.1,6.2,0.5,15.6,0.9c9.9,0.4,11.9-7.3,11.5-12.1c-10.1,2.2-12.5,2.7-21.2,2.7
+		c-9.2,0-20.4,2.6-20.7,10.6c-0.2,8,10.3,9.8,15.7,11.3c1.5,0.4,2.1,1.6,1.1,2.4c-2.3,1.9-7.6,4.3-8.2,8.7
+		c-0.9,6.2,4.8,11.1,11.9,10.9c9.5-0.2,20-4.2,30.2-16.4c2.9-3.4,6.1-9.2,8-11.8c0.5-0.9,1.8-1.4,2.4-1.3c1.8,0.4,4.4,1.8,4,3.7
+		c-0.5,3-8.7,12.4-3.3,18c3.3,3.5,11.8,6,18.5,1.1c6.3-4.6,4.1-8.7,1.6-9c-1.8-0.2-6.7,6-10.8,1.6c-3.3-3.7,4.6-11.3,6.2-14.1
+		c2.3-3.9-6.6-6.9-10.3-11.8c-2.4-3.2,3.8-13.1-4-15.7c-2.6-0.9-10.4,3.9-7.6,17.5c-3.6,13.5-30.9,37.1-34.5,27.6
+		c-0.9-2.3,1.5-6.2,7.7-7.5c10.3-2.2,9.5-8.5,4.6-9.2c-7.7-1-9.9-1-19.1-3.2C266.9,72.4,267,67.6,271.3,67.7">
+  </path>
+    <path  d="M121.8,82.5c-2.5,2.5-5.4,6-5.7,8.8c-0.8,6.1,2.3,11.5,10,11.3c8.3-0.1,11-6.2,25-14.6
+		c3.9-2.4,8.7-6.4,10.7-6.7c0.8,0,1.9,0.2,1.8,1.7c-1.2,5.6-2.5,9.3-1,14c1,3.3,5.4,5.4,8.6,3c5.3-4,5.4-6.3,12.3-15.4
+		c1.1-1.5,5.3-8.4,7.3-7.5c1.6,0.8,1.2,3,0.9,4.7c-1.4,8.5-5.1,21.9,11.6,19.8c4-0.5,7.2-3.2,4.2-6c-1.8-1.7-3.9-0.5-6.2-1
+		c-5.4-1.2,7.9-25.7,1.6-30.3c-8.9-6.4-17.2,4.9-23.4,13.2c-2.4,3.3-4.3,1.8-5.8-2.8c-1.8-5.1-12.4-1.4-18.5,1.8
+		c-9.7,5-27.6,21.8-29.3,13.4c-0.3-1.4,2.1-4.7,6.4-6.2c5.1-1.9,10.9-3.5,10.9-6.6c0-2.4-1.4-4.1-3-4c-7.1,0.4-15.4,2.3-25-0.3
+		c-2.2,0-3.1-5.5,3.3-4.8c1.7,0.2,5.5,0.4,19.9,0.7c10.1,0.2,10.3-7.4,9-11.4c-8.4,2.5-12.7,2.2-21.6,2.2c-9.3,0-21.9,1.3-21.4,10.3
+		c0.5,7.6,11.1,9.7,16.6,10.3C122.5,80.2,123,81.7,121.8,82.5">
+  </path>
+    <path  d="M91.1,63.1c0.9-3.2,2.7-3.9,5.2-4.4c3.6-1.2,8.8-2.8,11.9-3.4c7.9-2,10.2-1.5,11.2-7c0.7-3.8-0.9-5.6-0.9-5.6
+		s-17.3,5.4-20.7,6.4c-3,1.3-2.4-1.9-2.4-1.9s-0.4,2,1.4-6.2c5.7-24.9,2.3-31.5-2.2-35.3c-11.4-9.4-53,10.1-82.7,33.6
+		C2,47.9-3.7,49.9,2.7,56.8c5.7,5.7,9.5,1.4,9.5,1.4c5.5-4.3,17.2-16.4,25-22.1c11-8.2,26.3-19.9,39.7-23.1
+		c10.7-2.7,13.9,0.4,12.5,11.3c-0.8,9.4-8,30.4-8,30.4s-11,4.9-14.3,6.2c-2.6,1-5.3,0.3-5.6,6.2c-0.1,6.3,3.7,3.9,6.3,3
+		c2-0.8,6.7-3,8.4-3.7c1.3-1,2.7-0.1,2,1.7c-1.3,4.2-3.6,10.9-8,20.7c-5.6,13.3-15.6,31.6-16.9,36.2c0.1,3,3.4,3.4,7.8,3.5
+		c4-0.3,5.8-3.1,5.8-3.1s5.2-11.2,13.2-30.8C85.7,80.2,89.5,68.4,91.1,63.1">
+  </path>
+    <path  d="M233.9,68.3c-6.2-1.8-11.7,5.6-13.3,12.1c-1.4,6-0.7,14,4.7,15.1c4.3,0.8,9.4-3,10.7-10
+		c0.3-1.9,1.1-7.9,1.4-9.4c1.5-9.5,2.6-13.7,2.6-13.7c5.2-19.9,17.6-58.6,21-60.9c3.5-2.3,13.2-2.7,10.2,5.3
+		C266.5,19.4,261,30.5,256.1,46c-5.8,18.2-17.1,47.3-7,48.6c4.7,0.6,6.6-3.7,9.4-1.5c4.3,3.4-0.4,9.5-8.7,10.3
+		c-11.4,0.4-11.2-6.3-16.3-3.4c-16.2,9.2-26.3-3.7-23.1-19.8c2.7-13.9,13.4-23.6,25.3-17.6c0,0,3.1,1.5,2.8,4.1
+		C238.4,68.6,236.9,69,233.9,68.3">
+  </path>
+    <path  d="M347.2,60.4c-1.7,1.7-3.7,2.5-6,2.5c-2.4,0-4.4-0.8-6-2.5c-1.7-1.7-2.5-3.7-2.5-6s0.8-4.3,2.5-6s3.7-2.5,6-2.5
+		c2.4,0,4.4,0.8,6,2.5c1.7,1.7,2.5,3.7,2.5,6S348.9,58.7,347.2,60.4 M336,49.2c-1.4,1.4-2.1,3.2-2.1,5.2s0.7,3.8,2.1,5.2
+		s3.1
+</body>
+</html>

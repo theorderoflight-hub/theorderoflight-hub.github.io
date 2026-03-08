@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Year Two</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════
+   RESET & TOKENS
+══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ice: rgba(200,220,240,0.15);
+  /* Core — same world, colder */
+  --void:     #080808;
+  --deep:     #0F0F0F;
+  --surface:  #181818;
+  --surface2: #202020;
+  --border:   #282828;
+  --border-hi:#3A3A3A;
+
+  /* Text — WCAG AA throughout */
+  --text-1: #EDE8E0;   /* 13.8:1 */
+  --text-2: #B0A89A;   /* 6.8:1  */
+  --text-3: #7A7268;   /* 4.5:1  */
+
+  /* Year Two palette — same crimson/gold but shifted, degraded */
+  --crimson:   #B83048;
+  --crimson-h: #CC3D56;
+  --gold:      #B8965A;
+  --gold-dim:  #7A6030;
+
+  /* The new frequency — deep blue, cold, pressurised */
+  --deep-blue: #2A5A8A;
+  --deep-blue-h: #3A7ABF;   /* 4.6:1 on --deep */
+  --ice:       #8AB0C8;     /* 5.8:1 on --deep */
+
+  /* Damage colour — the degradation signal */
+  --static:    #4A4A4A;
+  --burn:      #6A3A2A;
+
+  --max-w: 900px;
+}
+
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  background: var(--void);
+  color: var(--text-1);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+  /* Subtle static overlay across entire page */
+  position: relative;
+}
+
+/* Page-level grain — heavier than Year One */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Horizontal scan damage — subtle interference lines */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 4px,
+    rgba(0,0,0,0.018) 4px,
+    rgba(0,0,0,0.018) 5px
+  );
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute; top: -100%; left: 16px;
+  background: var(--gold); color: #080808;
+  padding: 8px 16px; font-size: 14px; font-weight: 500;
+  text-decoration: none; z-index: 9999;
+}
+.skip-link:focus { top: 16px; }
+
+/* ── LAYOUT ── */
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+/* ══════════════════════════════════════════
+   COVER
+══════════════════════════════════════════ */
+.cover {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 40px 64px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Vertical frequency line — left edge */
+.cover::before {
+  content: '';
+  position: absolute;
+  left: 40px; top: 80px; bottom: 80px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--deep-blue-h) 30%,
+    var(--crimson) 70%,
+    transparent
+  );
+  opacity: 0.35;
+}
+
+.cover-year {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--deep-blue-h);
+  margin-bottom: 32px;
+  padding-left: 20px;
+}
+
+/* Damaged title treatment */
+.cover-title-wrap {
+  padding-left: 20px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+/* Glitch offset layer */
+.cover-title-wrap::before {
+  content: 'Year Two';
+  position: absolute;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  font-size: clamp(52px, 8vw, 88px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  opacity: 0.12;
+  top: 3px;
+  left: 23px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.cover-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  font-size: clamp(52px, 8vw, 88px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-1);
+  line-height: 0.95;
+}
+
+.cover-title-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 26px);
+  color: var(--text-2);
+  margin-top: 12px;
+  letter-spacing: 0.04em;
+}
+
+.cover-meta {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.cover-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.cover-meta-label {
+  font-size: 8px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.cover-meta-value {
+  font-size: 13px;
+  color: var(--text-2);
+  letter-spacing: 0.06em;
+}
+
+.cover-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, var(--deep-blue-h), var(--crimson), transparent);
+  opacity: 0.3;
+  margin: 32px 0;
+}
+
+/* ══════════════════════════════════════════
+   SECTION ARCHITECTURE
+══════════════════════════════════════════ */
+.section {
+  padding-top: 72px;
+  scroll-margin-top: 24px;
+}
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 6px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sec-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.12em;
+  flex-shrink: 0;
+}
+
+.sec-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.sec-desc {
+  font-size: 13px;
+  color: var(--text-3);
+  line-height: 1.7;
+  margin: 14px 0 32px;
+  max-width: 560px;
+}
+
+/* ══════════════════════════════════════════
+   PROSE
+══════════════════════════════════════════ */
+.prose {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.85;
+  max-width: 640px;
+}
+
+.prose p { margin-bottom: 1.4em; }
+.prose p:last-child { margin-bottom: 0; }
+
+.prose strong {
+  color: var(--text-1);
+  font-weight: 400;
+}
+
+.prose em {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05em;
+  color: var(--text-1);
+}
+
+/* Large pull quote */
+.pull {
+  border-left: 2px solid var(--deep-blue-h);
+  padding: 4px 0 4px 24px;
+  margin: 36px 0;
+}
+
+.pull-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 26px);
+  color: var(--text-1);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.pull-attr {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--deep-blue-h);
+  margin-top: 10px;
+  display: block;
+}
+
+/* ══════════════════════════════════════════
+   RECORD TITLE CANDIDATES
+══════════════════════════════════════════ */
+.title-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2px;
+  margin-bottom: 24px;
+}
+
+.title-card {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 24px 22px;
+  position: relative;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.title-card:hover {
+  border-color: var(--border-hi);
+  background: var(--surface);
+}
+
+.title-card.featured {
+  border-color: var(--deep-blue-h);
+  background: rgba(42,90,138,0.06);
+}
+
+.title-card.featured::before {
+  content: 'Recommended';
+  position: absolute;
+  top: 12px; right: 14px;
+  font-size: 7px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--deep-blue-h);
+}
+
+.title-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--text-1);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.title-reading {
+  font-size: 11px;
+  color: var(--text-3);
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════════════════
+   TRACK LIST
+══════════════════════════════════════════ */
+.tracklist {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tracklist thead tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.tracklist th {
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 0 16px 12px 0;
+  text-align: left;
+}
+.tracklist th:last-child { padding-right: 0; }
+
+.tracklist td {
+  padding: 14px 16px 14px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.tracklist td:last-child { padding-right: 0; }
+.tracklist tr:last-child td { border-bottom: none; }
+
+.tracklist tr:hover td {
+  background: rgba(255,255,255,0.015);
+}
+
+.track-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--text-3);
+  letter-spacing: 0.1em;
+  width: 32px;
+}
+
+.track-title {
+  font-size: 14px;
+  color: var(--text-1);
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+.track-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+.track-type {
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.tt-transmission { color: var(--deep-blue-h); border-color: rgba(58,122,191,0.3); }
+.tt-interlude    { color: var(--text-3);      border-color: var(--border-hi); }
+.tt-frequency    { color: var(--gold);        border-color: rgba(184,150,90,0.3); }
+.tt-opener       { color: var(--crimson-h);   border-color: rgba(204,61,86,0.3); }
+.tt-closer       { color: var(--crimson-h);   border-color: rgba(204,61,86,0.3); }
+
+/* ══════════════════════════════════════════
+   THEME BLOCKS
+══════════════════════════════════════════ */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2px;
+  margin-bottom: 24px;
+}
+
+.theme-card {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 24px 22px;
+  position: relative;
+}
+
+.theme-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.theme-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 36px;
+  color: var(--border-hi);
+  line-height: 1;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.theme-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--text-1);
+  margin-bottom: 10px;
+}
+
+.theme-body {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+.theme-lines {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.theme-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.7;
+  display: block;
+}
+
+/* ══════════════════════════════════════════
+   VISUAL DIRECTION
+══════════════════════════════════════════ */
+.visual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 24px;
+}
+
+.visual-card {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 24px 22px;
+}
+
+.visual-card-full { grid-column: 1 / -1; }
+
+.visual-label {
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.visual-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.visual-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--text-1);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+
+.visual-body {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* Colour swatch row */
+.swatch-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch-block {
+  width: 36px;
+  height: 36px;
+}
+
+.swatch-name {
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.swatch-hex {
+  font-size: 8px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════
+   CONDUIT EVOLUTION
+══════════════════════════════════════════ */
+.conduit-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 24px;
+}
+
+.compare-col {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 24px 22px;
+}
+
+.compare-label {
+  font-size: 8px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.compare-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.compare-item:last-child { border-bottom: none; }
+
+.compare-dot {
+  width: 4px;
+  height: 4px;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ══════════════════════════════════════════
+   FREQUENCY YEAR TWO
+══════════════════════════════════════════ */
+.frequency-block {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 28px 28px;
+  margin-bottom: 2px;
+}
+
+.frequency-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  font-size: 11px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.frequency-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--text-2);
+  margin-bottom: 20px;
+}
+
+.frequency-body {
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+.frequency-body p { margin-bottom: 1.2em; }
+.frequency-body p:last-child { margin-bottom: 0; }
+.frequency-body strong { color: var(--text-1); font-weight: 400; }
+
+/* ══════════════════════════════════════════
+   CAMPAIGN ARCHITECTURE
+══════════════════════════════════════════ */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--deep-blue-h),
+    var(--crimson),
+    var(--gold),
+    transparent
+  );
+  opacity: 0.4;
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  background: var(--surface2);
+  border: 1px solid var(--border-hi);
+}
+
+.tl-item.active::before {
+  background: var(--deep-blue-h);
+  border-color: var(--deep-blue-h);
+}
+
+.tl-period {
+  font-size: 8.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--deep-blue-h);
+  margin-bottom: 6px;
+}
+
+.tl-event {
+  font-size: 14px;
+  color: var(--text-1);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.tl-desc {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+/* ══════════════════════════════════════════
+   CALLOUT
+══════════════════════════════════════════ */
+.callout {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--deep-blue-h);
+  padding: 16px 20px;
+  margin: 24px 0;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+.callout strong { color: var(--text-1); font-weight: 400; }
+.callout.gold { border-left-color: var(--gold); }
+.callout.crimson { border-left-color: var(--crimson-h); }
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+.page-nav {
+  position: fixed;
+  top: 28px;
+  right: 32px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.nav-pill {
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-decoration: none;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-pill:hover {
+  color: var(--text-1);
+  border-color: var(--border-hi);
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.foot {
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 700px) {
+  .wrap { padding: 0 20px 80px; }
+  .cover { padding: 0 20px 48px; }
+  .cover::before { left: 20px; }
+  .cover-title-wrap { padding-left: 12px; }
+  .cover-title-wrap::before { left: 15px; }
+  .cover-meta { padding-left: 12px; }
+  .page-nav { display: none; }
+  .visual-grid { grid-template-columns: 1fr; }
+  .conduit-compare { grid-template-columns: 1fr; }
+  .title-grid { grid-template-columns: 1fr; }
+  .theme-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav class="page-nav" aria-label="Page sections">
+  <a href="#cover" class="nav-pill">Cover</a>
+  <a href="#title" class="nav-pill">Title</a>
+  <a href="#themes" class="nav-pill">Themes</a>
+  <a href="#record" class="nav-pill">Record</a>
+  <a href="#conduit" class="nav-pill">Conduit</a>
+  <a href="#visual" class="nav-pill">Visual</a>
+  <a href="#frequency" class="nav-pill">Frequency</a>
+  <a href="#campaign" class="nav-pill">Campaign</a>
+</nav>
+
+<div class="page">
+
+  <!-- ══════════════════════
+       COVER
+  ══════════════════════ -->
+  <div class="cover" id="cover">
+    <div class="cover-year">The Order of Light · Year Two · First Broadcast</div>
+    <div class="cover-title-wrap">
+      <h1 class="cover-title">Year Two</h1>
+      <p class="cover-title-sub">The signal deepens. The same frequency, further in.</p>
+    </div>
+    <div class="cover-divider" aria-hidden="true"></div>
+    <div class="cover-meta" role="list" aria-label="Document overview">
+      <div class="cover-meta-item" role="listitem">
+        <span class="cover-meta-label">Format</span>
+        <span class="cover-meta-value">Full-length record</span>
+      </div>
+      <div class="cover-meta-item" role="listitem">
+        <span class="cover-meta-label">Tracks</span>
+        <span class="cover-meta-value">11 transmissions</span>
+      </div>
+      <div class="cover-meta-item" role="listitem">
+        <span class="cover-meta-label">Themes</span>
+        <span class="cover-meta-value">Memory · Depth · Transformation</span>
+      </div>
+      <div class="cover-meta-item" role="listitem">
+        <span class="cover-meta-label">The Frequency</span>
+        <span class="cover-meta-value">Year Two · same rules · new song</span>
+      </div>
+      <div class="cover-meta-item" role="listitem">
+        <span class="cover-meta-label">Label</span>
+        <span class="cover-meta-value">First Broadcast</span>
+      </div>
+    </div>
+  </div>
+
+
+  <main id="main" tabindex="-1">
+  <div class="wrap">
+
+
+  <!-- ══════════════════════
+       SECTION 1 — THE SIGNAL DEEPENS
+  ══════════════════════ -->
+  <section class="section" id="signal" aria-labelledby="signal-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="signal-title" style="color:var(--deep-blue-h);">The Signal Deepens</h2>
+    </div>
+    <p class="sec-desc">Where Year Two begins and what it means for the project's arc.</p>
+
+    <div class="prose">
+      <p>
+        Year One was an act of transmission — signal sent outward, the Conduit as origin point,
+        the audience as receiver. The mythology was established. The frequency was found.
+        The order was named and its existence announced.
+      </p>
+      <p>
+        Year Two does not repeat that gesture. The signal has already been sent.
+        What Year Two asks is a harder question: <strong>what happens to something that carries
+        a signal for long enough?</strong> What does it cost? What does it change?
+        What does it remember, and what does it lose?
+      </p>
+      <p>
+        The Conduit returns — but the Conduit is different. Not broken. Not corrupted.
+        Changed. Uncertain in ways it was not uncertain before. Further along a path
+        that is no longer clearly lit. The broadcasts continue, but the tone has shifted —
+        from proclamation to examination. The signal has gone deeper, and deeper is darker,
+        and darker is where the most honest things live.
+      </p>
+    </div>
+
+    <div class="pull" role="blockquote" aria-label="Year Two thesis">
+      <p class="pull-text">"Year One asked you to receive the signal. Year Two asks what receiving it has done to you."</p>
+      <span class="pull-attr">Year Two — guiding principle</span>
+    </div>
+
+    <div class="prose">
+      <p>
+        This is the emotional logic of a second record done right. The audience who found
+        you in Year One arrived because something in the signal resonated. They stayed.
+        They are now a year further in. Year Two honours that by going deeper with them —
+        not louder, not bigger, not more. <strong>Further.</strong>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════
+       SECTION 2 — RECORD TITLE
+  ══════════════════════ -->
+  <section class="section" id="title" aria-labelledby="title-section-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="title-section-title" style="color:var(--deep-blue-h);">Record Title</h2>
+    </div>
+    <p class="sec-desc">
+      The title should sound like a frequency, a coordinate, a transmission header —
+      something technical that turns out to be emotional. A phrase that means nothing
+      on first read and everything on third.
+    </p>
+
+    <div class="title-grid" role="list" aria-label="Title candidates">
+
+      <div class="title-card featured" role="listitem" aria-label="Working title — subject to change">
+        <div class="title-main">Below the Line of Sight</div>
+        <div class="title-reading">
+          A carrier wave is what a signal travels on — the invisible medium. Below the Line of Sight
+          suggests the frequency has gone below the surface. Technical, cold, then suddenly
+          intimate. The Conduit as carrier, not just transmitter. Something that has been
+          carrying this for a long time.
+        </div>
+      </div>
+
+      <div class="title-card" role="listitem">
+        <div class="title-main">Below the Line of Sight</div>
+        <div class="title-reading">
+          Navigation and surveillance both use "line of sight" — the threshold below which
+          things disappear from view. What happens beneath it. Transformation, depth, the
+          further-in feeling. Long enough to feel like a coordinate.
+        </div>
+      </div>
+
+      <div class="title-card" role="listitem">
+        <div class="title-main">Null Point</div>
+        <div class="title-reading">
+          In signal processing, the null point is where two frequencies cancel each other
+          out — silence through excess, not absence. Memory erasing itself. The cost of
+          transformation. Two words, maximum weight.
+        </div>
+      </div>
+
+      <div class="title-card" role="listitem">
+        <div class="title-main">The Weight of Clear</div>
+        <div class="title-reading">
+          Counterintuitive — clarity as something heavy rather than liberating.
+          What it costs to see something clearly. Memory that insists on accuracy.
+          Transformation that cannot be undone because you now know what it was.
+        </div>
+      </div>
+
+      <div class="title-card" role="listitem">
+        <div class="title-main">Further Down the Signal</div>
+        <div class="title-reading">
+          The most direct statement of Year Two's thesis. Positional — you are
+          further along than you were. Ambiguous direction — further down could be
+          deeper understanding or deeper trouble. Probably both.
+        </div>
+      </div>
+
+      <div class="title-card" role="listitem">
+        <div class="title-main">At the Frequency of Loss</div>
+        <div class="title-reading">
+          Memory, erosion, transformation all converge here. Loss has a frequency —
+          the record is the attempt to find it and hold it. Resonant without being
+          sentimental. Specific without being confessional.
+        </div>
+      </div>
+
+      <div class="title-card" role="listitem">
+        <div class="title-main">The Long Dark</div>
+        <div class="title-reading">
+          Two words, both simple, together they carry enormous weight. Depth, pressure,
+          the further-in feeling. Not dramatic — matter of fact. This is where
+          the signal has gone. This is what it sounds like there.
+        </div>
+      </div>
+
+      <div class="title-card" role="listitem">
+        <div class="title-main">What the Signal Carries</div>
+        <div class="title-reading">
+          A question disguised as a statement. Answers across 11 tracks.
+          The Conduit as delivery mechanism for something it may not fully understand.
+          Memory, depth, transformation — all of it carried, none of it chosen.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" role="note">
+      <strong>Recommendation: Below the Line of Sight.</strong> It reads as technical first — a signal term,
+      a navigation term — and only becomes personal on reflection. It names the Conduit's new
+      position without explaining it. It pairs cleanly with Year One's transmission language.
+      And it is short enough to be a visual object: two words, heavy, typeset in DM Sans Light
+      at extreme letter-spacing across the centre of void black artwork.
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════
+       SECTION 3 — THEMES
+  ══════════════════════ -->
+  <section class="section" id="themes" aria-labelledby="themes-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="themes-title" style="color:var(--deep-blue-h);">Thematic Framework</h2>
+    </div>
+    <p class="sec-desc">
+      Three themes selected — Memory, Depth, Transformation. Each is a lens, not a
+      subject. Songs need not be about these things — they need to be made of them.
+    </p>
+
+    <div class="theme-grid" role="list" aria-label="Year Two themes">
+
+      <div class="theme-card" role="listitem" style="--card-accent:var(--ice);">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--ice);opacity:0.6;"></div>
+        <div class="theme-num" aria-hidden="true">I</div>
+        <div class="theme-title">Memory</div>
+        <div class="theme-body">
+          Not nostalgia — the mechanics of memory. How it distorts under pressure.
+          How it persists where it should fade and fades where it should persist.
+          Memory as signal degradation: the original is intact somewhere, but what
+          you receive is not the original. The gap between the two is where these
+          songs live.
+          <div class="theme-lines">
+            <span class="theme-line">What you remember clearly that didn't happen that way.</span>
+            <span class="theme-line">What the body remembers that the mind has let go.</span>
+            <span class="theme-line">The frequency a thing leaves in a room after it's gone.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-card" role="listitem">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--deep-blue-h);opacity:0.6;"></div>
+        <div class="theme-num" aria-hidden="true">II</div>
+        <div class="theme-title">Depth</div>
+        <div class="theme-body">
+          Pressure, darkness, the further-in feeling. Depth is not negative —
+          it is neutral, physical, honest. Things behave differently under pressure.
+          Sound travels differently in deep water. The signal that reaches the surface
+          has already been transformed by the distance it traveled.
+          Deep is not dangerous. Deep is simply where fewer things survive.
+          <div class="theme-lines">
+            <span class="theme-line">The weight of being further along than you planned.</span>
+            <span class="theme-line">What you find when you stop ascending and go the other way.</span>
+            <span class="theme-line">The signal that only works below a certain depth.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-card" role="listitem">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--crimson-h);opacity:0.6;"></div>
+        <div class="theme-num" aria-hidden="true">III</div>
+        <div class="theme-title">Transformation</div>
+        <div class="theme-body">
+          The irreversible kind. Not growth, not change — transformation as the point
+          past which return is structurally impossible. You are not the same thing
+          that went in. The Conduit at Year Two is this: the same voice, the same
+          signal, the same frequency — but the carrier has been altered by what
+          it has been carrying.
+          <div class="theme-lines">
+            <span class="theme-line">What you become when you've gone too far to return.</span>
+            <span class="theme-line">The moment you realise you crossed a line without knowing it.</span>
+            <span class="theme-line">Transformation as arrival, not departure.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout gold" role="note">
+      <strong>On thematic integration:</strong> these three themes are not separate — they form
+      a sequence. Memory is what you carry in. Depth is where you go when you follow it honestly.
+      Transformation is what happens at the bottom. The record as a whole traces this arc across
+      11–12 individual transmissions, each one a discrete object that also belongs to the larger movement.
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════
+       SECTION 4 — THE RECORD
+  ══════════════════════ -->
+  <section class="section" id="record" aria-labelledby="record-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">04</span>
+      <h2 class="sec-title" id="record-title" style="color:var(--deep-blue-h);">The Record — Track Architecture</h2>
+    </div>
+    <p class="sec-desc">
+      11 tracks. Dense, immersive, individual but unified. Structured in three movements
+      with a central interlude. Track titles and song content are not defined at this stage —
+      the architecture below is the skeleton only.
+    </p>
+
+    <div class="callout" role="note">
+      Track titles and song-level content are not defined at this stage — the structure
+      below is the architectural skeleton only. Songs determine their own names and
+      territories when they exist. This is the shape, not the content.
+    </div>
+
+    <div style="overflow-x:auto;">
+    <table class="tracklist" aria-label="Year Two record structure">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Position</th>
+          <th scope="col">Type</th>
+          <th scope="col">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="track-num">01</td>
+          <td><div class="track-title">Opener</div></td>
+          <td><span class="track-type tt-opener">Opener</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">First movement begins. Sets the Year Two tone.</td>
+        </tr>
+        <tr>
+          <td class="track-num">02</td>
+          <td><div class="track-title">First movement</div></td>
+          <td><span class="track-type tt-transmission">Transmission</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Memory territory.</td>
+        </tr>
+        <tr>
+          <td class="track-num">03</td>
+          <td><div class="track-title">First movement</div></td>
+          <td><span class="track-type tt-transmission">Transmission</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Likely single candidate — most accessible of the opening movement.</td>
+        </tr>
+        <tr>
+          <td class="track-num">04</td>
+          <td><div class="track-title">First movement</div></td>
+          <td><span class="track-type tt-transmission">Transmission</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Pivot point — Memory into Depth.</td>
+        </tr>
+        <tr>
+          <td class="track-num">05</td>
+          <td><div class="track-title">First movement</div></td>
+          <td><span class="track-type tt-transmission">Transmission</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Longest track on the record. Earns its length.</td>
+        </tr>
+        <tr>
+          <td class="track-num">06</td>
+          <td><div class="track-title">Interlude</div></td>
+          <td><span class="track-type tt-interlude">Interlude</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">The record's midpoint pause. Two minutes, no more.</td>
+        </tr>
+        <tr>
+          <td class="track-num">07</td>
+          <td><div class="track-title">Second movement</div></td>
+          <td><span class="track-type tt-transmission">Transmission</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Depth territory. Production shifts here — heavier, more space.</td>
+        </tr>
+        <tr>
+          <td class="track-num">08</td>
+          <td><div class="track-title">Second movement</div></td>
+          <td><span class="track-type tt-transmission">Transmission</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Memory returns — but after Depth. Not the same thing.</td>
+        </tr>
+        <tr>
+          <td class="track-num">09</td>
+          <td><div class="track-title">The Frequency — Year Two</div></td>
+          <td><span class="track-type tt-frequency">The Frequency</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">The annual collaboration. OOL's Transmission lives here on the record. Collaborators' versions release as standalone singles in surrounding weeks.</td>
+        </tr>
+        <tr>
+          <td class="track-num">10</td>
+          <td><div class="track-title">Second movement</div></td>
+          <td><span class="track-type tt-transmission">Transmission</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Transformation territory. Late arrival — earned, not announced.</td>
+        </tr>
+        <tr>
+          <td class="track-num">11</td>
+          <td><div class="track-title">Closer</div></td>
+          <td><span class="track-type tt-closer">Closer</span></td>
+          <td style="font-size:12px;color:var(--text-2);line-height:1.55;">Not a resolution — an arrival. The signal continues. Year Three begins here.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout gold" style="margin-top:24px;" role="note">
+      <strong>On The Frequency placement:</strong> track nine — deep in the second half —
+      is a deliberate structural statement. It belongs to the record, shaped by the same
+      thematic gravity as everything around it. Not a bonus, not an outlier.
+      The collaborators' versions release as standalone singles in surrounding weeks.
+      The record version is the anchor.
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════
+       SECTION 5 — THE CONDUIT
+  ══════════════════════ -->
+  <section class="section" id="conduit" aria-labelledby="conduit-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">05</span>
+      <h2 class="sec-title" id="conduit-title" style="color:var(--deep-blue-h);">The Conduit — Year Two</h2>
+    </div>
+    <p class="sec-desc">
+      The same figure. Different position. The Broadcasts continue — but the Conduit
+      has been changed by what it has been carrying. This is not a character arc —
+      it is an honest record of what happens to something that transmits for long enough.
+    </p>
+
+    <div class="conduit-compare" aria-label="Conduit Year One versus Year Two comparison">
+
+      <div class="compare-col">
+        <span class="compare-label">Year One — The Conduit</span>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--crimson-h);"></div>
+          <span>Declarative — announces, proclaims, transmits outward</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--crimson-h);"></div>
+          <span>Certain — the signal is clear, the order is established</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--crimson-h);"></div>
+          <span>Still — controlled, deliberate, each word chosen</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--crimson-h);"></div>
+          <span>Visually sharp — the glitch is occasional, technical</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--crimson-h);"></div>
+          <span>The signal moves through the Conduit outward</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--crimson-h);"></div>
+          <span>Broadcasts feel like transmission events</span>
+        </div>
+      </div>
+
+      <div class="compare-col" style="border-color:var(--deep-blue-h);">
+        <span class="compare-label" style="color:var(--deep-blue-h);">Year Two — The Conduit</span>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--deep-blue-h);"></div>
+          <span>Examines — questions, sits with things, returns to them</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--deep-blue-h);"></div>
+          <span>Uncertain in earned ways — knows more, therefore less sure</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--deep-blue-h);"></div>
+          <span>Something has shifted — not distress, just weight</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--deep-blue-h);"></div>
+          <span>Visually degraded — more grain, signal damage is present</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--deep-blue-h);"></div>
+          <span>The signal has moved through the Conduit — and left a mark</span>
+        </div>
+        <div class="compare-item">
+          <div class="compare-dot" style="background:var(--deep-blue-h);"></div>
+          <span>Broadcasts feel like transmissions from further away</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="prose">
+      <p>
+        The Broadcasts themselves evolve in structure. Year One's five Broadcasts each had
+        a defined shape: Opening, Message, Call, End Card. Year Two's Broadcasts are less
+        formally divided — the Conduit no longer separates itself into sections quite so
+        deliberately. Things bleed into each other. The end of the Message and the beginning
+        of the Call are harder to locate. This is intentional: it reflects the thematic content
+        of Memory without stating it.
+      </p>
+      <p>
+        <strong>Production note:</strong> the HeyGen-generated Conduit for Year Two should
+        use the same base model but with post-production treatment pushed further. More chromatic
+        aberration, more persistent. Occasional audio degradation — not dramatic, subliminal.
+        The impression should be: the same signal, traveling from further away, arriving
+        slightly more worn than it left.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════
+       SECTION 6 — VISUAL DIRECTION
+  ══════════════════════ -->
+  <section class="section" id="visual" aria-labelledby="visual-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">06</span>
+      <h2 class="sec-title" id="visual-title" style="color:var(--deep-blue-h);">Visual Direction</h2>
+    </div>
+    <p class="sec-desc">
+      The same world, more damaged. More grain, more signal loss, more evidence of wear.
+      Not a redesign — a degradation. The visual identity should feel like Year One's
+      assets have been in use for a year and the frequency has taken its toll.
+    </p>
+
+    <div class="visual-grid" role="list" aria-label="Visual direction elements">
+
+      <div class="visual-card visual-card-full" role="listitem">
+        <div class="visual-label">Palette evolution</div>
+        <div class="visual-title">From controlled to pressurised</div>
+        <div class="visual-body">
+          Year One: void black, crimson, gold. Clean signals against deep space.<br><br>
+          Year Two: the same foundation — but a new frequency enters. Deep blue — the colour
+          of depth and pressure, cold water and deep signal. It does not replace the crimson
+          and gold. It joins them as an undertone. The palette now has three poles: the warmth
+          of the original signal (gold), the urgency of the transmission (crimson), and the
+          cold depth of where the signal has gone (deep blue). The interplay between them
+          across artwork, motion content, and social imagery is the visual story of the year.
+        </div>
+        <div class="swatch-row" role="list" aria-label="Year Two colour palette">
+          <div class="swatch" role="listitem">
+            <div class="swatch-block" style="background:#080808;" aria-label="Void black"></div>
+            <span class="swatch-name">Void</span>
+            <span class="swatch-hex">#080808</span>
+          </div>
+          <div class="swatch" role="listitem">
+            <div class="swatch-block" style="background:#B83048;" aria-label="Crimson"></div>
+            <span class="swatch-name">Crimson</span>
+            <span class="swatch-hex">#B83048</span>
+          </div>
+          <div class="swatch" role="listitem">
+            <div class="swatch-block" style="background:#B8965A;" aria-label="Gold"></div>
+            <span class="swatch-name">Gold</span>
+            <span class="swatch-hex">#B8965A</span>
+          </div>
+          <div class="swatch" role="listitem">
+            <div class="swatch-block" style="background:#2A5A8A;" aria-label="Deep blue — new in Year Two"></div>
+            <span class="swatch-name">Deep Blue</span>
+            <span class="swatch-hex">#2A5A8A</span>
+          </div>
+          <div class="swatch" role="listitem">
+            <div class="swatch-block" style="background:#8AB0C8;" aria-label="Ice — new in Year Two"></div>
+            <span class="swatch-name">Ice</span>
+            <span class="swatch-hex">#8AB0C8</span>
+          </div>
+          <div class="swatch" role="listitem">
+            <div class="swatch-block" style="background:#4A4A4A;" aria-label="Static — degradation colour"></div>
+            <span class="swatch-name">Static</span>
+            <span class="swatch-hex">#4A4A4A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="visual-card" role="listitem">
+        <div class="visual-label">Grain &amp; Damage</div>
+        <div class="visual-title">More degraded — the same grammar, heavier</div>
+        <div class="visual-body">
+          Year One's Glitch Grammar was applied occasionally and precisely. Year Two's
+          damage is more persistent — it is background condition rather than punctuation.
+          The grain sits heavier across all assets. The chromatic aberration in Broadcast
+          production is more present. Tracking errors occur more frequently and last slightly
+          longer before recovery. The signal still arrives. It is simply more visibly
+          worn by the distance it has traveled.
+        </div>
+      </div>
+
+      <div class="visual-card" role="listitem">
+        <div class="visual-label">Record Artwork</div>
+        <div class="visual-title">The mark under pressure</div>
+        <div class="visual-body">
+          The eight-pointed mark — unchanged in geometry, changed in treatment.
+          For the record artwork: the mark rendered in deep blue against void black,
+          with evidence of signal damage. Not destroyed — pressurised. As if it has
+          been transmitting from depth for a long time and the depth has begun to show.
+          The record title (recommended: Below the Line of Sight) in DM Sans weight 200, wide
+          letter-spacing, positioned below the mark. Nothing else on the front cover.
+        </div>
+      </div>
+
+      <div class="visual-card" role="listitem">
+        <div class="visual-label">Typography</div>
+        <div class="visual-title">Same system, colder application</div>
+        <div class="visual-body">
+          DM Sans and Cormorant Garamond remain the type system. The application shifts:
+          Year One used gold for hierarchy and emphasis. Year Two uses ice blue for
+          primary emphasis, with gold reserved for moments of warmth — the Frequency
+          material, moments of memory, anything that predates the deepening.
+          The cold/warm interplay in typography mirrors the palette's emotional arc.
+        </div>
+      </div>
+
+      <div class="visual-card visual-card-full" role="listitem">
+        <div class="visual-label">Motion &amp; Video</div>
+        <div class="visual-title">Broadcast production — Year Two changes</div>
+        <div class="visual-body">
+          Five Broadcasts planned for Year Two, aligned to the record's thematic arc.
+          The structural change from Year One: Broadcasts no longer open with static —
+          they open in medias res, as if the transmission was already in progress
+          when you tuned in. This small shift carries significant implication:
+          the signal is continuous, not episodic. You are receiving a fragment
+          of something that does not begin or end at your convenience.<br><br>
+          New visual element introduced in Broadcast 002: a second figure, partial,
+          at the edge of frame. Never addressed. Never explained. Appears twice more
+          across the remaining Broadcasts. The audience will find it. Let them.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════
+       SECTION 7 — THE FREQUENCY YEAR TWO
+  ══════════════════════ -->
+  <section class="section" id="frequency" aria-labelledby="freq-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">07</span>
+      <h2 class="sec-title" id="freq-title" style="color:var(--gold);">The Frequency — Year Two</h2>
+    </div>
+    <p class="sec-desc">
+      Same rules. Different song. The series proves itself through repetition.
+    </p>
+
+    <div class="frequency-block">
+      <div class="frequency-title">The Frequency · Year Two</div>
+      <div class="frequency-sub">"The ritual earns its meaning by returning."</div>
+      <div class="frequency-body">
+        <p>
+          Year One of The Frequency was the announcement of a concept. Year Two is the proof
+          that it is a concept and not a one-time gesture. The rules do not change.
+          The Source goes out — title, lyrics, Nashville Numbers chart, nothing else.
+          The collaborators record independently. The Transmissions release in sequence.
+          The Week Four reaction is documented.
+        </p>
+        <p>
+          What changes is the weight of it. By Year Two, the audience knows what this is.
+          Some of them have been waiting for it. The collaborators are joining something
+          that already has a shape — which changes the nature of the invitation.
+          The established artist in Year Two is selected with this in mind:
+          someone who has heard Year One's Transmissions and understands what they're
+          walking into. The emerging artist in Year Two is selected with the same care —
+          but with an additional lens: <strong>whose career could this genuinely move?</strong>
+        </p>
+        <p>
+          The Year Two song belongs thematically to the record. It is written from
+          within the same world of Memory, Depth, and Transformation. The Source
+          goes out before the record releases — the collaborators are working from
+          the same emotional territory without knowing the record's full context.
+          When the album lands, track nine is a song three artists have already
+          interpreted. The audience who followed The Frequency already knows
+          two versions before they hear the record. This is the architecture working.
+        </p>
+        <p>
+          <strong>Collaborator selection note for Year Two:</strong> consider reaching
+          outside the obvious alternative rock sphere. A collaborator from a different
+          but adjacent world — folk, post-rock, ambient, art-pop — will produce a more
+          surprising third Transmission than a second alternative rock act would.
+          The rules guarantee that the harmonic structure is shared. What they bring
+          to it is their own. The further their starting point from yours, the more
+          the series reveals itself.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════
+       SECTION 8 — CAMPAIGN
+  ══════════════════════ -->
+  <section class="section" id="campaign" aria-labelledby="campaign-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">08</span>
+      <h2 class="sec-title" id="campaign-title" style="color:var(--deep-blue-h);">Campaign Architecture</h2>
+    </div>
+    <p class="sec-desc">
+      Year Two's campaign builds directly on Year One's audience. The people who found
+      you are the launch platform. Everything in Year Two's campaign acknowledges
+      them without pandering to them.
+    </p>
+
+    <div class="timeline" role="list" aria-label="Year Two campaign timeline">
+
+      <div class="tl-item" role="listitem">
+        <div class="tl-period">Months 1–2 — Re-Entry</div>
+        <div class="tl-event">The signal returns. No announcement — resumption.</div>
+        <div class="tl-desc">
+          The first Year Two social content appears without explanation.
+          The visual treatment has shifted — deeper blue entering the palette,
+          grain heavier. Illuminated members receive private notification first.
+          The general public notices the change in tone before they understand it.
+          No record announcement yet. Just: the signal is back, and it sounds different.
+        </div>
+      </div>
+
+      <div class="tl-item" role="listitem">
+        <div class="tl-period">Month 3 — Broadcast 001</div>
+        <div class="tl-event">The first Year Two Broadcast drops.</div>
+        <div class="tl-desc">
+          Opens mid-transmission. The Conduit is the same voice — but the audience
+          will feel the difference before they can name it. No record announcement
+          in the Broadcast itself. The mythology deepens. The Conduit references
+          something from Year One obliquely — a reward for the audience who stayed.
+        </div>
+      </div>
+
+      <div class="tl-item" role="listitem">
+        <div class="tl-period">Month 4 — First Single</div>
+        <div class="tl-event">"Carrier" — the record's first single and the Year Two announcement.</div>
+        <div class="tl-desc">
+          Track three on the record. The most melodic, the most accessible — the correct
+          first statement. The single release is also the record announcement:
+          title, artwork, release date, pre-save. The artwork debuts the deep blue
+          palette shift. Press outreach begins — the story is the evolution, not just the release.
+        </div>
+      </div>
+
+      <div class="tl-item" role="listitem">
+        <div class="tl-period">Months 5–6 — Build</div>
+        <div class="tl-event">Second single, Broadcast 002, The Frequency announcement.</div>
+        <div class="tl-desc">
+          The second single goes deeper into the record's second half — a deliberate
+          tonal shift from the first single that signals this is not a straightforward
+          record. Broadcast 002 introduces the second figure at the edge of frame.
+          The Frequency Year Two is announced: same rules, Year Two song, collaborators
+          revealed on announcement day.
+        </div>
+      </div>
+
+      <div class="tl-item active" role="listitem">
+        <div class="tl-period">Month 7 — Release</div>
+        <div class="tl-event">Below the Line of Sight arrives. The Frequency Transmission I drops same week.</div>
+        <div class="tl-desc">
+          The record releases on a Friday. The Order of Light's Frequency Transmission
+          releases the same week — track nine on the record is now also a standalone single.
+          The following three weeks: Transmission II (established collaborator),
+          Transmission III (emerging artist), Week Four reaction content.
+          The Frequency and the record campaign run simultaneously, each amplifying the other.
+        </div>
+      </div>
+
+      <div class="tl-item" role="listitem">
+        <div class="tl-period">Months 8–12 — Sustain &amp; Live</div>
+        <div class="tl-event">Live shows, Broadcasts 003–005, Year Three signal begins.</div>
+        <div class="tl-desc">
+          Year Two's live shows are framed differently from Year One's — these are not
+          performances of the record, they are transmissions of it. The staging reflects
+          the visual evolution: deeper blue lighting, more visible signal damage in
+          the visual treatment, the Conduit's presence in the show's framing.
+          By month 12, the final Broadcast of Year Two plants the first signal of Year Three —
+          something unresolved, something new entering the frequency.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout crimson" role="note" style="margin-top:32px;">
+      <strong>The throughline:</strong> Year One built the mythology. Year Two deepens it.
+      Year Three — whatever it becomes — will be built on an audience that has been
+      with The Order of Light for two years, through two distinct emotional territories,
+      and has stayed. That audience is not large by industry standards. It does not need to be.
+      It needs to be real.
+    </div>
+  </section>
+
+
+  </div><!-- /.wrap -->
+  </main>
+
+  <div class="wrap">
+    <footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+  </div>
+
+</div><!-- /.page -->
+
+</body>
+</html>

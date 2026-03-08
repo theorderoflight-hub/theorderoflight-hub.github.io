@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Frequency — Framework Document</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -322,7 +323,7 @@ em.freq-em { color:var(--freq-bright); font-style:italic; }
 .source-field:last-of-type { border-bottom:none; }
 .source-field-label {
   font-size:8.5px; letter-spacing:0.32em; text-transform:uppercase;
-  color:var(--crimson-dim); margin-bottom:10px;
+  color:rgba(192,56,79,0.45); margin-bottom:10px;
   font-family:'DM Sans',sans-serif;
 }
 .source-field-content {
@@ -425,6 +426,54 @@ em.freq-em { color:var(--freq-bright); font-style:italic; }
   .source-header { padding:28px 24px; flex-direction:column; }
   .source-footer { padding:20px 24px; flex-direction:column; gap:8px; }
 }
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
 </style>
 </head>
 <body>
@@ -491,7 +540,7 @@ em.freq-em { color:var(--freq-bright); font-style:italic; }
       <div class="word-bg">03</div>
       <div class="word-num">Each Version</div>
       <div class="word-title">Transmission</div>
-      <p class="word-def">Each released interpretation — The Order of Light's, the established artist's, the emerging artist's — is a Transmission. The same word used for the Sermons. The mythology holds. The signal continues.</p>
+      <p class="word-def">Each released interpretation — The Order of Light's, the established artist's, the emerging artist's — is a Transmission. The same word used for the Broadcasts. The mythology holds. The signal continues.</p>
     </div>
   </div>
 
@@ -840,7 +889,7 @@ Outro lyrics or final chorus notation.</div>
     </div>
     <div class="source-footer">
       <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
-      <p>The Order of Light · The Frequency · tristanmatthew@gmail.com</p>
+      <p>The Order of Light · The Frequency · <a href="mailto:info@signalhouse.co">info@signalhouse.co</a></p>
       <p>Confidential · Do not distribute · © The Order of Light</p>
     </div>
   </div>
@@ -894,12 +943,26 @@ Outro lyrics or final chorus notation.</div>
 <div class="doc-footer">
   <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
   <p>The Order of Light · The Frequency · Framework Document · 2025</p>
-  <p>Not legal advice · Consult an entertainment lawyer before Year One · tristanmatthew@gmail.com</p>
-</div>
+  <p>Not legal advice · Confidential · For collaborator use only</p>
+</div><!-- end doc-footer -->
+
+</div><!-- end wrap -->
 
 <script>
-  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('v'); }), {threshold:0.06, rootMargin:'0px 0px -20px 0px'});
-  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+(function(){
+  var els = document.querySelectorAll('.r');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('v'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('v'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
 </script>
 </body>
 </html>

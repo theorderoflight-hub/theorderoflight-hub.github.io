@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Merch & Illuminated Membership</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --crimson:#C0384F;--crimson-h:#D94E65;
+  --gold:#C8A55A;--gold-dim:#7A6030;
+  --serif:'Cormorant Garamond',serif;
+  --mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--void);}
+body{color:var(--text-1);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:1px solid var(--gold);outline-offset:3px;}
+
+.r{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.r.v{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;}}
+
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 56px;position:relative;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--crimson-h) 40%,var(--gold) 70%,transparent);opacity:0.3;}
+.cover-eyebrow{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:16px;padding-left:20px;font-family:var(--mono);}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(44px,6vw,88px);line-height:0.9;letter-spacing:-0.01em;color:var(--text-1);padding-left:20px;}
+.cover-title em{font-style:italic;color:var(--gold);}
+.cover-sub{font-family:var(--sans);font-weight:300;font-size:14.5px;color:var(--text-2);padding-left:20px;margin-top:20px;max-width:500px;line-height:1.8;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--crimson-h),var(--gold),transparent);opacity:0.3;margin:28px 0;}
+.cover-meta{display:flex;gap:32px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-family:var(--mono);font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-family:var(--mono);font-size:12px;color:var(--text-2);}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:var(--sans);font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+.prose{font-size:14.5px;color:var(--text-2);line-height:1.85;max-width:640px;}
+.prose p{margin-bottom:1.2em;}
+.prose strong{color:var(--text-1);font-weight:400;}
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 20px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+.callout.crit{border-left-color:var(--crimson-h);}
+
+/* TAGLINE OPTIONS */
+.tagline-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:20px 0;}
+.tl-card{background:var(--deep);border:1px solid var(--border);padding:22px 26px;cursor:default;transition:border-color 0.2s;}
+.tl-card:hover{border-color:var(--gold);}
+.tl-card.preferred{border-color:var(--gold);background:rgba(200,165,90,0.05);}
+.tl-text{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text-1);margin-bottom:8px;line-height:1.4;}
+.tl-note{font-family:var(--mono);font-size:10.5px;color:var(--text-3);line-height:1.6;}
+.tl-label{font-family:var(--mono);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:20px 0;}
+.product-card{background:var(--deep);border:1px solid var(--border);padding:24px 26px;}
+.pc-cat{font-family:var(--mono);font-size:8.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:8px;}
+.pc-name{font-size:16px;color:var(--text-1);margin-bottom:6px;font-weight:300;}
+.pc-spec{font-family:var(--mono);font-size:11px;color:var(--text-3);line-height:1.6;margin-bottom:12px;}
+.pc-price{font-family:var(--mono);font-size:11px;color:var(--gold);}
+.pc-note{font-size:12px;color:var(--text-3);margin-top:8px;font-style:italic;}
+
+/* OBJECT TABLE */
+.obj-rows{margin:16px 0;}
+.obj-row{display:grid;grid-template-columns:1fr 80px 80px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px;align-items:baseline;}
+.obj-row:first-child{border-top:1px solid var(--border-hi);}
+.obj-head{font-family:var(--mono);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);padding:8px 0;}
+.obj-name{color:var(--text-1);}
+.obj-cost{font-family:var(--mono);color:var(--text-3);}
+.obj-retail{font-family:var(--mono);color:var(--gold);}
+.obj-note{font-family:var(--mono);font-size:11px;color:var(--text-3);}
+
+/* PRODUCTION MODEL */
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:20px 0;}
+.prod-card{background:var(--deep);border:1px solid var(--border);padding:22px 24px;}
+.prod-card.rec{border-color:var(--gold);background:rgba(200,165,90,0.04);}
+.prod-label{font-family:var(--mono);font-size:8.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;}
+.prod-label.gold{color:var(--gold);}
+.prod-title{font-size:15px;color:var(--text-1);margin-bottom:8px;font-weight:300;}
+.prod-body{font-family:var(--mono);font-size:11px;color:var(--text-3);line-height:1.7;}
+
+/* ILLUMINATED TIERS */
+.tier-block{background:var(--deep);border:1px solid var(--border);margin:20px 0;}
+.tier-header{display:flex;justify-content:space-between;align-items:baseline;padding:20px 24px;border-bottom:1px solid var(--border);}
+.tier-name{font-size:16px;color:var(--text-1);font-weight:300;}
+.tier-price{font-family:var(--mono);font-size:14px;color:var(--gold);}
+.tier-perks{padding:0;}
+.perk-row{display:flex;align-items:baseline;gap:12px;padding:12px 24px;border-bottom:1px solid var(--border);font-size:13.5px;}
+.perk-row:last-child{border-bottom:none;}
+.perk-dot{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;margin-top:5px;}
+.perk-dot.dim{background:var(--text-3);}
+.perk-text{color:var(--text-2);line-height:1.6;}
+.perk-text strong{color:var(--text-1);font-weight:400;}
+
+/* LAUNCH SEQUENCE */
+.timeline{margin:20px 0;}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--border);}
+.tl-item:last-child{border-bottom:none;}
+.tl-phase{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);padding-top:2px;}
+.tl-content{}
+.tl-title{font-size:14px;color:var(--text-1);margin-bottom:4px;font-weight:300;}
+.tl-desc{font-family:var(--mono);font-size:11px;color:var(--text-3);line-height:1.6;}
+
+/* PRICING FRAMEWORK */
+.price-table{margin:16px 0;}
+.pt-row{display:grid;grid-template-columns:1fr 90px 90px 90px;gap:0;padding:11px 0;border-bottom:1px solid var(--border);font-size:13px;align-items:baseline;}
+.pt-head{font-family:var(--mono);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3);padding:8px 0;border-bottom:1px solid var(--border-hi);}
+.pt-item{color:var(--text-1);}
+.pt-cost{font-family:var(--mono);color:var(--text-3);text-align:right;}
+.pt-retail{font-family:var(--mono);color:var(--gold);text-align:right;}
+.pt-margin{font-family:var(--mono);color:var(--text-2);text-align:right;}
+
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-eyebrow">The Order of Light · Internal Strategy · Working Document</p>
+  <h1 class="cover-title">Merch &amp;<br><em>Illuminated</em><br>Membership</h1>
+  <p class="cover-sub">The physical extension of the brand. Objects from the world. A membership that rewards the people who commit early.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Brand register</span><span class="cm-value">Elevated band merch — not generic</span></div>
+    <div class="cm-item"><span class="cm-label">Price point</span><span class="cm-value">Accessible — $30–35 tees, adjust from there</span></div>
+    <div class="cm-item"><span class="cm-label">Production</span><span class="cm-value">Small batch screen print — 100–200 units</span></div>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+  <!-- MERCH PHILOSOPHY -->
+  <section class="section r" id="philosophy">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title" style="color:var(--crimson-h);">The Brief</h2></div>
+    <div class="prose">
+      <p>This band is a brand. The merch is the physical proof of that. Every object needs to feel like it came from the world of The Order of Light — not like it was made to sell at a merch table. The standard is elevated basics: quality materials, precise printing, restrained design. The kind of thing you wear because it's genuinely good, not because it has a band name on it.</p>
+      <p>Small runs. High quality. Limited availability. The scarcity isn't artificial — it reflects the reality of a band that values craft over volume. If something sells out and people ask for it again, that's a success, not a problem.</p>
+    </div>
+    <div class="callout">
+      <strong>The test:</strong> Every piece should pass the "would I wear this if I didn't know the band?" test. If the answer is no, the design or the quality isn't there yet.
+    </div>
+  </section>
+
+  <!-- TAGLINE / TAG CONCEPT -->
+  <section class="section r" id="tagline">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title" style="color:var(--crimson-h);">Garment Tag — Inside Label</h2></div>
+    <p class="sec-intro">Following the alltheprettythings model — the mark on the hem, a tagline on the inside label. The tagline should feel like it belongs to the world, not to marketing. Options to react to:</p>
+    <div class="tagline-grid">
+      <div class="tl-card preferred">
+        <div class="tl-label">Preferred direction</div>
+        <div class="tl-text">From within the signal.</div>
+        <div class="tl-note">Minimal. Mythological without being precious. Sounds like something you'd find on a document from inside the world — not a marketing line.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-label">Direction B</div>
+        <div class="tl-text">Carry the frequency.</div>
+        <div class="tl-note">Direct. Ties to The Frequency framework. Action-oriented — you're doing something by wearing it. Slightly more declarative.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-label">Direction C</div>
+        <div class="tl-text">The transmission continues.</div>
+        <div class="tl-note">References the ongoing nature of the project. Good for a label because it's present-tense — the work isn't finished. Could date oddly.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-label">Direction D — open</div>
+        <div class="tl-text">Write your own here.</div>
+        <div class="tl-note">All four directions are starting points. The right one will feel inevitable when it lands. It should work on a 1cm hem tag in 6pt type and still mean something.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Tag structure:</strong> Outside hem — the mark (eight-pointed, 10mm, printed or woven). Inside neck label — band name in DM Sans weight 200 + tagline in DM Mono 8pt + care/composition info. Same quality as the garment. Not an afterthought.
+    </div>
+  </section>
+
+  <!-- GARMENTS -->
+  <section class="section r" id="garments">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title" style="color:var(--crimson-h);">Garment Range</h2></div>
+    <p class="sec-intro">Wearables for Year One and beyond. Each piece is a permanent part of the range or a limited cycle — noted below.</p>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="pc-cat">Core — permanent</div>
+        <div class="pc-name">Heavyweight Tee</div>
+        <div class="pc-spec">Blank: AS Colour Staple (180gsm) or Comfort Colors 1717 (heavyweight). One or two colour screen print. Mark on chest or back — not both. Black only for Year One.
+        <br>Run: 100–150 units.</div>
+        <div class="pc-price">Retail: $30–35</div>
+        <div class="pc-note">The anchor piece. Simple. Should be the tee people wear to death.</div>
+      </div>
+      <div class="product-card">
+        <div class="pc-cat">Core — permanent</div>
+        <div class="pc-name">Long Sleeve</div>
+        <div class="pc-spec">Same blank family as the tee. Mark on left chest, small. Wordmark or tagline on cuff in DM Mono — a detail for people who look closely.
+        <br>Run: 75–100 units.</div>
+        <div class="pc-price">Retail: $38–42</div>
+        <div class="pc-note">Earns its place in autumn and winter. Cuff detail separates it from a basic.</div>
+      </div>
+      <div class="product-card">
+        <div class="pc-cat">Core — permanent</div>
+        <div class="pc-name">Crewneck Sweatshirt</div>
+        <div class="pc-spec">Heavy fleece — 400gsm minimum. AS Colour Supply Crew or Independent Trading SS3000. Embroidered mark rather than screen print at this weight — holds better long-term.
+        <br>Run: 75 units.</div>
+        <div class="pc-price">Retail: $58–65</div>
+        <div class="pc-note">Higher price point justified by weight and embroidery. Not a hoodie — everyone does hoodies.</div>
+      </div>
+      <div class="product-card">
+        <div class="pc-cat">Cycle release — per EP</div>
+        <div class="pc-name">Coach Jacket / Overshirt</div>
+        <div class="pc-spec">One outerwear piece per release cycle. Design TBC per cycle — this is the statement piece, the one that photographs and gets talked about. Embroidered or custom-printed. Limited to 50–75 units.
+        <br>Run: 50–75 units.</div>
+        <div class="pc-price">Retail: $90–120</div>
+        <div class="pc-note">The collector's piece for each era. Sells out, doesn't restock. That's intentional.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Colour direction:</strong> Black primary. Faded black / off-black secondary. One colour per cycle in a non-black that fits the visual world — deep burgundy, raw linen, slate. Never bright. Never trend-chasing.
+    </div>
+  </section>
+
+  <!-- OBJECTS -->
+  <section class="section r" id="objects">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title" style="color:var(--crimson-h);">Objects & Accessories</h2></div>
+    <p class="sec-intro">Non-garment pieces. Each should feel like an artifact from the world — something you'd find in the ordination kit or leave on a merch table and have people ask what it is before they ask who the band is.</p>
+    <div class="obj-rows">
+      <div class="pt-row pt-head">
+        <div>Object</div><div class="pt-cost" style="text-align:left;">Est. cost</div><div class="pt-retail" style="text-align:left;">Retail</div><div class="pt-margin" style="text-align:left;">Notes</div>
+      </div>
+      <div class="obj-row">
+        <div class="obj-name"><strong>Embossed mints tin</strong><br><span style="font-size:11px;color:var(--text-3);font-family:var(--mono);">The mark pressed into each mint. Small tin, black or raw metal.</span></div>
+        <div class="obj-cost">$2–3</div><div class="obj-retail">$8–10</div>
+        <div class="obj-note">The PS2 era "experience as brand" object. Passes around, gets photographed. Launch moment piece — hand these out at the first show.</div>
+      </div>
+      <div class="obj-row">
+        <div class="obj-name"><strong>Tote bag</strong><br><span style="font-size:11px;color:var(--text-3);font-family:var(--mono);">Heavy canvas, not the cheap giveaway kind. Mark screen printed. Black or natural canvas.</span></div>
+        <div class="obj-cost">$5–8</div><div class="obj-retail">$22–26</div>
+        <div class="obj-note">Utility object that lives in the world. People carry these. Natural canvas with black print or black with white mark — test both.</div>
+      </div>
+      <div class="obj-row">
+        <div class="obj-name"><strong>Enamel pin</strong><br><span style="font-size:11px;color:var(--text-3);font-family:var(--mono);">The eight-pointed mark. Hard enamel, black and crimson. 25mm.</span></div>
+        <div class="obj-cost">$2–3</div><div class="obj-retail">$12–14</div>
+        <div class="obj-note">Low barrier entry into the merch range. Good impulse buy at merch table. Consider including one in the ordination kit.</div>
+      </div>
+      <div class="obj-row">
+        <div class="obj-name"><strong>Woven patch</strong><br><span style="font-size:11px;color:var(--text-3);font-family:var(--mono);">Iron-on/sew-on. The mark or a Glitch Grammar element. High-detail weave.</span></div>
+        <div class="obj-cost">$1.50–2</div><div class="obj-retail">$10–12</div>
+        <div class="obj-note">Customisation piece — people put these on bags, jackets, wherever. Cheap to produce, good margin.</div>
+      </div>
+      <div class="obj-row">
+        <div class="obj-name"><strong>Postcard / art print — numbered</strong><br><span style="font-size:11px;color:var(--text-3);font-family:var(--mono);">Glitch Grammar visual language. Heavy stock, matte. Numbered edition of 108.</span></div>
+        <div class="obj-cost">$0.50–1</div><div class="obj-retail">$6–8 / $18–24</div>
+        <div class="obj-note">Postcard as merch table freebie (first show). Larger numbered print as a real object. Edition of 108 ties to ordination number.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>The mints note:</strong> Source through a custom confectionery supplier — several UK and US companies do embossed logo mints in custom tins at reasonable MOQs (250–500 units). The tin is as important as the mint. Black anodised aluminium if budget allows, printed metal if not. This is the piece that circulates — invest in it.
+    </div>
+  </section>
+
+  <!-- PRICING FRAMEWORK -->
+  <section class="section r" id="pricing">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title" style="color:var(--crimson-h);">Pricing & Production</h2></div>
+    <p class="sec-intro">Working cost model at 100-unit screen print runs. Figures are estimates — get actual quotes before committing to retail prices.</p>
+    <div class="price-table">
+      <div class="pt-row pt-head">
+        <div>Item</div><div class="pt-cost">Est. cost</div><div class="pt-retail">Retail</div><div class="pt-margin">Margin</div>
+      </div>
+      <div class="pt-row"><div class="pt-item">Tee (100 units, 1-colour print)</div><div class="pt-cost">~$14–18</div><div class="pt-retail">$30–35</div><div class="pt-margin">~$15–18</div></div>
+      <div class="pt-row"><div class="pt-item">Long sleeve (75 units)</div><div class="pt-cost">~$18–22</div><div class="pt-retail">$38–42</div><div class="pt-margin">~$18–22</div></div>
+      <div class="pt-row"><div class="pt-item">Crewneck (75 units, embroidered)</div><div class="pt-cost">~$28–34</div><div class="pt-retail">$58–65</div><div class="pt-margin">~$28–34</div></div>
+      <div class="pt-row"><div class="pt-item">Coach jacket (50 units)</div><div class="pt-cost">~$45–60</div><div class="pt-retail">$90–120</div><div class="pt-margin">~$45–60</div></div>
+      <div class="pt-row"><div class="pt-item">Tote bag (100 units)</div><div class="pt-cost">~$6–9</div><div class="pt-retail">$22–26</div><div class="pt-margin">~$15–18</div></div>
+      <div class="pt-row"><div class="pt-item">Mints tin (250 units)</div><div class="pt-cost">~$2.50–4</div><div class="pt-retail">$8–10</div><div class="pt-margin">~$5–7</div></div>
+      <div class="pt-row"><div class="pt-item">Enamel pin (100 units)</div><div class="pt-cost">~$2.50–3.50</div><div class="pt-retail">$12–14</div><div class="pt-margin">~$9–11</div></div>
+    </div>
+    <div class="callout">
+      <strong>Research required:</strong> Get real quotes from Printful (baseline DTG), local Charlotte screen printers (better quality), and Jakprints or similar (national screen print). Compare cost vs quality at 100 units. For embroidery, Stoney Creek or Rock City Stitch. For pins, Pinmart or PinSource. Do not lock retail prices until you have actual production quotes.
+    </div>
+    <div class="prod-grid" style="margin-top:20px;">
+      <div class="prod-card">
+        <div class="prod-label">Avoid for primary range</div>
+        <div class="prod-title">Print-on-demand (DTG)</div>
+        <div class="prod-body">Lower quality ceiling. No tactile print texture. Can't do special finishes. Useful for testing designs before committing to a run, or for long-tail items. Not the main line.</div>
+      </div>
+      <div class="prod-card rec">
+        <div class="prod-label gold">Recommended</div>
+        <div class="prod-title">Small batch screen print</div>
+        <div class="prod-body">100–150 units per design. Better quality, proper tactile finish, can do specialty inks (discharge, water-based, glow). The right production method for a brand that values the object.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ILLUMINATED MEMBERSHIP -->
+  <section class="section r" id="philosophy" aria-labelledby="phil-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="phil-title" style="color:var(--gold);">Philosophy</h2>
+    </div>
+    <div class="prose">
+      <p>
+        The Illuminated is the inner community of The Order of Light. It is designed as a
+        genuine creative community — not a revenue stream disguised as one. The distinction matters:
+        members pay to be closer to the work, not to be marketed at from a shorter distance.
+      </p>
+      <p>
+        Everything the Illuminated receives — early access, exclusive content, physical objects —
+        should feel like it was made for them specifically. The mythology of the project makes
+        this natural: they are not subscribers, they are <strong>members of an order</strong>.
+        That framing should be consistent across every touchpoint.
+      </p>
+      <p>
+        The founding cap of <strong>108</strong> is not arbitrary — it is the mythology's
+        central number, and it makes the founding cohort genuinely finite. Once 108 founding
+        memberships are issued, they cannot be reissued. This is not a marketing trick.
+        It is a commitment to the people who arrived first.
+      </p>
+    </div>
+  </section>
+
+<section class="section r" id="tiers" aria-labelledby="tiers-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="tiers-title" style="color:var(--gold);">Membership Tiers</h2>
+    </div>
+    <p class="sec-intro">Three tiers. All include Discord access. Prices are indicative — confirm before launch.</p>
+
+    <div class="tier-stack" role="list" aria-label="Membership tiers">
+
+      <!-- TIER 1 — THE SIGNAL -->
+      <div class="tier-card" role="listitem" style="border-color:rgba(200,165,90,0.25);">
+        <div class="tier-head" style="background:rgba(200,165,90,0.05);">
+          <div class="tier-mark">
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <line x1="20" y1="20" x2="80" y2="80" stroke="#C8A55A" stroke-width="8" stroke-linecap="square"/>
+              <line x1="80" y1="20" x2="20" y2="80" stroke="#C8A55A" stroke-width="8" stroke-linecap="square"/>
+              <line x1="50" y1="50" x2="50" y2="88" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+              <line x1="50" y1="10" x2="50" y2="32" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+              <line x1="10" y1="50" x2="32" y2="50" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+              <line x1="68" y1="50" x2="90" y2="50" stroke="#C8A55A" stroke-width="7" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tier-name">The Signal</div>
+            <div style="font-size:10px;color:var(--text-3);letter-spacing:0.1em;margin-top:2px;">Entry level · Digital access</div>
+          </div>
+          <div><div class="tier-price">$5<span style="font-size:14px;">/mo</span></div><div class="tier-price-note">or $50/yr</div></div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">The base tier — for those who want to be inside the world without the physical component. Discord access, early music, and a presence in the community.</p>
+          <div class="tier-benefits">
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Discord access — all community channels</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span><strong>48-hour early access</strong> to all releases before public</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Illuminated-only behind-the-scenes content</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Advance notice of live shows and tickets</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold);"></div><span>Name in the credits of all releases</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 2 — THE FREQUENCY -->
+      <div class="tier-card" role="listitem" style="border-color:rgba(192,56,79,0.3);">
+        <div class="tier-head" style="background:rgba(192,56,79,0.06);">
+          <div class="tier-mark">
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <line x1="20" y1="20" x2="80" y2="80" stroke="#D94E65" stroke-width="8" stroke-linecap="square"/>
+              <line x1="80" y1="20" x2="20" y2="80" stroke="#D94E65" stroke-width="8" stroke-linecap="square"/>
+              <line x1="50" y1="50" x2="50" y2="88" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+              <line x1="50" y1="10" x2="50" y2="32" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+              <line x1="10" y1="50" x2="32" y2="50" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+              <line x1="68" y1="50" x2="90" y2="50" stroke="#D94E65" stroke-width="7" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tier-name">The Frequency</div>
+            <div style="font-size:10px;color:var(--text-3);letter-spacing:0.1em;margin-top:2px;">Mid tier · Digital + exclusive</div>
+          </div>
+          <div><div class="tier-price">$12<span style="font-size:14px;">/mo</span></div><div class="tier-price-note">or $120/yr</div></div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">For those who want deeper access to the creative process — demos, the stories behind songs, and direct interaction with the project.</p>
+          <div class="tier-benefits">
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span><strong>Everything in The Signal</strong></span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span><strong>1-week early access</strong> to all releases</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Demo recordings — raw versions before production</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Monthly voice memo — the story behind a song in progress</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>The Frequency — full context before public announcement</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Priority access to limited merch drops</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--crimson-h);"></div><span>Discounted show tickets — Frequency tier and above</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 3 — THE ILLUMINATED FOUNDING -->
+      <div class="tier-card" role="listitem" style="border-color:rgba(200,165,90,0.6);">
+        <div class="tier-head" style="background:linear-gradient(135deg,rgba(200,165,90,0.12),rgba(192,56,79,0.06));">
+          <div class="tier-mark">
+            <svg width="32" height="32" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <line x1="13" y1="13" x2="87" y2="87" stroke="#E0BE78" stroke-width="8.5" stroke-linecap="square"/>
+              <line x1="87" y1="13" x2="13" y2="87" stroke="#E0BE78" stroke-width="8.5" stroke-linecap="square"/>
+              <line x1="50" y1="50" x2="50" y2="91" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+              <line x1="50" y1="8"  x2="50" y2="31" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+              <line x1="8"  y1="50" x2="31" y2="50" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+              <line x1="69" y1="50" x2="92" y2="50" stroke="#E0BE78" stroke-width="7" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <div>
+            <div class="tier-name" style="color:var(--gold-hi);">The Illuminated — Founding</div>
+            <div style="font-size:10px;color:var(--gold-dim);letter-spacing:0.1em;margin-top:2px;">Limited to 108 · Physical ordination kit included</div>
+          </div>
+          <div><div class="tier-price" style="color:var(--gold-hi);">$108<span style="font-size:12px;"> once</span></div><div class="tier-price-note">+ $12/mo after</div></div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">The original 108. A one-time founding payment that covers the physical ordination kit and establishes your membership permanently. After the founding payment, billed monthly at The Frequency rate. Non-transferable. Limited to 108 members, ever.</p>
+          <div class="tier-benefits">
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span><strong>Everything in The Frequency tier — permanently</strong></span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span><strong>Physical ordination kit</strong> — shipped to founding members</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Numbered ordination certificate — your number in the 108</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Founding member Discord role — permanent, visible</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Guest list access to first three live shows</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Name inscribed in liner notes of all Year One releases</span></div>
+            <div class="benefit-row"><div class="benefit-dot" style="background:var(--gold-hi);"></div><span>Exclusive: Year End broadcast made for founding members only</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" role="note">
+      <strong>Pricing review:</strong> confirm final pricing with an accountant before launch.
+      Consider platform fees (Patreon takes 8–12%, Memberful 4.9%+$0.30, Ko-fi 0% on Gold).
+      The $108 founding fee is intentionally the mythology number — non-negotiable on that figure.
+    </div>
+  </section>
+
+<section class="section r" id="kit" aria-labelledby="kit-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="kit-title" style="color:var(--gold);">Ordination Kit — Contents</h2>
+    </div>
+    <p class="sec-intro">Physical kit shipped to founding members only. Each item numbered 1–108. Production brief — not final design.</p>
+
+    <div class="kit-grid" role="list" aria-label="Ordination kit contents">
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">01</div>
+        <div class="kit-name">Ordination Certificate</div>
+        <div class="kit-desc">Heavyweight uncoated stock. Numbered in sequence. The Order of Light mark blind-embossed. Member's number hand-written or letterpressed. The founding document.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">02</div>
+        <div class="kit-name">The Mark — Enamel Pin</div>
+        <div class="kit-desc">The eight-pointed geometry in hard enamel. Black base, gold fill. 25mm. A physical version of the mark — the only official merchandise that carries it in three dimensions.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">03</div>
+        <div class="kit-name">The Frequency — Year One Source</div>
+        <div class="kit-desc">A printed copy of The Source — the chart and lyric sheet sent to collaborators. The same object the artists received, printed and numbered. Evidence of the process.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">04</div>
+        <div class="kit-name">The 108 — Print</div>
+        <div class="kit-desc">A4 or letter format. Void black background. The number 108 in DM Sans ExtraLight at extreme scale. Nothing else. The mythology's central number as a physical object.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">05</div>
+        <div class="kit-name">Wax Seal Sticker Sheet</div>
+        <div class="kit-desc">The Order of Light mark reproduced as a sheet of premium foil stickers. The mark in gold, crimson, and parchment. Eight stickers per sheet.</div>
+      </div>
+      <div class="kit-item" role="listitem">
+        <div class="kit-num" aria-hidden="true">06</div>
+        <div class="kit-name">The Kit — Outer Packaging</div>
+        <div class="kit-desc">Black rigid mailer or folding box. The mark and member number printed on the exterior. Inside: black tissue, sealed with the wax-impression sticker. The unboxing is part of the mythology.</div>
+      </div>
+    </div>
+
+    <div class="callout crit" role="note">
+      <strong>Production note:</strong> source quotes for print and enamel manufacturing before
+      confirming the $108 price point. Minimum order quantities for enamel pins are typically
+      50–100 units — the 108 cap works with this. Recommend using a print-on-demand certificate
+      printer for the numbered certificates to avoid holding stock. Budget approximately
+      $30–45 per kit all-in at 108 units.
+    </div>
+  </section>
+
+<section class="section r" id="discord" aria-labelledby="disc-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">04</span>
+      <h2 class="sec-title" id="disc-title" style="color:var(--gold);">Discord Structure</h2>
+    </div>
+    <p class="sec-intro">The community backbone. All tiers access Discord — channels are gated by role.</p>
+
+    <div class="discord-grid" role="list" aria-label="Discord channel structure">
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">All members</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">#welcome-to-the-order</div><div class="dc-desc">Pinned orientation. The mythology framing. Rules.</div></div>
+          <div><div class="dc-channel">#transmissions</div><div class="dc-desc">Official announcements — releases, shows, Broadcasts.</div></div>
+          <div><div class="dc-channel">#the-signal</div><div class="dc-desc">General community discussion.</div></div>
+          <div><div class="dc-channel">#the-frequency</div><div class="dc-desc">Music discussion — what the sound is doing and why.</div></div>
+        </div>
+      </div>
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">The Frequency tier + Founding</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">#signal-room</div><div class="dc-desc">Demos, voice memos, work-in-progress. The raw signal.</div></div>
+          <div><div class="dc-channel">#the-process</div><div class="dc-desc">Behind the scenes — recording, writing, decisions.</div></div>
+          <div><div class="dc-channel">#merch-access</div><div class="dc-desc">Early and priority access to merchandise drops.</div></div>
+        </div>
+      </div>
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">Founding members only</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">#the-108</div><div class="dc-desc">Private channel. Founding members only. The inner order.</div></div>
+          <div><div class="dc-channel">#before-the-signal</div><div class="dc-desc">Content that predates the public release — the origin material.</div></div>
+        </div>
+      </div>
+      <div class="dc-card" role="listitem">
+        <div class="dc-label">Moderation notes</div>
+        <div class="dc-channels">
+          <div><div class="dc-channel">Identity protection</div><div class="dc-desc">No discussion of band member identities in any public channel. Founding channel excepted — founding members are vetted.</div></div>
+          <div><div class="dc-channel">Mythology integrity</div><div class="dc-desc">The Conduit and mythology are treated as real within the server. Breaking the fourth wall should be redirected quietly.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="section r" id="platform" aria-labelledby="plat-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">06</span>
+      <h2 class="sec-title" id="plat-title" style="color:var(--gold);">Platform Recommendation</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;margin:16px 0;">
+      <div style="background:var(--deep);border:1px solid rgba(200,165,90,0.4);padding:20px 22px;">
+        <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Recommended</div>
+        <div style="font-size:15px;color:var(--text-1);margin-bottom:6px;">Memberful</div>
+        <div style="font-size:12.5px;color:var(--text-2);line-height:1.7;">Integrates directly with Stripe (lowest fees), allows custom branding, supports Discord role integration natively, and lets you host content directly. No marketplace — members join through your own site. 4.9% + $0.30 per transaction. Most professional option for a project that wants to control its own presentation.</div>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;">
+        <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;">Alternative</div>
+        <div style="font-size:15px;color:var(--text-1);margin-bottom:6px;">Patreon</div>
+        <div style="font-size:12.5px;color:var(--text-2);line-height:1.7;">Higher discoverability, established audience familiarity with the format. 8% platform fee on the Pro plan. Built-in Discord integration. Lower control over branding and presentation — members see the Patreon interface, not yours. Acceptable if launching quickly is the priority.</div>
+      </div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:20px 22px;">
+        <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;">Not recommended</div>
+        <div style="font-size:15px;color:var(--text-1);margin-bottom:6px;">Bandcamp subscriptions</div>
+        <div style="font-size:12.5px;color:var(--text-2);line-height:1.7;">Limited to music and downloads. No Discord integration, no physical tier support, no community features. Fine as an additional channel but not a primary membership platform.</div>
+      </div>
+    </div>
+  </section>
+
+<section class="section r" id="launch">
+    <div class="sec-head"><span class="sec-num">11</span><h2 class="sec-title" style="color:var(--crimson-h);">Launch Sequence</h2></div>
+    <p class="sec-intro">Merch doesn't launch all at once. It arrives in phases tied to the band's public existence.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-phase">Pre-launch</div>
+        <div class="tl-content">
+          <div class="tl-title">Ordination Kit only</div>
+          <div class="tl-desc">The ordination kit is the only physical object available. Includes enamel pin and numbered print. Founding membership begins here. No general merch store yet — this keeps it exclusive.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">EP launch</div>
+        <div class="tl-content">
+          <div class="tl-title">Store opens — core garments + mints</div>
+          <div class="tl-desc">Tee, long sleeve, tote, mints tin go live simultaneously with the EP release. Illuminated members get 48hr early access. The mints are the launch object — handed out at the first show, circulated as the moment piece.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">First show</div>
+        <div class="tl-content">
+          <div class="tl-title">Merch table: curated, not exhaustive</div>
+          <div class="tl-desc">3–4 items max at the merch table. Tee, crewneck or long sleeve, pin, mints. The table should look considered, not like a clearance rack. Quality over quantity at every visible touchpoint.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">End of Year One</div>
+        <div class="tl-content">
+          <div class="tl-title">Coach jacket — limited cycle drop</div>
+          <div class="tl-desc">The outerwear piece drops as a year-end / holiday exclusive. Illuminated members get first access. 50–75 units. Does not restock. This becomes the collector's piece for the first era.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.r');
+  if(!els.length)return;
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('v');});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target);}}); 
+  },{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){io.observe(e);});
+  setTimeout(function(){document.querySelectorAll('.r:not(.v)').forEach(function(e){e.classList.add('v');});},800);
+})();
+</script>
+</body>
+</html>

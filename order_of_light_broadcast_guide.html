@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Broadcast Production Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --crimson:#C0384F;--crimson-h:#D94E65;
+  --gold:#C8A55A;--gold-dim:#7A6030;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--text-1);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--gold);color:#0A0A0A;padding:8px 16px;font-size:14px;text-decoration:none;z-index:9999;}
+.skip-link:focus{top:16px;}
+
+/* COVER */
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 56px;position:relative;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--crimson-h) 40%,var(--gold) 70%,transparent);opacity:0.3;}
+.cover-eyebrow{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:16px;padding-left:20px;}
+.cover-title{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(40px,5.5vw,78px);letter-spacing:0.2em;text-transform:uppercase;color:var(--text-1);line-height:0.92;padding-left:20px;}
+.cover-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(16px,2vw,22px);color:var(--text-2);padding-left:20px;margin-top:14px;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--crimson-h),var(--gold),transparent);opacity:0.3;margin:32px 0;}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-size:13px;color:var(--text-2);}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+.prose{font-size:14.5px;color:var(--text-2);line-height:1.85;max-width:640px;}
+.prose p{margin-bottom:1.3em;}
+.prose strong{color:var(--text-1);font-weight:400;}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+.callout.crit{border-left-color:var(--crimson-h);}
+.callout.note{border-left-color:var(--crimson-h);}
+
+/* WORKFLOW STEPS */
+.steps{display:flex;flex-direction:column;gap:0;margin:20px 0;}
+.step{display:grid;grid-template-columns:60px 1fr;gap:0;position:relative;}
+.step::before{content:'';position:absolute;left:28px;top:52px;bottom:-1px;width:1px;background:var(--border);z-index:0;}
+.step:last-child::before{display:none;}
+.step-num-wrap{padding:18px 0;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;}
+.step-dot{width:10px;height:10px;transform:rotate(45deg);background:var(--surface);border:1px solid var(--border-hi);flex-shrink:0;}
+.step.active .step-dot{background:var(--crimson-h);border-color:var(--crimson-h);}
+.step-body{padding:16px 0 28px 20px;border-bottom:1px solid var(--border);}
+.step:last-child .step-body{border-bottom:none;}
+.step-phase{font-size:8.5px;letter-spacing:0.3em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:6px;}
+.step-title{font-size:15px;color:var(--text-1);margin-bottom:8px;letter-spacing:0.02em;}
+.step-desc{font-size:13px;color:var(--text-2);line-height:1.7;max-width:600px;}
+.step-desc p{margin-bottom:8px;}
+.step-desc p:last-child{margin-bottom:0;}
+.step-desc strong{color:var(--text-1);font-weight:400;}
+
+/* SPEC TABLE */
+.spec-table{width:100%;border-collapse:collapse;margin:16px 0;}
+.spec-table th{font-size:8px;letter-spacing:0.32em;text-transform:uppercase;color:var(--text-3);padding:0 16px 10px 0;text-align:left;border-bottom:1px solid var(--border);}
+.spec-table td{padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-size:13px;}
+.spec-table tr:last-child td{border-bottom:none;}
+.spec-key{color:var(--text-3);font-size:11px;letter-spacing:0.1em;min-width:160px;}
+.spec-val{color:var(--text-1);}
+.spec-note{color:var(--text-2);font-size:12px;line-height:1.55;}
+
+/* TOOL GRID */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;margin:16px 0 24px;}
+.tool-card{background:var(--deep);border:1px solid var(--border);padding:18px 18px;}
+.tool-name{font-size:13px;color:var(--text-1);margin-bottom:4px;letter-spacing:0.03em;}
+.tool-role{font-size:10.5px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;}
+.tool-desc{font-size:11.5px;color:var(--text-2);line-height:1.6;}
+.tool-cost{font-size:10px;color:var(--text-3);margin-top:8px;letter-spacing:0.08em;}
+
+/* GLITCH CHECKLIST */
+.glitch-list{display:flex;flex-direction:column;gap:2px;margin:16px 0;}
+.gl-item{background:var(--deep);border:1px solid var(--border);padding:14px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:baseline;}
+.gl-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--text-3);}
+.gl-text{font-size:13px;color:var(--text-2);line-height:1.6;}
+.gl-text strong{color:var(--text-1);font-weight:400;}
+.gl-timing{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);white-space:nowrap;}
+
+/* PLATFORM SPECS */
+.platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:16px 0;}
+.plat-card{background:var(--deep);border:1px solid var(--border);padding:20px 20px;}
+.plat-name{font-size:14px;color:var(--text-1);margin-bottom:12px;letter-spacing:0.03em;}
+.plat-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.plat-row:last-child{border-bottom:none;}
+.plat-key{color:var(--text-3);}
+.plat-val{color:var(--text-2);}
+
+footer{max-width:900px;margin:72px auto 0;padding:22px 60px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);letter-spacing:0.1em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.cover{padding:80px 24px 48px;}.cover-line{left:24px;}.wrap{padding:0 24px 80px;}.step{grid-template-columns:40px 1fr;}.platform-grid{grid-template-columns:1fr;}.tool-grid{grid-template-columns:1fr;}footer{padding:22px 24px 48px;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="cover">
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-eyebrow">The Order of Light · Broadcast Production Guide · Internal</p>
+  <h1 class="cover-title">Broadcast<br>Production<br>Guide</h1>
+  <p class="cover-sub">Script to published video — the complete workflow.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Tools</span><span class="cm-value">HeyGen · DaVinci Resolve</span></div>
+    <div class="cm-item"><span class="cm-label">Outputs</span><span class="cm-value">Instagram · TikTok · YouTube</span></div>
+    <div class="cm-item"><span class="cm-label">Per Broadcast</span><span class="cm-value">~3–5 hrs production</span></div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+  <!-- OVERVIEW -->
+  <section class="section" id="overview" aria-labelledby="ov-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="ov-title" style="color:var(--crimson-h);">Overview</h2>
+    </div>
+    <div class="prose">
+      <p>A Broadcast is a short video — typically 90 seconds to 3 minutes — in which The Conduit delivers a transmission. It is the mythology's public face and the project's primary content format. The visual treatment must be consistent across all five Year One Broadcasts. This guide covers the complete production workflow from finished script to published video.</p>
+      <p>The Conduit is generated via HeyGen using a custom AI avatar. Post-production happens in DaVinci Resolve. The Glitch Grammar documented in the Brand Bible is applied at the post stage. Each Broadcast takes approximately 3–5 hours of production time once the workflow is established.</p>
+    </div>
+    <div class="callout" role="note">
+      <strong>Year One vs Year Two:</strong> Year One Broadcasts open with static, then the Conduit appears. Year Two Broadcasts open mid-transmission — no static opening. This guide covers Year One production. The Year Two Brand Bible documents the changes needed for Year Two.
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="section" id="tools" aria-labelledby="tools-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="tools-title" style="color:var(--crimson-h);">Tools Required</h2>
+    </div>
+    <div class="tool-grid" role="list" aria-label="Production tools">
+      <div class="tool-card" role="listitem">
+        <div class="tool-name">HeyGen</div>
+        <div class="tool-role">AI Video Generation</div>
+        <div class="tool-desc">Generates The Conduit video from a script. Custom avatar trained on source footage. Used for all base video generation.</div>
+        <div class="tool-cost">heygen.com — Creator plan minimum ($24/mo)</div>
+      </div>
+      <div class="tool-card" role="listitem">
+        <div class="tool-name">DaVinci Resolve</div>
+        <div class="tool-role">Post-Production</div>
+        <div class="tool-desc">Video editing, colour grading, glitch effects, titles, and all post-production. The full Glitch Grammar is applied here.</div>
+        <div class="tool-cost">Free version sufficient — blackmagicdesign.com</div>
+      </div>
+      <div class="tool-card" role="listitem">
+        <div class="tool-name">ElevenLabs</div>
+        <div class="tool-role">Voice (if needed)</div>
+        <div class="tool-desc">Custom voice model for The Conduit's audio if HeyGen's built-in voice is not used. Cloned from source recordings.</div>
+        <div class="tool-cost">elevenlabs.io — Starter plan ($5/mo)</div>
+      </div>
+      <div class="tool-card" role="listitem">
+        <div class="tool-name">Adobe Audition / Audacity</div>
+        <div class="tool-role">Audio Post</div>
+        <div class="tool-desc">Pitch drop effect, audio degradation, and final mix of voice + ambient audio. Audacity is free; Audition if Adobe CC is available.</div>
+        <div class="tool-cost">Audacity — free · audacityteam.org</div>
+      </div>
+      <div class="tool-card" role="listitem">
+        <div class="tool-name">Script document</div>
+        <div class="tool-role">Source Material</div>
+        <div class="tool-desc">Each Broadcast has a written script. Scripts are in the Campaign Master. Confirm script is final and approved before generating video.</div>
+        <div class="tool-cost">Internal — see Campaign Master</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="section" id="workflow" aria-labelledby="wf-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="wf-title" style="color:var(--crimson-h);">Production Workflow</h2>
+    </div>
+    <p class="sec-intro">Eight stages from script to published. Follow in sequence — skipping stages causes rework.</p>
+
+    <div class="steps" role="list" aria-label="Production workflow steps">
+
+      <div class="step active" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 1 — Prep</div>
+          <div class="step-title">Script review and lock</div>
+          <div class="step-desc">
+            <p>Confirm the script is final — not a draft. HeyGen generation is not cheap to redo. Read the script aloud at the intended delivery pace to confirm timing (target: 90s–3min). Check all section markers are correct: Opening / Message / The Call / End Card.</p>
+            <p><strong>Year One note:</strong> the script opens with a static hold cue. This is not spoken — it is a production instruction for post. Mark it clearly in the script document as [STATIC — 4 seconds] before line one.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 2 — HeyGen generation</div>
+          <div class="step-title">Generate base video from script</div>
+          <div class="step-desc">
+            <p>In HeyGen: select The Conduit avatar. Paste the script text (excluding the static cue). Set background to solid void black (#0A0A0A). Resolution: 1080×1920 (portrait/story) as the master — this crops to 1080×1080 and 1920×1080 without reshot.</p>
+            <p><strong>Voice:</strong> use the custom Conduit voice model. Delivery pace: slow and deliberate — if the platform generates it too fast, use the speed control (0.85–0.9× is usually correct). Preview before committing credits.</p>
+            <p>Export as MP4, highest available quality. This is the raw base file — do not publish this directly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 3 — Audio post</div>
+          <div class="step-title">Process voice audio</div>
+          <div class="step-desc">
+            <p>Extract audio from the HeyGen export. In Audacity or Audition:</p>
+            <p><strong>Pitch drop:</strong> in the Message section — locate the target moment, apply a gradual pitch shift of approximately −1 semitone over 2–3 seconds, recovering back to normal pitch. Subtle — if it's immediately noticeable, it's too much.</p>
+            <p><strong>Ambient layer:</strong> add a low-level sine tone at 432Hz or 528Hz beneath the voice — nearly inaudible (−30dB), present under silence. This is the frequency hum. Fade in at the opening, fade out at the end card.</p>
+            <p>Export processed audio as WAV, 48kHz/24bit. Replace audio in DaVinci Resolve in stage 5.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 4 — DaVinci Resolve import</div>
+          <div class="step-title">Set up project and import assets</div>
+          <div class="step-desc">
+            <p>New project in DaVinci Resolve. Timeline settings: 1080×1920, 24fps (or 30fps — keep consistent across all Broadcasts). Import the HeyGen MP4, the processed WAV, and the static asset (a generated static/noise clip — create once, reuse).</p>
+            <p><strong>Colour space:</strong> DaVinci Wide Gamut, Intermediate. Master the final grade in Rec.709 for export.</p>
+            <p>Replace the HeyGen audio track with the processed WAV from Stage 3.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 5 — Colour grade</div>
+          <div class="step-title">Apply the Year One visual treatment</div>
+          <div class="step-desc">
+            <p><strong>Lift/Gamma/Gain:</strong> crush blacks hard (lift −0.05), reduce saturation to approximately 70%, add a very slight warm tint in the shadows (orange/red, subtle). The image should feel dark, intimate, and slightly overexposed in the highlights.</p>
+            <p><strong>Grain:</strong> add Resolve's built-in Film Grain at strength 0.3–0.4. Size: Fine. This is the base grain layer — the Brand Bible's 0.04 opacity level.</p>
+            <p><strong>Vignette:</strong> moderate circular vignette, centred on The Conduit's face. Not heavy — the edges should darken, not go black.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 6 — Glitch Grammar</div>
+          <div class="step-title">Apply distortion effects per Brand Bible spec</div>
+          <div class="step-desc"><p>Apply each glitch element in sequence. See the checklist in Section 04 of this document for the complete spec with timings.</p></div>
+        </div>
+      </div>
+
+      <div class="step" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 7 — Titles and end card</div>
+          <div class="step-title">Add text overlays and end card</div>
+          <div class="step-desc">
+            <p><strong>Opening title:</strong> after the static hold, before The Conduit speaks — "BROADCAST 00[X]" in DM Sans ExtraLight, tracked at 0.4em, white, centre frame, 1.5 seconds, fade out. Small — not dominant.</p>
+            <p><strong>End card:</strong> The Conduit finishes speaking. Cut to void black. The eight-pointed mark appears at centre, fades in over 1 second. Holds 2 seconds. Fades out. "THE ORDER OF LIGHT" in DM Sans ExtraLight below the mark, tracked wide, appears with the mark. That is the end. No call to action. No link. No follow prompt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" role="listitem">
+        <div class="step-num-wrap"><div class="step-dot"></div></div>
+        <div class="step-body">
+          <div class="step-phase">Stage 8 — Export and publish</div>
+          <div class="step-title">Export per platform and schedule</div>
+          <div class="step-desc"><p>Export master file, then platform-specific versions. See Section 05 for platform export specs. Review the final export on a phone before publishing — the primary viewing context is mobile.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GLITCH CHECKLIST -->
+  <section class="section" id="glitch" aria-labelledby="glitch-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">04</span>
+      <h2 class="sec-title" id="glitch-title" style="color:var(--crimson-h);">Glitch Grammar — Production Checklist</h2>
+    </div>
+    <p class="sec-intro">Apply all of these. In this order. Every Broadcast — no exceptions.</p>
+
+    <div class="glitch-list" role="list" aria-label="Glitch grammar checklist">
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">01</div>
+        <div class="gl-text"><strong>Static hold opening</strong> — 4 seconds of VHS static before The Conduit appears. Use the static asset. Cut hard from static to Conduit — no cross-fade. The Conduit begins speaking immediately.</div>
+        <div class="gl-timing">Seconds 0–4</div>
+      </div>
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">02</div>
+        <div class="gl-text"><strong>Chromatic aberration — first hit</strong> — RGB channel split, 3–4 frames. In Resolve: use the Chromatic Aberration effect or offset R/B channels manually on a Fusion node. Offset: 4–6px. Apply once in the first 20 seconds.</div>
+        <div class="gl-timing">First 20s</div>
+      </div>
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">03</div>
+        <div class="gl-text"><strong>VHS tracking error — first</strong> — horizontal band distortion, 2–3 frames. Use a Resolve Transform node with a quick horizontal position offset (+40px for 1 frame, back) plus a brief desaturation. Feels like tape slipping.</div>
+        <div class="gl-timing">Opening section</div>
+      </div>
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">04</div>
+        <div class="gl-text"><strong>Pitch drop</strong> — audio only, applied in Stage 3. Confirm it is audible (but subtle) in the mix before finalising. Occurs once, in the Message section.</div>
+        <div class="gl-timing">Message section</div>
+      </div>
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">05</div>
+        <div class="gl-text"><strong>VHS tracking error — second</strong> — same technique as above. Apply at a moment of thematic weight in the Message. Slightly longer than the first — 3 frames. The signal straining under the content.</div>
+        <div class="gl-timing">Message section</div>
+      </div>
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">06</div>
+        <div class="gl-text"><strong>Chromatic aberration — second hit</strong> — apply once more, at or near The Call section opening. Same technique as the first. This is the final glitch before the end card.</div>
+        <div class="gl-timing">The Call / late</div>
+      </div>
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">07</div>
+        <div class="gl-text"><strong>Brief static flash — close</strong> — 1–2 frames of static, then back to normal, approximately 5 seconds before The Conduit finishes speaking. Not a full static hold — just a flash. The signal flickering before transmission ends.</div>
+        <div class="gl-timing">Near end</div>
+      </div>
+      <div class="gl-item" role="listitem">
+        <div class="gl-num">08</div>
+        <div class="gl-text"><strong>Review total glitch count</strong> — the above gives 2 chromatic aberration hits, 2 VHS tracking errors, 1 static flash, 1 pitch drop. That is the maximum. If any of these feel heavy or noticeable on first viewing, pull back — subtlety is the standard.</div>
+        <div class="gl-timing">Review</div>
+      </div>
+    </div>
+
+    <div class="callout crit" role="note">
+      <strong>The cardinal rule:</strong> every glitch should be felt before it is noticed.
+      If a viewer's first reaction is "that's a glitch effect," it's too much.
+      Their first reaction should be a vague unease they cannot immediately name.
+    </div>
+  </section>
+
+  <!-- PLATFORM SPECS -->
+  <section class="section" id="platforms" aria-labelledby="plat-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">05</span>
+      <h2 class="sec-title" id="plat-title" style="color:var(--crimson-h);">Platform Export Specifications</h2>
+    </div>
+
+    <div class="platform-grid" role="list" aria-label="Platform export specifications">
+      <div class="plat-card" role="listitem">
+        <div class="plat-name">Master File</div>
+        <div class="plat-row"><span class="plat-key">Resolution</span><span class="plat-val">1080×1920 (9:16)</span></div>
+        <div class="plat-row"><span class="plat-key">Codec</span><span class="plat-val">H.264 or H.265</span></div>
+        <div class="plat-row"><span class="plat-key">Bitrate</span><span class="plat-val">20–30 Mbps</span></div>
+        <div class="plat-row"><span class="plat-key">Frame rate</span><span class="plat-val">24fps (consistent all Broadcasts)</span></div>
+        <div class="plat-row"><span class="plat-key">Audio</span><span class="plat-val">AAC 320kbps, stereo</span></div>
+        <div class="plat-row"><span class="plat-key">Colour</span><span class="plat-val">Rec.709</span></div>
+      </div>
+      <div class="plat-card" role="listitem">
+        <div class="plat-name">Instagram Reels / TikTok</div>
+        <div class="plat-row"><span class="plat-key">Resolution</span><span class="plat-val">1080×1920 — from master</span></div>
+        <div class="plat-row"><span class="plat-key">Max length</span><span class="plat-val">3 min (Reels) / 10 min (TikTok)</span></div>
+        <div class="plat-row"><span class="plat-key">Safe zone</span><span class="plat-val">Keep titles out of bottom 250px (UI overlay)</span></div>
+        <div class="plat-row"><span class="plat-key">Caption</span><span class="plat-val">Broadcast number + tagline only. No hashtag spam.</span></div>
+      </div>
+      <div class="plat-card" role="listitem">
+        <div class="plat-name">YouTube</div>
+        <div class="plat-row"><span class="plat-key">Resolution</span><span class="plat-val">1920×1080 (16:9 crop from master)</span></div>
+        <div class="plat-row"><span class="plat-key">Thumbnail</span><span class="plat-val">The mark on void black. No text. No face.</span></div>
+        <div class="plat-row"><span class="plat-key">Title format</span><span class="plat-val">The Order of Light — Broadcast 00[X]</span></div>
+        <div class="plat-row"><span class="plat-key">Description</span><span class="plat-val">Broadcast text only — no promotional copy</span></div>
+      </div>
+      <div class="plat-card" role="listitem">
+        <div class="plat-name">Instagram Feed (square)</div>
+        <div class="plat-row"><span class="plat-key">Resolution</span><span class="plat-val">1080×1080 (centre crop from master)</span></div>
+        <div class="plat-row"><span class="plat-key">Note</span><span class="plat-val">Reels is preferred. Square only if Reels unavailable.</span></div>
+        <div class="plat-row"><span class="plat-key">Crop guide</span><span class="plat-val">The Conduit is centred — square crop should work without reframing</span></div>
+      </div>
+    </div>
+
+    <div class="callout" role="note">
+      <strong>Publication cadence:</strong> one Broadcast per quarter in Year One — approximately every 10–12 weeks. Do not rush publication. A Broadcast that arrives too soon after the previous one loses the weight of the interval. The wait is part of the mythology.
+    </div>
+  </section>
+
+  <!-- QC CHECKLIST -->
+  <section class="section" id="qc" aria-labelledby="qc-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">06</span>
+      <h2 class="sec-title" id="qc-title" style="color:var(--crimson-h);">Pre-Publication Checklist</h2>
+    </div>
+    <p class="sec-intro">Review every item before scheduling. On a phone, not a monitor.</p>
+
+    <div style="display:flex;flex-direction:column;gap:2px;margin:16px 0;" role="list" aria-label="Pre-publication checklist">
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>Static hold is exactly 4 seconds at the opening</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>Opening title reads correctly — BROADCAST 00[X], correct number</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>All 8 glitch grammar elements applied and confirmed subtle</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>Pitch drop audible but not jarring — felt, not noticed</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>End card: mark appears cleanly, no artefacts, correct fade</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>Reviewed on mobile — The Conduit is visible, titles are in safe zone</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>Audio levels consistent — no clipping, voice clear, ambient layer inaudible at normal volume</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>Caption written and reviewed — Broadcast number, tagline, no hashtag spam</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>YouTube thumbnail: the mark on void black. No other thumbnail.</div>
+      <div style="background:var(--deep);border:1px solid var(--border);padding:14px 20px;display:flex;gap:16px;font-size:13px;color:var(--text-2);" role="listitem"><span style="color:var(--text-3);min-width:20px;">☐</span>Scheduled — not posted immediately. Even if ready now, schedule 24 hours out. You will notice something you want to change.</div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+</body>
+</html>

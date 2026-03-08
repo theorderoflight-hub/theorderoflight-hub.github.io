@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>firstbroadcast — Mark System</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F5F3EE;--s1:#ECEAE4;--s2:#E2DFD8;--rule:#CCC9C0;
+  --ink:#1A1814;--ink2:#4A4740;--ink3:#9A9690;--sig:#D4360A;
+  --j:'Plus Jakarta Sans',sans-serif;--m:'JetBrains Mono',monospace
+}
+html{background:var(--bg)}
+body{color:var(--ink);font-family:var(--j);font-weight:300;line-height:1.6}
+::selection{background:var(--sig);color:#fff}
+
+/* ═══════════════════════════════════════════════════════════
+   THE INLINE O — CORRECTED GEOMETRY
+   
+   Key fix: waves are CAP ARCS only — top ~100° and bottom ~100°
+   NOT full semicircles (that was making a bullseye / Target logo)
+   
+   ViewBox "5 12 90 76" — tight crop to just the circle area
+   The circle fills the element bounds exactly
+   overflow:visible lets wave caps poke above/below
+   
+   All stroke weights identical: circle = waves = font stroke weight
+   
+   Arc geometry (100×100 internal coordinate space):
+   Circle: cx=50 cy=50 r=34 sw=8.5
+   
+   Cap arcs — 100° total span (50° each side of vertical axis):
+   Wave 1 r=49: top M87.5,18.5 A49,49 0 0 0 12.5,18.5
+                bot M87.5,81.5 A49,49 0 0 1 12.5,81.5
+   Wave 2 r=64: top M1.0,8.9   A64,64 0 0 0 99.0,8.9
+                bot M99.0,91.1 A64,64 0 0 1 1.0,91.1
+   Wave 3 r=79: top M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8
+                bot M110.5,100.8 A79,79 0 0 1 -10.5,100.8
+═══════════════════════════════════════════════════════════ */
+
+.o{
+  display:inline-block;
+  height:0.72em;width:0.72em;  /* matches cap-height of Jakarta Sans */
+  overflow:visible;             /* wave caps extend above/below element */
+  vertical-align:-0.06em;      /* sits on text baseline */
+}
+
+.wm{display:inline-flex;align-items:baseline;font-family:var(--j);letter-spacing:-0.028em;line-height:1}
+.wm .l{font-weight:200}
+.wm .h{font-weight:600}
+
+/* page chrome */
+.cover{padding:60px 80px 44px;border-bottom:2px solid var(--ink)}
+.cm{font-family:var(--m);font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.ct{font-family:var(--j);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+.cn{font-family:var(--m);font-size:10.5px;color:var(--ink3);margin-top:6px}
+
+.ch{border-bottom:1px solid var(--rule)}
+.chh{padding:34px 80px 26px;display:flex;align-items:baseline;gap:18px;border-bottom:1px solid var(--rule)}
+.chn{font-family:var(--m);font-size:11px;color:var(--ink3);width:26px;flex-shrink:0}
+.cht{font-family:var(--m);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2)}
+.chr{flex:1;height:1px;background:var(--rule)}
+.chb{padding:48px 80px 64px}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.cell{display:flex;flex-direction:column;align-items:flex-start;padding:40px 32px 28px;gap:22px;background:var(--s1);border:1px solid var(--rule)}
+.cell.ctr{align-items:center;justify-content:center;padding:52px 32px}
+.cell.dk{background:var(--ink);border-color:var(--ink)}
+.cell.sg{background:var(--sig);border-color:var(--sig)}
+.cell.wide{grid-column:1/-1}
+.lbl{font-family:var(--m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.dk .lbl,.sg .lbl{color:rgba(245,243,238,.3)}
+.note{font-family:var(--m);font-size:10.5px;color:var(--ink3);line-height:1.65;max-width:320px}
+.dk .note,.sg .note{color:rgba(245,243,238,.28)}
+
+.spec{width:100%}
+.sr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--rule);gap:12px}
+.sr:last-child{border-bottom:none}
+.sk{font-family:var(--m);font-size:10px;color:var(--ink3)}
+.sv{font-family:var(--m);font-size:10px;color:var(--ink);text-align:right}
+
+.scale{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;padding:36px;background:var(--s1);border:1px solid var(--rule);margin-top:2px}
+.si{display:flex;flex-direction:column;align-items:center;gap:10px}
+.sl{font-family:var(--m);font-size:9px;color:var(--ink3)}
+
+/* reusable mark fragment — same paths used everywhere */
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="cm">firstbroadcast · mark system · definitive</p>
+  <p class="ct">Transmission O — corrected geometry</p>
+  <p class="cn">Cap arcs only (no full circles) · Top + bottom transmission only · Concentric curvature · Matching stroke weight</p>
+</div>
+
+<!-- 01 MARK GEOMETRY -->
+<div class="ch">
+  <div class="chh"><span class="chn">01</span><span class="cht">The mark — cap arcs only</span><span class="chr"></span></div>
+  <div class="chb">
+    <div class="g2" style="margin-bottom:2px">
+      <div class="cell ctr" style="background:var(--bg);min-height:280px">
+        <!-- STANDALONE: padded viewBox shows all three wave caps clearly -->
+        <svg width="130" height="130" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <!-- Wave 1: cap arcs, 100° span -->
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <!-- Wave 2 -->
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <!-- Wave 3 -->
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="cell" style="justify-content:center;min-height:280px">
+        <div class="spec">
+          <div class="sr"><span class="sk">Standalone viewBox</span><span class="sv">-38 -38 176 176</span></div>
+          <div class="sr"><span class="sk">Inline viewBox</span><span class="sv">5 12 90 76 (tight to circle)</span></div>
+          <div class="sr"><span class="sk">Circle: cx cy r</span><span class="sv">50 50 34</span></div>
+          <div class="sr"><span class="sk">Stroke weight</span><span class="sv">8.5 — circle = all waves</span></div>
+          <div class="sr"><span class="sk">Arc span</span><span class="sv">100° — 50° each side of vertical</span></div>
+          <div class="sr"><span class="sk">Wave 1 r=49 top</span><span class="sv">M87.5,18.5 A49,49 0 0 0 12.5,18.5</span></div>
+          <div class="sr"><span class="sk">Wave 2 r=64 top</span><span class="sv">M99.0,8.9 A64,64 0 0 0 1.0,8.9</span></div>
+          <div class="sr"><span class="sk">Wave 3 r=79 top</span><span class="sv">M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8</span></div>
+          <div class="sr"><span class="sk">Gap (stroke-edge)</span><span class="sv">6.5px consistent</span></div>
+          <div class="sr"><span class="sk">Inline height</span><span class="sv">0.72em (cap height match)</span></div>
+          <div class="sr"><span class="sk">Inline overflow</span><span class="sv">visible</span></div>
+          <div class="sr"><span class="sk">Vertical align</span><span class="sv">-0.06em (sits on baseline)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Size scale -->
+    <div class="scale">
+      <div class="si">
+        <svg width="100" height="100" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><span class="sl">100px</span>
+      </div>
+      <div class="si">
+        <svg width="64" height="64" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><span class="sl">64px</span>
+      </div>
+      <div class="si">
+        <svg width="40" height="40" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><span class="sl">40px (2 waves)</span>
+      </div>
+      <div class="si">
+        <svg width="24" height="24" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><span class="sl">24px (1 wave)</span>
+      </div>
+      <div class="si">
+        <svg width="16" height="16" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+        </svg><span class="sl">16px (circle only)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 COLOUR VARIANTS -->
+<div class="ch">
+  <div class="chh"><span class="chn">02</span><span class="cht">Colour variants</span><span class="chr"></span></div>
+  <div class="chb">
+    <div class="g3">
+      <div class="cell ctr" style="background:var(--bg)">
+        <svg width="84" height="84" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">Primary · ink on off-white</span>
+      </div>
+      <div class="cell ctr dk">
+        <svg width="84" height="84" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#F5F3EE" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">Reversed · off-white on ink</span>
+      </div>
+      <div class="cell ctr" style="background:var(--bg)">
+        <svg width="84" height="84" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#D4360A" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">Signal · #D4360A on off-white</span>
+      </div>
+      <div class="cell ctr dk">
+        <svg width="84" height="84" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#D4360A" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">Signal on dark · release moments</span>
+      </div>
+      <div class="cell ctr sg">
+        <svg width="84" height="84" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="white" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">White on signal · key moments</span>
+      </div>
+      <div class="cell" style="justify-content:center;background:var(--s2)">
+        <p class="lbl" style="color:var(--sig)">Never use opacity to show the mark</p>
+        <p class="note">Full opacity, one solid colour, always. The mark is either present or absent — never ghosted, watermarked, or reduced.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 LOCKUPS -->
+<div class="ch">
+  <div class="chh"><span class="chn">03</span><span class="cht">Three lockup configurations</span><span class="chr"></span></div>
+  <div class="chb">
+
+    <!-- PRIMARY: O embedded in word -->
+    <div class="cell wide" style="background:var(--bg);padding:52px 56px;gap:28px;margin-bottom:2px;align-items:flex-start">
+      <span class="lbl">Primary — transmission O inside 'broadcast'</span>
+
+      <!-- Hero -->
+      <div class="wm" style="font-size:clamp(46px,6vw,84px)">
+        <span class="l">first</span><span class="h">br</span><!--
+        --><svg class="o" viewBox="5 12 90 76" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><!--
+        --><span class="h">adcast</span>
+      </div>
+
+      <!-- Large -->
+      <div class="wm" style="font-size:48px">
+        <span class="l">first</span><span class="h">br</span><!--
+        --><svg class="o" viewBox="5 12 90 76" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><!--
+        --><span class="h">adcast</span>
+      </div>
+
+      <!-- Mid -->
+      <div class="wm" style="font-size:28px">
+        <span class="l">first</span><span class="h">br</span><!--
+        --><svg class="o" viewBox="5 12 90 76" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><!--
+        --><span class="h">adcast</span>
+      </div>
+
+      <!-- Nav / small -->
+      <div class="wm" style="font-size:15px">
+        <span class="l">first</span><span class="h">br</span><!--
+        --><svg class="o" viewBox="5 12 90 76" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><!--
+        --><span class="h">adcast</span>
+      </div>
+
+      <p class="note">The O in broadcast is the mark. Waves are concentric cap arcs — same curvature as the O, same stroke weight, top + bottom only. Never left/right. Reduces to 1 wave at small sizes.</p>
+    </div>
+
+    <!-- PRIMARY DARK -->
+    <div class="cell wide dk" style="padding:44px 56px;gap:24px;align-items:flex-start;margin-bottom:2px">
+      <span class="lbl">Primary · dark ground</span>
+      <div class="wm" style="font-size:48px;color:#F5F3EE">
+        <span class="l">first</span><span class="h">br</span><!--
+        --><svg class="o" viewBox="5 12 90 76" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#F5F3EE" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><!--
+        --><span class="h">adcast</span>
+      </div>
+      <!-- Signal O on dark -->
+      <div class="wm" style="font-size:48px;color:#F5F3EE">
+        <span class="l">first</span><span class="h">br</span><!--
+        --><svg class="o" viewBox="5 12 90 76" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#D4360A" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#D4360A" stroke-width="8.5" stroke-linecap="round"/>
+        </svg><!--
+        --><span class="h">adcast</span>
+      </div>
+    </div>
+
+    <!-- ALT 1: MARK ONLY -->
+    <div class="g3" style="margin-bottom:2px;margin-top:2px">
+      <div class="cell ctr" style="background:var(--bg)">
+        <svg width="72" height="72" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">Alt 1 — mark only · light</span>
+        <p class="note">App icon, favicon, embossed product. Brand must be established in context.</p>
+      </div>
+      <div class="cell ctr dk">
+        <svg width="72" height="72" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#F5F3EE" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#F5F3EE" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">Alt 1 — mark only · dark</span>
+        <p class="note">Dark print or OOL document contexts.</p>
+      </div>
+      <div class="cell ctr sg">
+        <svg width="72" height="72" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="white" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="white" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <span class="lbl">Alt 1 — signal ground</span>
+        <p class="note">Release moments, high impact. Not for sustained use.</p>
+      </div>
+    </div>
+
+    <!-- ALT 2: MARK + WORDMARK SAME LINE -->
+    <div class="cell wide" style="background:var(--bg);padding:48px 56px;gap:28px;align-items:flex-start;margin-top:2px">
+      <span class="lbl">Alt 2 — mark + wordmark · same line</span>
+      <div style="display:flex;align-items:center;gap:16px">
+        <svg width="52" height="52" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,8.9 A64,64 0 0 0 1.0,8.9" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M99.0,91.1 A64,64 0 0 1 1.0,91.1" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,-0.8 A79,79 0 0 0 -10.5,-0.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M110.5,100.8 A79,79 0 0 1 -10.5,100.8" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <div class="wm" style="font-size:34px"><span class="l">first</span><span class="h">broadcast</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <svg width="28" height="28" viewBox="-38 -38 176 176" fill="none">
+          <circle cx="50" cy="50" r="34" stroke="#1A1814" stroke-width="8.5"/>
+          <path d="M87.5,18.5 A49,49 0 0 0 12.5,18.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+          <path d="M87.5,81.5 A49,49 0 0 1 12.5,81.5" stroke="#1A1814" stroke-width="8.5" stroke-linecap="round"/>
+        </svg>
+        <div class="wm" style="font-size:18px"><span class="l">first</span><span class="h">broadcast</span></div>
+      </div>
+      <p class="note">Mark left, wordmark right, same horizontal baseline. No stacking. For letterheads, press sheets, email footers.</p>
+    </div>
+  </div>
+</div>
+
+<div style="padding:18px 80px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:var(--m);font-size:10px;color:var(--ink3)">
+  <span>firstbroadcast · mark system · definitive · cap arcs locked</span>
+  <span>Plus Jakarta Sans · top + bottom transmission only</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Ad Images & Plain Text</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #0A0A0A;
+  --deep: #121212;
+  --crimson: #8B1A2E;
+  --gold: #C8A96E;
+  --gold-dim: #8A6E3E;
+  --white: #F5F0E8;
+  --parchment: #E8E0D0;
+
+  --singer:   #C8A96E;
+  --drummer:  #8B1A2E;
+  --guitarist:#5A8A72;
+  --keys:     #7A6A9A;
+  --bassist:  #4A7A9A;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background:#111;
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  color:var(--white);
+  padding-bottom:80px;
+}
+
+/* ── UI CHROME ── */
+.page-header {
+  background:rgba(10,10,10,0.98);
+  border-bottom:1px solid rgba(139,26,46,0.2);
+  padding:20px 48px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:100;
+}
+.ph-left { display:flex; align-items:center; gap:12px; }
+.ph-title { font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(196,184,154,0.5); }
+.ph-note { font-size:10px; letter-spacing:0.15em; color:rgba(139,26,46,0.6); }
+nav-links { display:flex; gap:24px; }
+nav a { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#555; text-decoration:none; }
+nav a:hover { color:var(--crimson); }
+
+/* ── SECTION HEADERS ── */
+.section-title {
+  padding:48px 48px 8px;
+  font-size:9.5px; letter-spacing:0.38em; text-transform:uppercase; color:var(--crimson);
+  display:flex; align-items:center; gap:14px;
+}
+.section-title::after { content:''; flex:1; height:1px; background:rgba(139,26,46,0.2); }
+
+.section-desc {
+  padding:0 48px 32px;
+  font-size:13px; color:rgba(245,240,232,0.45); line-height:1.7; max-width:700px;
+}
+
+/* ── SCREENSHOT INSTRUCTIONS ── */
+.screenshot-tip {
+  margin:0 48px 24px;
+  background:rgba(200,169,110,0.06);
+  border:1px solid rgba(200,169,110,0.15);
+  padding:14px 20px;
+  display:flex; align-items:center; gap:12px;
+}
+.st-icon { font-size:14px; color:var(--gold-dim); flex-shrink:0; }
+.st-text { font-size:12px; color:rgba(245,240,232,0.5); line-height:1.6; }
+.st-text strong { color:rgba(245,240,232,0.8); font-weight:400; }
+
+/* ── AD IMAGE WRAPPER ── */
+.ad-wrap {
+  margin:0 48px 48px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.ad-label {
+  font-size:8.5px; letter-spacing:0.28em; text-transform:uppercase;
+}
+
+/* ── THE AD IMAGE ITSELF ── */
+/* Exact 1200×628 aspect ratio, scaled to fit screen */
+.ad-image {
+  width:100%;
+  aspect-ratio:1200/628;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+}
+
+/* Grain */
+.ad-image::after {
+  content:'';
+  position:absolute; inset:0; z-index:8; pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+
+/* Scan lines */
+.ad-image::before {
+  content:'';
+  position:absolute; inset:0; z-index:7; pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.03) 3px,rgba(0,0,0,0.03) 4px);
+}
+
+.ad-bg { position:absolute; inset:0; background:var(--void); }
+
+/* Diagonal accent stripe */
+.ad-stripe {
+  position:absolute; z-index:1; pointer-events:none;
+  width:3px; top:0; bottom:0;
+  transform:skewX(-8deg);
+  transform-origin:bottom left;
+}
+
+/* Left column — mark area */
+.ad-left {
+  position:relative; z-index:5;
+  width:42%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:6% 5%;
+  border-right:1px solid rgba(255,255,255,0.04);
+}
+
+/* Right column — typography */
+.ad-right {
+  position:relative; z-index:5;
+  flex:1; display:flex; flex-direction:column;
+  justify-content:space-between;
+  padding:7% 7% 6%;
+}
+
+/* Mark SVG responsive sizing */
+.ad-mark {
+  width:38%;
+  filter:drop-shadow(0 0 24px rgba(139,26,46,0.4));
+}
+
+.ad-band-name {
+  font-family:'DM Sans',sans-serif; font-weight:200;
+  font-size:1.05vw;
+  letter-spacing:0.45em; text-transform:uppercase;
+  color:rgba(196,184,154,0.45);
+  margin-top:6%;
+  white-space:nowrap;
+}
+
+/* Right col top */
+.ad-kicker {
+  font-family:'DM Sans',sans-serif; font-weight:300;
+  font-size:0.75vw; letter-spacing:0.4em; text-transform:uppercase;
+}
+
+/* Role headline */
+.ad-headline {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:3.8vw; letter-spacing:0.04em;
+  color:var(--white); line-height:1.0;
+}
+.ad-headline em {
+  display:block; font-style:italic;
+  font-size:2.6vw; letter-spacing:0.02em;
+  color:rgba(245,240,232,0.6);
+  margin-top:0.15em;
+}
+
+/* Divider */
+.ad-divider {
+  width:40px; height:2px; margin:3% 0;
+  flex-shrink:0;
+}
+
+/* Requirements snippet */
+.ad-reqs {
+  flex:1;
+  display:flex; flex-direction:column; gap:0.4vw;
+  justify-content:center;
+}
+.ad-req-item {
+  font-size:0.72vw; letter-spacing:0.12em;
+  color:rgba(245,240,232,0.5);
+  display:flex; align-items:baseline; gap:0.5vw;
+  line-height:1.6;
+}
+.ad-req-dot {
+  width:3px; height:3px;
+  border-radius:0;
+  transform:rotate(45deg);
+  flex-shrink:0;
+  margin-top:0.1vw;
+}
+
+/* Bottom strip */
+.ad-bottom {
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top:3%;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.ad-location {
+  font-size:0.65vw; letter-spacing:0.3em; text-transform:uppercase;
+  color:rgba(245,240,232,0.25);
+}
+.ad-cta {
+  font-size:0.65vw; letter-spacing:0.28em; text-transform:uppercase;
+  padding:0.4vw 1vw;
+  border:1px solid;
+}
+
+/* Vignette */
+.ad-vignette {
+  position:absolute; inset:0; z-index:6; pointer-events:none;
+  box-shadow:inset 0 0 15vw rgba(0,0,0,0.6);
+}
+
+/* Background large mark watermark */
+.ad-bg-mark {
+  position:absolute; z-index:2; pointer-events:none;
+  opacity:0.04;
+  right:-8%; bottom:-20%;
+  width:55%;
+}
+
+/* ── PLAIN TEXT SECTION ── */
+.plaintext-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+  margin:0 48px;
+}
+
+.pt-card {
+  background:#0E0E0E;
+  border:1px solid rgba(255,255,255,0.05);
+  padding:28px 28px;
+}
+.pt-card-full {
+  grid-column:1/-1;
+}
+
+.pt-role-label {
+  font-size:8.5px; letter-spacing:0.32em; text-transform:uppercase;
+  margin-bottom:16px; padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex; align-items:center; gap:10px;
+}
+.pt-role-dot {
+  width:8px; height:8px; transform:rotate(45deg); flex-shrink:0;
+}
+
+.pt-body {
+  font-family:monospace; font-size:12px; line-height:1.85;
+  color:rgba(245,240,232,0.6);
+  white-space:pre-wrap;
+  user-select:all;
+}
+
+.copy-btn {
+  margin-top:14px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.1);
+  padding:8px 16px;
+  font-family:'DM Sans',sans-serif; font-weight:300;
+  font-size:9px; letter-spacing:0.25em; text-transform:uppercase;
+  color:rgba(245,240,232,0.35);
+  cursor:pointer;
+  transition:all 0.25s;
+  display:block;
+  width:100%;
+}
+.copy-btn:hover { border-color:rgba(139,26,46,0.5); color:rgba(245,240,232,0.7); }
+.copy-btn.copied { border-color:rgba(90,138,114,0.6); color:rgba(90,138,114,0.8); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-left">
+    <svg width="16" height="16" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+    <span class="ph-title">Ad Images & Plain Text — The Order of Light</span>
+  </div>
+  <span class="ph-note">Screenshot each image · Copy-paste plain text below</span>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     AD IMAGES
+═══════════════════════════════════ -->
+
+<div class="section-title">01 — Facebook Ad Images · 1200 × 628px</div>
+<div class="section-desc">Each image is rendered at the correct 1200×628 Facebook aspect ratio. To use: open this file in Chrome, zoom to 100%, then screenshot each ad individually. For pixel-perfect export, use browser DevTools → capture screenshot at device pixel ratio 2.</div>
+
+<div class="screenshot-tip" style="margin:0 48px 32px;">
+  <span class="st-icon">◈</span>
+  <span class="st-text"><strong>Best method for clean export:</strong> In Chrome, right-click the page → Inspect → open DevTools → press Ctrl+Shift+P (Cmd+Shift+P on Mac) → type "screenshot" → select "Capture node screenshot" after clicking each ad element. Or simply screenshot at 100% zoom — the aspect ratios are exact.</span>
+</div>
+
+
+<!-- ── VOCALIST ── -->
+<div class="section-title" style="padding-top:12px;">Vocalist</div>
+<div class="ad-wrap">
+  <div class="ad-image" id="ad-vocalist">
+    <div class="ad-bg" style="background:linear-gradient(135deg,#0A0A0A 0%,#120808 50%,#0A0A0A 100%);"></div>
+    <div class="ad-stripe" style="background:var(--singer);left:41%;opacity:0.15;"></div>
+    <div class="ad-vignette"></div>
+
+    <!-- BG mark watermark -->
+    <svg class="ad-bg-mark" viewBox="0 0 100 100" fill="none">
+      <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+    </svg>
+
+    <div class="ad-left">
+      <svg class="ad-mark" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 0 20px rgba(200,169,110,0.35));">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="ad-band-name">The Order of Light</div>
+    </div>
+
+    <div class="ad-right">
+      <div>
+        <div class="ad-kicker" style="color:var(--singer);">Seeking · Charlotte, NC</div>
+        <div style="height:0.8vw;"></div>
+        <div class="ad-headline">Vocalist<em>The signal needs a voice.</em></div>
+        <div class="ad-divider" style="background:var(--singer);"></div>
+      </div>
+      <div class="ad-reqs">
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:var(--singer);"></div>Lead vocals with range, dynamics &amp; emotional control</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:var(--singer);"></div>Harmony ability — stacked vocals are central to this project</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:var(--singer);"></div>Studio recording &amp; touring experience required</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:var(--singer);"></div>Co-writing capability — lyrics, melody, or both</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:var(--singer);"></div>30s–40s · In-person · Serious applicants only</div>
+      </div>
+      <div class="ad-bottom">
+        <div class="ad-location">Charlotte, NC &amp; surrounding areas</div>
+        <div class="ad-cta" style="border-color:rgba(200,169,110,0.4);color:rgba(200,169,110,0.7);">Apply Now</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── DRUMMER ── -->
+<div class="section-title" style="padding-top:12px;">Drummer</div>
+<div class="ad-wrap">
+  <div class="ad-image" id="ad-drummer">
+    <div class="ad-bg" style="background:linear-gradient(135deg,#0A0A0A 0%,#100808 50%,#0A0A0A 100%);"></div>
+    <div class="ad-stripe" style="background:var(--drummer);left:41%;opacity:0.2;"></div>
+    <div class="ad-vignette"></div>
+    <svg class="ad-bg-mark" viewBox="0 0 100 100" fill="none">
+      <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+    </svg>
+    <div class="ad-left">
+      <svg class="ad-mark" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 0 20px rgba(139,26,46,0.5));">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="ad-band-name">The Order of Light</div>
+    </div>
+    <div class="ad-right">
+      <div>
+        <div class="ad-kicker" style="color:#A82035;">Seeking · Charlotte, NC</div>
+        <div style="height:0.8vw;"></div>
+        <div class="ad-headline">Drummer<em>The signal needs a pulse.</em></div>
+        <div class="ad-divider" style="background:#8B1A2E;"></div>
+      </div>
+      <div class="ad-reqs">
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#8B1A2E;"></div>Groove and feel over everything — taste matched with technique</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#8B1A2E;"></div>Performs to a click track — live and in studio, non-negotiable</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#8B1A2E;"></div>Studio recording &amp; touring experience required</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#8B1A2E;"></div>Comfortable with hybrid electronic/live setup</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#8B1A2E;"></div>30s–40s · In-person · Serious applicants only</div>
+      </div>
+      <div class="ad-bottom">
+        <div class="ad-location">Charlotte, NC &amp; surrounding areas</div>
+        <div class="ad-cta" style="border-color:rgba(139,26,46,0.5);color:rgba(168,32,53,0.8);">Apply Now</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── GUITARIST ── -->
+<div class="section-title" style="padding-top:12px;">Guitarist</div>
+<div class="ad-wrap">
+  <div class="ad-image" id="ad-guitarist">
+    <div class="ad-bg" style="background:linear-gradient(135deg,#0A0A0A 0%,#080F0C 50%,#0A0A0A 100%);"></div>
+    <div class="ad-stripe" style="background:var(--guitarist);left:41%;opacity:0.15;"></div>
+    <div class="ad-vignette"></div>
+    <svg class="ad-bg-mark" viewBox="0 0 100 100" fill="none">
+      <line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+      <line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+      <line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+      <line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+    </svg>
+    <div class="ad-left">
+      <svg class="ad-mark" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 0 20px rgba(90,138,114,0.35));">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="ad-band-name">The Order of Light</div>
+    </div>
+    <div class="ad-right">
+      <div>
+        <div class="ad-kicker" style="color:#5A8A72;">Seeking · Charlotte, NC</div>
+        <div style="height:0.8vw;"></div>
+        <div class="ad-headline">Guitarist<em>Texture, teeth &amp; restraint.</em></div>
+        <div class="ad-divider" style="background:#5A8A72;"></div>
+      </div>
+      <div class="ad-reqs">
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#5A8A72;"></div>Lead &amp; rhythm fluency — atmosphere, melody, and groove</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#5A8A72;"></div>Effects vocabulary — space and texture are part of your language</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#5A8A72;"></div>Studio recording &amp; touring experience required</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#5A8A72;"></div>Harmony vocals required — you sing and contribute</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#5A8A72;"></div>30s–40s · In-person · Serious applicants only</div>
+      </div>
+      <div class="ad-bottom">
+        <div class="ad-location">Charlotte, NC &amp; surrounding areas</div>
+        <div class="ad-cta" style="border-color:rgba(90,138,114,0.45);color:rgba(90,138,114,0.75);">Apply Now</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── KEYS / SYNTH ── -->
+<div class="section-title" style="padding-top:12px;">Keys & Synth</div>
+<div class="ad-wrap">
+  <div class="ad-image" id="ad-keys">
+    <div class="ad-bg" style="background:linear-gradient(135deg,#0A0A0A 0%,#0A0810 50%,#0A0A0A 100%);"></div>
+    <div class="ad-stripe" style="background:var(--keys);left:41%;opacity:0.15;"></div>
+    <div class="ad-vignette"></div>
+    <svg class="ad-bg-mark" viewBox="0 0 100 100" fill="none">
+      <line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+      <line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+      <line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+      <line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+    </svg>
+    <div class="ad-left">
+      <svg class="ad-mark" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 0 20px rgba(122,106,154,0.4));">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="ad-band-name">The Order of Light</div>
+    </div>
+    <div class="ad-right">
+      <div>
+        <div class="ad-kicker" style="color:#7A6A9A;">Seeking · Charlotte, NC</div>
+        <div style="height:0.8vw;"></div>
+        <div class="ad-headline">Keys / Synth<em>The signal needs its frequency.</em></div>
+        <div class="ad-divider" style="background:#7A6A9A;"></div>
+      </div>
+      <div class="ad-reqs">
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#7A6A9A;"></div>Piano and synthesizer both — not one or the other</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#7A6A9A;"></div>Sound design capability — you shape tones, not just presets</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#7A6A9A;"></div>Live electronic performance &amp; studio experience required</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#7A6A9A;"></div>Touring history — serious live experience beyond local shows</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#7A6A9A;"></div>30s–40s · In-person · Serious applicants only</div>
+      </div>
+      <div class="ad-bottom">
+        <div class="ad-location">Charlotte, NC &amp; surrounding areas</div>
+        <div class="ad-cta" style="border-color:rgba(122,106,154,0.45);color:rgba(122,106,154,0.8);">Apply Now</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── BASSIST ── -->
+<div class="section-title" style="padding-top:12px;">Bassist</div>
+<div class="ad-wrap">
+  <div class="ad-image" id="ad-bassist">
+    <div class="ad-bg" style="background:linear-gradient(135deg,#0A0A0A 0%,#080C10 50%,#0A0A0A 100%);"></div>
+    <div class="ad-stripe" style="background:var(--bassist);left:41%;opacity:0.15;"></div>
+    <div class="ad-vignette"></div>
+    <svg class="ad-bg-mark" viewBox="0 0 100 100" fill="none">
+      <line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+      <line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+      <line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+      <line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+    </svg>
+    <div class="ad-left">
+      <svg class="ad-mark" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 0 20px rgba(74,122,154,0.35));">
+        <line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/>
+        <line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+        <line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div class="ad-band-name">The Order of Light</div>
+    </div>
+    <div class="ad-right">
+      <div>
+        <div class="ad-kicker" style="color:#4A7A9A;">Seeking · Charlotte, NC</div>
+        <div style="height:0.8vw;"></div>
+        <div class="ad-headline">Bassist<em>The signal needs its foundation.</em></div>
+        <div class="ad-divider" style="background:#4A7A9A;"></div>
+      </div>
+      <div class="ad-reqs">
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#4A7A9A;"></div>Groove and pocket — locked with the drummer instinctively</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#4A7A9A;"></div>Performs to a click track — live and in studio, non-negotiable</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#4A7A9A;"></div>Studio recording &amp; touring experience required</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#4A7A9A;"></div>Melodically aware — bass lines have shape and direction</div>
+        <div class="ad-req-item"><div class="ad-req-dot" style="background:#4A7A9A;"></div>30s–40s · In-person · Serious applicants only</div>
+      </div>
+      <div class="ad-bottom">
+        <div class="ad-location">Charlotte, NC &amp; surrounding areas</div>
+        <div class="ad-cta" style="border-color:rgba(74,122,154,0.45);color:rgba(74,122,154,0.8);">Apply Now</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

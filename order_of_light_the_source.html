@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — The Source · Year One</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#0A0A0A;--deep:#141414;--surface:#1E1E1E;
+  --border:#2A2A2A;--border-hi:#3C3C3C;
+  --text-1:#F0EBE1;--text-2:#B8AFA0;--text-3:#8A8278;
+  --gold:#C8A55A;--gold-dim:#7A6030;
+  --crimson:#C0384F;--crimson-h:#D94E65;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--text-1);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--gold);color:#0A0A0A;padding:8px 16px;font-size:14px;text-decoration:none;z-index:9999;}
+.skip-link:focus{top:16px;}
+
+/* COVER */
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px 56px;position:relative;}
+.cover-line{position:absolute;left:60px;top:80px;bottom:80px;width:1px;background:linear-gradient(to bottom,transparent,var(--gold) 50%,transparent);opacity:0.35;}
+.cover-eyebrow{font-size:9px;letter-spacing:0.48em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-left:20px;}
+.cover-title{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(40px,6vw,80px);letter-spacing:0.2em;text-transform:uppercase;color:var(--text-1);line-height:0.92;padding-left:20px;}
+.cover-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(16px,2vw,22px);color:var(--text-2);padding-left:20px;margin-top:14px;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--gold),var(--crimson-h),transparent);opacity:0.3;margin:32px 0;}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;padding-left:20px;}
+.cm-item{display:flex;flex-direction:column;gap:3px;}
+.cm-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--text-3);}
+.cm-value{font-size:13px;color:var(--text-2);}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:0 60px 100px;}
+.section{padding-top:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:0.12em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin:12px 0 28px;max-width:560px;}
+.prose{font-size:14.5px;color:var(--text-2);line-height:1.85;max-width:640px;}
+.prose p{margin-bottom:1.3em;}
+.prose strong{color:var(--text-1);font-weight:400;}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;font-size:13px;color:var(--text-2);line-height:1.7;}
+.callout strong{color:var(--text-1);font-weight:400;}
+.callout.crit{border-left-color:var(--crimson-h);}
+
+/* RULES */
+.rules{display:flex;flex-direction:column;gap:2px;margin:20px 0;}
+.rule-row{background:var(--deep);border:1px solid var(--border);padding:16px 20px;display:grid;grid-template-columns:80px 1fr;gap:16px;align-items:baseline;}
+.rule-tag{font-size:8px;letter-spacing:0.22em;text-transform:uppercase;padding:3px 8px;border:1px solid;width:fit-content;}
+.rule-do{color:#6AAF8C;border-color:rgba(106,175,140,0.35);}
+.rule-dont{color:var(--crimson-h);border-color:rgba(217,78,101,0.35);}
+.rule-note{color:var(--gold);border-color:rgba(200,165,90,0.35);}
+.rule-text{font-size:13px;color:var(--text-2);line-height:1.6;}
+.rule-text strong{color:var(--text-1);font-weight:400;}
+
+/* CHART */
+.chart-wrap{background:var(--deep);border:1px solid var(--border);padding:32px 36px;margin:20px 0;font-family:'DM Sans',monospace;}
+.chart-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px;}
+.chart-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;color:var(--text-1);letter-spacing:0.04em;}
+.chart-meta-col{display:flex;flex-direction:column;gap:4px;text-align:right;}
+.chart-meta-row{font-size:10px;color:var(--text-3);letter-spacing:0.1em;}
+.chart-meta-val{color:var(--gold);}
+
+.chart-section-label{font-size:8px;letter-spacing:0.38em;text-transform:uppercase;color:var(--gold);margin:24px 0 10px;display:flex;align-items:center;gap:10px;}
+.chart-section-label::after{content:'';flex:1;height:1px;background:rgba(200,165,90,0.15);}
+
+.chart-row{display:grid;grid-template-columns:48px 80px 1fr 80px;gap:0;border-bottom:1px solid var(--border);align-items:center;}
+.chart-row:last-child{border-bottom:none;}
+.chart-row.header-row{border-bottom:2px solid var(--border);}
+.chart-cell{padding:10px 12px;font-size:12px;color:var(--text-2);}
+.chart-cell.bar{color:var(--text-3);font-size:11px;}
+.chart-cell.chord{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text-1);letter-spacing:0.06em;}
+.chart-cell.note{font-size:11px;color:var(--text-3);font-style:italic;}
+.chart-cell.head{font-size:8px;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-3);padding:8px 12px;}
+
+.lyric-block{margin:24px 0;}
+.lyric-section{margin-bottom:20px;}
+.lyric-section-label{font-size:8px;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.lyric-line{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:16px;color:var(--text-1);line-height:1.9;letter-spacing:0.02em;}
+.lyric-line.empty{height:20px;}
+
+/* EMBARGO */
+.embargo{background:rgba(192,56,79,0.06);border:1px solid rgba(192,56,79,0.3);padding:24px 26px;margin:24px 0;}
+.embargo-label{font-size:9px;letter-spacing:0.36em;text-transform:uppercase;color:var(--crimson-h);margin-bottom:14px;}
+.embargo-text{font-size:13.5px;color:var(--text-2);line-height:1.75;}
+.embargo-text strong{color:var(--text-1);font-weight:400;}
+.embargo-sign{margin-top:20px;padding-top:20px;border-top:1px solid rgba(192,56,79,0.2);display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.sign-field{display:flex;flex-direction:column;gap:8px;}
+.sign-line{border-bottom:1px solid var(--border-hi);height:32px;}
+.sign-label{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-3);}
+
+footer{max-width:900px;margin:72px auto 0;padding:22px 60px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);letter-spacing:0.1em;flex-wrap:wrap;gap:8px;}
+@media(max-width:700px){.cover{padding:80px 24px 48px;}.cover-line{left:24px;}.wrap{padding:0 24px 80px;}.chart-row{grid-template-columns:36px 60px 1fr;}.chart-cell.note{display:none;}.embargo-sign{grid-template-columns:1fr;}.rule-row{grid-template-columns:1fr;gap:8px;}footer{padding:22px 24px 48px;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="cover">
+  <div class="cover-line" aria-hidden="true"></div>
+  <p class="cover-eyebrow">The Frequency · Year One · The Source</p>
+  <h1 class="cover-title">The Source</h1>
+  <p class="cover-sub">Everything you need and nothing else. What you do with it is yours.</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div class="cm-item"><span class="cm-label">Document</span><span class="cm-value">The Frequency · Year One Source</span></div>
+    <div class="cm-item"><span class="cm-label">Sent to</span><span class="cm-value">3 collaborators — separately</span></div>
+    <div class="cm-item"><span class="cm-label">Embargo</span><span class="cm-value">Until Week 4 simultaneous release</span></div>
+    <div class="cm-item"><span class="cm-label">Contact</span><span class="cm-value"><a href="mailto:tristanmatthew@gmail.com">tristanmatthew@gmail.com</a></span></div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+
+  <!-- WHAT THIS IS -->
+  <section class="section" id="what" aria-labelledby="what-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h2 class="sec-title" id="what-title" style="color:var(--gold);">What This Is</h2>
+    </div>
+    <div class="prose">
+      <p>
+        This document is The Source — the only material you receive for The Frequency collaboration.
+        It contains a Nashville Numbers chart and a lyric sheet. Nothing else.
+        No reference recording. No guide vocal. No production direction.
+      </p>
+      <p>
+        <strong>You interpret this entirely in your own voice, in your own world.</strong>
+        There are no wrong answers. There is no version we're hoping for.
+        The only requirement is that the harmonic structure in the chart is followed —
+        the chords are the shared foundation. Everything else is yours.
+      </p>
+      <p>
+        Three artists are receiving this document independently. None of you will hear
+        the other versions until all three are released in the same week.
+        The point of The Frequency is the comparison — three entirely different
+        interpretations of the same signal. Your version should be entirely yours.
+        Resist any temptation to imagine what the others might do.
+      </p>
+    </div>
+    <div class="callout crit" role="note">
+      <strong>Read the embargo clause before anything else.</strong> It is at the end of this
+      document. Your participation in The Frequency is conditional on your agreement to it.
+      Reply to <a href="mailto:tristanmatthew@gmail.com">tristanmatthew@gmail.com</a> to confirm you have read and agreed before you begin recording.
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section class="section" id="rules-sec" aria-labelledby="rules-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">02</span>
+      <h2 class="sec-title" id="rules-title" style="color:var(--gold);">The Rules</h2>
+    </div>
+    <p class="sec-intro">Simple, few, and non-negotiable.</p>
+
+    <div class="rules" role="list" aria-label="Frequency rules">
+      <div class="rule-row" role="listitem"><div class="rule-tag rule-do">Do</div><div class="rule-text">Follow the chord structure in the Nashville Numbers chart. The harmonic foundation is the shared element — this is what connects all three versions.</div></div>
+      <div class="rule-row" role="listitem"><div class="rule-tag rule-do">Do</div><div class="rule-text">Use the lyrics as written. You may omit sections, repeat sections, or reorder them. You may not rewrite them. The words are ours — the interpretation is yours.</div></div>
+      <div class="rule-row" role="listitem"><div class="rule-tag rule-do">Do</div><div class="rule-text">Record and produce the track in your own style, in your own environment, with your own people. No instructions on production, instrumentation, tempo, or arrangement.</div></div>
+      <div class="rule-row" role="listitem"><div class="rule-tag rule-dont">Don't</div><div class="rule-text"><strong>Do not share this document, the chart, or the lyrics</strong> with anyone outside your immediate recording collaborators until after Week 4 release. This is the embargo clause — details at the end.</div></div>
+      <div class="rule-row" role="listitem"><div class="rule-tag rule-dont">Don't</div><div class="rule-text"><strong>Do not seek out or listen to any other version</strong> of this song before your recording is complete. If you encounter another version accidentally, note it and let us know. Your version should be untainted by others.</div></div>
+      <div class="rule-row" role="listitem"><div class="rule-tag rule-note">Note</div><div class="rule-text">Credit: the song is credited as written by The Order of Light. Your recording is credited as performed by you. Standard co-interpretation credit — your version is yours to release, license, and own as a master recording. Royalty split documented in the collaboration agreement.</div></div>
+      <div class="rule-row" role="listitem"><div class="rule-tag rule-note">Deadline</div><div class="rule-text">Final mixed and mastered audio file due <strong>eight weeks before your agreed release date</strong>. WAV, 16-bit/44.1kHz minimum. One revision round if required. Contact us before the deadline if you need an extension — surprises are harder to manage than advance notice.</div></div>
+    </div>
+  </section>
+
+  <!-- THE CHART -->
+  <section class="section" id="chart" aria-labelledby="chart-title">
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">03</span>
+      <h2 class="sec-title" id="chart-title" style="color:var(--gold);">The Chart — Nashville Numbers</h2>
+    </div>
+    <p class="sec-intro">Key, tempo, and structure. Chords in Nashville Numbers — transpose to whatever key serves your voice and arrangement.</p>
+
+    <div class="chart-wrap" role="region" aria-label="Nashville Numbers chart">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">[Song title — to be completed]</div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:4px;font-style:italic;">The Frequency · Year One · The Order of Light</div>
+        </div>
+        <div class="chart-meta-col">
+          <div class="chart-meta-row">Key: <span class="chart-meta-val">[Key — e.g. A minor]</span></div>
+          <div class="chart-meta-row">Tempo: <span class="chart-meta-val">[BPM]</span></div>
+          <div class="chart-meta-row">Time: <span class="chart-meta-val">[e.g. 4/4]</span></div>
+          <div class="chart-meta-row">Feel: <span class="chart-meta-val">[e.g. Straight eighths, swung]</span></div>
+        </div>
+      </div>
+
+      <div class="chart-section-label">Intro</div>
+      <div class="chart-row header-row">
+        <div class="chart-cell head">Bar</div>
+        <div class="chart-cell head">Chord</div>
+        <div class="chart-cell head">Structure / feel</div>
+        <div class="chart-cell head">Bars</div>
+      </div>
+      <div class="chart-row"><div class="chart-cell bar">1</div><div class="chart-cell chord">1</div><div class="chart-cell note">Enter sparse — space is intentional</div><div class="chart-cell note">×4</div></div>
+      <div class="chart-row"><div class="chart-cell bar">5</div><div class="chart-cell chord">6m</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">7</div><div class="chart-cell chord">4</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+
+      <div class="chart-section-label">Verse</div>
+      <div class="chart-row"><div class="chart-cell bar">9</div><div class="chart-cell chord">1</div><div class="chart-cell note">Two bars each chord</div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">11</div><div class="chart-cell chord">6m</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">13</div><div class="chart-cell chord">4</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">15</div><div class="chart-cell chord">5</div><div class="chart-cell note">Hold / let breathe</div><div class="chart-cell note">×2</div></div>
+
+      <div class="chart-section-label">Pre-Chorus</div>
+      <div class="chart-row"><div class="chart-cell bar">17</div><div class="chart-cell chord">4</div><div class="chart-cell note">Build from here</div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">19</div><div class="chart-cell chord">5</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">21</div><div class="chart-cell chord">6m</div><div class="chart-cell note"></div><div class="chart-cell note">×1</div></div>
+      <div class="chart-row"><div class="chart-cell bar">22</div><div class="chart-cell chord">5</div><div class="chart-cell note">Into chorus</div><div class="chart-cell note">×1</div></div>
+
+      <div class="chart-section-label">Chorus</div>
+      <div class="chart-row"><div class="chart-cell bar">23</div><div class="chart-cell chord">1</div><div class="chart-cell note">Full — where it arrives</div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">25</div><div class="chart-cell chord">5</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">27</div><div class="chart-cell chord">6m</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">29</div><div class="chart-cell chord">4</div><div class="chart-cell note">Repeat chorus ×2 total</div><div class="chart-cell note">×2</div></div>
+
+      <div class="chart-section-label">Bridge</div>
+      <div class="chart-row"><div class="chart-cell bar">—</div><div class="chart-cell chord">3m</div><div class="chart-cell note">Contrast — unexpected chord</div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">—</div><div class="chart-cell chord">4</div><div class="chart-cell note"></div><div class="chart-cell note">×2</div></div>
+      <div class="chart-row"><div class="chart-cell bar">—</div><div class="chart-cell chord">1</div><div class="chart-cell note">Resolve — then outro</div><div class="chart-cell note">×4</div></div>
+
+      <div style="margin-top:16px;font-size:11px;color:var(--text-3);font-style:italic;line-height:1.6;">
+        Note: This chart is a structural template — bars ma
+</body>
+</html>

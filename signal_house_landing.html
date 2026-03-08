@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>signal house</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0F1117;
+  --s1:rgba(232,235,240,.03);
+  --rule:rgba(232,235,240,.08);
+  --rule2:rgba(232,235,240,.05);
+  --ink:#E8EBF0;
+  --ink2:rgba(232,235,240,.55);
+  --ink3:rgba(232,235,240,.25);
+  --ink4:rgba(232,235,240,.12);
+  --accent:#1B4F6E;
+  --accent-bright:rgba(27,79,110,.8);
+  --syne:'Syne',sans-serif;
+  --body:'Outfit',sans-serif;
+  --m:'JetBrains Mono',monospace
+}
+html{background:var(--bg);scroll-behavior:smooth}
+body{color:var(--ink);font-family:var(--body);font-weight:300;overflow-x:hidden}
+::selection{background:var(--accent);color:#fff}
+
+/* ── NAV ──
+   The wordmark that caught the eye: horizontal, lowercase Syne 800
+   Clean, authoritative, no decoration
+*/
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:52px;padding:0 56px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--rule);
+  background:rgba(15,17,23,.94);backdrop-filter:blur(20px)
+}
+.nav-wm{
+  font-family:var(--syne);font-weight:800;font-size:16px;
+  letter-spacing:-.03em;color:var(--ink);line-height:1
+}
+.nav-wm .dim{color:var(--ink3);font-weight:500;margin-left:6px;font-size:11px;letter-spacing:.06em;font-family:var(--m)}
+.nav-links{display:flex;gap:36px}
+.nav-links a{
+  font-family:var(--m);font-size:10px;letter-spacing:.1em;
+  color:var(--ink3);text-decoration:none;transition:color .15s
+}
+.nav-links a:hover{color:var(--ink)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  padding-top:52px;
+  display:grid;
+  grid-template-rows:1fr auto
+}
+.hero-main{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 56px 64px
+}
+
+/* The big stacked wordmark — signal large/House recessed same font */
+.hero-wm{
+  display:flex;flex-direction:column;
+  font-family:var(--syne);line-height:.86;letter-spacing:-.04em
+}
+.hw-signal{
+  font-size:clamp(88px,13vw,196px);
+  font-weight:800;color:var(--ink)
+}
+.hw-house{
+  font-size:clamp(88px,13vw,196px);
+  font-weight:500;color:rgba(232,235,240,.18)
+}
+
+/* Bottom meta bar — four columns of data */
+.hero-meta{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--rule);
+  padding:0
+}
+.hm-item{
+  padding:22px 28px;border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:5px
+}
+.hm-item:last-child{border-right:none}
+.hm-k{font-family:var(--m);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+.hm-v{font-family:var(--m);font-size:11px;color:var(--ink2)}
+.hm-v a{color:var(--accent-bright);text-decoration:none}
+.hm-v a:hover{color:var(--ink)}
+
+/* ── DIVIDER RULE ── */
+.rule{border:none;height:1px;background:var(--rule);margin:0}
+
+/* ── ABOUT ── */
+.about{
+  display:grid;grid-template-columns:240px 1fr;
+  border-bottom:1px solid var(--rule)
+}
+.about-l{
+  padding:64px 56px;border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:48px
+}
+.section-label{
+  font-family:var(--m);font-size:8.5px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--ink3)
+}
+.about-index{
+  font-family:var(--syne);font-weight:800;font-size:64px;
+  letter-spacing:-.04em;color:rgba(232,235,240,.06);line-height:1
+}
+.about-r{padding:64px 56px}
+.about-hed{
+  font-family:var(--syne);font-weight:700;
+  font-size:clamp(24px,2.4vw,38px);letter-spacing:-.025em;line-height:1.1;
+  color:var(--ink);margin-bottom:28px
+}
+.about-body{font-size:15px;color:var(--ink2);line-height:1.9;max-width:580px}
+.about-body p+p{margin-top:1em}
+.about-body strong{color:var(--ink);font-weight:500}
+
+/* ── SERVICES ── */
+.services{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid var(--rule)
+}
+.svc{
+  padding:44px 40px;border-right:1px solid var(--rule);
+  background:var(--s1);transition:background .2s
+}
+.svc:last-child{border-right:none}
+.svc:hover{background:rgba(232,235,240,.05)}
+.svc-n{font-family:var(--m);font-size:9px;letter-spacing:.2em;color:var(--accent-bright);margin-bottom:18px}
+.svc-title{font-family:var(--syne);font-weight:700;font-size:18px;color:var(--ink);margin-bottom:12px;letter-spacing:-.01em}
+.svc-body{font-size:13.5px;color:var(--ink3);line-height:1.7}
+
+/* ── ROSTER ── */
+.roster{border-bottom:1px solid var(--rule);padding:0 56px}
+.roster-label{
+  font-family:var(--m);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink3);padding:20px 0;border-bottom:1px solid var(--rule)
+}
+.roster-row{
+  display:grid;grid-template-columns:48px 1fr auto;gap:20px;
+  padding:32px 0;border-bottom:1px solid var(--rule2);align-items:center
+}
+.roster-row:last-child{border-bottom:none}
+.rr-n{font-family:var(--m);font-size:11px;color:var(--accent-bright)}
+.rr-name{font-family:var(--syne);font-weight:700;font-size:22px;color:var(--ink);letter-spacing:-.01em}
+.rr-sub{font-family:var(--m);font-size:10px;color:var(--ink3);margin-top:4px}
+.rr-badge{
+  font-family:var(--m);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--accent);color:var(--accent-bright);padding:4px 12px;white-space:nowrap
+}
+
+/* ── CONTACT ── */
+.contact{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--rule)
+}
+.cc{padding:56px}
+.cc+.cc{border-left:1px solid var(--rule)}
+.cc-dept{
+  font-family:var(--m);font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--accent-bright);margin-bottom:20px
+}
+.cc-name{
+  font-family:var(--syne);font-weight:700;font-size:22px;
+  color:var(--ink);letter-spacing:-.01em;margin-bottom:32px
+}
+.cc-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule2)}
+.cc-row:last-child{border-bottom:none}
+.ck{font-family:var(--m);font-size:10px;color:var(--ink3)}
+.cv{font-family:var(--m);font-size:10px;text-align:right}
+.cv a{color:var(--accent-bright);text-decoration:none}
+.cv a:hover{color:var(--ink)}
+
+/* ── FOOTER ── */
+footer{
+  padding:18px 56px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px
+}
+.ft-wm{
+  font-family:var(--syne);font-weight:800;font-size:12px;
+  letter-spacing:-.02em;color:var(--ink3)
+}
+.ft-r{font-family:var(--m);font-size:10px;color:var(--ink3)}
+.ft-r a{color:var(--ink3);text-decoration:none}
+.ft-r a:hover{color:var(--accent-bright)}
+
+/* ── ANIMATIONS ── */
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hw-signal{animation:up .7s .05s ease both}
+.hw-house {animation:up .7s .15s ease both}
+.hero-meta{opacity:0;animation:up .5s .4s ease forwards}
+
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .hero-main{padding:0 24px 48px}
+  .hero-meta{grid-template-columns:1fr 1fr}
+  .hm-item:nth-child(2){border-right:none}
+  .hm-item:nth-child(3){border-top:1px solid var(--rule);border-right:1px solid var(--rule)}
+  .hm-item:last-child{border-top:1px solid var(--rule)}
+  .about{grid-template-columns:1fr}
+  .about-l{padding:40px 24px;border-right:none;border-bottom:1px solid var(--rule)}
+  .about-r{padding:40px 24px}
+  .services{grid-template-columns:1fr}
+  .svc{border-right:none;border-bottom:1px solid var(--rule)}
+  .svc:last-child{border-bottom:none}
+  .roster{padding:0 24px}
+  .contact{grid-template-columns:1fr}
+  .cc+.cc{border-left:none;border-top:1px solid var(--rule)}
+  .cc{padding:40px 24px}
+  footer{padding:16px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wm">signal house<span class="dim">LLC</span></div>
+  <div class="nav-links">
+    <a href="#about">about</a>
+    <a href="#roster">roster</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-main">
+    <div class="hero-wm">
+      <span class="hw-signal">signal</span>
+      <span class="hw-house">house</span>
+    </div>
+  </div>
+
+  <div class="hero-meta">
+    <div class="hm-item">
+      <span class="hm-k">Entity</span>
+      <span class="hm-v">LLC · North Carolina</span>
+    </div>
+    <div class="hm-item">
+      <span class="hm-k">Label</span>
+      <span class="hm-v">First Broadcast</span>
+    </div>
+    <div class="hm-item">
+      <span class="hm-k">Distribution</span>
+      <span class="hm-v">Symphonic</span>
+    </div>
+    <div class="hm-item">
+      <span class="hm-k">Contact</span>
+      <span class="hm-v"><a href="mailto:info@signalhouse.co">info@signalhouse.co</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-l">
+    <span class="section-label">about</span>
+    <span class="about-index">01</span>
+  </div>
+  <div class="about-r">
+    <h2 class="about-hed">Built for artists who are building something that lasts.</h2>
+    <div class="about-body">
+      <p>Signal House LLC handles the business so artists can focus on the work — management, publishing administration, creative strategy, brand development, and label services through our First Broadcast imprint.</p>
+      <p>We work with a small number of artists at any one time. <strong>Not because we have to, but because real development requires attention, not volume.</strong> Selective. Independent. Long-term.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="svc">
+    <div class="svc-n">01</div>
+    <div class="svc-title">Management</div>
+    <div class="svc-body">Career strategy, day-to-day operations, booking coordination, and long-form creative development.</div>
+  </div>
+  <div class="svc">
+    <div class="svc-n">02</div>
+    <div class="svc-title">Publishing</div>
+    <div class="svc-body">Copyright registration, sync licensing, PRO administration, and royalty collection.</div>
+  </div>
+  <div class="svc">
+    <div class="svc-n">03</div>
+    <div class="svc-title">Label — First Broadcast</div>
+    <div class="svc-body">Independent releases through our First Broadcast imprint, distributed via Symphonic.</div>
+  </div>
+</section>
+
+<!-- ROSTER -->
+<section class="roster" id="roster">
+  <div class="roster-label">roster</div>
+  <div class="roster-row">
+    <div class="rr-n">001</div>
+    <div>
+      <div class="rr-name">The Order of Light</div>
+      <div class="rr-sub">Alternative rock · Charlotte, NC · Label: First Broadcast</div>
+    </div>
+    <div class="rr-badge">Active</div>
+  </div>
+  <div class="roster-row" style="opacity:.18">
+    <div class="rr-n">002</div>
+    <div><div class="rr-name" style="font-weight:400;font-size:18px;font-style:italic">Future representation</div></div>
+  </div>
+</section>
+</body>
+</html>

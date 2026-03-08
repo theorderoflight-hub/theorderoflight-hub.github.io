@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Order of Light — Brand Bible</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -97,11 +98,9 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     position: relative;
-    padding: 120px 60px 80px;
-    text-align: center;
+    padding: 80px 60px 64px;
     overflow: hidden;
   }
 
@@ -132,10 +131,10 @@
   }
 
   .cover h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
     font-size: clamp(40px, 6vw, 72px);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--white);
     margin-bottom: 16px;
@@ -398,10 +397,10 @@
   }
 
   .type-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 200;
     font-size: 32px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--white);
   }
@@ -583,7 +582,7 @@
   /* ─── FOOTER ─── */
   footer {
     padding: 80px 60px;
-    text-align: center;
+    
     border-top: 1px solid rgba(255,255,255,0.04);
     display: flex;
     flex-direction: column;
@@ -624,6 +623,54 @@
     opacity: 1;
     transform: none;
   }
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
 </style>
 </head>
 <body>
@@ -853,7 +900,7 @@
     <div class="type-row">
       <div class="type-meta">
         <div class="label">Title / Heading</div>
-        <div class="font-name">Cormorant Garamond<br>SemiBold · All Caps<br>Tracked +150</div>
+        <div class="font-name">DM Sans<br>ExtraLight · All Caps<br>Tracked +280 · Wordmark</div>
       </div>
       <div class="type-heading">The Order of Light</div>
     </div>
@@ -884,7 +931,7 @@
   <div class="rules-grid reveal">
     <div class="rule-card do">
       <div class="rule-tag">✓ Display copy</div>
-      <p>Cormorant Garamond should be used large, with generous line spacing. It rewards scale. Use italics for Sermon titles and taglines — the slant adds the necessary sinister quality without extra design work.</p>
+      <p>Cormorant Garamond should be used large, with generous line spacing. It rewards scale. Use italics for Broadcast titles and taglines — the slant adds the necessary sinister quality without extra design work.</p>
     </div>
     <div class="rule-card dont">
       <div class="rule-tag">✗ Mixed systems</div>
@@ -951,7 +998,7 @@
 <section id="glitch">
   <div class="section-eyebrow reveal">05 — The Glitch Grammar</div>
   <h2 class="reveal">The Language<br>of Distortion</h2>
-  <p class="reveal">The Glitch Grammar is the consistent set of video distortion techniques that run across all moving image content — Sermons, Vignettes, performance clips, and social video. These are not random effects. Each technique is applied intentionally at specific moments to suggest that something is being transmitted imperfectly across time or distance. Consistency is critical: the audience should recognise the grammar and feel reassured by its familiarity.</p>
+  <p class="reveal">The Glitch Grammar is the consistent set of video distortion techniques that run across all moving image content — Broadcasts, Vignettes, performance clips, and social video. These are not random effects. Each technique is applied intentionally at specific moments to suggest that something is being transmitted imperfectly across time or distance. Consistency is critical: the audience should recognise the grammar and feel reassured by its familiarity.</p>
 
   <div class="glitch-grid reveal">
     <div class="glitch-card">
@@ -962,7 +1009,7 @@
     <div class="glitch-card">
       <div class="glitch-number">02</div>
       <div class="glitch-name">Frame Skip</div>
-      <p class="glitch-desc">A single-frame jump cut, as if the tape has been edited or a moment excised. Used to suggest that not everything is being shown. Apply once per Sermon, maximum twice per Vignette.</p>
+      <p class="glitch-desc">A single-frame jump cut, as if the tape has been edited or a moment excised. Used to suggest that not everything is being shown. Apply once per Broadcast, maximum twice per Vignette.</p>
     </div>
     <div class="glitch-card">
       <div class="glitch-number">03</div>
@@ -982,25 +1029,20 @@
     <div class="glitch-card">
       <div class="glitch-number">06</div>
       <div class="glitch-name">Audio Pitch Drift</div>
-      <p class="glitch-desc">The audio drops approximately a semitone over 2–3 seconds, then corrects. Applied once per Sermon during the Teaching section. Deeply subliminal — most viewers will feel it rather than hear it.</p>
+      <p class="glitch-desc">The audio drops approximately a semitone over 2–3 seconds, then corrects. Applied once per Broadcast during the Teaching section. Deeply subliminal — most viewers will feel it rather than hear it.</p>
     </div>
   </div>
 
   <h3>Recommended Tools</h3>
-  <p class="reveal">DaVinci Resolve (free) — primary post-production tool for all effects. The grain node, chromatic aberration, and custom overlay support handles 80% of the grammar. Premiere Pro with a VHS preset pack handles the remainder. For quick social content on mobile: Glitché or VHS Cam apps. For Sermon production: combine HeyGen output with DaVinci Resolve for the full effects stack.</p>
+  <p class="reveal">DaVinci Resolve (free) — primary post-production tool for all effects. The grain node, chromatic aberration, and custom overlay support handles 80% of the grammar. Premiere Pro with a VHS preset pack handles the remainder. For quick social content on mobile: Glitché or VHS Cam apps. For Broadcast production: combine HeyGen output with DaVinci Resolve for the full effects stack.</p>
 </section>
 
-<footer>
-  <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
-  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
-  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-</svg>
-  <p>The Order of Light · Brand Identity System · 2025</p>
-  <p>The signal continues · For the Illuminated only</p>
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
 </footer>
 
 <script>

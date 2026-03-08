@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Year Two Campaign Master</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void:#080808; --deep:#111; --surface:#1A1A1A; --surface2:#202020;
+  --border:#2A2A2A; --border-hi:#3A3A3A;
+  --crimson:#B83048; --crimson-h:#CC3D56; --crimson-dim:#7A1F30;
+  --gold:#B8965A; --gold-dim:#7A6030;
+  --blue:#2A5A8A; --blue-h:#3A7ABF; --ice:#8AB0C8;
+  --white:#EDE8E0; --text-2:#B0A898; --text-3:#6A6260;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.7;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.065'/%3E%3C/svg%3E");opacity:.5;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:998;
+  background:repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(0,0,0,0.016) 4px,rgba(0,0,0,0.016) 5px);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(8,8,8,0.94);
+  border-bottom:1px solid var(--border);backdrop-filter:blur(12px);
+  display:flex;align-items:center;padding:0 48px;height:52px;gap:0;}
+.nav-brand{font-family:'DM Sans',sans-serif;font-weight:200;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);margin-right:auto;}
+.nav-y2{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-h);padding:2px 10px;border:1px solid rgba(58,122,191,.35);margin-right:16px;}
+.nav-links{display:flex;}
+.nav-links a{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--text-3);text-decoration:none;padding:0 14px;height:52px;display:flex;align-items:center;border-left:1px solid var(--border);transition:color .2s,background .2s;}
+.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.03);}
+
+/* COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 64px 64px;position:relative;overflow:hidden;}
+.cover-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:600px;height:600px;
+  background:radial-gradient(circle,rgba(42,90,138,.14) 0%,rgba(184,48,72,.06) 50%,transparent 70%);pointer-events:none;}
+.cover::before{content:'';position:absolute;left:64px;top:80px;bottom:80px;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--blue-h) 30%,var(--crimson) 70%,transparent);opacity:.35;}
+.cover-tag{font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--blue-h);margin-bottom:12px;position:relative;z-index:2;}
+.cover h1{font-family:'DM Sans',sans-serif;font-weight:200;font-size:clamp(36px,5.5vw,68px);letter-spacing:.2em;text-transform:uppercase;color:var(--white);margin-bottom:6px;position:relative;z-index:2;}
+.cover h1::before{content:'The Order of Light';position:absolute;font-family:'DM Sans',sans-serif;font-weight:200;font-size:inherit;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson);opacity:.08;top:3px;left:2px;pointer-events:none;}
+.cover-sub{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-3);margin-bottom:28px;position:relative;z-index:2;}
+.cover-rule{width:100%;height:1px;background:linear-gradient(to right,var(--blue-h),var(--crimson),transparent);opacity:.3;margin:0 0 28px;position:relative;z-index:2;}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;position:relative;z-index:2;}
+.cm-label{font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;}
+.cm-value{font-size:13px;color:var(--text-2);}
+
+/* SECTIONS */
+.wrap{max-width:960px;margin:0 auto;padding:0 64px;}
+.section{padding:72px 0 0;scroll-margin-top:52px;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:28px;}
+.sec-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:11px;color:var(--text-3);letter-spacing:.1em;}
+.sec-title{font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:.42em;text-transform:uppercase;}
+.sec-intro{font-size:13px;color:var(--text-3);line-height:1.7;margin-bottom:28px;max-width:580px;}
+
+/* CALLOUT */
+.callout{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--blue-h);padding:16px 20px;margin:0 0 24px;font-size:13px;color:var(--text-2);line-height:1.75;}
+.callout strong{color:var(--white);font-weight:400;}
+.callout.gold{border-left-color:var(--gold);}
+.callout.crit{border-left-color:var(--crimson-h);}
+
+/* PHASE TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:2px;margin:0 0 40px;}
+.phase{background:var(--deep);border:1px solid var(--border);overflow:hidden;}
+.phase-head{display:grid;grid-template-columns:120px 1fr auto;align-items:center;padding:18px 22px;gap:16px;cursor:pointer;transition:background .2s;}
+.phase-head:hover{background:var(--surface);}
+.phase-period{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--blue-h);}
+.phase-name{font-size:14px;color:var(--white);}
+.phase-status{font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:3px 10px;border:1px solid var(--border);color:var(--text-3);}
+.phase-status.active{border-color:rgba(58,122,191,.4);color:var(--blue-h);}
+.phase-status.key{border-color:rgba(204,61,86,.4);color:var(--crimson-h);}
+.phase-body{padding:0 22px 20px;display:flex;flex-direction:column;gap:12px;}
+.phase-row{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);}
+.phase-row:last-child{border-bottom:none;}
+.pr-key{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-3);padding-top:2px;}
+.pr-val{font-size:13px;color:var(--text-2);line-height:1.65;}
+.pr-val strong{color:var(--white);font-weight:400;}
+.pr-val em{color:var(--gold);font-style:italic;}
+
+/* SINGLES PLAN */
+.singles{display:flex;flex-direction:column;gap:2px;margin:0 0 32px;}
+.single-item{background:var(--deep);border:1px solid var(--border);display:grid;grid-template-columns:60px 1fr 120px;align-items:center;padding:16px 20px;gap:16px;}
+.si-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:28px;color:var(--border-hi);}
+.si-title{font-size:14px;color:var(--white);margin-bottom:3px;}
+.si-meta{font-size:12px;color:var(--text-3);}
+.si-tag{font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:3px 10px;border:1px solid;text-align:center;}
+
+/* BROADCAST PLAN */
+.bc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px;margin:0 0 32px;}
+.bc-card{background:var(--deep);border:1px solid var(--border);padding:20px;position:relative;}
+.bc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.bc-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:28px;color:var(--border-hi);line-height:1;margin-bottom:8px;}
+.bc-title{font-size:13px;font-weight:400;color:var(--white);margin-bottom:6px;}
+.bc-timing{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-h);margin-bottom:10px;}
+.bc-desc{font-size:12.5px;color:var(--text-2);line-height:1.65;}
+.bc-note{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--text-3);}
+
+/* FREQUENCY Y2 */
+.freq-block{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--gold);padding:24px 28px;margin:0 0 24px;}
+.freq-block p{font-size:13.5px;color:var(--text-2);line-height:1.8;margin-bottom:12px;}
+.freq-block p:last-child{margin-bottom:0;}
+.freq-block strong{color:var(--white);font-weight:400;}
+
+/* CONTENT PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;margin:0 0 24px;}
+.pillar{background:var(--deep);border:1px solid var(--border);padding:18px 20px;}
+.pillar-name{font-size:10px;font-weight:400;letter-spacing:.06em;color:var(--white);margin-bottom:6px;}
+.pillar-cadence{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-h);margin-bottom:10px;}
+.pillar-desc{font-size:12px;color:var(--text-3);line-height:1.6;}
+
+/* RULES */
+.rules{display:flex;flex-direction:column;gap:2px;margin:0 0 24px;}
+.rule{background:var(--deep);border:1px solid var(--border);display:grid;grid-template-columns:80px 1fr;align-items:baseline;padding:14px 18px;gap:14px;}
+.rule-v{font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:3px 8px;border:1px solid;width:fit-content;}
+.do{color:#6AAF8C;border-color:rgba(106,175,140,.35);}
+.dont{color:var(--crimson-h);border-color:rgba(204,61,86,.35);}
+.note{color:var(--ice);border-color:rgba(138,176,200,.35);}
+.rule-t{font-size:13px;color:var(--text-2);line-height:1.6;}
+.rule-t strong{color:var(--white);font-weight:400;}
+
+/* FOOTER */
+footer{max-width:960px;margin:80px auto 0;padding:24px 64px 56px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);letter-spacing:.1em;flex-wrap:wrap;gap:8px;}
+
+@media(max-width:700px){
+  .cover{padding:100px 24px 48px;}
+  .cover::before{left:24px;}
+  .wrap{padding:0 24px;}
+  .phase-head{grid-template-columns:1fr auto;}
+  .phase-period{display:none;}
+  .single-item{grid-template-columns:1fr;}
+  .rule{grid-template-columns:1fr;gap:8px;}
+  footer{padding:24px 24px 48px;}
+}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+
+<nav aria-label="Page navigation">
+  <span class="nav-brand">The Order of Light</span>
+  <span class="nav-y2">Year Two</span>
+  <div class="nav-links">
+    <a href="#timeline">Timeline</a>
+    <a href="#singles">Singles</a>
+    <a href="#broadcasts">Broadcasts</a>
+    <a href="#frequency">Frequency</a>
+    <a href="#content">Content</a>
+    <a href="#rules">Rules</a>
+  </div>
+</nav>
+
+<div class="cover" aria-label="Cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+  <div class="cover-tag">Campaign Master · Year Two</div>
+  <h1>The Order of Light</h1>
+  <p class="cover-sub">Below the Line of Sight — Full-Length Campaign · Signal House LLC</p>
+  <div class="cover-rule" aria-hidden="true"></div>
+  <div class="cover-meta">
+    <div><div class="cm-label">Campaign Period</div><div class="cm-value">Months 1–12 · Year Two</div></div>
+    <div><div class="cm-label">Primary Release</div><div class="cm-value">Below the Line of Sight (working title)</div></div>
+    <div><div class="cm-label">Label</div><div class="cm-value">First Broadcast</div></div>
+    <div><div class="cm-label">Read Alongside</div><div class="cm-value">Year One Campaign Master</div></div>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+<!-- SECTION 1: CAMPAIGN THESIS -->
+<section class="section" id="thesis" aria-labelledby="thesis-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">01</span>
+    <h2 class="sec-title" id="thesis-title" style="color:var(--blue-h);">Campaign Thesis</h2>
+  </div>
+  <p class="sec-intro">Year One asked the audience to receive the signal. Year Two asks what receiving it has done to them.</p>
+
+  <div class="callout">
+    <strong>Year One built the world. Year Two deepens it.</strong> The campaign does not reintroduce the project — it continues it. The audience who followed Year One arrives at Year Two having been changed by it. The campaign treats them as already inside the mythology, not as new arrivals being welcomed in.
+  </div>
+
+  <div class="callout gold">
+    <strong>The signal has been traveling.</strong> Visually, tonally, and narratively, Year Two carries evidence of distance. The grain is heavier. The Conduit has changed. The palette has deepened. None of this is announced. The audience who notices is the audience this project is for.
+  </div>
+
+  <div class="rules">
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Return without announcement.</strong> Year Two does not begin with a launch post. The signal returns — a single image, a changed aesthetic — and the audience finds it. This mirrors Year One's mythology-first strategy.</div></div>
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Let the record title remain provisional.</strong> Below the Line of Sight is the working title. Campaign materials can reference the record without naming it until the official announcement window.</div></div>
+    <div class="rule"><div class="rule-v dont">Don't</div><div class="rule-t"><strong>Don't explain the gap between years.</strong> No "we've been busy" posts. No behind-the-scenes content during the silence period. The mythology does not acknowledge real-world logistics.</div></div>
+  </div>
+</section>
+
+<!-- SECTION 2: PHASE TIMELINE -->
+<section class="section" id="timeline" aria-labelledby="timeline-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">02</span>
+    <h2 class="sec-title" id="timeline-title" style="color:var(--blue-h);">Phase Timeline</h2>
+  </div>
+  <p class="sec-intro">Twelve months from re-entry through record release and into the Year Three signal. All dates relative to Year Two Month 1.</p>
+
+  <div class="timeline" role="list" aria-label="Campaign phases">
+
+    <div class="phase" role="listitem">
+      <div class="phase-head">
+        <span class="phase-period">Months 1–2</span>
+        <span class="phase-name">The Signal Returns</span>
+        <span class="phase-status active">Pre-launch</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-row"><div class="pr-key">Strategy</div><div class="pr-val">Return without announcement. A single changed image — deeper blue where there was crimson, heavier grain. No caption or explanation. The audience notices, or they don't.</div></div>
+        <div class="phase-row"><div class="pr-key">Content</div><div class="pr-val">Static signal posts — the mark in deep blue, abstract visual fragments. No text beyond the mark itself. Frequency: 1× per week maximum.</div></div>
+        <div class="phase-row"><div class="pr-key">The Illuminated</div><div class="pr-val">Existing members receive a DM or email — no announcement, just a quiet signal that something is changing. A single piece of content not posted publicly.</div></div>
+        <div class="phase-row"><div class="pr-key">No</div><div class="pr-val">No record announcement. No personnel updates. No "Year Two is coming" copy. The return is the message.</div></div>
+      </div>
+    </div>
+
+    <div class="phase" role="listitem">
+      <div class="phase-head">
+        <span class="phase-period">Month 3</span>
+        <span class="phase-name">Broadcast 001 — Year Two</span>
+        <span class="phase-status key">Key event</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-row"><div class="pr-key">Release</div><div class="pr-val"><strong>Broadcast 001 drops.</strong> Opens mid-transmission — no static opening. The Conduit is already speaking. The visual damage is present from the first frame. No announcement post precedes it.</div></div>
+        <div class="phase-row"><div class="pr-key">Visual shift</div><div class="pr-val">This is the first public appearance of the deep blue palette. The audience sees it without being told it means something different. Let the work carry the meaning.</div></div>
+        <div class="phase-row"><div class="pr-key">Social</div><div class="pr-val">1 clip (30s) for Reels/TikTok. 1 still frame with no caption. 1 Illuminated-exclusive extended cut or alternate angle.</div></div>
+        <div class="phase-row"><div class="pr-key">DSP</div><div class="pr-val">If Year One catalogue is live: playlist pitching for existing tracks in the week Broadcast 001 drops. Re-signal the catalogue to the algorithm before new music arrives.</div></div>
+      </div>
+    </div>
+
+    <div class="phase" role="listitem">
+      <div class="phase-head">
+        <span class="phase-period">Month 4</span>
+        <span class="phase-name">Single 01 + Record Announcement</span>
+        <span class="phase-status key">Key event</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-row"><div class="pr-key">Release</div><div class="pr-val"><strong>First single releases.</strong> Tentatively "Carrier" — the song that introduces the record's emotional territory. DSP release + music video or visualiser.</div></div>
+        <div class="phase-row"><div class="pr-key">Announcement</div><div class="pr-val"><strong>Record announced</strong> in the same week as the single. Title, artwork, release date, tracklist (if ready). Artwork: mark in deep blue on void black, evidence of pressure. Glitch shadow behind title.</div></div>
+        <div class="phase-row"><div class="pr-key">Pre-orders</div><div class="pr-val">Pre-order live on release day. Physical formats include LP and CD. Ordination Kit Bundle available for Illuminated members at pre-order.</div></div>
+        <div class="phase-row"><div class="pr-key">Press</div><div class="pr-val">EPK distributed to target outlets. Playlist pitching via Symphonic begins week of release. Record announced to editorial contacts simultaneously.</div></div>
+        <div class="phase-row"><div class="pr-key">Social</div><div class="pr-val">Record artwork reveal post. Single release post. Pre-order link in bio. 1× Reel per week for 4 weeks following.</div></div>
+      </div>
+    </div>
+
+    <div class="phase" role="listitem">
+      <div class="phase-head">
+        <span class="phase-period">Months 5–6</span>
+        <span class="phase-name">Single 02 + Broadcast 002 + Frequency Announcement</span>
+        <span class="phase-status key">Key event</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-row"><div class="pr-key">Single 02</div><div class="pr-val">Second single — deeper into the record's emotional core. Music video or visualiser. DSP release + playlist pitching continuation.</div></div>
+        <div class="phase-row"><div class="pr-key">Broadcast 002</div><div class="pr-val">The second figure appears at the edge of frame for the first time. Never addressed. The Conduit's uncertainty is visible for the first time — earned, not performed.</div></div>
+        <div class="phase-row"><div class="pr-key">Frequency Y2</div><div class="pr-val"><strong>The Frequency Year Two is announced.</strong> The Source is distributed to the three collaborators in this window. Embargo active. Public announcement of the project — not of the song or the collaborators.</div></div>
+        <div class="phase-row"><div class="pr-key">The Illuminated</div><div class="pr-val">Illuminated members receive a preview of the Frequency song before any collaborator release. Private listening event or early access stream.</div></div>
+      </div>
+    </div>
+
+    <div class="phase" role="listitem">
+      <div class="phase-head">
+        <span class="phase-period">Month 7</span>
+        <span class="phase-name">Record Release + Frequency Transmission I</span>
+        <span class="phase-status key">Key event</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-row"><div class="pr-key">Record release</div><div class="pr-val"><strong>Below the Line of Sight releases</strong> on all DSPs and in physical formats. Ordination Kit Bundles ship to Illuminated pre-orders. Record release show (Charlotte) in the same week where possible.</div></div>
+        <div class="phase-row"><div class="pr-key">Frequency I</div><div class="pr-val"><strong>Frequency Transmission I drops in the same week as the record.</strong> The established collaborator's version. Creates a second release event around the same cultural moment.</div></div>
+        <div class="phase-row"><div class="pr-key">Press push</div><div class="pr-val">Reviews, features, and interviews target this window. EPK active. Symphonic playlist pitching at peak. Any media relationships from Year One leveraged here.</div></div>
+        <div class="phase-row"><div class="pr-key">Social</div><div class="pr-val">Record release day post. Physical arrival content (unboxing, production shots). Frequency Transmission I announcement. Sustained 3× per week cadence for 4 weeks.</div></div>
+      </div>
+    </div>
+
+    <div class="phase" role="listitem">
+      <div class="phase-head">
+        <span class="phase-period">Months 8–10</span>
+        <span class="phase-name">Live + Frequency Transmissions II & III + Broadcast 003</span>
+        <span class="phase-status">Sustain</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-row"><div class="pr-key">Live</div><div class="pr-val">Regional shows and support slot targeting. 4–8 shows across this window. Each show treated as a transmission event — pre-show social content, post-show recap, Illuminated exclusive content.</div></div>
+        <div class="phase-row"><div class="pr-key">Frequency II</div><div class="pr-val">Mid-level collaborator's version releases in Month 8 or 9. Two-week gap minimum between Frequency transmissions.</div></div>
+        <div class="phase-row"><div class="pr-key">Frequency III</div><div class="pr-val">Emerging collaborator's version releases in Month 9 or 10. The three versions now exist in public simultaneously — the comparison is the content.</div></div>
+        <div class="phase-row"><div class="pr-key">Broadcast 003</div><div class="pr-val">Mid-sustain Broadcast. The second figure appears again — different position, different frame. Still not addressed. The Conduit is further in.</div></div>
+        <div class="phase-row"><div class="pr-key">Social cadence</div><div class="pr-val">2× per week. Mix of live content, record campaign posts, Frequency reaction/discourse engagement, and mythology signal posts.</div></div>
+      </div>
+    </div>
+
+    <div class="phase" role="listitem">
+      <div class="phase-head">
+        <span class="phase-period">Months 11–12</span>
+        <span class="phase-name">Broadcasts 004–005 + Year Three Signal Begins</span>
+        <span class="phase-status">Transition</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-row"><div class="pr-key">Broadcasts 004–005</div><div class="pr-val">Final two Broadcasts of Year Two. Broadcast 005 is the last appearance of the second figure — the frame closes without resolution. What the audience has seen is what they have seen.</div></div>
+        <div class="phase-row"><div class="pr-key">Year Three signal</div><div class="pr-val">The first Year Three signal appears before Year Two fully closes — a single post, no context. Something is changing again. The cycle continues.</div></div>
+        <div class="phase-row"><div class="pr-key">Year Two close</div><div class="pr-val">No farewell post. No "Year Two is done" content. The signal simply shifts frequency. The audience who has been paying attention knows.</div></div>
+        <div class="phase-row"><div class="pr-key">Internal</div><div class="pr-val">Year Three planning begins. Catalogue review. Symphonic analytics review. Illuminated community health check. Member equity and writing credit reconciliation for Year Two.</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 3: SINGLES PLAN -->
+<section class="section" id="singles" aria-labelledby="singles-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">03</span>
+    <h2 class="sec-title" id="singles-title" style="color:var(--blue-h);">Singles Plan</h2>
+  </div>
+  <p class="sec-intro">Two singles precede the record. Both serve as entry points — one to hook, one to deepen.</p>
+
+  <div class="callout">
+    Year Two singles are not standalone tracks — they are transmissions from the record's world. Sequencing matters: Single 01 is the first signal, accessible enough to bring new listeners in. Single 02 is deeper, for those who stayed after Single 01.
+  </div>
+
+  <div class="singles" role="list" aria-label="Singles release plan">
+    <div class="single-item" role="listitem">
+      <div class="si-num">01</div>
+      <div>
+        <div class="si-title">Single 01 — "Carrier" (working title)</div>
+        <div class="si-meta">Month 4 · Simultaneous with record announcement · The signal's access point</div>
+      </div>
+      <span class="si-tag" style="color:var(--crimson-h);border-color:rgba(204,61,86,.35);">Record single</span>
+    </div>
+    <div class="single-item" role="listitem">
+      <div class="si-num">02</div>
+      <div>
+        <div class="si-title">Single 02 — TBD from record sequence</div>
+        <div class="si-meta">Month 5 or 6 · Deeper cut · For those already inside</div>
+      </div>
+      <span class="si-tag" style="color:var(--blue-h);border-color:rgba(58,122,191,.35);">Record single</span>
+    </div>
+    <div class="single-item" role="listitem" style="opacity:.55;">
+      <div class="si-num">03</div>
+      <div>
+        <div class="si-title">Post-release single — TBD (optional)</div>
+        <div class="si-meta">Month 8–9 if momentum warrants · Sustain the campaign through the live period</div>
+      </div>
+      <span class="si-tag" style="color:var(--text-3);border-color:var(--border);">Optional</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: BROADCASTS -->
+<section class="section" id="broadcasts" aria-labelledby="bc-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">04</span>
+    <h2 class="sec-title" id="bc-title" style="color:var(--blue-h);">Broadcast Schedule — Year Two</h2>
+  </div>
+  <p class="sec-intro">Five Broadcasts across the year. Each opens mid-transmission. The second figure appears in three of them.</p>
+
+  <div class="callout">
+    <strong>Year Two Broadcasts open differently.</strong> No static opening. The Conduit is already speaking when the video begins. The production looks more worn — heavier grain, persistent chromatic aberration, scan lines throughout. The signal has been traveling longer.
+  </div>
+
+  <div class="bc-grid" role="list" aria-label="Year Two Broadcast schedule">
+    <div class="bc-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue-h);"></div>
+      <div class="bc-num">001</div>
+      <div class="bc-title">Broadcast 001 — Re-entry</div>
+      <div class="bc-timing">Month 3</div>
+      <div class="bc-desc">The first Broadcast of Year Two. The Conduit returns — visibly different, harder to place. Opens mid-sentence. The deep blue palette appears for the first time. No second figure yet.</div>
+      <div class="bc-note">No second figure · Palette shift is the message</div>
+    </div>
+    <div class="bc-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--crimson);"></div>
+      <div class="bc-num">002</div>
+      <div class="bc-title">Broadcast 002 — The Depth</div>
+      <div class="bc-timing">Month 5–6</div>
+      <div class="bc-desc">The Conduit speaks about what it means to go further in. The second figure appears at the edge of frame — once, briefly. Never addressed. This is the moment the audience first sees it.</div>
+      <div class="bc-note" style="color:var(--crimson-h);">Second figure: first appearance · Edge of frame · 1× only</div>
+    </div>
+    <div class="bc-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue-h);"></div>
+      <div class="bc-num">003</div>
+      <div class="bc-title">Broadcast 003 — The Carrier</div>
+      <div class="bc-timing">Month 8–9</div>
+      <div class="bc-desc">Mid-sustain Broadcast, timed around Frequency Transmissions. Thematically tied to the record's Memory pillar — what persists, what distorts, what the signal carries that wasn't intended.</div>
+      <div class="bc-note">No second figure · Memory territory</div>
+    </div>
+    <div class="bc-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--crimson);"></div>
+      <div class="bc-num">004</div>
+      <div class="bc-title">Broadcast 004 — Pressure</div>
+      <div class="bc-timing">Month 10–11</div>
+      <div class="bc-desc">The Conduit is further in than the audience has seen before. Broadcast feels more interior, less staged. The second figure appears again — different position, longer duration. Still not addressed.</div>
+      <div class="bc-note" style="color:var(--crimson-h);">Second figure: second appearance · More prominent</div>
+    </div>
+    <div class="bc-card" role="listitem">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);"></div>
+      <div class="bc-num">005</div>
+      <div class="bc-title">Broadcast 005 — The Line</div>
+      <div class="bc-timing">Month 12</div>
+      <div class="bc-desc">The final Broadcast of Year Two. The second figure's last appearance — the frame closes without resolution. The Conduit acknowledges, obliquely, that something is changing. The Year Three signal is already present.</div>
+      <div class="bc-note" style="color:var(--gold);">Second figure: final appearance · No resolution · Y3 signal begins</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: THE FREQUENCY YEAR TWO -->
+<section class="section" id="frequency" aria-labelledby="freq-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">05</span>
+    <h2 class="sec-title" id="freq-title" style="color:var(--blue-h);">The Frequency — Year Two Execution</h2>
+  </div>
+  <p class="sec-intro">Same structure. Different song. The series proves itself through repetition. The second year, the audience already knows what it is — which changes everything.</p>
+
+  <div class="freq-block">
+    <p><strong>The song:</strong> Written from the record's thematic world — Memory, Depth, Transformation. The collaborators receive it without knowing the record's full context. What they do with it comes entirely from what the song gives them.</p>
+    <p><strong>Collaborator selection:</strong> Year Two expands the pool. Consider reaching outside alternative rock — folk, post-rock, ambient, or art-pop. The comparison between versions is more revealing when the interpretive distance between collaborators is greater.</p>
+    <p><strong>The Source:</strong> Distributed in Months 5–6. Same format as Year One — chart, lyric sheet, The Rules, the embargo clause. The collaborators are given the same constraints. The outcome differs because the people differ.</p>
+    <p><strong>Release sequence:</strong> Transmission I in Month 7 (established collaborator, same week as the record). Transmission II in Month 8–9. Transmission III in Month 9–10. Minimum two-week gap between transmissions. The audience has time to sit with each before the next arrives.</p>
+    <p><strong>The Illuminated:</strong> Founding members receive the original version before any Transmission releases. This is the one point where the audience hears the song before it's been reinterpreted. That listening is private and unrecorded.</p>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t">Release Frequency Transmission I in the <strong>same week as the record</strong>. The collision of the two release events amplifies both.</div></div>
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t">Let the three versions exist publicly at the same time by Month 10. <strong>The comparison is the content.</strong> Don't rush the spacing just to get them all out.</div></div>
+    <div class="rule"><div class="rule-v dont">Don't</div><div class="rule-t"><strong>Don't reveal collaborators in advance.</strong> The announcement is the release. Each Transmission drops with the collaborator's name on the day it drops — not before.</div></div>
+  </div>
+</section>
+
+<!-- SECTION 6: CONTENT PILLARS -->
+<section class="section" id="content" aria-labelledby="content-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">06</span>
+    <h2 class="sec-title" id="content-title" style="color:var(--blue-h);">Content Pillars — Year Two</h2>
+  </div>
+  <p class="sec-intro">Year One's content pillars are inherited and extended. The tone shifts — Year Two is less declarative, more interior. The content feels worn, not fresh. Examined, not certain.</p>
+
+  <div class="pillars" role="list" aria-label="Year Two content pillars">
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">Signal Posts</div>
+      <div class="pillar-cadence">1–2× / week · Pre-launch</div>
+      <div class="pillar-desc">The mark in deep blue. Abstract visual fragments. No caption. The return before the return. Year Two's equivalent of Year One's mythology-building window.</div>
+    </div>
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">Broadcast Clips</div>
+      <div class="pillar-cadence">On release · 2–3 clips per Broadcast</div>
+      <div class="pillar-desc">30-second excerpts — no context, no caption beyond the Broadcast number. Reels and TikTok. The clip should feel like a fragment, not a preview.</div>
+    </div>
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">Record Campaign</div>
+      <div class="pillar-cadence">3× / week · Months 4–7</div>
+      <div class="pillar-desc">Artwork reveals, single releases, tracklist drops, pre-order content, physical arrival documentation. The record is an object — treat it as one.</div>
+    </div>
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">Live Documentation</div>
+      <div class="pillar-cadence">Per show</div>
+      <div class="pillar-desc">Each show is a transmission. Pre-show: single signal post. Day-of: nothing. Post-show: one still, maximum. The show is not content. The show is the show.</div>
+    </div>
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">The Frequency</div>
+      <div class="pillar-cadence">Per transmission</div>
+      <div class="pillar-desc">Announcement + release post per transmission. Between transmissions: discourse engagement is permitted — reacting to audience comparisons without directing them.</div>
+    </div>
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">Illuminated-Exclusive</div>
+      <div class="pillar-cadence">1× / month minimum</div>
+      <div class="pillar-desc">Private content for members — early access, alternate cuts, behind-signal material. What the Illuminated receive should feel like they are inside the mythology, not watching it from outside.</div>
+    </div>
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">Thematic Fragments</div>
+      <div class="pillar-cadence">2× / week · Sustain phase</div>
+      <div class="pillar-desc">Memory, Depth, Transformation — text posts, stills, abstract imagery that extends the record's thematic world without explaining it. What the signal carries between release events.</div>
+    </div>
+    <div class="pillar" role="listitem">
+      <div class="pillar-name">Year Three Seeds</div>
+      <div class="pillar-cadence">Months 11–12</div>
+      <div class="pillar-desc">Single posts with no context. Something is changing again. The audience who has been inside the mythology since Year One will feel the shift before it's named.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: CAMPAIGN RULES -->
+<section class="section" id="rules" aria-labelledby="rules-title">
+  <div class="sec-head">
+    <span class="sec-num" aria-hidden="true">07</span>
+    <h2 class="sec-title" id="rules-title" style="color:var(--blue-h);">Campaign Rules — Year Two</h2>
+  </div>
+  <p class="sec-intro">Year One rules are inherited. Year Two adds and updates. Where a rule conflicts, Year Two takes precedence for Year Two content.</p>
+
+  <div class="rules">
+    <div class="rule"><div class="rule-v dont">Never</div><div class="rule-t"><strong>Never explain the second figure.</strong> It appears three times across five Broadcasts. It is never captioned, hashtagged, or addressed in any post. If the audience asks directly, silence or deflection. What they found is theirs.</div></div>
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Treat the record release and Frequency Transmission I as a single event.</strong> The same week. The audience is given two things to hold at once — the complete work and the first interpretation of the work's seed.</div></div>
+    <div class="rule"><div class="rule-v dont">Never</div><div class="rule-t"><strong>Never post "Year Two is here" copy.</strong> The campaign is already underway when the audience returns. The signal doesn't announce itself.</div></div>
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Use deep blue as the leading visual signal of Year Two.</strong> The palette shift is the campaign's visual thesis. It should be consistent across all assets from Month 1 onward.</div></div>
+    <div class="rule"><div class="rule-v note">Note</div><div class="rule-t"><strong>The record title is provisional.</strong> Below the Line of Sight is the working title. Do not lock campaign materials to this title until the official announcement. Refer to "the record" or "the full-length" in internal documents until the name is confirmed.</div></div>
+    <div class="rule"><div class="rule-v do">Do</div><div class="rule-t"><strong>Honour the Illuminated first, always.</strong> Every major announcement and release event should reach Illuminated members before the general public — even by a few hours. The community's trust is the campaign's most valuable asset.</div></div>
+    <div class="rule"><div class="rule-v dont">Never</div><div class="rule-t"><strong>Never break the mythology frame on social media.</strong> No casual "thanks for the support" posts. No real-name mentions. No behind-the-scenes content that reads as a normal band. The Order of Light does not exist outside its world.</div></div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+
+</body>
+</html>

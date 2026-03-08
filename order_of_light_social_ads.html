@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Social Ad Images</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background:#111;
+  font-family:'DM Sans', sans-serif;
+  font-weight:300;
+  color:#F5F0E8;
+  padding-bottom:80px;
+}
+
+/* ── PAGE CHROME ── */
+.page-header {
+  background:#0A0A0A;
+  border-bottom:1px solid rgba(139,26,46,0.25);
+  padding:16px 40px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:200;
+}
+.ph-left { display:flex; align-items:center; gap:10px; }
+.ph-title { font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(200,169,110,0.45); }
+.ph-note { font-size:10px; letter-spacing:0.15em; color:rgba(139,26,46,0.6); }
+
+.section-head {
+  padding:48px 40px 6px;
+  font-size:9px; letter-spacing:0.4em; text-transform:uppercase; color:#8B1A2E;
+  display:flex; align-items:center; gap:14px;
+}
+.section-head::after { content:''; flex:1; height:1px; background:rgba(139,26,46,0.2); }
+.section-sub { padding:8px 40px 28px; font-size:12px; color:rgba(245,240,232,0.4); line-height:1.7; }
+
+.tip {
+  margin:0 40px 32px;
+  background:rgba(200,169,110,0.06);
+  border:1px solid rgba(200,169,110,0.15);
+  padding:14px 20px;
+  font-size:12px; color:rgba(245,240,232,0.55); line-height:1.7;
+}
+.tip strong { color:rgba(245,240,232,0.85); font-weight:400; }
+
+/* ── ROLE GROUP ── */
+.role-group { margin-bottom:64px; }
+.role-group-label {
+  margin:0 40px 20px;
+  display:flex; align-items:center; gap:12px;
+}
+.role-group-dot { width:9px; height:9px; transform:rotate(45deg); flex-shrink:0; }
+.role-group-name { font-size:10px; letter-spacing:0.3em; text-transform:uppercase; }
+
+.format-row {
+  display:flex; gap:24px; padding:0 40px;
+  align-items:flex-start; flex-wrap:wrap;
+}
+.format-col { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.format-label {
+  font-size:8px; letter-spacing:0.25em; text-transform:uppercase;
+  color:rgba(245,240,232,0.22);
+}
+
+/* ══════════════════════════════════════
+   AD BASE STYLES
+══════════════════════════════════════ */
+.ad {
+  position:relative;
+  overflow:hidden;
+  background:#0A0A0A;
+  flex-shrink:0;
+}
+
+/* Grain overlay */
+.ad::after {
+  content:'';
+  position:absolute; inset:0; z-index:20; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+
+/* ── SQUARE: 320×320 ── */
+.sq { width:320px; height:320px; }
+
+/* ── PORTRAIT: 320×400 ── */
+.pt { width:320px; height:400px; }
+
+/* ── STORY: 240×427 ── */
+.st { width:240px; height:427px; }
+
+/* ── SHARED INNER ELEMENTS ── */
+
+/* top 3px colour bar */
+.a-bar { position:absolute; top:0; left:0; right:0; height:3px; z-index:15; }
+
+/* vignette */
+.a-vig {
+  position:absolute; inset:0; z-index:10; pointer-events:none;
+  box-shadow:inset 0 0 80px rgba(0,0,0,0.7);
+}
+
+/* radial glow */
+.a-glow {
+  position:absolute; z-index:1; pointer-events:none;
+  border-radius:50%;
+}
+
+/* big faint bg mark */
+.a-bgmark {
+  position:absolute; z-index:2; pointer-events:none;
+  opacity:0.04;
+}
+
+/* scan lines */
+.a-scan {
+  position:absolute; inset:0; z-index:8; pointer-events:none;
+  background:repeating-linear-gradient(0deg,
+    transparent, transparent 3px,
+    rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px
+  );
+}
+
+/* top bar with band name + location */
+.a-topbar {
+  position:absolute; top:0; left:0; right:0; z-index:15;
+  display:flex; justify-content:space-between; align-items:center;
+}
+
+/* bottom bar */
+.a-botbar {
+  position:absolute; bottom:0; left:0; right:0; z-index:15;
+  display:flex; justify-content:space-between; align-items:center;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+
+/* centred content */
+.a-center {
+  position:absolute; inset:0; z-index:12;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+}
+
+/* mark */
+.a-mark { display:block; flex-shrink:0; }
+
+/* role label (SEEKING) */
+.a-seeking {
+  font-family:'DM Sans',sans-serif; font-weight:300;
+  text-transform:uppercase; letter-spacing:0.38em;
+  color:rgba(245,240,232,0.45);
+}
+
+/* role name */
+.a-role {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  color:#F5F0E8;
+  line-height:0.95; letter-spacing:0.04em;
+  text-align:center;
+}
+
+/* tagline */
+.a-tag {
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-style:italic;
+  color:rgba(245,240,232,0.65);
+  text-align:center; letter-spacing:0.02em;
+}
+
+/* requirements */
+.a-reqs { width:100%; }
+.a-req {
+  display:flex; align-items:flex-start; gap:7px;
+  color:rgba(245,240,232,0.72);
+  font-family:'DM Sans',sans-serif; font-weight:300;
+  line-height:1.5;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  padding:3px 0;
+}
+.a-req:last-child { border-bottom:none; }
+.a-dia { flex-shrink:0; transform:rotate(45deg); margin-top:2px; }
+
+/* divider line */
+.a-div { flex-shrink:0; }
+
+/* band name footer text */
+.a-band {
+  font-family:'DM Sans',sans-serif; font-weight:200;
+  text-transform:uppercase; letter-spacing:0.28em;
+  color:rgba(245,240,232,0.4);
+}
+.a-loc {
+  font-family:'DM Sans',sans-serif; font-weight:200;
+  text-transform:uppercase; letter-spacing:0.22em;
+  color:rgba(245,240,232,0.25);
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-left">
+    <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+      <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
+      <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+      <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
+    </svg>
+    <span class="ph-title">Social Ad Images — The Order of Light</span>
+  </div>
+  <span class="ph-note">3 formats × 5 roles = 15 images</span>
+</div>
+
+<div class="section-head">Social Ad Images · IG · Threads · Facebook</div>
+<div class="section-sub">Square 1080×1080 · Portrait 1080×1350 · Story 1080×1920 — all at correct aspect ratios.</div>
+
+<div class="tip">
+  <strong>To export:</strong> Open in Chrome at 100% zoom. Right-click any ad → Inspect → select the <code>.ad</code> div in DevTools → Cmd/Ctrl+Shift+P → type "screenshot" → <strong>Capture node screenshot</strong>. Clean PNG, no browser chrome.
+</div>
+
+
+<!-- ════════════════════════════════════════
+     VOCALIST — #C8A96E gold
+════════════════════════════════════════ -->
+<div class="section-head" style="padding-top:16px;">Vocalist</div>
+<div class="role-group">
+  <div class="role-group-label">
+    <div class="role-group-dot" style="background:#C8A96E;"></div>
+    <span class="role-group-name" style="color:#C8A96E;">Vocalist — The signal needs a voice.</span>
+  </div>
+  <div class="format-row">
+
+    <!-- SQUARE -->
+    <div class="format-col">
+      <span class="format-label">Square · 1080×1080</span>
+      <div class="ad sq">
+        <div class="a-bar" style="background:#C8A96E;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(200,169,110,0.15) 0%,#0A0A0A 68%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-58%);background:radial-gradient(circle,rgba(200,169,110,0.18) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:260px;bottom:-40px;right:-40px;">
+          <svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/></svg>
+        </div>
+        <div class="a-scan"></div>
+        <div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 16px;">
+          <span class="a-band" style="font-size:7px;">The Order of Light</span>
+          <span class="a-loc" style="font-size:7px;">Charlotte, NC</span>
+        </div>
+        <div class="a-center" style="gap:0;padding-top:8px;">
+          <svg class="a-mark" style="margin-bottom:16px;" width="82" height="82" viewBox="0 0 100 100" fill="none">
+            <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+          </svg>
+          <span class="a-seeking" style="font-size:8px;margin-bottom:6px;">Seeking</span>
+          <span class="a-role" style="font-size:36px;">Vocalist</span>
+          <div class="a-div" style="width:80px;height:2px;background:#C8A96E;opacity:0.5;margin:12px 0;"></div>
+          <span class="a-tag" style="font-size:13px;">The signal needs a voice.</span>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;">
+          <span class="a-band" style="font-size:7px;">The Order of Light</span>
+          <span class="a-loc" style="font-size:7px;">Charlotte, NC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTRAIT -->
+    <div class="format-col">
+      <span class="format-label">Portrait · 1080×1350</span>
+      <div class="ad pt">
+        <div class="a-bar" style="background:#C8A96E;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(200,169,110,0.14) 0%,#0A0A0A 62%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(200,169,110,0.15) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:240px;bottom:-30px;right:-30px;">
+          <svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/></svg>
+        </div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 18px;">
+          <span class="a-band" style="font-size:7px;">The Order of Light</span>
+          <span class="a-loc" style="font-size:7px;">Charlotte, NC</span>
+        </div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:56px 20px 56px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="72" height="72" viewBox="0 0 100 100" fill="none">
+            <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+          </svg>
+          <span class="a-seeking" style="font-size:7.5px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:34px;">Vocalist</span>
+          <div class="a-div" style="width:70px;height:2px;background:#C8A96E;opacity:0.5;margin:11px 0;"></div>
+          <span class="a-tag" style="font-size:12.5px;margin-bottom:20px;">The signal needs a voice.</span>
+          <div class="a-reqs" style="padding:0 4px;">
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#C8A96E;opacity:0.7;"></div><span>Lead vocals — range, dynamics &amp; control</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#C8A96E;opacity:0.7;"></div><span>Harmony vocals — non-negotiable</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#C8A96E;opacity:0.7;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#C8A96E;opacity:0.7;"></div><span>Co-writing — lyrics, melody or both</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#C8A96E;opacity:0.7;"></div><span>IEMs · click track · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 18px;">
+          <span class="a-band" style="font-size:7px;">The Order of Light</span>
+          <span class="a-loc" style="font-size:7px;">Charlotte, NC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY -->
+    <div class="format-col">
+      <span class="format-label">Story / Reel · 1080×1920</span>
+      <div class="ad st">
+        <div class="a-bar" style="background:#C8A96E;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,169,110,0.14) 0%,#0A0A0A 60%);z-index:0;"></div>
+        <div class="a-glow" style="width:170px;height:170px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(200,169,110,0.15) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:200px;bottom:-20px;right:-20px;">
+          <svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/></svg>
+        </div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:28px 16px 12px;">
+          <span class="a-band" style="font-size:6.5px;">The Order of Light</span>
+          <span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span>
+        </div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:72px 16px 72px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="64" height="64" viewBox="0 0 100 100" fill="none">
+            <line x1="13" y1="13" x2="87" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#C8A96E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#C8A96E" stroke-width="7" stroke-linecap="square"/>
+          </svg>
+          <span class="a-seeking" style="font-size:7px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:30px;">Vocalist</span>
+          <div class="a-div" style="width:60px;height:2px;background:#C8A96E;opacity:0.5;margin:10px 0;"></div>
+          <span class="a-tag" style="font-size:11px;margin-bottom:18px;">The signal needs a voice.</span>
+          <div class="a-reqs" style="padding:0 2px;">
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#C8A96E;opacity:0.7;"></div><span>Lead vocals — range, dynamics &amp; control</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#C8A96E;opacity:0.7;"></div><span>Harmony vocals — non-negotiable</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#C8A96E;opacity:0.7;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#C8A96E;opacity:0.7;"></div><span>Co-writing — lyrics, melody or both</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#C8A96E;opacity:0.7;"></div><span>IEMs · click track · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;padding-bottom:28px;">
+          <span class="a-band" style="font-size:6.5px;">The Order of Light</span>
+          <span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     DRUMMER — #8B1A2E crimson
+════════════════════════════════════════ -->
+<div class="section-head">Drummer</div>
+<div class="role-group">
+  <div class="role-group-label">
+    <div class="role-group-dot" style="background:#8B1A2E;"></div>
+    <span class="role-group-name" style="color:#A82035;">Drummer — The signal needs a pulse.</span>
+  </div>
+  <div class="format-row">
+    <div class="format-col">
+      <span class="format-label">Square · 1080×1080</span>
+      <div class="ad sq">
+        <div class="a-bar" style="background:#8B1A2E;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(139,26,46,0.2) 0%,#0A0A0A 68%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-58%);background:radial-gradient(circle,rgba(139,26,46,0.22) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:260px;bottom:-40px;right:-40px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;padding-top:8px;">
+          <svg class="a-mark" style="margin-bottom:16px;" width="82" height="82" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:8px;margin-bottom:6px;">Seeking</span>
+          <span class="a-role" style="font-size:36px;">Drummer</span>
+          <div class="a-div" style="width:80px;height:2px;background:#8B1A2E;opacity:0.6;margin:12px 0;"></div>
+          <span class="a-tag" style="font-size:13px;">The signal needs a pulse.</span>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Portrait · 1080×1350</span>
+      <div class="ad pt">
+        <div class="a-bar" style="background:#8B1A2E;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(139,26,46,0.18) 0%,#0A0A0A 62%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(139,26,46,0.18) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:240px;bottom:-30px;right:-30px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:56px 20px 56px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="72" height="72" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7.5px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:34px;">Drummer</span>
+          <div class="a-div" style="width:70px;height:2px;background:#8B1A2E;opacity:0.6;margin:11px 0;"></div>
+          <span class="a-tag" style="font-size:12.5px;margin-bottom:20px;">The signal needs a pulse.</span>
+          <div class="a-reqs" style="padding:0 4px;">
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#8B1A2E;opacity:0.8;"></div><span>Groove &amp; feel — taste matched with technique</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#8B1A2E;opacity:0.8;"></div><span>Click track live — non-negotiable</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#8B1A2E;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#8B1A2E;opacity:0.8;"></div><span>Hybrid electronic/live setup comfortable</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#8B1A2E;opacity:0.8;"></div><span>IEMs · professional kit · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Story / Reel · 1080×1920</span>
+      <div class="ad st">
+        <div class="a-bar" style="background:#8B1A2E;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(139,26,46,0.18) 0%,#0A0A0A 60%);z-index:0;"></div>
+        <div class="a-glow" style="width:170px;height:170px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(139,26,46,0.18) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:200px;bottom:-20px;right:-20px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:28px 16px 12px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:72px 16px 72px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="64" height="64" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:30px;">Drummer</span>
+          <div class="a-div" style="width:60px;height:2px;background:#8B1A2E;opacity:0.6;margin:10px 0;"></div>
+          <span class="a-tag" style="font-size:11px;margin-bottom:18px;">The signal needs a pulse.</span>
+          <div class="a-reqs" style="padding:0 2px;">
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#8B1A2E;opacity:0.8;"></div><span>Groove &amp; feel — taste matched with technique</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#8B1A2E;opacity:0.8;"></div><span>Click track live — non-negotiable</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#8B1A2E;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#8B1A2E;opacity:0.8;"></div><span>Hybrid electronic/live setup comfortable</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#8B1A2E;opacity:0.8;"></div><span>IEMs · professional kit · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;padding-bottom:28px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     GUITARIST — #5A8A72
+════════════════════════════════════════ -->
+<div class="section-head">Guitarist</div>
+<div class="role-group">
+  <div class="role-group-label">
+    <div class="role-group-dot" style="background:#5A8A72;"></div>
+    <span class="role-group-name" style="color:#5A8A72;">Guitarist — Texture, teeth &amp; restraint.</span>
+  </div>
+  <div class="format-row">
+    <div class="format-col">
+      <span class="format-label">Square · 1080×1080</span>
+      <div class="ad sq">
+        <div class="a-bar" style="background:#5A8A72;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(90,138,114,0.15) 0%,#0A0A0A 68%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-58%);background:radial-gradient(circle,rgba(90,138,114,0.16) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:260px;bottom:-40px;right:-40px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;padding-top:8px;">
+          <svg class="a-mark" style="margin-bottom:16px;" width="82" height="82" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:8px;margin-bottom:6px;">Seeking</span>
+          <span class="a-role" style="font-size:36px;">Guitarist</span>
+          <div class="a-div" style="width:80px;height:2px;background:#5A8A72;opacity:0.55;margin:12px 0;"></div>
+          <span class="a-tag" style="font-size:13px;">Texture, teeth &amp; restraint.</span>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Portrait · 1080×1350</span>
+      <div class="ad pt">
+        <div class="a-bar" style="background:#5A8A72;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(90,138,114,0.14) 0%,#0A0A0A 62%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(90,138,114,0.14) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:240px;bottom:-30px;right:-30px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:56px 20px 56px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="72" height="72" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7.5px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:34px;">Guitarist</span>
+          <div class="a-div" style="width:70px;height:2px;background:#5A8A72;opacity:0.55;margin:11px 0;"></div>
+          <span class="a-tag" style="font-size:12.5px;margin-bottom:20px;">Texture, teeth &amp; restraint.</span>
+          <div class="a-reqs" style="padding:0 4px;">
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#5A8A72;opacity:0.8;"></div><span>Lead &amp; rhythm fluency — not siloed</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#5A8A72;opacity:0.8;"></div><span>Effects vocabulary — atmosphere &amp; texture</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#5A8A72;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#5A8A72;opacity:0.8;"></div><span>Harmony vocals required</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#5A8A72;opacity:0.8;"></div><span>IEMs · click track · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Story / Reel · 1080×1920</span>
+      <div class="ad st">
+        <div class="a-bar" style="background:#5A8A72;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(90,138,114,0.14) 0%,#0A0A0A 60%);z-index:0;"></div>
+        <div class="a-glow" style="width:170px;height:170px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(90,138,114,0.14) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:200px;bottom:-20px;right:-20px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:28px 16px 12px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:72px 16px 72px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="64" height="64" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#5A8A72" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#5A8A72" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:30px;">Guitarist</span>
+          <div class="a-div" style="width:60px;height:2px;background:#5A8A72;opacity:0.55;margin:10px 0;"></div>
+          <span class="a-tag" style="font-size:11px;margin-bottom:18px;">Texture, teeth &amp; restraint.</span>
+          <div class="a-reqs" style="padding:0 2px;">
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#5A8A72;opacity:0.8;"></div><span>Lead &amp; rhythm fluency — not siloed</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#5A8A72;opacity:0.8;"></div><span>Effects vocabulary — atmosphere &amp; texture</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#5A8A72;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#5A8A72;opacity:0.8;"></div><span>Harmony vocals required</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#5A8A72;opacity:0.8;"></div><span>IEMs · click track · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;padding-bottom:28px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     KEYS — #7A6A9A
+════════════════════════════════════════ -->
+<div class="section-head">Keys & Synth</div>
+<div class="role-group">
+  <div class="role-group-label">
+    <div class="role-group-dot" style="background:#7A6A9A;"></div>
+    <span class="role-group-name" style="color:#7A6A9A;">Keys / Synth — The signal needs its frequency.</span>
+  </div>
+  <div class="format-row">
+    <div class="format-col">
+      <span class="format-label">Square · 1080×1080</span>
+      <div class="ad sq">
+        <div class="a-bar" style="background:#7A6A9A;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(122,106,154,0.15) 0%,#0A0A0A 68%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-58%);background:radial-gradient(circle,rgba(122,106,154,0.16) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:260px;bottom:-40px;right:-40px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;padding-top:8px;">
+          <svg class="a-mark" style="margin-bottom:16px;" width="82" height="82" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:8px;margin-bottom:6px;">Seeking</span>
+          <span class="a-role" style="font-size:32px;">Keys / Synth</span>
+          <div class="a-div" style="width:80px;height:2px;background:#7A6A9A;opacity:0.55;margin:12px 0;"></div>
+          <span class="a-tag" style="font-size:12px;">The signal needs its frequency.</span>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Portrait · 1080×1350</span>
+      <div class="ad pt">
+        <div class="a-bar" style="background:#7A6A9A;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(122,106,154,0.14) 0%,#0A0A0A 62%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(122,106,154,0.14) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:240px;bottom:-30px;right:-30px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:56px 20px 56px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="72" height="72" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7.5px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:30px;">Keys / Synth</span>
+          <div class="a-div" style="width:70px;height:2px;background:#7A6A9A;opacity:0.55;margin:11px 0;"></div>
+          <span class="a-tag" style="font-size:12px;margin-bottom:20px;">The signal needs its frequency.</span>
+          <div class="a-reqs" style="padding:0 4px;">
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#7A6A9A;opacity:0.8;"></div><span>Piano AND synth — both required</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#7A6A9A;opacity:0.8;"></div><span>Sound design — shape tones, not presets</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#7A6A9A;opacity:0.8;"></div><span>Live electronic performance experience</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#7A6A9A;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#7A6A9A;opacity:0.8;"></div><span>IEMs · click track · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Story / Reel · 1080×1920</span>
+      <div class="ad st">
+        <div class="a-bar" style="background:#7A6A9A;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(122,106,154,0.14) 0%,#0A0A0A 60%);z-index:0;"></div>
+        <div class="a-glow" style="width:170px;height:170px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(122,106,154,0.14) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:200px;bottom:-20px;right:-20px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:28px 16px 12px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:72px 16px 72px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="64" height="64" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#7A6A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#7A6A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:27px;">Keys / Synth</span>
+          <div class="a-div" style="width:60px;height:2px;background:#7A6A9A;opacity:0.55;margin:10px 0;"></div>
+          <span class="a-tag" style="font-size:10.5px;margin-bottom:18px;">The signal needs its frequency.</span>
+          <div class="a-reqs" style="padding:0 2px;">
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#7A6A9A;opacity:0.8;"></div><span>Piano AND synth — both required</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#7A6A9A;opacity:0.8;"></div><span>Sound design — shape tones, not presets</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#7A6A9A;opacity:0.8;"></div><span>Live electronic performance experience</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#7A6A9A;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#7A6A9A;opacity:0.8;"></div><span>IEMs · click track · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;padding-bottom:28px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     BASSIST — #4A7A9A
+════════════════════════════════════════ -->
+<div class="section-head">Bassist</div>
+<div class="role-group">
+  <div class="role-group-label">
+    <div class="role-group-dot" style="background:#4A7A9A;"></div>
+    <span class="role-group-name" style="color:#4A7A9A;">Bassist — The signal needs its foundation.</span>
+  </div>
+  <div class="format-row">
+    <div class="format-col">
+      <span class="format-label">Square · 1080×1080</span>
+      <div class="ad sq">
+        <div class="a-bar" style="background:#4A7A9A;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(74,122,154,0.15) 0%,#0A0A0A 68%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-58%);background:radial-gradient(circle,rgba(74,122,154,0.16) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:260px;bottom:-40px;right:-40px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;padding-top:8px;">
+          <svg class="a-mark" style="margin-bottom:16px;" width="82" height="82" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:8px;margin-bottom:6px;">Seeking</span>
+          <span class="a-role" style="font-size:36px;">Bassist</span>
+          <div class="a-div" style="width:80px;height:2px;background:#4A7A9A;opacity:0.55;margin:12px 0;"></div>
+          <span class="a-tag" style="font-size:13px;">The signal needs its foundation.</span>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Portrait · 1080×1350</span>
+      <div class="ad pt">
+        <div class="a-bar" style="background:#4A7A9A;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(74,122,154,0.14) 0%,#0A0A0A 62%);z-index:0;"></div>
+        <div class="a-glow" style="width:200px;height:200px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(74,122,154,0.14) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:240px;bottom:-30px;right:-30px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:14px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:56px 20px 56px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="72" height="72" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7.5px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:34px;">Bassist</span>
+          <div class="a-div" style="width:70px;height:2px;background:#4A7A9A;opacity:0.55;margin:11px 0;"></div>
+          <span class="a-tag" style="font-size:12.5px;margin-bottom:20px;">The signal needs its foundation.</span>
+          <div class="a-reqs" style="padding:0 4px;">
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#4A7A9A;opacity:0.8;"></div><span>Groove &amp; pocket — locked with the drummer</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#4A7A9A;opacity:0.8;"></div><span>Click track live — non-negotiable</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#4A7A9A;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#4A7A9A;opacity:0.8;"></div><span>Melodically aware bass lines</span></div>
+            <div class="a-req" style="font-size:10.5px;"><div class="a-dia" style="width:5px;height:5px;background:#4A7A9A;opacity:0.8;"></div><span>IEMs · harmony vocals · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 18px;"><span class="a-band" style="font-size:7px;">The Order of Light</span><span class="a-loc" style="font-size:7px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+    <div class="format-col">
+      <span class="format-label">Story / Reel · 1080×1920</span>
+      <div class="ad st">
+        <div class="a-bar" style="background:#4A7A9A;"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(74,122,154,0.14) 0%,#0A0A0A 60%);z-index:0;"></div>
+        <div class="a-glow" style="width:170px;height:170px;top:38%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(74,122,154,0.14) 0%,transparent 70%);"></div>
+        <div class="a-bgmark" style="width:200px;bottom:-20px;right:-20px;"><svg viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg></div>
+        <div class="a-scan"></div><div class="a-vig"></div>
+        <div class="a-topbar" style="padding:28px 16px 12px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+        <div class="a-center" style="gap:0;justify-content:flex-start;padding:72px 16px 72px;">
+          <svg class="a-mark" style="margin-bottom:14px;" width="64" height="64" viewBox="0 0 100 100" fill="none"><line x1="13" y1="13" x2="87" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="87" y1="13" x2="13" y2="87" stroke="#4A7A9A" stroke-width="8.5" stroke-linecap="square"/><line x1="50" y1="50" x2="50" y2="91" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="50" y1="8" x2="50" y2="31" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="8" y1="50" x2="31" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/><line x1="69" y1="50" x2="92" y2="50" stroke="#4A7A9A" stroke-width="7" stroke-linecap="square"/></svg>
+          <span class="a-seeking" style="font-size:7px;margin-bottom:5px;">Seeking</span>
+          <span class="a-role" style="font-size:30px;">Bassist</span>
+          <div class="a-div" style="width:60px;height:2px;background:#4A7A9A;opacity:0.55;margin:10px 0;"></div>
+          <span class="a-tag" style="font-size:11px;margin-bottom:18px;">The signal needs its foundation.</span>
+          <div class="a-reqs" style="padding:0 2px;">
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#4A7A9A;opacity:0.8;"></div><span>Groove &amp; pocket — locked with the drummer</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#4A7A9A;opacity:0.8;"></div><span>Click track live — non-negotiable</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#4A7A9A;opacity:0.8;"></div><span>Studio recording &amp; touring experience</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#4A7A9A;opacity:0.8;"></div><span>Melodically aware bass lines</span></div>
+            <div class="a-req" style="font-size:9.5px;"><div class="a-dia" style="width:4px;height:4px;background:#4A7A9A;opacity:0.8;"></div><span>IEMs · harmony vocals · 30s–40s · Charlotte</span></div>
+          </div>
+        </div>
+        <div class="a-botbar" style="padding:10px 16px;padding-bottom:28px;"><span class="a-band" style="font-size:6.5px;">The Order of Light</span><span class="a-loc" style="font-size:6.5px;">Charlotte, NC</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

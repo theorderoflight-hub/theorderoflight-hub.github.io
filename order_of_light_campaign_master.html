@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Order of Light — Campaign Master Document</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -406,6 +407,54 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
   .stat-row { flex-wrap: wrap; }
   .stat-box { min-width: 140px; }
 }
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
 </style>
 </head>
 <body>
@@ -430,7 +479,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <li><a href="#phase3">Phase 3</a></li>
     <li><a href="#phase4">Phase 4</a></li>
     <li><a href="#phase5">Phase 5</a></li>
-    <li><a href="#sermon">Sermon 001</a></li>
+    <li><a href="#broadcast">Broadcast 001</a></li>
     <li><a href="#conduit">Conduit</a></li>
   </ul>
 </nav>
@@ -469,7 +518,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="cover-stat-div"></div>
     <div class="cover-stat">
       <div class="cover-stat-n">5</div>
-      <div class="cover-stat-l">Sermons</div>
+      <div class="cover-stat-l">Broadcasts</div>
     </div>
     <div class="cover-stat-div"></div>
     <div class="cover-stat">
@@ -551,10 +600,10 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
   </div>
 
   <h3>The 108 in the Marketing</h3>
-  <p>The number 108 should surface gradually across the campaign without explanation. It begins as a detail — a reference in a Sermon, a number on the ordination certificate, perhaps the first run of kits is exactly 108 units. It accumulates meaning slowly. By the time EP3 drops, the audience who has been paying close attention will feel the full weight of it. This is the reward for staying with the Order across the year.</p>
+  <p>The number 108 should surface gradually across the campaign without explanation. It begins as a detail — a reference in a Broadcast, a number on the ordination certificate, perhaps the first run of kits is exactly 108 units. It accumulates meaning slowly. By the time EP3 drops, the audience who has been paying close attention will feel the full weight of it. This is the reward for staying with the Order across the year.</p>
   <ul class="ilist">
     <li>First run of ordination kits: <strong>108 units</strong>, hand-numbered 001/108 to 108/108</li>
-    <li>The Conduit references "the 108" obliquely in Sermon 002 — never explaining what it means</li>
+    <li>The Conduit references "the 108" obliquely in Broadcast 002 — never explaining what it means</li>
     <li>Transmission 003 contains the first direct reference: <em>"108 is not a concept. It is a coordinate."</em></li>
     <li>EP1 artwork contains 108 hidden somewhere in the design — discovered by fans, never confirmed by the band</li>
     <li>The Discord (The Chamber) has exactly 108 founding member slots before general access opens</li>
@@ -571,7 +620,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
   <div class="stat-row reveal">
     <div class="stat-box"><div class="stat-n">3</div><div class="stat-l">EP Releases</div></div>
     <div class="stat-box"><div class="stat-n">2</div><div class="stat-l">Transmission Tracks</div></div>
-    <div class="stat-box"><div class="stat-n">5</div><div class="stat-l">Sermons</div></div>
+    <div class="stat-box"><div class="stat-n">5</div><div class="stat-l">Broadcasts</div></div>
     <div class="stat-box"><div class="stat-n">4+</div><div class="stat-l">Vignette Films</div></div>
     <div class="stat-box"><div class="stat-n">108</div><div class="stat-l">Kit Units — Run 1</div></div>
     <div class="stat-box"><div class="stat-n">~200</div><div class="stat-l">Social Posts</div></div>
@@ -597,9 +646,9 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
       <div class="tl-content">
         <span class="tl-phase-tag" style="background:rgba(139,26,46,0.15);color:var(--crimson-bright);">Phase 1</span>
         <div class="tl-title">First Transmission</div>
-        <p class="tl-desc">Sermon 001 drops. The Illuminated membership opens. First music teases — no track yet, just sonic fragments on Stories. Ordination Kit pre-orders go live.</p>
+        <p class="tl-desc">Broadcast 001 drops. The Illuminated membership opens. First music teases — no track yet, just sonic fragments on Stories. Ordination Kit pre-orders go live.</p>
         <div class="tl-events">
-          <span class="tl-event sermon">Sermon 001: FOUND</span>
+          <span class="tl-event sermon">Broadcast 001: FOUND</span>
           <span class="tl-event kit">Kit pre-order opens</span>
           <span class="tl-event">Illuminated launches</span>
         </div>
@@ -610,11 +659,11 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
       <div class="tl-content">
         <span class="tl-phase-tag" style="background:rgba(200,169,110,0.1);color:var(--gold);">Phase 2</span>
         <div class="tl-title">108.I — Something</div>
-        <p class="tl-desc">First EP release. Vignette 01 (The Unboxing) drops alongside. Sermon 002. Kit fulfilment begins. First single to streaming platforms.</p>
+        <p class="tl-desc">First EP release. Vignette 01 (The Unboxing) drops alongside. Broadcast 002. Kit fulfilment begins. First single to streaming platforms.</p>
         <div class="tl-events">
           <span class="tl-event release">EP 108.I Release</span>
           <span class="tl-event vignette">Vignette 01: The Unboxing</span>
-          <span class="tl-event sermon">Sermon 002: SIGNAL</span>
+          <span class="tl-event sermon">Broadcast 002: SIGNAL</span>
           <span class="tl-event kit">Kit fulfilment</span>
         </div>
       </div>
@@ -628,7 +677,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
         <div class="tl-events">
           <span class="tl-event release">Transmission Track A</span>
           <span class="tl-event vignette">Vignette 02: Karaoke Bar</span>
-          <span class="tl-event sermon">Sermon 003: OPEN</span>
+          <span class="tl-event sermon">Broadcast 003: OPEN</span>
         </div>
       </div>
     </div>
@@ -651,10 +700,10 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
       <div class="tl-content">
         <span class="tl-phase-tag" style="background:rgba(160,160,192,0.1);color:#A0A0C0;">Bridge</span>
         <div class="tl-title">Transmission Track B + The 108 Post</div>
-        <p class="tl-desc">Second transmission track. The single-image post — 108 on void black, no caption — goes live. Sermon 004 drops. Live show announcements begin for Illuminated first.</p>
+        <p class="tl-desc">Second transmission track. The single-image post — 108 on void black, no caption — goes live. Broadcast 004 drops. Live show announcements begin for Illuminated first.</p>
         <div class="tl-events">
           <span class="tl-event release">Transmission Track B</span>
-          <span class="tl-event sermon">Sermon 004: AWAKEN</span>
+          <span class="tl-event sermon">Broadcast 004: AWAKEN</span>
           <span class="tl-event">The 108 post</span>
           <span class="tl-event">Live teases begin</span>
         </div>
@@ -665,10 +714,10 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
       <div class="tl-content">
         <span class="tl-phase-tag" style="background:rgba(232,224,208,0.05);color:var(--parchment-dim);">Phase 4</span>
         <div class="tl-title">108.III — Everything</div>
-        <p class="tl-desc">Third and final EP. The partial band reveal via Sermon 005. First live Gatherings. Second kit run opens. The arc completes. The Illuminated receive a special year-end transmission.</p>
+        <p class="tl-desc">Third and final EP. The partial band reveal via Broadcast 005. First live Gatherings. Second kit run opens. The arc completes. The Illuminated receive a special year-end transmission.</p>
         <div class="tl-events">
           <span class="tl-event release">EP 108.III Release</span>
-          <span class="tl-event sermon">Sermon 005: RETURN</span>
+          <span class="tl-event sermon">Broadcast 005: RETURN</span>
           <span class="tl-event vignette">Vignette 04</span>
           <span class="tl-event">First Gatherings</span>
           <span class="tl-event kit">Kit Run 2</span>
@@ -707,7 +756,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <li>All social accounts live — Instagram, YouTube, Facebook, Threads. Profile image: the mark only. Bio: a single line.</li>
     <li>Logo, colour system, and core visual assets finalised from the Brand Bible</li>
     <li>AI Conduit character generated and locked — see Conduit Brief section</li>
-    <li>Sermon 001 scripted, shot, and in post-production</li>
+    <li>Broadcast 001 scripted, shot, and in post-production</li>
     <li>Ordination Kit designed and supplier orders placed (108 unit first run)</li>
     <li>Illuminated membership page set up on Bandcamp/Patreon — not yet live to public</li>
     <li>Content bank of 12–16 atmospheric images created for the first 4 weeks of posting</li>
@@ -895,7 +944,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="ph-content">
       <div class="ph-label">Phase One · Months 2–3</div>
       <div class="ph-title">First Transmission</div>
-      <p class="ph-sub">Sermon 001 drops. The world learns something exists. The Illuminated membership opens. The first music fragments appear — not full tracks, sonic previews only. Ordination Kits go on pre-order.</p>
+      <p class="ph-sub">Broadcast 001 drops. The world learns something exists. The Illuminated membership opens. The first music fragments appear — not full tracks, sonic previews only. Ordination Kits go on pre-order.</p>
     </div>
   </div>
 
@@ -906,17 +955,17 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="post-card">
       <div class="post-meta">
         <span class="post-platform plat-yt">YouTube</span>
-        <div class="post-type">Sermon Drop</div>
+        <div class="post-type">Broadcast Drop</div>
         <div class="post-week">W5</div>
         <div class="post-format">16:9 · 3–5 min</div>
       </div>
       <div class="post-body">
-        <div class="post-title">Sermon 001: FOUND — YouTube Release</div>
+        <div class="post-title">Broadcast 001: FOUND — YouTube Release</div>
         <div class="post-caption">Transmission 001: FOUND · The Order of Light</div>
         <p class="post-notes"><strong>YouTube Title:</strong> "Transmission 001: FOUND | The Order of Light" · <strong>Description (in-world first paragraph):</strong> "The signal has been located. Transmission 001 is available to those who are ready. If you are receiving this, you were meant to receive it." [then below the fold: link to Illuminated, link to social channels] · <strong>Tags:</strong> the order of light, transmission, found, alternative music, post rock, indie rock, electronic, art rock, radiohead, massive attack · <strong>Thumbnail:</strong> The Conduit's face, half in shadow, the Order mark overlaid at low opacity, "TRANSMISSION 001" in DM Sans tracking across the bottom. <strong>Post Tuesday 7pm.</strong></p>
         <div class="post-visual-dir">
           <div class="post-visual-dir-label">Full Script</div>
-          <p>See Section 09 — Sermon 001 full script with production notes.</p>
+          <p>See Section 09 — Broadcast 001 full script with production notes.</p>
         </div>
       </div>
     </div>
@@ -929,12 +978,12 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
         <div class="post-format">9:16 · 45–60 sec</div>
       </div>
       <div class="post-body">
-        <div class="post-title">Sermon 001 Excerpt — Reel</div>
+        <div class="post-title">Broadcast 001 Excerpt — Reel</div>
         <div class="post-caption">The signal has been located. ◈<br><br>Transmission 001: FOUND — now available. Link in bio.</div>
-        <p class="post-notes"><strong>Reel strategy:</strong> Use the 45-second excerpt that contains the most striking visual moment of the Sermon — likely the Static Hold glitch at the end of the Teaching section. The Reel should begin mid-sentence to create immediate intrigue (no intro, no title card). End on a freeze-frame glitch cut before the Conduit finishes speaking — leave the sentence incomplete to drive viewers to the full YouTube version. <strong>Add closed captions</strong> — 85% of Reels are watched without sound. <strong>First comment hashtags:</strong> #theorderoflight #transmission001 #found #letthelightin #postrock #indierock #electronicmusic #alternativemusic #artrock #newmusic #indieband #transmission</p>
+        <p class="post-notes"><strong>Reel strategy:</strong> Use the 45-second excerpt that contains the most striking visual moment of the Broadcast — likely the Static Hold glitch at the end of the Teaching section. The Reel should begin mid-sentence to create immediate intrigue (no intro, no title card). End on a freeze-frame glitch cut before the Conduit finishes speaking — leave the sentence incomplete to drive viewers to the full YouTube version. <strong>Add closed captions</strong> — 85% of Reels are watched without sound. <strong>First comment hashtags:</strong> #theorderoflight #transmission001 #found #letthelightin #postrock #indierock #electronicmusic #alternativemusic #artrock #newmusic #indieband #transmission</p>
         <div class="post-visual-dir">
           <div class="post-visual-dir-label">Visual Direction</div>
-          <p>Direct excerpt from Sermon 001 — no additional editing beyond the existing Glitch Grammar. Ensure closed captions are styled: DM Sans, white text, small, bottom-third placement. Do not use Instagram's auto-caption style — custom caption placement preserves the visual integrity.</p>
+          <p>Direct excerpt from Broadcast 001 — no additional editing beyond the existing Glitch Grammar. Ensure closed captions are styled: DM Sans, white text, small, bottom-third placement. Do not use Instagram's auto-caption style — custom caption placement preserves the visual integrity.</p>
         </div>
       </div>
     </div>
@@ -944,12 +993,12 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
         <span class="post-platform plat-fb">Facebook</span>
         <div class="post-type">Native Video</div>
         <div class="post-week">W5</div>
-        <div class="post-format">16:9 · Full Sermon</div>
+        <div class="post-format">16:9 · Full Broadcast</div>
       </div>
       <div class="post-body">
-        <div class="post-title">Sermon 001 — Facebook Native Upload</div>
+        <div class="post-title">Broadcast 001 — Facebook Native Upload</div>
         <div class="post-caption">The signal has been located.<br><br>Transmission 001: FOUND is now available. If you are receiving this, you were meant to receive it. The Order is open to those who are ready.<br><br>◈ theorderoflight.com [or Bandcamp/Patreon link]</div>
-        <p class="post-notes"><strong>Critical:</strong> Upload the full Sermon video natively to Facebook — do NOT just share the YouTube link. Facebook's algorithm heavily penalises external links in posts and rewards native video with 3–5x the organic reach. This single action dramatically increases Facebook's contribution to the campaign. Also post in the "The Illuminated" Facebook Group immediately after the page post.</p>
+        <p class="post-notes"><strong>Critical:</strong> Upload the full Broadcast video natively to Facebook — do NOT just share the YouTube link. Facebook's algorithm heavily penalises external links in posts and rewards native video with 3–5x the organic reach. This single action dramatically increases Facebook's contribution to the campaign. Also post in the "The Illuminated" Facebook Group immediately after the page post.</p>
       </div>
     </div>
 
@@ -1012,7 +1061,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="ph-content">
       <div class="ph-label">Phase Two · Months 4–5</div>
       <div class="ph-title">108.I — Something</div>
-      <p class="ph-sub">The first EP lands. The world hears the signal for the first time. Vignette 01 drops alongside. Sermon 002. Kit fulfilment begins. The Illuminated are formally welcomed.</p>
+      <p class="ph-sub">The first EP lands. The world hears the signal for the first time. Vignette 01 drops alongside. Broadcast 002. Kit fulfilment begins. The Illuminated are formally welcomed.</p>
     </div>
   </div>
 
@@ -1047,10 +1096,10 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
       <div class="post-body">
         <div class="post-title">Vignette 01: The Unboxing</div>
         <div class="post-caption">Something arrived. Something changed.<br><br>Vignette 01: The Unboxing — The Order of Light</div>
-        <p class="post-notes"><strong>YouTube Title:</strong> "The Unboxing | Official Vignette #1 | The Order of Light" · Release the day after EP 108.I to sustain momentum. <strong>YouTube description (in-world):</strong> "The Order finds those who are ready. Sometimes it arrives in the post." [then practical: EP link, Illuminated link, socials] · <strong>Instagram Reel cut:</strong> 50-second version ending on the wax seal crack. Caption: "The light found her." No other copy. <strong>Facebook:</strong> Native upload with longer in-world description. Tag as a Watch Party opportunity — encourage the Illuminated Facebook Group to watch together. <strong>Cross-promotion note:</strong> Pin this video to the YouTube channel homepage above the Sermons — it is the most accessible entry point for new audiences.</p>
+        <p class="post-notes"><strong>YouTube Title:</strong> "The Unboxing | Official Vignette #1 | The Order of Light" · Release the day after EP 108.I to sustain momentum. <strong>YouTube description (in-world):</strong> "The Order finds those who are ready. Sometimes it arrives in the post." [then practical: EP link, Illuminated link, socials] · <strong>Instagram Reel cut:</strong> 50-second version ending on the wax seal crack. Caption: "The light found her." No other copy. <strong>Facebook:</strong> Native upload with longer in-world description. Tag as a Watch Party opportunity — encourage the Illuminated Facebook Group to watch together. <strong>Cross-promotion note:</strong> Pin this video to the YouTube channel homepage above the Broadcasts — it is the most accessible entry point for new audiences.</p>
         <div class="post-visual-dir">
           <div class="post-visual-dir-label">Production Reminder</div>
-          <p>Full scene breakdown in the main Marketing Strategy document Section 05. Key visual note: shoot the kit unboxing sequences in clean digital (no VHS treatment) — the contrast between the normal world and the Sermon playing on the VCR is the point. The VCR screen footage is the only element with the Glitch Grammar applied.</p>
+          <p>Full scene breakdown in the main Marketing Strategy document Section 05. Key visual note: shoot the kit unboxing sequences in clean digital (no VHS treatment) — the contrast between the normal world and the Broadcast playing on the VCR is the point. The VCR screen footage is the only element with the Glitch Grammar applied.</p>
         </div>
       </div>
     </div>
@@ -1079,7 +1128,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
       <div class="post-body">
         <div class="post-title">EP 108.I Full Release</div>
         <div class="post-caption">108.I — "First you're something."<br><br>The first transmission is complete. The signal is encoded. Find it on all frequencies. Those who are ready will understand what they are hearing. Those who are not — the light is patient.<br><br>◈ The Order of Light</div>
-        <p class="post-notes"><strong>Instagram:</strong> EP artwork as feed post. Reel: 60-second "EP trailer" — a montage of the audio visualiser, a Sermon fragment, and a Vignette clip cut together. <strong>YouTube:</strong> Full EP on YouTube Music / unlisted playlist. Consider a full EP listening video — all tracks sequenced with the visualiser treatment, posted as a single 20–30 minute video. <strong>Threads:</strong> Release day post: "108.I is complete. The first state has been transmitted. First you're something." Post at midnight. <strong>Key metric to track:</strong> Spotify listener conversion rate from social — use the Spotify for Artists dashboard to see how many listeners are coming from Instagram.</p>
+        <p class="post-notes"><strong>Instagram:</strong> EP artwork as feed post. Reel: 60-second "EP trailer" — a montage of the audio visualiser, a Broadcast fragment, and a Vignette clip cut together. <strong>YouTube:</strong> Full EP on YouTube Music / unlisted playlist. Consider a full EP listening video — all tracks sequenced with the visualiser treatment, posted as a single 20–30 minute video. <strong>Threads:</strong> Release day post: "108.I is complete. The first state has been transmitted. First you're something." Post at midnight. <strong>Key metric to track:</strong> Spotify listener conversion rate from social — use the Spotify for Artists dashboard to see how many listeners are coming from Instagram.</p>
         <div class="post-visual-dir">
           <div class="post-visual-dir-label">EP Artwork Direction</div>
           <p>108.I artwork: The Order mark in Sacred Gold on a deep textured dark background — aged, grain-heavy. The numerals "108.I" in Cormorant Garamond below the mark. The phrase "First you're something" in very small DM Sans, tracked wide, at the bottom edge. Warm, amber-adjacent — this EP has the most warmth of the three.</p>
@@ -1090,14 +1139,14 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="post-card">
       <div class="post-meta">
         <span class="post-platform plat-yt">YouTube</span>
-        <div class="post-type">Sermon</div>
+        <div class="post-type">Broadcast</div>
         <div class="post-week">W14</div>
         <div class="post-format">16:9 · 4–5 min</div>
       </div>
       <div class="post-body">
-        <div class="post-title">Sermon 002: SIGNAL</div>
+        <div class="post-title">Broadcast 002: SIGNAL</div>
         <div class="post-caption">Transmission 002: SIGNAL · The Order has encoded its first frequency. The signal is now audible to those who are ready.</div>
-        <p class="post-notes">Sermon 002 drops 2–3 weeks after the EP to sustain content momentum. This Sermon acknowledges — obliquely — that the music now exists. The Conduit references "the signal finding its voice" without naming a band or tracks. <strong>New element in Sermon 002:</strong> For the first time, a brief audio fragment of a track from 108.I plays underneath the Conduit's voice during the Teaching section — very low in the mix, heavily treated, almost subliminal. This is the first time music and Sermon intersect. <strong>Sermon 002 Teaching core message:</strong> "The signal has always existed. The music is simply what happens when the signal is given form. What you are hearing is not new. It is ancient. You are simply hearing it clearly for the first time."</p>
+        <p class="post-notes">Broadcast 002 drops 2–3 weeks after the EP to sustain content momentum. This Broadcast acknowledges — obliquely — that the music now exists. The Conduit references "the signal finding its voice" without naming a band or tracks. <strong>New element in Broadcast 002:</strong> For the first time, a brief audio fragment of a track from 108.I plays underneath the Conduit's voice during the Teaching section — very low in the mix, heavily treated, almost subliminal. This is the first time music and Sermon intersect. <strong>Broadcast 002 Teaching core message:</strong> "The signal has always existed. The music is simply what happens when the signal is given form. What you are hearing is not new. It is ancient. You are simply hearing it clearly for the first time."</p>
       </div>
     </div>
   </div>
@@ -1110,7 +1159,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="ph-content">
       <div class="ph-label">Phase Three · Month 6</div>
       <div class="ph-title">The Bridge — Transmission Track A</div>
-      <p class="ph-sub">The connective tissue between Something and Nothing. Vignette 02 (The Karaoke Bar). Sermon 003 — the first explicit 108 reference. The Chamber (Discord) opens for founding Illuminated.</p>
+      <p class="ph-sub">The connective tissue between Something and Nothing. Vignette 02 (The Karaoke Bar). Broadcast 003 — the first explicit 108 reference. The Chamber (Discord) opens for founding Illuminated.</p>
     </div>
   </div>
 
@@ -1156,17 +1205,17 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="post-card">
       <div class="post-meta">
         <span class="post-platform plat-yt">YouTube</span>
-        <div class="post-type">Sermon</div>
+        <div class="post-type">Broadcast</div>
         <div class="post-week">W17</div>
         <div class="post-format">16:9 · 4–5 min</div>
       </div>
       <div class="post-body">
-        <div class="post-title">Sermon 003: OPEN — First 108 Reference</div>
+        <div class="post-title">Broadcast 003: OPEN — First 108 Reference</div>
         <div class="post-caption">Transmission 003: OPEN · The coordinate has always been known.</div>
-        <p class="post-notes"><strong>This Sermon is the narrative pivot of the entire campaign.</strong> For the first time, The Conduit references 108 directly — and the meaning is given, partially. The exact line (from the 108 framework section): <em>"108 is not a concept. It is a coordinate. And we have always known where it points."</em> This is delivered during the Teaching section, held for 3 seconds of silence after it is spoken, then the frame glitches. <strong>The audience who has been paying attention to the carousels, the Threads posts, and the EP artwork will feel this land.</strong> This is the campaign's first "reward for following closely" moment. The Chamber (Discord) announcement goes out to Illuminated members the same week — framed as "the inner frequency is now open."</p>
+        <p class="post-notes"><strong>This Broadcast is the narrative pivot of the entire campaign.</strong> For the first time, The Conduit references 108 directly — and the meaning is given, partially. The exact line (from the 108 framework section): <em>"108 is not a concept. It is a coordinate. And we have always known where it points."</em> This is delivered during the Teaching section, held for 3 seconds of silence after it is spoken, then the frame glitches. <strong>The audience who has been paying attention to the carousels, the Threads posts, and the EP artwork will feel this land.</strong> This is the campaign's first "reward for following closely" moment. The Chamber (Discord) announcement goes out to Illuminated members the same week — framed as "the inner frequency is now open."</p>
         <div class="post-visual-dir">
-          <div class="post-visual-dir-label">Sermon 003 Visual Treatment</div>
-          <p>Introduce one new visual element in Sermon 003 not present in 001 or 002: a very brief (2-second) cutaway from The Conduit to an extreme close-up of a mala bead being counted — fingers moving slowly through the beads, warm light, out of focus. This image without explanation. It returns in Sermon 005 with context. Plant the seed now.</p>
+          <div class="post-visual-dir-label">Broadcast 003 Visual Treatment</div>
+          <p>Introduce one new visual element in Broadcast 003 not present in 001 or 002: a very brief (2-second) cutaway from The Conduit to an extreme close-up of a mala bead being counted — fingers moving slowly through the beads, warm light, out of focus. This image without explanation. It returns in Sermon 005 with context. Plant the seed now.</p>
         </div>
       </div>
     </div>
@@ -1194,7 +1243,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="ph-content">
       <div class="ph-label">Phase Four · Months 7–9</div>
       <div class="ph-title">108.II — Nothing &amp; The Bridge</div>
-      <p class="ph-sub">The emotional midpoint. Dissolution. The campaign's most intense phase. EP2, Sermon 004, Transmission Track B, press outreach, and the single post that changes everything — 108 on void black.</p>
+      <p class="ph-sub">The emotional midpoint. Dissolution. The campaign's most intense phase. EP2, Broadcast 004, Transmission Track B, press outreach, and the single post that changes everything — 108 on void black.</p>
     </div>
   </div>
 
@@ -1229,7 +1278,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
       <div class="post-body">
         <div class="post-title">THE 108 POST — Campaign Landmark</div>
         <div class="post-caption">[no caption]</div>
-        <p class="post-notes"><strong>This is the most important single piece of content in the entire 12-month campaign.</strong> A single image: the numeral "108" in Cormorant Garamond, centred on absolute void black. Nothing else. No hashtags. No caption. No context. <strong>Post simultaneously across all platforms.</strong> On Threads, the same: "108" and nothing else. On Facebook, the image with a single period as the caption: "." This post lands between EP2 and EP3. The audience who has been following from the beginning — who has heard the Sermon references, seen the carousel, counted the kit numbers — will feel this immediately. New audience members will be confused and search for answers, discovering the full mythology in the process. <strong>Do not respond to any comments on this post for 48 hours.</strong> After 48 hours, respond to one comment only, with: "The coordinate has always been known." Then go silent again.</p>
+        <p class="post-notes"><strong>This is the most important single piece of content in the entire 12-month campaign.</strong> A single image: the numeral "108" in Cormorant Garamond, centred on absolute void black. Nothing else. No hashtags. No caption. No context. <strong>Post simultaneously across all platforms.</strong> On Threads, the same: "108" and nothing else. On Facebook, the image with a single period as the caption: "." This post lands between EP2 and EP3. The audience who has been following from the beginning — who has heard the Broadcast references, seen the carousel, counted the kit numbers — will feel this immediately. New audience members will be confused and search for answers, discovering the full mythology in the process. <strong>Do not respond to any comments on this post for 48 hours.</strong> After 48 hours, respond to one comment only, with: "The coordinate has always been known." Then go silent again.</p>
         <div class="post-visual-dir">
           <div class="post-visual-dir-label">Visual Spec</div>
           <p>"108" · Cormorant Garamond · weight 300 · size: approximately 40% of image height · colour: #F5F0E8 (Signal White) · background: #0A0A0A (Void) · no grain, no effects, no treatment. The absence of the brand's usual texture is itself part of the meaning — stripped back to the number alone.</p>
@@ -1254,14 +1303,14 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="post-card">
       <div class="post-meta">
         <span class="post-platform plat-yt">YouTube</span>
-        <div class="post-type">Sermon</div>
+        <div class="post-type">Broadcast</div>
         <div class="post-week">W25</div>
         <div class="post-format">16:9 · 4–5 min</div>
       </div>
       <div class="post-body">
-        <div class="post-title">Sermon 004: AWAKEN</div>
+        <div class="post-title">Broadcast 004: AWAKEN</div>
         <div class="post-caption">Transmission 004: AWAKEN · What has come apart begins to remember what it is.</div>
-        <p class="post-notes">Sermon 004 is the turning point. It sits after EP2 and begins to point toward EP3. The emotional register shifts from dissolution to the first signs of expansion. <strong>Core teaching message:</strong> "The nothing is not an ending. It is the space required for everything. Do not be afraid of what the light reveals when the self is quiet." <strong>New visual element:</strong> For the first time in a Sermon, The Conduit almost smiles — a fraction of warmth at the corner of the mouth at the end of the Teaching section. It is the first sign that the arc is turning. <strong>Return of the mala cutaway</strong> from Sermon 003 — this time slightly longer, the counting reaching its final beads before cutting back to The Conduit.</p>
+        <p class="post-notes">Broadcast 004 is the turning point. It sits after EP2 and begins to point toward EP3. The emotional register shifts from dissolution to the first signs of expansion. <strong>Core teaching message:</strong> "The nothing is not an ending. It is the space required for everything. Do not be afraid of what the light reveals when the self is quiet." <strong>New visual element:</strong> For the first time in a Broadcast, The Conduit almost smiles — a fraction of warmth at the corner of the mouth at the end of the Teaching section. It is the first sign that the arc is turning. <strong>Return of the mala cutaway</strong> from Sermon 003 — this time slightly longer, the counting reaching its final beads before cutting back to The Conduit.</p>
       </div>
     </div>
   </div>
@@ -1274,7 +1323,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="ph-content">
       <div class="ph-label">Phase Five · Months 10–12</div>
       <div class="ph-title">108.III — Everything &amp; The Gathering</div>
-      <p class="ph-sub">The arc completes. EP3, the partial band reveal via Sermon 005, first live Gatherings, second kit run. The year ends with the mythology fully established and the band finally, deliberately, visible.</p>
+      <p class="ph-sub">The arc completes. EP3, the partial band reveal via Broadcast 005, first live Gatherings, second kit run. The year ends with the mythology fully established and the band finally, deliberately, visible.</p>
     </div>
   </div>
 
@@ -1296,17 +1345,17 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     <div class="post-card">
       <div class="post-meta">
         <span class="post-platform plat-yt">YouTube</span>
-        <div class="post-type">Sermon</div>
+        <div class="post-type">Broadcast</div>
         <div class="post-week">W38</div>
         <div class="post-format">16:9 · 5–6 min</div>
       </div>
       <div class="post-body">
-        <div class="post-title">Sermon 005: RETURN — The Partial Reveal</div>
+        <div class="post-title">Broadcast 005: RETURN — The Partial Reveal</div>
         <div class="post-caption">Transmission 005: RETURN · The Order has found its voice. The signal is ready to be seen.</div>
-        <p class="post-notes"><strong>This is the most important Sermon.</strong> For the first time, The Conduit acknowledges that the Order has taken physical form. The exact words: <em>"The time has come for the signal to be given form. The Order has found its voice. What you have been hearing — the transmission, the frequency — it exists now in people. In a room. In sound that moves through air."</em> <strong>After this line:</strong> For the first time, a brief cutaway — not to the mala, not to atmospheric B-roll, but to a fragment of the band performing. 8–10 seconds only. Heavily treated: VHS grain, low exposure, faces not yet clearly visible. The performance is atmospheric, intense, unmistakably live. Then back to The Conduit. <strong>The band is revealed, but not yet seen clearly. That moment comes at the Gatherings.</strong> The mala completes its count in this Sermon — 108 beads, the final one held. Silence. Then: "The coordinate is complete."</p>
+        <p class="post-notes"><strong>This is the most important Broadcast.</strong> For the first time, The Conduit acknowledges that the Order has taken physical form. The exact words: <em>"The time has come for the signal to be given form. The Order has found its voice. What you have been hearing — the transmission, the frequency — it exists now in people. In a room. In sound that moves through air."</em> <strong>After this line:</strong> For the first time, a brief cutaway — not to the mala, not to atmospheric B-roll, but to a fragment of the band performing. 8–10 seconds only. Heavily treated: VHS grain, low exposure, faces not yet clearly visible. The performance is atmospheric, intense, unmistakably live. Then back to The Conduit. <strong>The band is revealed, but not yet seen clearly. That moment comes at the Gatherings.</strong> The mala completes its count in this Sermon — 108 beads, the final one held. Silence. Then: "The coordinate is complete."</p>
         <div class="post-visual-dir">
           <div class="post-visual-dir-label">Performance Footage Notes</div>
-          <p>Film a short performance session — 10–15 minutes of material — specifically for Sermon 005 and future content. Dark environment, one or two strong light sources, band in silhouette or near-silhouette. Treat all footage with the full Glitch Grammar. This footage also provides the source material for all future performance content on social media.</p>
+          <p>Film a short performance session — 10–15 minutes of material — specifically for Broadcast 005 and future content. Dark environment, one or two strong light sources, band in silhouette or near-silhouette. Treat all footage with the full Glitch Grammar. This footage also provides the source material for all future performance content on social media.</p>
         </div>
       </div>
     </div>
@@ -1346,10 +1395,10 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
 </section>
 
 <!-- ═══════ SERMON 001 FULL SCRIPT ═══════ -->
-<section id="sermon">
-  <div class="eyebrow reveal">09 — Sermon 001</div>
+<section id="broadcast">
+  <div class="eyebrow reveal">09 — Broadcast 001</div>
   <h2 class="reveal">Transmission 001:<br>F O U N D</h2>
-  <p class="reveal">The following is the complete script for Sermon Transmission 001. This is the first piece of content the world encounters from The Order of Light with the Conduit present. It must establish tone, pace, visual grammar, and the mythology's emotional register in a single viewing. Nothing is explained. Everything is felt.</p>
+  <p class="reveal">The following is the complete script for Broadcast Transmission 001. This is the first piece of content the world encounters from The Order of Light with the Conduit present. It must establish tone, pace, visual grammar, and the mythology's emotional register in a single viewing. Nothing is explained. Everything is felt.</p>
   <p class="reveal"><strong>Runtime target:</strong> 3:30–4:30 minutes. <strong>Location:</strong> The Conduit at the centre of frame, lit from the left with a single warm source. Right side in shadow. Plain, non-specific background. Slightly too-still framing — the camera does not move.</p>
 
   <div class="sermon-script reveal">
@@ -1375,7 +1424,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     </div>
 
     <div class="sermon-block sb-teach">
-      <div class="sermon-part">The Teaching · 0:55–2:45</div>
+      <div class="sermon-part">The Message · 0:55–2:45</div>
       <div class="sermon-dir">[The Conduit's delivery slows slightly. More deliberate. Each sentence given its own space.]</div>
       <p class="sermon-text">
         There is a signal that has been present for longer than you have been listening.<br><br>
@@ -1396,7 +1445,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     </div>
 
     <div class="sermon-block sb-invite">
-      <div class="sermon-part">The Invitation · 2:45–3:30</div>
+      <div class="sermon-part">The Call · 2:45–3:30</div>
       <div class="sermon-dir">[A slight shift in the Conduit's position — not a movement, but a settling. As if something has been confirmed.]</div>
       <p class="sermon-text">
         The Order is open.<br><br>
@@ -1427,13 +1476,13 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     </div>
   </div>
 
-  <h3>Production Notes — Sermon 001</h3>
+  <h3>Production Notes — Broadcast 001</h3>
   <ul class="ilist reveal">
     <li><strong>The Conduit's voice:</strong> Measured, slightly lower than conversational register. No performance — no heightened delivery. The power comes from understatement. If using ElevenLabs, use a voice with low breathiness, slow speaking rate (0.85x), and slight warmth. Avoid anything that reads as theatrical or "spooky."</li>
     <li><strong>The pauses:</strong> They are written into the script deliberately and must be observed. The discomfort of silence is part of the grammar. Do not edit them out in post.</li>
     <li><strong>Eye line:</strong> The Conduit should look at a point approximately 2–3 inches above and to the right of the lens. This creates the impression of eye contact without quite achieving it — which is exactly the sensation required.</li>
-    <li><strong>HeyGen generation note:</strong> Script the Sermon in full, input into HeyGen with the custom avatar. Then in post, apply all glitch effects as described in the Glitch Grammar. The HeyGen output is the clean source — the distortion is applied entirely in post-production.</li>
-    <li><strong>Audio:</strong> Before mixing, add a very subtle room tone beneath the entire Sermon — a low, non-specific ambience that is felt rather than heard. The silence should not be completely clean.</li>
+    <li><strong>HeyGen generation note:</strong> Script the Broadcast in full, input into HeyGen with the custom avatar. Then in post, apply all glitch effects as described in the Glitch Grammar. The HeyGen output is the clean source — the distortion is applied entirely in post-production.</li>
+    <li><strong>Audio:</strong> Before mixing, add a very subtle room tone beneath the entire Broadcast — a low, non-specific ambience that is felt rather than heard. The silence should not be completely clean.</li>
   </ul>
 </section>
 
@@ -1463,7 +1512,7 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
     </div>
     <div class="conduit-card">
       <div class="conduit-card-label">Lighting</div>
-      <p class="conduit-card-body">One warm source from the left, casting the right side of the face into shadow. The ratio should be approximately 3:1 — three parts light, one part shadow. The lit side should be warm amber; the shadow side should be cool and dark. This is consistent across all Sermons — never varies.</p>
+      <p class="conduit-card-body">One warm source from the left, casting the right side of the face into shadow. The ratio should be approximately 3:1 — three parts light, one part shadow. The lit side should be warm amber; the shadow side should be cool and dark. This is consistent across all Broadcasts — never varies.</p>
     </div>
     <div class="conduit-card">
       <div class="conduit-card-label">The Specific Wrongness</div>
@@ -1493,26 +1542,20 @@ footer p { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; c
   <h3>Maintaining Consistency</h3>
   <ul class="ilist reveal">
     <li>Document every HeyGen parameter, seed number, and setting used to generate The Conduit. Save this as a separate locked file — losing this information means losing the character's consistency.</li>
-    <li>The Conduit's appearance does not change between Sermons. Same avatar, same lighting setup, same crop. The only thing that changes is what they say.</li>
+    <li>The Conduit's appearance does not change between Broadcasts. Same avatar, same lighting setup, same crop. The only thing that changes is what they say.</li>
     <li>The Conduit has no name in any public communication. They are referred to only as "the transmission," "the voice," "the signal." If the audience begins to name the character, do not engage with or contradict their speculation.</li>
-    <li>The Conduit never appears outside the Sermons — not in Stories, not in posts, not in any other context. Their presence is confined to the transmissions. This exclusivity preserves the character's authority.</li>
+    <li>The Conduit never appears outside the Broadcasts — not in Stories, not in posts, not in any other context. Their presence is confined to the transmissions. This exclusivity preserves the character's authority.</li>
   </ul>
 </section>
 
 </div><!-- end .page -->
 
-<footer>
-  <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <line x1="13" y1="13" x2="87" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
-  <line x1="87" y1="13" x2="13" y2="87" stroke="#8B1A2E" stroke-width="8.5" stroke-linecap="square"/>
-  <line x1="50" y1="50" x2="50" y2="91" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-  <line x1="50" y1="8" x2="50" y2="31" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-  <line x1="8" y1="50" x2="31" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-  <line x1="69" y1="50" x2="92" y2="50" stroke="#8B1A2E" stroke-width="7" stroke-linecap="square"/>
-</svg>
-  <p>The Order of Light · Campaign Master Document · 2025–2026</p>
-  <p>108 is not an ending. It is a coordinate.</p>
-  <p style="margin-top:8px;">◈</p>
+<footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
 </footer>
 
 <script>

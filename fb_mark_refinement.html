@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>firstbroadcast — mark refinement</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F5F3EE;--s1:#ECEAE4;--s2:#E2DFD8;
+  --rule:#CCC9C0;--ink:#1A1814;--ink-2:#4A4740;--ink-3:#9A9690;
+  --signal:#D4360A;
+  --j:'Plus Jakarta Sans',sans-serif;
+  --m:'JetBrains Mono',monospace;
+}
+html,body{background:var(--bg);}
+body{color:var(--ink);font-family:var(--j);font-weight:300;}
+::selection{background:var(--signal);color:#fff;}
+
+/*
+  ═══════════════════════════════════════════════════
+  THE O MARK — CORRECTED GEOMETRY
+  
+  Jakarta Sans cap-height ≈ 0.72em
+  SVG: height:0.72em; width:0.72em → same size as text O
+  viewBox="0 0 100 100" — circle fills edge-to-edge
+  overflow:visible → arcs extend freely beyond box
+  
+  Circle: r=47, stroke-width=6
+    outer edges: left=3, right=97, top=0, bottom=100
+    This circle exactly matches the visual size of text "O"
+  
+  All arcs: r=47 (same), stroke-width=6 (same)
+  Arc endpoints: x=3 and x=97 (always — because same radius)
+  Gap between stroke edges = 7px, step = 13px
+  
+  Above:  Arc1 M3,-10  Arc2 M3,-23  Arc3 M3,-36
+  Below:  Arc1 M3,110  Arc2 M3,123  Arc3 M3,136
+  
+  letter-spacing correction: margin-right:-0.025em on SVG
+  to compensate for letter-spacing not applying to SVG element
+  ═══════════════════════════════════════════════════
+*/
+.o {
+  display:inline-block;
+  height:0.72em;
+  width:0.72em;
+  overflow:visible;
+  vertical-align:-0.06em;
+  margin-right:-0.025em; /* match letter-spacing gap */
+}
+
+/* Wordmark wrapper */
+.wm {
+  display:inline-flex;
+  align-items:baseline;
+  font-family:var(--j);
+  letter-spacing:-0.025em;
+  line-height:1;
+  white-space:nowrap;
+}
+.wm .l{font-weight:200;}
+.wm .h{font-weight:600;}
+
+/* Arc draw-in animation */
+@keyframes arc-draw {
+  from { stroke-dashoffset: 300; }
+  to   { stroke-dashoffset: 0; }
+}
+.arc { stroke-dasharray: 300; stroke-dashoffset: 300; }
+.play .arc { animation: arc-draw 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+.play .a1  { animation-delay: 0.0s; }
+.play .a2  { animation-delay: 0.13s; }
+.play .a3  { animation-delay: 0.26s; }
+.play .b1  { animation-delay: 0.0s; }
+.play .b2  { animation-delay: 0.13s; }
+.play .b3  { animation-delay: 0.26s; }
+
+/* Layout */
+.page { max-width: 1100px; margin: 0 auto; padding: 72px 72px 120px; }
+.hd { border-bottom: 2px solid var(--ink); padding-bottom: 28px; margin-bottom: 64px; }
+.hd-label { font-family:var(--m); font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px; }
+.hd-title { font-family:var(--j); font-weight:700; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; }
+
+.section { margin-bottom: 72px; }
+.sec-label {
+  font-family:var(--m); font-size:9px; letter-spacing:0.26em;
+  text-transform:uppercase; color:var(--ink-3);
+  padding-bottom:12px; border-bottom:1px solid var(--rule);
+  margin-bottom:36px;
+}
+
+.strip {
+  background:var(--s1); border:1px solid var(--rule);
+  padding:48px 56px;
+  display:flex; flex-direction:column; gap:28px;
+}
+.strip.dark { background:var(--ink); }
+.strip.bg   { background:var(--bg); border-color:var(--rule); }
+
+.note { font-family:var(--m); font-size:10.5px; color:var(--ink-3); line-height:1.6; }
+.strip.dark .note { color:rgba(245,243,238,0.3); }
+
+.spec-row {
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:9px 0; border-bottom:1px solid var(--rule); gap:20px;
+}
+.spec-row:last-child{border-bottom:none;}
+.sk{font-family:var(--m);font-size:10px;color:var(--ink-3);}
+.sv{font-family:var(--m);font-size:10px;color:var(--ink);text-align:right;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hd">
+    <p class="hd-label">firstbroadcast · mark refinement · corrected geometry</p>
+    <p class="hd-title">O same size as text · same radius · same stroke weight</p>
+  </div>
+
+  <!-- 01 SIZE COMPARISON -->
+  <div class="section">
+    <p class="sec-label">01 — O size match · mark circle = text O</p>
+
+    <div class="strip bg" style="gap:40px;">
+      <!-- 80px: baseline text vs mark O -->
+      <div>
+        <div style="font-family:var(--m);font-size:9px;color:var(--ink-3);margin-bottom:10px;letter-spacing:0.14em;text-transform:uppercase;">80px — compare: plain text vs lockup</div>
+        <div style="display:flex;gap:48px;align-items:baseline;flex-wrap:wrap;">
+          <span class="wm" style="font-size:80px;">
+            <span class="h">broadcast</span>
+          </span>
+          <span class="wm" style="font-size:80px;">
+            <span class="l">first</span><span class="h">br</span><svg class="o" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="47" stroke="#1A1814" stroke-width="6"/><path d="M3,-10 A47,47 0 0 1 97,-10" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,-23 A47,47 0 0 1 97,-23" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,-36 A47,47 0 0 1 97,-36" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,110 A47,47 0 0 0 97,110" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,123 A47,47 0 0 0 97,123" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,136 A47,47 0 0 0 97,136" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/></svg><span class="h">adcast</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 48px -->
+      <div>
+        <div style="font-family:var(--m);font-size:9px;color:var(--ink-3);margin-bottom:10px;letter-spacing:0.14em;text-transform:uppercase;">48px</div>
+        <span class="wm" style="font-size:48px;">
+          <span class="l">first</span><span class="h">br</span><svg class="o" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="47" stroke="#1A1814" stroke-width="6"/><path d="M3,-10 A47,47 0 0 1 97,-10" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,-23 A47,47 0 0 1 97,-23" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,-36 A47,47 0 0 1 97,-36" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,110 A47,47 0 0 0 97,110" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,123 A47,47 0 0 0 97,123" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,136 A47,47 0 0 0 97,136" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/></svg><span class="h">adcast</span>
+        </span>
+      </div>
+
+      <!-- 24px -->
+      <div>
+        <div style="font-family:var(--m);font-size:9px;color:var(--ink-3);margin-bottom:10px;letter-spacing:0.14em;text-transform:uppercase;">24px — nav scale</div>
+        <span class="wm" style="font-size:24px;">
+          <span class="l">first</span><span class="h">br</span><svg class="o" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="47" stroke="#1A1814" stroke-width="6"/><path d="M3,-10 A47,47 0 0 1 97,-10" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,-23 A47,47 0 0 1 97,-23" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,110 A47,47 0 0 0 97,110" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,123 A47,47 0 0 0 97,123" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/></svg><span class="h">adcast</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 COLOUR VARIANTS -->
+  <div class="section">
+    <p class="sec-label">02 — Colour variants · one mark, three grounds</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;">
+
+      <div class="strip bg" style="align-items:flex-start;min-height:160px;justify-content:center;">
+        <span class="wm" style="font-size:36px;">
+          <span class="l">first</span><span class="h">br</span><svg class="o" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="47" stroke="#1A1814" stroke-width="6"/><path d="M3,-10 A47,47 0 0 1 97,-10" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,-23 A47,47 0 0 1 97,-23" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,-36 A47,47 0 0 1 97,-36" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,110 A47,47 0 0 0 97,110" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,123 A47,47 0 0 0 97,123" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path d="M3,136 A47,47 0 0 0 97,136" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/></svg><span class="h">adcast</span>
+        </span>
+        <span class="note">Primary · ink on off-white</span>
+      </div>
+
+      <div class="strip dark" style="align-items:flex-start;min-height:160px;justify-content:center;">
+        <span class="wm" style="font-size:36px;color:#F5F3EE;">
+          <span class="l">first</span><span class="h">br</span><svg class="o" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="47" stroke="#F5F3EE" stroke-width="6"/><path d="M3,-10 A47,47 0 0 1 97,-10" stroke="#F5F3EE" stroke-width="6" stroke-linecap="round"/><path d="M3,-23 A47,47 0 0 1 97,-23" stroke="#F5F3EE" stroke-width="6" stroke-linecap="round"/><path d="M3,-36 A47,47 0 0 1 97,-36" stroke="#F5F3EE" stroke-width="6" stroke-linecap="round"/><path d="M3,110 A47,47 0 0 0 97,110" stroke="#F5F3EE" stroke-width="6" stroke-linecap="round"/><path d="M3,123 A47,47 0 0 0 97,123" stroke="#F5F3EE" stroke-width="6" stroke-linecap="round"/><path d="M3,136 A47,47 0 0 0 97,136" stroke="#F5F3EE" stroke-width="6" stroke-linecap="round"/></svg><span class="h">adcast</span>
+        </span>
+        <span class="note">Reversed · off-white on dark</span>
+      </div>
+
+      <div class="strip dark" style="align-items:flex-start;min-height:160px;justify-content:center;">
+        <span class="wm" style="font-size:36px;color:#F5F3EE;">
+          <span class="l">first</span><span class="h">br</span><svg class="o" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="47" stroke="#D4360A" stroke-width="6"/><path d="M3,-10 A47,47 0 0 1 97,-10" stroke="#D4360A" stroke-width="6" stroke-linecap="round"/><path d="M3,-23 A47,47 0 0 1 97,-23" stroke="#D4360A" stroke-width="6" stroke-linecap="round"/><path d="M3,-36 A47,47 0 0 1 97,-36" stroke="#D4360A" stroke-width="6" stroke-linecap="round"/><path d="M3,110 A47,47 0 0 0 97,110" stroke="#D4360A" stroke-width="6" stroke-linecap="round"/><path d="M3,123 A47,47 0 0 0 97,123" stroke="#D4360A" stroke-width="6" stroke-linecap="round"/><path d="M3,136 A47,47 0 0 0 97,136" stroke="#D4360A" stroke-width="6" stroke-linecap="round"/></svg><span class="h">adcast</span>
+        </span>
+        <span class="note">Signal O on dark · release moments only</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 03 ANIMATION -->
+  <div class="section">
+    <p class="sec-label">03 — Animation · arcs draw in on load · circle always present</p>
+    <div class="strip bg" style="padding:56px;">
+      <span class="wm play" id="demo" style="font-size:72px;">
+        <span class="l">first</span><span class="h">br</span><svg class="o" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="47" stroke="#1A1814" stroke-width="6"/><path class="arc a1" d="M3,-10 A47,47 0 0 1 97,-10" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path class="arc a2" d="M3,-23 A47,47 0 0 1 97,-23" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path class="arc a3" d="M3,-36 A47,47 0 0 1 97,-36" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path class="arc b1" d="M3,110 A47,47 0 0 0 97,110" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path class="arc b2" d="M3,123 A47,47 0 0 0 97,123" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/><path class="arc b3" d="M3,136 A47,47 0 0 0 97,136" stroke="#1A1814" stroke-width="6" stroke-linecap="round"/></svg><span class="h">adcast</span>
+      </span>
+      <p class="note">Arcs draw inner-to-outer simultaneously top and bottom. Circle is always static — only arcs animate.
+        <a href="#" id="replay" style="color:var(--signal);margin-left:12px;">↺ replay</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- 04 GEOMETRY SPEC -->
+  <div class="section">
+    <p class="sec-label">04 — Geometry specification</p>
+    <div class="strip" style="max-width:560px;">
+      <div class="spec-row"><span class="sk">viewBox</span><span class="sv">0 0 100 100</span></div>
+      <div class="spec-row"><span class="sk">overflow</span><span class="sv">visible</span></div>
+      <div class="spec-row"><span class="sk">SVG size</span><span class="sv">height:0.72em; width:0.72em</span></div>
+      <div class="spec-row"><span class="sk">vertical-align</span><span class="sv">-0.06em</span></div>
+      <div class="spec-row"><span class="sk">margin-right</span><span class="sv">-0.025em (letter-spacing compensation)</span></div>
+      <div class="spec-row"><span class="sk">Circle</span><span class="sv">cx=50 cy=50 r=47 sw=6</span></div>
+      <div class="spec-row"><span class="sk">Arc radius</span><span class="sv">47 — same as circle</span></div>
+      <div class="spec-row"><span class="sk">Arc stroke-width</span><span class="sv">6 — same as circle</span></div>
+      <div class="spec-row"><span class="sk">Arc x-endpoints</span><span class="sv">always x=3 and x=97</span></div>
+      <div class="spec-row"><span class="sk">Gap (stroke-edge to edge)</span><span class="sv">7px</span></div>
+      <div class="spec-row"><span class="sk">Step (gap + stroke)</span><span class="sv">13 units</span></div>
+      <div class="spec-row"><span class="sk">Above arc 1</span><span class="sv">M3,-10 A47,47 0 0 1 97,-10</span></div>
+      <div class="spec-row"><span class="sk">Above arc 2</span><span class="sv">M3,-23 A47,47 0 0 1 97,-23</span></div>
+      <div class="spec-row"><span class="sk">Above arc 3</span><span class="sv">M3,-36 A47,47 0 0 1 97,-36</span></div>
+      <div class="spec-row"><span class="sk">Below arc 1</span><span class="sv">M3,110 A47,47 0 0 0 97,110</span></div>
+      <div class="spec-row"><span class="sk">Below arc 2</span><span class="sv">M3,123 A47,47 0 0 0 97,123</span></div>
+      <div class="spec-row"><span class="sk">Below arc 3</span><span class="sv">M3,136 A47,47 0 0 0 97,136</span></div>
+    </div>
+  </div>
+
+</div>
+<script>
+document.getElementById('replay').addEventListener('click', function(e){
+  e.preventDefault();
+  var d=document.getElementById('demo');
+  d.classList.remove('play');
+  void d.offsetWidth;
+  d.classList.add('play');
+});
+</script>
+</body>
+</html>

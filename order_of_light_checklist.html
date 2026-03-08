@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Cline x1='13' y1='13' x2='87' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='87' y1='13' x2='13' y2='87' stroke='%238B1A2E' stroke-width='8.5' stroke-linecap='square'/%3E%3Cline x1='50' y1='50' x2='50' y2='91' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='50' y1='8' x2='50' y2='31' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='8' y1='50' x2='31' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3Cline x1='69' y1='50' x2='92' y2='50' stroke='%238B1A2E' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Order of Light — Setup Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --void:     #0A0A0A;
+  --deep:     #141414;
+  --surface:  #1C1C1C;
+  --surface2: #222222;
+  --border:   #2A2A2A;
+  --border-hi:#3E3E3E;
+
+  --text-1: #F0EBE1;   /* 14.2:1 */
+  --text-2: #B8AFA0;   /* 7.1:1  */
+  --text-3: #8A8278;   /* 4.6:1  */
+
+  --crimson:  #C0384F;
+  --crimson-h:#D94E65;
+  --gold:     #C8A55A;
+
+  /* Phase colours — all ≥4.5:1 on --deep */
+  --ph-legal:   #D94E65;
+  --ph-brand:   #C8A55A;
+  --ph-finance: #6AAF8C;
+  --ph-label:   #9B8EBF;
+  --ph-distro:  #6AA3C8;
+  --ph-band:    #C8A55A;
+  --ph-release: #D94E65;
+  --ph-keys:    #9B8EBF;
+
+  --check-done: #6AAF8C;
+  --check-warn: #C8A55A;
+}
+
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  background:var(--void);
+  color:var(--text-1);
+  font-family:'DM Sans', system-ui, sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  min-height:100vh;
+}
+
+:focus-visible {
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+.skip-link {
+  position:absolute; top:-100%; left:16px;
+  background:var(--gold); color:#0A0A0A;
+  padding:8px 16px; font-size:14px; font-weight:500;
+  text-decoration:none; z-index:9999; border-radius:2px;
+}
+.skip-link:focus { top:16px; }
+
+/* ── LAYOUT ── */
+.wrap { max-width:860px; margin:0 auto; padding:56px 40px 100px; }
+
+/* ── HEADER ── */
+.page-head { margin-bottom:48px; padding-bottom:40px; border-bottom:1px solid var(--border); }
+
+.eyebrow {
+  font-size:9px; font-weight:400; letter-spacing:0.42em; text-transform:uppercase;
+  color:var(--crimson-h); margin-bottom:16px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow::after { content:''; width:32px; height:1px; background:var(--crimson-h); opacity:0.5; }
+
+.wordmark {
+  font-family:'DM Sans', sans-serif; font-weight:200;
+  font-size:clamp(24px,3.5vw,38px);
+  letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--text-1); line-height:1.1; margin-bottom:6px;
+}
+
+.subtitle {
+  font-family:'Cormorant Garamond', serif; font-weight:300; font-style:italic;
+  font-size:17px; color:var(--text-2); margin-bottom:24px;
+}
+
+.head-desc {
+  font-size:14px; color:var(--text-2); line-height:1.75; max-width:560px;
+}
+
+/* ── DATE PICKER ── */
+.date-bar {
+  background:var(--deep);
+  border:1px solid var(--border);
+  border-left:3px solid var(--gold);
+  padding:20px 24px;
+  margin-bottom:40px;
+  display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+}
+
+.date-bar-label {
+  font-size:10px; font-weight:400; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--text-2); flex-shrink:0;
+}
+
+.date-input-wrap { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+
+#start-date {
+  background:var(--surface);
+  border:1px solid var(--border-hi);
+  color:var(--text-1);
+  font-family:'DM Sans', sans-serif; font-weight:300; font-size:14px;
+  padding:8px 14px;
+  border-radius:2px;
+  cursor:pointer;
+  color-scheme:dark;
+}
+#start-date:focus { border-color:var(--gold); }
+
+.date-bar-note {
+  font-size:11px; color:var(--text-3); font-style:italic;
+}
+
+.date-bar-reset {
+  margin-left:auto;
+  background:transparent; border:1px solid var(--border-hi);
+  color:var(--text-3); font-family:'DM Sans',sans-serif; font-weight:300;
+  font-size:9px; letter-spacing:0.22em; text-transform:uppercase;
+  padding:6px 14px; cursor:pointer; transition:all 0.2s;
+}
+.date-bar-reset:hover { border-color:var(--text-3); color:var(--text-2); }
+
+/* ── PROGRESS BAR ── */
+.progress-wrap { margin-bottom:40px; }
+.progress-label {
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom:8px;
+}
+.progress-title {
+  font-size:9px; letter-spacing:0.32em; text-transform:uppercase; color:var(--text-3);
+}
+.progress-count {
+  font-size:11px; color:var(--text-2);
+}
+.progress-track {
+  height:3px; background:var(--surface2); border-radius:0; overflow:hidden;
+}
+.progress-fill {
+  height:100%; background:var(--check-done);
+  transition:width 0.4s ease;
+  width:0%;
+}
+
+/* ── PHASE ── */
+.phase { margin-bottom:48px; scroll-margin-top:24px; }
+
+.phase-header {
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:4px; padding-bottom:14px;
+  border-bottom:1px solid var(--border);
+}
+
+.phase-num {
+  font-family:'Cormorant Garamond', serif; font-weight:300;
+  font-size:11px; color:var(--text-3); letter-spacing:0.1em; flex-shrink:0;
+}
+
+.phase-title {
+  font-family:'DM Sans', sans-serif; font-weight:300;
+  font-size:11px; letter-spacing:0.36em; text-transform:uppercase;
+  color:var(--text-1);
+}
+
+.phase-count {
+  margin-left:auto; font-size:10px; color:var(--text-3); letter-spacing:0.1em;
+  flex-shrink:0;
+}
+
+.phase-desc {
+  font-size:12px; color:var(--text-3); line-height:1.65;
+  margin-bottom:16px; padding-left:0;
+}
+
+/* ── CHECKLIST ITEM ── */
+.item {
+  display:grid;
+  grid-template-columns:20px 1fr auto;
+  gap:0 14px;
+  align-items:start;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+  transition:background 0.15s;
+}
+.item:last-child { border-bottom:none; }
+.item.done .item-title { color:var(--text-3); text-decoration:line-through; text-decoration-color:var(--text-3); }
+.item.done .item-body { opacity:0.5; }
+
+/* Checkbox */
+.cb-wrap {
+  padding-top:2px;
+}
+.cb {
+  width:16px; height:16px;
+  appearance:none; -webkit-appearance:none;
+  background:var(--surface2);
+  border:1px solid var(--border-hi);
+  cursor:pointer; display:block; position:relative;
+  transform:rotate(45deg);
+  flex-shrink:0;
+  transition:background 0.2s, border-color 0.2s;
+}
+.cb:hover { border-color:var(--text-3); }
+.cb:checked {
+  background:var(--check-done);
+  border-color:var(--check-done);
+}
+.cb:checked::after {
+  content:'';
+  position:absolute;
+  inset:3px;
+  background:var(--void);
+  transform:rotate(0deg);
+}
+
+/* Item body */
+.item-content { min-width:0; }
+
+.item-title {
+  font-size:14px; font-weight:300; color:var(--text-1);
+  line-height:1.45; margin-bottom:4px;
+  transition:color 0.2s;
+}
+
+.item-body {
+  font-size:12px; color:var(--text-2); line-height:1.65;
+  transition:opacity 0.2s;
+}
+
+.item-body a {
+  color:var(--gold); text-underline-offset:2px;
+}
+.item-body a:hover { color:var(--text-1); }
+
+.item-tags {
+  display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;
+}
+
+.tag {
+  font-size:8.5px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase;
+  padding:2px 8px; border:1px solid;
+}
+.tag-legal   { color:var(--ph-legal);   border-color:rgba(217,78,101,0.3); }
+.tag-finance { color:var(--ph-finance); border-color:rgba(106,175,140,0.3); }
+.tag-brand   { color:var(--ph-brand);   border-color:rgba(200,165,90,0.3); }
+.tag-label   { color:var(--ph-label);   border-color:rgba(155,142,191,0.3); }
+.tag-distro  { color:var(--ph-distro);  border-color:rgba(106,163,200,0.3); }
+.tag-music   { color:var(--text-3);     border-color:var(--border-hi); }
+
+/* Date chip */
+.item-date {
+  font-size:9.5px; letter-spacing:0.12em; color:var(--text-3);
+  white-space:nowrap; padding-top:3px; text-align:right;
+  min-width:80px;
+  font-variant-numeric:tabular-nums;
+}
+.item-date.has-date { color:var(--gold); }
+
+/* ── CALLOUT ── */
+.callout {
+  background:var(--deep); border:1px solid var(--border);
+  border-left:3px solid var(--gold);
+  padding:14px 18px; margin:0 0 24px;
+  font-size:12.5px; color:var(--text-2); line-height:1.7;
+}
+.callout strong { color:var(--text-1); font-weight:400; }
+.callout.crit { border-left-color:var(--ph-legal); }
+.callout.info { border-left-color:var(--ph-distro); }
+
+/* ── SECTION DIVIDER ── */
+.sec-div {
+  display:flex; align-items:center; gap:14px;
+  margin:40px 0 8px;
+}
+.sec-div-num {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:11px; color:var(--text-3); letter-spacing:0.12em;
+}
+.sec-div-title {
+  font-size:9px; letter-spacing:0.4em; text-transform:uppercase; color:var(--crimson-h);
+}
+.sec-div::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* ── FOOTER ── */
+.foot {
+  margin-top:56px; padding-top:28px; border-top:1px solid var(--border);
+  font-size:11px; color:var(--text-3); letter-spacing:0.1em;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width:600px) {
+  .wrap { padding:32px 18px 80px; }
+  .item { grid-template-columns:20px 1fr; }
+  .item-date { grid-column:2; padding-top:4px; text-align:left; }
+  .date-bar { flex-direction:column; align-items:flex-start; gap:12px; }
+  .date-bar-reset { margin-left:0; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { transition-duration:0.01ms !important; }
+  html { scroll-behavior:auto; }
+}
+
+/* Consolidated footer */
+.doc-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.footer-band {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(245,240,232,0.4);
+}
+.footer-meta {
+  font-size: 10px;
+  color: rgba(245,240,232,0.18);
+  letter-spacing: 0.08em;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: rgba(245,240,232,0.28);
+}
+.footer-svg {
+  height: 18px;
+  width: auto;
+}
+.footer-svg-eb {
+  height: 14px;
+}
+@media(max-width:600px){
+  .doc-footer-bar{padding:20px 24px;flex-direction:column;align-items:flex-start;}
+  .footer-logos{justify-content:flex-start;}
+}
+
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to checklist</a>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="page-head">
+    <p class="eyebrow" aria-hidden="true">Internal · Setup Checklist</p>
+    <h1 class="wordmark">The Order of Light</h1>
+    <p class="subtitle">Launch preparation — in order of execution</p>
+    <p class="head-desc">
+      Everything required to protect the band name, establish the legal and financial
+      structure, set up distribution, and move into active recruitment and recording.
+      Work through each phase in sequence — later phases depend on earlier ones being complete.
+    </p>
+  </header>
+
+  <!-- DATE PICKER -->
+  <div class="date-bar" role="region" aria-label="Timeline start date">
+    <span class="date-bar-label">Start date</span>
+    <div class="date-input-wrap">
+      <input type="date" id="start-date" aria-label="Set your start date to calculate the timeline">
+      <span class="date-bar-note">Set your start date — all timeline dates update automatically.</span>
+    </div>
+    <button class="date-bar-reset" onclick="resetDates()" aria-label="Clear start date">Clear</button>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" role="region" aria-label="Checklist progress">
+    <div class="progress-label">
+      <span class="progress-title">Overall progress</span>
+      <span class="progress-count" id="progress-count" aria-live="polite">0 of 0 complete</span>
+    </div>
+    <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Checklist completion">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+
+  <!-- ═══════════════════════════════════
+       PHASE 1 — LEGAL FOUNDATION
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase1-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">01</span>
+      <h2 class="phase-title" id="phase1-title" style="color:var(--ph-legal);">Legal Foundation</h2>
+      <span class="phase-count" id="count-1" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">Do this first. Everything else — banking, distribution, trademark — depends on having a legal entity in place. North Carolina LLC formation is straightforward and inexpensive.</p>
+
+    <div class="callout crit" role="note">
+      <strong>Do not spend money on recording, gear, or marketing under your personal name.</strong>
+      All business expenses should flow through the LLC from day one for liability protection and tax purposes.
+    </div>
+
+    <ul role="list" style="list-style:none;" data-phase="1">
+
+      <li class="item" data-offset="0">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Choose LLC name"></div>
+        <div class="item-content">
+          <div class="item-title">Choose your LLC name</div>
+          <div class="item-body">
+            Search the NC Secretary of State database to confirm <strong>Signal House LLC</strong> is available at sosnc.gov. Your LLC name is Signal House LLC — it operates doing business as "The Order of Light" via a DBA. Confirm availability before filing.
+            <div class="item-tags">
+              <span class="tag tag-legal">Legal</span>
+              <span class="tag tag-legal">NC SOS</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="0">—</div>
+      </li>
+
+      <li class="item" data-offset="3">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="File LLC with NC Secretary of State"></div>
+        <div class="item-content">
+          <div class="item-title">File LLC with NC Secretary of State</div>
+          <div class="item-body">
+            File Articles of Organization at <strong>sosnc.gov</strong>. Filing fee is $125. Processing is typically 3–5 business days online. You will need a registered agent (can be yourself). Single-member LLC is fine for sole ownership — you retain 100% control and it is taxed as a sole proprietor by default.
+            <div class="item-tags">
+              <span class="tag tag-legal">Legal</span>
+              <span class="tag tag-finance">$125 fee</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="3">—</div>
+      </li>
+
+      <li class="item" data-offset="10">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Obtain EIN from IRS"></div>
+        <div class="item-content">
+          <div class="item-title">Obtain EIN (Employer Identification Number) from IRS</div>
+          <div class="item-body">
+            Apply free at <strong>irs.gov/ein</strong> — takes 10 minutes, issued immediately online. You need this to open a business bank account and to register with PROs (ASCAP/BMI). Even as a single-member LLC with no employees, get the EIN — do not use your SSN for music business registrations.
+            <div class="item-tags">
+              <span class="tag tag-legal">Legal</span>
+              <span class="tag tag-finance">Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="10">—</div>
+      </li>
+
+      <li class="item" data-offset="14">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="File DBA if using band name separately from LLC name"></div>
+        <div class="item-content">
+          <div class="item-title">File "Doing Business As" (DBA) if needed</div>
+          <div class="item-body">
+            If your LLC is named something other than "The Order of Light," file a DBA (Assumed Business Name) with your county register of deeds. In NC this is typically $26. This lets you legally operate, sign contracts, and receive payments as "The Order of Light" while the underlying LLC provides the liability protection.
+            <div class="item-tags">
+              <span class="tag tag-legal">Legal</span>
+              <span class="tag tag-finance">~$26 fee</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="14">—</div>
+      </li>
+
+      <li class="item" data-offset="14">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Draft operating agreement"></div>
+        <div class="item-content">
+          <div class="item-title">Draft LLC Operating Agreement</div>
+          <div class="item-body">
+            NC does not legally require an operating agreement for a single-member LLC, but you should have one. It documents that you are the sole owner, defines how the business operates, and is required by many banks. A simple single-member template is sufficient — an entertainment lawyer can review it affordably, or use a service like LegalZoom/Rocket Lawyer as a starting point.
+            <div class="item-tags">
+              <span class="tag tag-legal">Legal</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="14">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       PHASE 2 — BRAND PROTECTION
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase2-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">02</span>
+      <h2 class="phase-title" id="phase2-title" style="color:var(--ph-brand);">Brand Protection</h2>
+      <span class="phase-count" id="count-2" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">Securing sole ownership of the name, mark, and branding. Trademark registration is the primary instrument — it gives you federal protection and the legal standing to challenge infringement.</p>
+
+    <div class="callout" role="note">
+      <strong>File the trademark under your LLC, not your personal name.</strong>
+      This keeps the IP inside the entity and protects it through any future band member changes.
+    </div>
+
+    <ul role="list" style="list-style:none;" data-phase="2">
+
+      <li class="item" data-offset="7">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Search USPTO for existing trademarks"></div>
+        <div class="item-content">
+          <div class="item-title">Search USPTO TESS for conflicting trademarks</div>
+          <div class="item-body">
+            Before filing, search the USPTO Trademark Electronic Search System (<strong>tmsearch.uspto.gov</strong>) for "The Order of Light" in International Class 041 (entertainment services) and Class 009 (recorded music). A basic search is free. If conflicts exist you may need to modify the name or work with a trademark attorney.
+            <div class="item-tags">
+              <span class="tag tag-legal">Trademark</span>
+              <span class="tag tag-finance">Free search</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="7">—</div>
+      </li>
+
+      <li class="item" data-offset="21">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="File trademark application with USPTO"></div>
+        <div class="item-content">
+          <div class="item-title">File trademark application with USPTO</div>
+          <div class="item-body">
+            File via <strong>uspto.gov/trademarks</strong> using TEAS Plus ($250/class) or TEAS Standard ($350/class). File in Class 041 (entertainment, live performances) at minimum. Consider also Class 009 (sound recordings) and Class 025 (clothing/merch) if budget allows. Use your LLC as the applicant. Filing on an "Intent to Use" basis is fine if you haven't released music yet — you have up to 36 months to demonstrate use. Examination takes 8–12 months. Note: this is not a lawyer — consult one for trademark strategy.
+            <div class="item-tags">
+              <span class="tag tag-legal">Trademark</span>
+              <span class="tag tag-finance">$250–$350/class</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="21">—</div>
+      </li>
+
+      <li class="item" data-offset="21">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="File trademark for visual mark/logo"></div>
+        <div class="item-content">
+          <div class="item-title">File trademark for the visual mark (the eight-pointed geometry)</div>
+          <div class="item-body">
+            Separate from the word mark. File the mark as a design mark in the same classes. This protects the distinctive cross-and-cardinal geometry from being copied independently of the name. Include a clear black-and-white reproduction of the mark in your application.
+            <div class="item-tags">
+              <span class="tag tag-legal">Trademark</span>
+              <span class="tag tag-brand">Brand</span>
+              <span class="tag tag-finance">$250–$350/class</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="21">—</div>
+      </li>
+
+      <li class="item" data-offset="7">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register domain names"></div>
+        <div class="item-content">
+          <div class="item-title">Register domain names</div>
+          <div class="item-body">
+            Register <strong>theorderoflight.com</strong> as the primary. Also grab <strong>theorderoflight.net</strong> and <strong>theorderoflight.co</strong> to protect the namespace. Use Namecheap or Cloudflare Registrar (both offer WHOIS privacy). Cost ~$12–15/year per domain.
+            <br><br><strong>If theorderoflight.com is taken:</strong> preferred fallbacks — <strong>orderoflight.band</strong> (.band is a legitimate music TLD), <strong>theool.com</strong>, <strong>orderoflight.co</strong>. Avoid long subdomain workarounds. Check availability at <strong>namecheap.com</strong> before settling on a handle name — domain and handles should match wherever possible.
+            <div class="item-tags">
+              <span class="tag tag-brand">Brand</span>
+              <span class="tag tag-finance">~$15/yr</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="7">—</div>
+      </li>
+
+      <li class="item" data-offset="7">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register social media handles"></div>
+        <div class="item-content">
+          <div class="item-title">Register and secure all social media handles</div>
+          <div class="item-body">
+            Claim <strong>@theorderoflight</strong> on: Instagram, Facebook, Threads, TikTok, YouTube, X, Bandcamp, SoundCloud, Spotify for Artists (after first release). Even platforms you won't use actively — register them to prevent squatting. Consistency across all platforms matters for searchability.
+            <br><br><strong>If @theorderoflight is taken:</strong> preferred fallbacks in priority order — <strong>@ool.official</strong>, <strong>@orderoflight.band</strong>, <strong>@orderoflight.music</strong>. Avoid hyphens, numbers, and underscores where possible. Lock in the same handle across all platforms before announcing publicly.
+            <div class="item-tags">
+              <span class="tag tag-brand">Brand</span>
+              <span class="tag tag-finance">Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="7">—</div>
+      </li>
+
+      <li class="item" data-offset="14">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register lyrics with PRO before sharing"></div>
+        <div class="item-content">
+          <div class="item-title">Register with a PRO (ASCAP or BMI) and register compositions</div>
+          <div class="item-body">
+            Register as a songwriter and publisher with either <strong>ASCAP</strong> (ascap.com, $50 one-time) or <strong>BMI</strong> (bmi.com, free for songwriters). Register your LLC as your publishing entity. Register each song title before sending The Source to any Frequency collaborator. This timestamps your ownership and enables automatic royalty collection from streaming, radio, and public performance.
+            <div class="item-tags">
+              <span class="tag tag-legal">Copyright</span>
+              <span class="tag tag-finance">ASCAP $50 · BMI Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="14">—</div>
+      </li>
+
+      <li class="item" data-offset="21">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register copyright with US Copyright Office"></div>
+        <div class="item-content">
+          <div class="item-title">Register copyrights with the US Copyright Office</div>
+          <div class="item-body">
+            PRO registration is not the same as copyright registration. File sound recordings and musical compositions at <strong>copyright.gov</strong>. You can register multiple works in one filing (group registration). Cost is $35–$65 per filing. Copyright exists automatically at creation, but registration is required to sue for statutory damages — this is your enforcement mechanism.
+            <div class="item-tags">
+              <span class="tag tag-legal">Copyright</span>
+              <span class="tag tag-finance">$35–$65/filing</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="21">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       PHASE 3 — FINANCIAL SETUP
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase3-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">03</span>
+      <h2 class="phase-title" id="phase3-title" style="color:var(--ph-finance);">Financial Setup</h2>
+      <span class="phase-count" id="count-3" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">Requires LLC + EIN from Phase 1. Keep all band income and expenses completely separate from personal finances — this is essential for liability protection and clean tax filing.</p>
+
+    <ul role="list" style="list-style:none;" data-phase="3">
+
+      <li class="item" data-offset="14">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Open business checking account"></div>
+        <div class="item-content">
+          <div class="item-title">Open a dedicated business checking account</div>
+          <div class="item-body">
+            Bring your LLC Articles of Organization, EIN letter, and operating agreement. Good options for small music businesses: <strong>Mercury</strong> (mercury.com — free, excellent for small LLCs), <strong>Relay</strong> (no fees, multiple accounts), or a local NC credit union. Avoid big bank business accounts — the fees are disproportionate at this stage. This is where Symphonic will send royalty payments.
+            <div class="item-tags">
+              <span class="tag tag-finance">Banking</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="14">—</div>
+      </li>
+
+      <li class="item" data-offset="21">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Set up basic bookkeeping"></div>
+        <div class="item-content">
+          <div class="item-title">Set up basic bookkeeping from day one</div>
+          <div class="item-body">
+            Every dollar spent on recording, gear, rehearsal, marketing, and legal fees is a deductible business expense. Use <strong>Wave</strong> (free) or <strong>QuickBooks Self-Employed</strong> (~$15/mo) to track from the start. Keep every receipt. The IRS treats music businesses that don't show profit after 3 of 5 years as hobbies — documenting your intent and expenses professionally protects you.
+            <div class="item-tags">
+              <span class="tag tag-finance">Accounting</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="21">—</div>
+      </li>
+
+      <li class="item" data-offset="21">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Open business PayPal or Stripe for merchandise"></div>
+        <div class="item-content">
+          <div class="item-title">Set up payment processing for merch and direct sales</div>
+          <div class="item-body">
+            <strong>Stripe</strong> is the cleanest option — connect it to your business bank account. You'll need this for Bandcamp, direct website sales, and any merchandise pre-orders. Set up under your LLC name.
+            <div class="item-tags">
+              <span class="tag tag-finance">Payments</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="21">—</div>
+      </li>
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Consult an accountant"></div>
+        <div class="item-content">
+          <div class="item-title">One-time consultation with an accountant familiar with music businesses</div>
+          <div class="item-body">
+            Before you start spending significantly, spend one hour with a CPA who understands creative businesses. Ask specifically about: NC state tax obligations for the LLC, quarterly estimated tax payments (if Symphonic royalties will be meaningful), and whether an S-corp election makes sense at your projected revenue level. The cost of one consultation saves multiples at tax time.
+            <div class="item-tags">
+              <span class="tag tag-finance">Tax</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       PHASE 4 — LABEL SETUP
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase4-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">04</span>
+      <h2 class="phase-title" id="phase4-title" style="color:var(--ph-label);">Label Setup</h2>
+      <span class="phase-count" id="count-4" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">Symphonic requires a label name for distribution. You are your own label — this is standard practice for independent artists. The label can be a DBA under your LLC or simply a name you register on the Symphonic platform.</p>
+
+    <div class="callout info" role="note">
+      <strong>Your label name does not have to be your band name.</strong>
+      Your label is <strong>First Broadcast</strong> — this name will appear on all DSP listings, Symphonic submissions, and copyright filings as the releasing entity. Signal House LLC is the legal owner of First Broadcast as a DBA.
+    </div>
+
+    <ul role="list" style="list-style:none;" data-phase="4">
+
+      <li class="item" data-offset="14">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Choose label name"></div>
+        <div class="item-content">
+          <div class="item-title">Verify "First Broadcast" is clear on all platforms</div>
+          <div class="item-body">
+            Search Spotify, Apple Music, Tidal, and Bandcamp to confirm no existing label is using the name First Broadcast. Also run a USPTO search. The label name appears permanently in DSP metadata on every release — confirm it is clean before filing the DBA.
+            <div class="item-tags">
+              <span class="tag tag-label">Label</span>
+              <span class="tag tag-brand">Brand</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="14">—</div>
+      </li>
+
+      <li class="item" data-offset="21">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register label name as DBA if different from LLC"></div>
+        <div class="item-content">
+          <div class="item-title">Register label name as a DBA under your LLC (if different)</div>
+          <div class="item-body">
+            File a DBA for <strong>First Broadcast</strong> with your county register of deeds (~$26). This lets Signal House LLC legally operate as First Broadcast — receiving payments, signing distribution agreements, and appearing on copyright filings under that name.
+            <div class="item-tags">
+              <span class="tag tag-label">Label</span>
+              <span class="tag tag-legal">Legal</span>
+              <span class="tag tag-finance">~$26</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="21">—</div>
+      </li>
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Create Symphonic Distribution account"></div>
+        <div class="item-content">
+          <div class="item-title">Create Symphonic Distribution account</div>
+          <div class="item-body">
+            Sign up at <strong>symphonicdistribution.com</strong>. Select a distribution plan — Symphonic's label plan allows multiple artists and releases under one account, which is appropriate for your setup. You will enter your label name, connect your business bank account for royalty payments, and verify your identity. Have your EIN ready — they will need it for tax reporting (1099s).
+            <div class="item-tags">
+              <span class="tag tag-distro">Distribution</span>
+              <span class="tag tag-label">Label</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register for SoundExchange"></div>
+        <div class="item-content">
+          <div class="item-title">Register with SoundExchange</div>
+          <div class="item-body">
+            SoundExchange collects digital performance royalties (Pandora, SiriusXM, webcasters) that Symphonic does not collect. Register free at <strong>soundexchange.com</strong> as both the featured artist AND the sound recording rights owner (your label). These are separate registration slots and both generate separate royalty streams.
+            <div class="item-tags">
+              <span class="tag tag-distro">Royalties</span>
+              <span class="tag tag-finance">Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+      <li class="item" data-offset="35">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Obtain ISRC codes"></div>
+        <div class="item-content">
+          <div class="item-title">Register for ISRC codes</div>
+          <div class="item-body">
+            International Standard Recording Codes uniquely identify each recording. Symphonic will issue ISRCs automatically when you distribute — but you can also register as an ISRC Manager directly at <strong>usisrc.org</strong> (free) to self-issue codes and maintain your own registry independent of your distributor. This is the professional approach if you plan to release consistently.
+            <div class="item-tags">
+              <span class="tag tag-distro">Distribution</span>
+              <span class="tag tag-label">Label</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="35">—</div>
+      </li>
+
+      <li class="item" data-offset="35">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Obtain UPC/barcode for releases"></div>
+        <div class="item-content">
+          <div class="item-title">Set up UPC barcodes for releases</div>
+          <div class="item-body">
+            Every album or EP release needs a UPC barcode. Symphonic will generate these for you automatically. However, if you want ownership of your own barcodes (recommended for a label), purchase a GS1 US membership at <strong>gs1us.org</strong> and self-issue. GS1 membership is ~$250 upfront. For early releases, letting Symphonic handle it is fine.
+            <div class="item-tags">
+              <span class="tag tag-distro">Distribution</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="35">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       PHASE 5 — ENTERTAINMENT LAWYER
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase5-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">05</span>
+      <h2 class="phase-title" id="phase5-title" style="color:var(--ph-legal);">Legal Agreements</h2>
+      <span class="phase-count" id="count-5" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">Before any musician joins or any Frequency collaborator receives The Source, you need signed agreements. These protect the name, the IP, and your sole ownership — regardless of how things go with any individual.</p>
+
+    <div class="callout crit" role="note">
+      <strong>Do not onboard any band member, collaborator, or session player without a signed agreement.</strong>
+      Work done without a contract creates implied co-ownership claims. One consultation with an entertainment lawyer is the most important investment you make before anyone else is involved.
+    </div>
+
+    <ul role="list" style="list-style:none;" data-phase="5">
+
+      <li class="item" data-offset="14">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Find and retain an entertainment lawyer"></div>
+        <div class="item-content">
+          <div class="item-title">Find and retain an entertainment lawyer (NC-licensed)</div>
+          <div class="item-body">
+            Look for a music or entertainment attorney licensed in NC. The NC Bar Association has a referral service at <strong>ncbar.org</strong>. Alternatively, services like <strong>NOLO</strong> and <strong>UpCounsel</strong> connect you with vetted attorneys. Expect $200–$400/hr. You likely need 2–4 hours for an initial consultation and template agreements. This is not optional — it is the foundation of everything.
+            <div class="item-tags">
+              <span class="tag tag-legal">Legal</span>
+              <span class="tag tag-finance">$400–$1,600 est.</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="14">—</div>
+      </li>
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Draft band member agreement"></div>
+        <div class="item-content">
+          <div class="item-title">Draft band member agreement template</div>
+          <div class="item-body">
+            Must cover: ownership of the band name (you, via LLC — non-negotiable), ownership of compositions and masters (your LLC), financial contributions and how costs are split, leaving member provisions, use of recordings after departure, and what happens to any recorded parts if a member leaves before release. Every musician signs this before their first paid rehearsal.
+            <div class="item-tags">
+              <span class="tag tag-legal">Agreement</span>
+              <span class="tag tag-brand">IP Protection</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Draft Frequency collaboration agreement"></div>
+        <div class="item-content">
+          <div class="item-title">Draft The Frequency collaboration agreement template</div>
+          <div class="item-body">
+            As documented in The Frequency framework: covers lyric ownership (100% your LLC), melody ownership split, master ownership, embargo clause with specific breach consequences, royalty collection, release schedule, and removal provisions. Have this reviewed before Year One of The Frequency — it is the most legally complex document in your portfolio.
+            <div class="item-tags">
+              <span class="tag tag-legal">Agreement</span>
+              <span class="tag tag-label">The Frequency</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+      <li class="item" data-offset="35">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Draft session musician agreements"></div>
+        <div class="item-content">
+          <div class="item-title">Draft session musician / work-for-hire agreement</div>
+          <div class="item-body">
+            For any session player, producer, or engineer hired to contribute to recordings: a work-for-hire agreement assigns all rights in their contribution to your LLC. Without this, they may have a claim on the master recording. Simple one-page document — your lawyer can template it once and you reuse it.
+            <div class="item-tags">
+              <span class="tag tag-legal">Agreement</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="35">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+
+
+  <!-- ═══════════════════════════════════
+       PHASE 5b — MEMBER IDENTITY PROTECTION
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase5b-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">05b</span>
+      <h2 class="phase-title" id="phase5b-title" style="color:var(--ph-keys);">Member Identity Protection</h2>
+      <span class="phase-count" id="count-5b" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">
+      Establishing the pseudonym framework, equity structure, and public-facing credit controls
+      before any member is onboarded. Identity protection and financial equity are entirely
+      separable — members can hold real ownership stakes under their legal names in private
+      documents while remaining completely anonymous publicly.
+    </p>
+
+    <div class="callout crit" role="note">
+      <strong>This framework must be agreed and signed before any member's first session.</strong>
+      Once someone has contributed recorded material without a pseudonym agreement in place,
+      unwinding their real-name association becomes significantly harder. Do this first.
+    </div>
+
+    <ul role="list" style="list-style:none;" data-phase="5b">
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Establish pseudonym policy"></div>
+        <div class="item-content">
+          <div class="item-title">Establish the pseudonym policy with your lawyer</div>
+          <div class="item-body">
+            Each permanent member chooses a pseudonym before their first session. The band member
+            agreement must explicitly state: (1) the member consents to be known publicly only
+            by their pseudonym, (2) they will not publicly identify themselves as a member of
+            The Order of Light without written approval from Signal House LLC, (3) all
+            public-facing credits, metadata, and press materials will use the pseudonym only,
+            and (4) breach of this clause is a material breach of the agreement.
+            <div class="item-tags">
+              <span class="tag tag-legal">Agreement</span>
+              <span class="tag tag-brand">Identity</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register pseudonyms with PRO"></div>
+        <div class="item-content">
+          <div class="item-title">Register each member's pseudonym with your PRO (ASCAP or BMI)</div>
+          <div class="item-body">
+            Both ASCAP and BMI allow writers to register and receive royalties under a
+            pseudonym. Each member registers their pseudonym as their writer name — the PRO
+            holds the legal name on file internally for payment purposes, but the pseudonym
+            is what appears on any public royalty registry lookup. This is the same mechanism
+            used by many well-known artists. Each member handles their own PRO registration
+            using their own account — you do not need access to their personal PRO details.
+            <div class="item-tags">
+              <span class="tag tag-legal">Copyright</span>
+              <span class="tag tag-brand">Identity</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+      <li class="item" data-offset="28">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Define equity structure for permanent members"></div>
+        <div class="item-content">
+          <div class="item-title">Define the equity structure for permanent members</div>
+          <div class="item-body">
+            Equity and identity are completely separable — a member can hold a real ownership
+            stake in Signal House LLC under their legal name in a private operating agreement
+            amendment, while being entirely anonymous publicly. Consider a tiered model:
+            <br><br>
+            <strong>Membership equity</strong> — a base percentage granted for joining as a
+            permanent member (e.g. 5–10% per member, structure to taste).<br>
+            <strong>Financial contribution equity</strong> — additional percentage for members
+            who contribute financially to recording, touring, or marketing costs.<br>
+            <strong>Writing equity</strong> — per-song splits agreed and documented at the
+            time of writing, not retroactively.<br>
+            <br>
+            All of this is documented in a private amendment to the Signal House LLC operating
+            agreement — it is never public-facing. Have your entertainment lawyer draft this
+            as a separate schedule to the band member agreement.
+            <div class="item-tags">
+              <span class="tag tag-legal">Equity</span>
+              <span class="tag tag-finance">Structure</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="28">—</div>
+      </li>
+
+      <li class="item" data-offset="35">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Set up per-song writing credit log"></div>
+        <div class="item-content">
+          <div class="item-title">Set up a per-song writing credit log</div>
+          <div class="item-body">
+            For every song written collaboratively, document the split at the time of writing —
+            not months later when memory is fallible and feelings are involved. Use a simple
+            shared document (private, Signal House LLC eyes only): song title, date written,
+            contributing pseudonyms, agreed percentage split, and a line each person initials.
+            This log becomes the source of truth for PRO registrations, copyright filings,
+            and royalty distributions. Disputes about writing credits are among the most
+            common and most damaging in band relationships — eliminate the ambiguity early.
+            <div class="item-tags">
+              <span class="tag tag-legal">Copyright</span>
+              <span class="tag tag-music">Writing</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="35">—</div>
+      </li>
+
+      <li class="item" data-offset="35">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Control all metadata submissions"></div>
+        <div class="item-content">
+          <div class="item-title">Retain sole control of all metadata submissions to Symphonic</div>
+          <div class="item-body">
+            Only Signal House LLC submits releases to First Broadcast's Symphonic account.
+            Band members never have direct access to the distribution account. All credits,
+            pseudonym spellings, and metadata are entered by you — this ensures no real name
+            accidentally appears on a DSP. Establish this as policy in the band member
+            agreement: the member grants Signal House LLC full authority over how their
+            pseudonym appears in all commercial releases.
+            <div class="item-tags">
+              <span class="tag tag-distro">Distribution</span>
+              <span class="tag tag-brand">Identity</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="35">—</div>
+      </li>
+
+      <li class="item" data-offset="35">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Establish copyright filing pseudonym procedure"></div>
+        <div class="item-content">
+          <div class="item-title">Establish the Copyright Office pseudonym filing procedure</div>
+          <div class="item-body">
+            The US Copyright Office allows registration of works under a pseudonym — the
+            form has a dedicated pseudonym field. The real name is held on file internally
+            by the Copyright Office and does not appear in the public record. Your lawyer
+            should set up a consistent procedure for this: every filing uses the pseudonyms
+            consistently, the Signal House LLC name appears as the copyright claimant (the
+            entity), and the writers are listed by pseudonym. This gives you public copyright
+            protection without exposing member identities.
+            <div class="item-tags">
+              <span class="tag tag-legal">Copyright</span>
+              <span class="tag tag-brand">Identity</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="35">—</div>
+      </li>
+
+      <li class="item" data-offset="42">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Define leaving member identity provisions"></div>
+        <div class="item-content">
+          <div class="item-title">Define leaving member provisions — identity and equity</div>
+          <div class="item-body">
+            The band member agreement must cover what happens when someone leaves:
+            their pseudonym remains the property of Signal House LLC and cannot be used
+            by the departing member in other projects; their recorded contributions remain
+            licensed to Signal House LLC in perpetuity; their equity stake either vests on
+            a schedule (e.g. 25% per year over 4 years) or is bought out at an agreed
+            valuation formula. Writing credits on completed songs are permanent and
+            non-revocable — a leaving member still receives PRO royalties on songs they
+            co-wrote. Their identity remains protected under the same confidentiality
+            provisions unless both parties agree otherwise in writing.
+            <div class="item-tags">
+              <span class="tag tag-legal">Agreement</span>
+              <span class="tag tag-finance">Equity</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="42">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       PHASE 6 — BAND RECRUITMENT
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase6-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">06</span>
+      <h2 class="phase-title" id="phase6-title" style="color:var(--ph-band);">Band Recruitment</h2>
+      <span class="phase-count" id="count-6" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">Begin active recruitment only after Phases 1–5 are complete. You want the legal structure in place before anyone submits recordings or signs on.</p>
+
+    <ul role="list" style="list-style:none;" data-phase="6">
+
+      <li class="item" data-offset="42">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Launch recruitment campaign"></div>
+        <div class="item-content">
+          <div class="item-title">Launch recruitment campaign — all platforms simultaneously</div>
+          <div class="item-body">
+            Post to: Instagram, Facebook, Threads, Craigslist (Charlotte musicians section), BandMix, and any NC-specific musician Facebook groups. Use the prepared ad materials from the hub. Post carousel ads to Instagram and Facebook. Post square images to BandMix photo gallery with plain text in the description fields.
+            <div class="item-tags">
+              <span class="tag tag-brand">Campaign</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="42">—</div>
+      </li>
+
+      <li class="item" data-offset="42">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Set up audition recording process"></div>
+        <div class="item-content">
+          <div class="item-title">Set up audition recording submission process</div>
+          <div class="item-body">
+            Decide how applicants submit: email with file attachments, a shared Dropbox/Google Drive folder, or a simple form (Typeform or Google Forms). Define exactly what you're asking for — which tracks to record to, what you want to hear, format requirements. The role documents specify "no recordings = no response" — make the submission process frictionless for serious applicants.
+            <div class="item-tags">
+              <span class="tag tag-music">Recruitment</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="42">—</div>
+      </li>
+
+      <li class="item" data-offset="70">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Conduct in-person auditions"></div>
+        <div class="item-content">
+          <div class="item-title">In-person auditions — shortlisted candidates</div>
+          <div class="item-body">
+            After reviewing recordings, shortlist 2–3 candidates per role for in-person auditions. Book a rehearsal space (hourly rental). Prepare 2–3 songs for auditionees to learn from recordings or charts. Listen for feel and fit as much as technical ability — you're assessing a long-term creative partner.
+            <div class="item-tags">
+              <span class="tag tag-music">Recruitment</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="70">—</div>
+      </li>
+
+      <li class="item" data-offset="98">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Issue and collect signed band agreements"></div>
+        <div class="item-content">
+          <div class="item-title">Issue and collect signed band member agreements</div>
+          <div class="item-body">
+            Before the first official rehearsal, every member signs the band member agreement. Use an e-signature service like <strong>DocuSign</strong> or <strong>HelloSign</strong> for clean digital records. File signed copies in a dedicated folder — you will need these if any dispute arises later. Do not skip this step under any circumstances.
+            <div class="item-tags">
+              <span class="tag tag-legal">Agreement</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="98">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       PHASE 7 — PRE-RELEASE
+  ═══════════════════════════════════ -->
+  <section class="phase" aria-labelledby="phase7-title">
+    <div class="phase-header">
+      <span class="phase-num" aria-hidden="true">07</span>
+      <h2 class="phase-title" id="phase7-title" style="color:var(--ph-release);">Pre-Release Preparation</h2>
+      <span class="phase-count" id="count-7" aria-live="polite"></span>
+    </div>
+    <p class="phase-desc">The operational checklist for moving from rehearsal to recorded and distributed material. These run in parallel with campaign execution once the lineup is locked.</p>
+
+    <ul role="list" style="list-style:none;" data-phase="7">
+
+      <li class="item" data-offset="112">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Book and complete recording sessions"></div>
+        <div class="item-content">
+          <div class="item-title">Book and complete recording sessions</div>
+          <div class="item-body">
+            Have your engineer or producer sign a work-for-hire agreement before any session begins. Ensure the studio invoices your LLC, not you personally — this keeps it as a business expense. Back up all session files to at least two locations immediately after each session.
+            <div class="item-tags">
+              <span class="tag tag-music">Recording</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="112">—</div>
+      </li>
+
+      <li class="item" data-offset="140">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Register completed recordings with copyright office"></div>
+        <div class="item-content">
+          <div class="item-title">Register completed masters with US Copyright Office</div>
+          <div class="item-body">
+            Once mixing and mastering is complete, register the sound recordings at <strong>copyright.gov</strong> before distribution. You can group-register up to 10 works per filing. Register the musical compositions (lyrics + music) as a separate filing from the sound recordings — these are different rights.
+            <div class="item-tags">
+              <span class="tag tag-legal">Copyright</span>
+              <span class="tag tag-finance">$35–$65</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="140">—</div>
+      </li>
+
+      <li class="item" data-offset="147">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Submit release to Symphonic Distribution"></div>
+        <div class="item-content">
+          <div class="item-title">Submit release to Symphonic Distribution</div>
+          <div class="item-body">
+            Symphonic requires submissions a minimum of <strong>4–6 weeks</strong> before your release date for standard distribution, and <strong>8–10 weeks</strong> for pitching to editorial playlists (Spotify New Music Friday, etc.). Have ready: finalized audio files (WAV, 16-bit/44.1kHz minimum), artwork (3000×3000px, RGB, JPEG), all metadata (track titles, credits, lyrics, ISRC codes, release date, label name).
+            <div class="item-tags">
+              <span class="tag tag-distro">Symphonic</span>
+              <span class="tag tag-label">Distribution</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="147">—</div>
+      </li>
+
+      <li class="item" data-offset="154">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Pitch to DSP editorial playlists via Symphonic"></div>
+        <div class="item-content">
+          <div class="item-title">Pitch to DSP editorial playlists via Symphonic</div>
+          <div class="item-body">
+            Symphonic has a playlist pitching tool. Submit each single 6–8 weeks before release for Spotify editorial consideration. One pitch per release — make it count. Focus on 2–3 playlists that genuinely fit the sound rather than casting wide. Symphonic also has an Apple Music pitching channel.
+            <div class="item-tags">
+              <span class="tag tag-distro">Playlisting</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="154">—</div>
+      </li>
+
+      <li class="item" data-offset="154">
+        <div class="cb-wrap"><input type="checkbox" class="cb" aria-label="Claim Spotify for Artists and Apple Music for Artists"></div>
+        <div class="item-content">
+          <div class="item-title">Claim Spotify for Artists and Apple Music for Artists profiles</div>
+          <div class="item-body">
+            As soon as your first release goes live: claim your artist profiles on both platforms. This unlocks direct playlist pitching (Spotify), Canvas video, bio, artist's pick, and verified status. You need a live release to claim — add this to your release week checklist.
+            <div class="item-tags">
+              <span class="tag tag-distro">Platforms</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-date" data-offset="154">—</div>
+      </li>
+
+    </ul>
+  </section>
+
+  </main>
+
+  <footer class="doc-footer-bar">
+  <div class="footer-left">
+    <span class="footer-band">The Order of Light</span>
+    <span class="footer-meta">Signal House LLC · Charlotte, NC</span>
+  </div>
+  
+</footer>
+
+</div><!-- /.wrap -->
+
+<script>
+// ── DATE CASCADING ──
+const START_KEY = 'ool_checklist_start';
+
+function formatDate(d) {
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+
+function addDays(base, days) {
+  const d = new Date(base);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+function updateDates() {
+  const input = document.getElementById('start-date');
+  const val = input.value;
+  if (!val) {
+    document.querySelectorAll('.item-date').forEach(el => {
+      el.textContent = '—';
+      el.classList.remove('has-date');
+    });
+    return;
+  }
+
+  // store choice
+  try { localStorage.setItem(START_KEY, val); } catch(e) {}
+
+  const base = new Date(val + 'T12:00:00'); // noon local to avoid DST issues
+  document.querySelectorAll('.item[data-offset]').forEach(item => {
+    const offset = parseInt(item.getAttribute('data-offset'), 10);
+    const dateEl = item.querySelector('.item-date');
+    if (dateEl) {
+      const target = addDays(base, offset);
+      dateEl.textContent = formatDate(target);
+      dateEl.classList.add('has-date');
+    }
+  });
+}
+
+function resetDates() {
+  document.getElementById('start-date').value = '';
+  try { localStorage.removeItem(START_KEY); } catch(e) {}
+  updateDates();
+}
+
+// Restore saved date
+try {
+  const saved = localStorage.getItem(START_KEY);
+  if (saved) {
+    document.getElementById('start-date').value = saved;
+    updateDates();
+  }
+} catch(e) {}
+
+document.getElementById('start-date').addEventListener('change', updateDates);
+
+// ── CHECKBOXES & PROGRESS ──
+function updateProgress() {
+  const all = document.querySelectorAll('.cb');
+  const done = document.querySelectorAll('.cb:checked');
+  const total = all.length;
+  const count = done.length;
+  const pct = total ? Math.round((count / total) * 100) : 0;
+
+  document.getElementById('progress-count').textContent = `${count} of ${total} complete`;
+  const fill = document.getElementById('progress-fill');
+  fill.style.width = pct + '%';
+  fill.closest('[role="progressbar"]').setAttribute('aria-valuenow', pct);
+
+  // Phase counts
+  document.querySelectorAll('[data-phase]').forEach(ul => {
+    const phase = ul.getAttribute('data-phase');
+    const phAll = ul.querySelectorAll('.cb').length;
+    const phDone = ul.querySelectorAll('.cb:checked').length;
+    const counter = document.getElementById('count-' + phase);
+    if (counter) counter.textContent = `${phDone} / ${phAll}`;
+  });
+
+  // Save state
+  const state = {};
+  all.forEach((cb, i) => { state[i] = cb.checked; });
+  try { localStorage.setItem('ool_checklist_state', JSON.stringify(state)); } catch(e) {}
+}
+
+// Strikethrough on check
+document.querySelectorAll('.cb').forEach((cb, i) => {
+  cb.addEventListener('change', function() {
+    this.closest('.item').classList.toggle('done', this.checked);
+    updateProgress();
+  });
+});
+
+// Restore saved checkboxes
+try {
+  const saved = JSON.parse(localStorage.getItem('ool_checklist_state') || '{}');
+  document.querySelectorAll('.cb').forEach((cb, i) => {
+    if (saved[i]) {
+      cb.checked = true;
+      cb.closest('.item').classList.add('done');
+    }
+  });
+} catch(e) {}
+
+// Initial count
+updateProgress();
+</script>
+</body>
+</html>
